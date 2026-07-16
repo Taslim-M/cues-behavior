@@ -1,0 +1,3 @@
+- [Prefer parallel batch runs](prefer-parallel-batch-runs.md) — run generation/inference jobs with high concurrency for speed
+- [Run OpenRouter batches foreground](openrouter-runs-foreground.md) — backgrounded async runs stall at 0; TaskStop leaves zombie python; conc 8–12
+- [Experiment 3 persona pipeline](exp3-persona-pipeline.md) — code layout, results/exp3_persona, cross-model + counterfactual findings

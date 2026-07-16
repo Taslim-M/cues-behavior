@@ -1,0 +1,1 @@
+Repeat experiment_2.md (same dataset), but instead of contextual cues prompt, use the infer_persona_prompt. Make necesarry adjustments. Do not run the counterfactuals, just run the first 2 steps so we can understand the verbalized persona traits.
