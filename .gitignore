@@ -218,4 +218,25 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Project: experiment outputs (large; regenerated, not source of truth)
-results/
+# Ignore all results contents, but keep the small analysis JSONs (geometry,
+# tier2/tier3, verdict, validation) so the numbers behind the report travel with
+# the repo. NB: we ignore results/** (not results/) and re-include the
+# directories so git can descend to the negated files.
+results/**
+!results/**/
+!results/**/analysis/*.json
+# Also keep the small labeled intermediates (the projection table, the axis
+# vectors, and the PCA per-persona loadings + persona label index) so the
+# analysis is reconstructable from the repo. Specific names only -- do NOT use a
+# broad *.npy, which would pull in the 376MB persona_vectors*.npy files (those
+# and the 36GB raw rollouts must go to Git LFS or a HuggingFace dataset).
+!results/**/analysis/projections.npz
+!results/**/assistant_axis.npy
+!results/**/user_axis.npy
+!results/**/pca.npz
+!results/**/persona_index.json
+
+# LaTeX build artifacts (keep main.pdf)
+*.aux
+*.out
+*.synctex.gz

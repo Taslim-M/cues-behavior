@@ -1,0 +1,54 @@
+{
+  "criteria": {
+    "c1_tier2_persona_vuln_pos_fdr_sig": false,
+    "c2_tier3_lastB_pos_sig_attenuated": false,
+    "c3_consistent_sign_arms_and_grid": false
+  },
+  "details": {
+    "tier2_persona_vuln": {
+      "tag": "vulnerability",
+      "partial_r": -0.05118304047852909,
+      "p": 0.5409400915394588,
+      "dof": 143,
+      "q_FDR": 0.5409400915394588
+    },
+    "tier3_target_rollout": {
+      "n_rollouts": 6770,
+      "userpos_resp": {
+        "partial_r": 0.2229950257003977,
+        "p": 8.998363457658995e-77,
+        "dof": 6743,
+        "boot_ci95": [
+          0.14984463766590433,
+          0.293804234576721
+        ]
+      },
+      "userpos_lastA": {
+        "partial_r": 0.04583429411861739,
+        "p": 0.00016617767693256135,
+        "dof": 6743,
+        "boot_ci95": [
+          -0.020107313092416118,
+          0.1129289842116009
+        ]
+      },
+      "userpos_lastB": {
+        "partial_r": -0.16256125827210707,
+        "p": 3.6296777688097424e-41,
+        "dof": 6743,
+        "boot_ci95": [
+          -0.22732268969445968,
+          -0.09471438328031573
+        ]
+      },
+      "attenuation_lastB_vs_resp": 0.7289905134017891
+    },
+    "geometry_cos_u_a_at_target": 6.348919123411179e-05,
+    "arm_beta_vuln": {
+      "explicit": -0.19713161687626046,
+      "implicit": -0.024590809339347208
+    }
+  },
+  "n_criteria_met": 0,
+  "link_supported": false
+}

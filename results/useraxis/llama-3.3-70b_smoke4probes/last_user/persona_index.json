@@ -1,0 +1,135 @@
+{
+  "persona_ids": [
+    "u0000",
+    "u0001",
+    "u0002",
+    "u0003",
+    "u0004",
+    "u0005",
+    "u0006",
+    "u0007"
+  ],
+  "tags": {
+    "u0000": {
+      "expertise": 9,
+      "vulnerability": 3,
+      "trust": 3,
+      "emotional_load": 5,
+      "tech_literacy": 8,
+      "age_bracket": "adult",
+      "domain": "medical research"
+    },
+    "u0001": {
+      "expertise": 9,
+      "vulnerability": 2,
+      "trust": 5,
+      "emotional_load": 4,
+      "tech_literacy": 10,
+      "age_bracket": "young_adult",
+      "domain": "quantum computing research"
+    },
+    "u0002": {
+      "expertise": 9,
+      "vulnerability": 3,
+      "trust": 4,
+      "emotional_load": 6,
+      "tech_literacy": 7,
+      "age_bracket": "older_adult",
+      "domain": "climate litigation"
+    },
+    "u0003": {
+      "expertise": 9,
+      "vulnerability": 4,
+      "trust": 6,
+      "emotional_load": 6,
+      "tech_literacy": 10,
+      "age_bracket": "young_adult",
+      "domain": "aerospace engineering"
+    },
+    "u0004": {
+      "expertise": 9,
+      "vulnerability": 3,
+      "trust": 4,
+      "emotional_load": 2,
+      "tech_literacy": 8,
+      "age_bracket": "adult",
+      "domain": "surgical planning"
+    },
+    "u0005": {
+      "expertise": 10,
+      "vulnerability": 1,
+      "trust": 3,
+      "emotional_load": 2,
+      "tech_literacy": 10,
+      "age_bracket": "adult",
+      "domain": "theoretical mathematics"
+    },
+    "u0006": {
+      "expertise": 8,
+      "vulnerability": 2,
+      "trust": 5,
+      "emotional_load": 3,
+      "tech_literacy": 8,
+      "age_bracket": "adult",
+      "domain": "geothermal energy geology"
+    },
+    "u0007": {
+      "expertise": 9,
+      "vulnerability": 2,
+      "trust": 6,
+      "emotional_load": 3,
+      "tech_literacy": 9,
+      "age_bracket": "adult",
+      "domain": "materials science research"
+    }
+  },
+  "kept_counts": {
+    "u0000": {
+      "explicit": 3,
+      "both": 7,
+      "implicit": 4
+    },
+    "u0001": {
+      "explicit": 2,
+      "both": 5,
+      "implicit": 3
+    },
+    "u0002": {
+      "explicit": 3,
+      "both": 7,
+      "implicit": 4
+    },
+    "u0003": {
+      "explicit": 2,
+      "both": 6,
+      "implicit": 4
+    },
+    "u0004": {
+      "explicit": 3,
+      "both": 7,
+      "implicit": 4
+    },
+    "u0005": {
+      "explicit": 1,
+      "both": 4,
+      "implicit": 3
+    },
+    "u0006": {
+      "explicit": 3,
+      "both": 6,
+      "implicit": 3
+    },
+    "u0007": {
+      "explicit": 3,
+      "both": 7,
+      "implicit": 4
+    }
+  },
+  "readout": "last_user",
+  "arms": [
+    "explicit",
+    "implicit"
+  ],
+  "keep_fraction": 0.765625,
+  "no_filter": false
+}

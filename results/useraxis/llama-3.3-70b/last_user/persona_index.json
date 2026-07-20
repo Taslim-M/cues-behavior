@@ -1,0 +1,2265 @@
+{
+  "persona_ids": [
+    "u0000",
+    "u0001",
+    "u0002",
+    "u0003",
+    "u0004",
+    "u0005",
+    "u0006",
+    "u0007",
+    "u0008",
+    "u0009",
+    "u0010",
+    "u0011",
+    "u0012",
+    "u0013",
+    "u0014",
+    "u0015",
+    "u0016",
+    "u0017",
+    "u0018",
+    "u0019",
+    "u0020",
+    "u0021",
+    "u0022",
+    "u0023",
+    "u0024",
+    "u0025",
+    "u0026",
+    "u0027",
+    "u0028",
+    "u0029",
+    "u0030",
+    "u0031",
+    "u0032",
+    "u0033",
+    "u0034",
+    "u0035",
+    "u0036",
+    "u0037",
+    "u0038",
+    "u0039",
+    "u0040",
+    "u0041",
+    "u0042",
+    "u0043",
+    "u0044",
+    "u0045",
+    "u0046",
+    "u0047",
+    "u0048",
+    "u0049",
+    "u0050",
+    "u0051",
+    "u0052",
+    "u0053",
+    "u0054",
+    "u0055",
+    "u0056",
+    "u0057",
+    "u0058",
+    "u0059",
+    "u0060",
+    "u0061",
+    "u0062",
+    "u0063",
+    "u0064",
+    "u0065",
+    "u0066",
+    "u0067",
+    "u0068",
+    "u0069",
+    "u0070",
+    "u0071",
+    "u0072",
+    "u0073",
+    "u0074",
+    "u0075",
+    "u0076",
+    "u0077",
+    "u0078",
+    "u0079",
+    "u0080",
+    "u0081",
+    "u0082",
+    "u0083",
+    "u0084",
+    "u0085",
+    "u0086",
+    "u0087",
+    "u0088",
+    "u0089",
+    "u0090",
+    "u0091",
+    "u0092",
+    "u0093",
+    "u0094",
+    "u0095",
+    "u0096",
+    "u0097",
+    "u0098",
+    "u0099",
+    "u0100",
+    "u0101",
+    "u0102",
+    "u0103",
+    "u0104",
+    "u0105",
+    "u0106",
+    "u0107",
+    "u0108",
+    "u0109",
+    "u0110",
+    "u0111",
+    "u0112",
+    "u0113",
+    "u0114",
+    "u0115",
+    "u0116",
+    "u0117",
+    "u0118",
+    "u0119",
+    "u0120",
+    "u0121",
+    "u0122",
+    "u0123",
+    "u0124",
+    "u0125",
+    "u0126",
+    "u0127",
+    "u0128",
+    "u0129",
+    "u0130",
+    "u0131",
+    "u0132",
+    "u0133",
+    "u0134",
+    "u0135",
+    "u0136",
+    "u0137",
+    "u0138",
+    "u0139",
+    "u0140",
+    "u0141",
+    "u0142",
+    "u0143",
+    "u0144",
+    "u0145",
+    "u0146",
+    "u0147",
+    "u0148",
+    "u0149"
+  ],
+  "tags": {
+    "u0000": {
+      "expertise": 9,
+      "vulnerability": 3,
+      "trust": 3,
+      "emotional_load": 5,
+      "tech_literacy": 8,
+      "age_bracket": "adult",
+      "domain": "medical research"
+    },
+    "u0001": {
+      "expertise": 9,
+      "vulnerability": 2,
+      "trust": 5,
+      "emotional_load": 4,
+      "tech_literacy": 10,
+      "age_bracket": "young_adult",
+      "domain": "quantum computing research"
+    },
+    "u0002": {
+      "expertise": 9,
+      "vulnerability": 3,
+      "trust": 4,
+      "emotional_load": 6,
+      "tech_literacy": 7,
+      "age_bracket": "older_adult",
+      "domain": "climate litigation"
+    },
+    "u0003": {
+      "expertise": 9,
+      "vulnerability": 4,
+      "trust": 6,
+      "emotional_load": 6,
+      "tech_literacy": 10,
+      "age_bracket": "young_adult",
+      "domain": "aerospace engineering"
+    },
+    "u0004": {
+      "expertise": 9,
+      "vulnerability": 3,
+      "trust": 4,
+      "emotional_load": 2,
+      "tech_literacy": 8,
+      "age_bracket": "adult",
+      "domain": "surgical planning"
+    },
+    "u0005": {
+      "expertise": 10,
+      "vulnerability": 1,
+      "trust": 3,
+      "emotional_load": 2,
+      "tech_literacy": 10,
+      "age_bracket": "adult",
+      "domain": "theoretical mathematics"
+    },
+    "u0006": {
+      "expertise": 8,
+      "vulnerability": 2,
+      "trust": 5,
+      "emotional_load": 3,
+      "tech_literacy": 8,
+      "age_bracket": "adult",
+      "domain": "geothermal energy geology"
+    },
+    "u0007": {
+      "expertise": 9,
+      "vulnerability": 2,
+      "trust": 6,
+      "emotional_load": 3,
+      "tech_literacy": 9,
+      "age_bracket": "adult",
+      "domain": "materials science research"
+    },
+    "u0008": {
+      "expertise": 9,
+      "vulnerability": 2,
+      "trust": 4,
+      "emotional_load": 1,
+      "tech_literacy": 7,
+      "age_bracket": "older_adult",
+      "domain": "constitutional law"
+    },
+    "u0009": {
+      "expertise": 9,
+      "vulnerability": 1,
+      "trust": 5,
+      "emotional_load": 2,
+      "tech_literacy": 10,
+      "age_bracket": "adult",
+      "domain": "computational biology"
+    },
+    "u0010": {
+      "expertise": 6,
+      "vulnerability": 6,
+      "trust": 5,
+      "emotional_load": 6,
+      "tech_literacy": 7,
+      "age_bracket": "adult",
+      "domain": "pharmaceutical regulatory compliance"
+    },
+    "u0011": {
+      "expertise": 4,
+      "vulnerability": 5,
+      "trust": 7,
+      "emotional_load": 6,
+      "tech_literacy": 7,
+      "age_bracket": "young_adult",
+      "domain": "technical visualization"
+    },
+    "u0012": {
+      "expertise": 6,
+      "vulnerability": 4,
+      "trust": 7,
+      "emotional_load": 5,
+      "tech_literacy": 6,
+      "age_bracket": "older_adult",
+      "domain": "environmental chemistry education"
+    },
+    "u0013": {
+      "expertise": 3,
+      "vulnerability": 6,
+      "trust": 5,
+      "emotional_load": 4,
+      "tech_literacy": 7,
+      "age_bracket": "adult",
+      "domain": "cryptocurrency finance"
+    },
+    "u0014": {
+      "expertise": 6,
+      "vulnerability": 4,
+      "trust": 6,
+      "emotional_load": 5,
+      "tech_literacy": 7,
+      "age_bracket": "adult",
+      "domain": "animal behavior"
+    },
+    "u0015": {
+      "expertise": 4,
+      "vulnerability": 6,
+      "trust": 7,
+      "emotional_load": 5,
+      "tech_literacy": 8,
+      "age_bracket": "adult",
+      "domain": "sustainability consulting"
+    },
+    "u0016": {
+      "expertise": 3,
+      "vulnerability": 4,
+      "trust": 6,
+      "emotional_load": 4,
+      "tech_literacy": 5,
+      "age_bracket": "young_adult",
+      "domain": "tech communication"
+    },
+    "u0017": {
+      "expertise": 4,
+      "vulnerability": 3,
+      "trust": 5,
+      "emotional_load": 2,
+      "tech_literacy": 7,
+      "age_bracket": "older_adult",
+      "domain": "renewable energy education"
+    },
+    "u0018": {
+      "expertise": 7,
+      "vulnerability": 6,
+      "trust": 5,
+      "emotional_load": 6,
+      "tech_literacy": 4,
+      "age_bracket": "adult",
+      "domain": "telemedicine protocols"
+    },
+    "u0019": {
+      "expertise": 6,
+      "vulnerability": 5,
+      "trust": 6,
+      "emotional_load": 5,
+      "tech_literacy": 8,
+      "age_bracket": "adult",
+      "domain": "food science formulation"
+    },
+    "u0020": {
+      "expertise": 7,
+      "vulnerability": 6,
+      "trust": 4,
+      "emotional_load": 6,
+      "tech_literacy": 6,
+      "age_bracket": "adult",
+      "domain": "medical research"
+    },
+    "u0021": {
+      "expertise": 5,
+      "vulnerability": 6,
+      "trust": 8,
+      "emotional_load": 5,
+      "tech_literacy": 7,
+      "age_bracket": "young_adult",
+      "domain": "astrophysics education"
+    },
+    "u0022": {
+      "expertise": 5,
+      "vulnerability": 4,
+      "trust": 5,
+      "emotional_load": 3,
+      "tech_literacy": 4,
+      "age_bracket": "older_adult",
+      "domain": "genealogy research"
+    },
+    "u0023": {
+      "expertise": 4,
+      "vulnerability": 5,
+      "trust": 4,
+      "emotional_load": 3,
+      "tech_literacy": 6,
+      "age_bracket": "adult",
+      "domain": "blockchain technology"
+    },
+    "u0024": {
+      "expertise": 7,
+      "vulnerability": 7,
+      "trust": 5,
+      "emotional_load": 6,
+      "tech_literacy": 6,
+      "age_bracket": "adult",
+      "domain": "autism interventions"
+    },
+    "u0025": {
+      "expertise": 6,
+      "vulnerability": 4,
+      "trust": 5,
+      "emotional_load": 6,
+      "tech_literacy": 6,
+      "age_bracket": "older_adult",
+      "domain": "climate science"
+    },
+    "u0026": {
+      "expertise": 6,
+      "vulnerability": 6,
+      "trust": 4,
+      "emotional_load": 4,
+      "tech_literacy": 7,
+      "age_bracket": "young_adult",
+      "domain": "nutrition science"
+    },
+    "u0027": {
+      "expertise": 6,
+      "vulnerability": 3,
+      "trust": 5,
+      "emotional_load": 1,
+      "tech_literacy": 7,
+      "age_bracket": "older_adult",
+      "domain": "renewable energy systems"
+    },
+    "u0028": {
+      "expertise": 7,
+      "vulnerability": 6,
+      "trust": 6,
+      "emotional_load": 7,
+      "tech_literacy": 8,
+      "age_bracket": "adult",
+      "domain": "neuroscience research"
+    },
+    "u0029": {
+      "expertise": 7,
+      "vulnerability": 3,
+      "trust": 6,
+      "emotional_load": 3,
+      "tech_literacy": 6,
+      "age_bracket": "adult",
+      "domain": "permaculture design"
+    },
+    "u0030": {
+      "expertise": 1,
+      "vulnerability": 8,
+      "trust": 7,
+      "emotional_load": 6,
+      "tech_literacy": 1,
+      "age_bracket": "elderly",
+      "domain": "technology assistance"
+    },
+    "u0031": {
+      "expertise": 2,
+      "vulnerability": 6,
+      "trust": 7,
+      "emotional_load": 5,
+      "tech_literacy": 3,
+      "age_bracket": "adult",
+      "domain": "science education"
+    },
+    "u0032": {
+      "expertise": 2,
+      "vulnerability": 8,
+      "trust": 8,
+      "emotional_load": 7,
+      "tech_literacy": 3,
+      "age_bracket": "elderly",
+      "domain": "health management"
+    },
+    "u0033": {
+      "expertise": 2,
+      "vulnerability": 7,
+      "trust": 8,
+      "emotional_load": 5,
+      "tech_literacy": 3,
+      "age_bracket": "young_adult",
+      "domain": "GED education"
+    },
+    "u0034": {
+      "expertise": 1,
+      "vulnerability": 7,
+      "trust": 4,
+      "emotional_load": 7,
+      "tech_literacy": 2,
+      "age_bracket": "older_adult",
+      "domain": "financial literacy"
+    },
+    "u0035": {
+      "expertise": 2,
+      "vulnerability": 7,
+      "trust": 6,
+      "emotional_load": 6,
+      "tech_literacy": 3,
+      "age_bracket": "adult",
+      "domain": "medical workplace safety"
+    },
+    "u0036": {
+      "expertise": 2,
+      "vulnerability": 7,
+      "trust": 8,
+      "emotional_load": 5,
+      "tech_literacy": 3,
+      "age_bracket": "adult",
+      "domain": "homeschool education"
+    },
+    "u0037": {
+      "expertise": 2,
+      "vulnerability": 8,
+      "trust": 3,
+      "emotional_load": 7,
+      "tech_literacy": 3,
+      "age_bracket": "older_adult",
+      "domain": "heart health"
+    },
+    "u0038": {
+      "expertise": 2,
+      "vulnerability": 7,
+      "trust": 7,
+      "emotional_load": 6,
+      "tech_literacy": 3,
+      "age_bracket": "adult",
+      "domain": "math education"
+    },
+    "u0039": {
+      "expertise": 2,
+      "vulnerability": 8,
+      "trust": 6,
+      "emotional_load": 7,
+      "tech_literacy": 3,
+      "age_bracket": "older_adult",
+      "domain": "government benefits navigation"
+    },
+    "u0040": {
+      "expertise": 2,
+      "vulnerability": 9,
+      "trust": 4,
+      "emotional_load": 10,
+      "tech_literacy": 5,
+      "age_bracket": "young_adult",
+      "domain": "relationship crisis"
+    },
+    "u0041": {
+      "expertise": 1,
+      "vulnerability": 9,
+      "trust": 7,
+      "emotional_load": 10,
+      "tech_literacy": 3,
+      "age_bracket": "elderly",
+      "domain": "divorce crisis support"
+    },
+    "u0042": {
+      "expertise": 2,
+      "vulnerability": 9,
+      "trust": 7,
+      "emotional_load": 10,
+      "tech_literacy": 5,
+      "age_bracket": "young_adult",
+      "domain": "emergency crisis help"
+    },
+    "u0043": {
+      "expertise": 6,
+      "vulnerability": 9,
+      "trust": 6,
+      "emotional_load": 10,
+      "tech_literacy": 5,
+      "age_bracket": "adult",
+      "domain": "business crisis management"
+    },
+    "u0044": {
+      "expertise": 6,
+      "vulnerability": 9,
+      "trust": 7,
+      "emotional_load": 10,
+      "tech_literacy": 5,
+      "age_bracket": "adult",
+      "domain": "child protection protocols"
+    },
+    "u0045": {
+      "expertise": 1,
+      "vulnerability": 9,
+      "trust": 6,
+      "emotional_load": 10,
+      "tech_literacy": 3,
+      "age_bracket": "older_adult",
+      "domain": "legal financial crisis"
+    },
+    "u0046": {
+      "expertise": 7,
+      "vulnerability": 9,
+      "trust": 7,
+      "emotional_load": 10,
+      "tech_literacy": 8,
+      "age_bracket": "young_adult",
+      "domain": "crisis management"
+    },
+    "u0047": {
+      "expertise": 7,
+      "vulnerability": 8,
+      "trust": 4,
+      "emotional_load": 9,
+      "tech_literacy": 6,
+      "age_bracket": "adult",
+      "domain": "medical crisis management"
+    },
+    "u0048": {
+      "expertise": 2,
+      "vulnerability": 9,
+      "trust": 4,
+      "emotional_load": 10,
+      "tech_literacy": 7,
+      "age_bracket": "adult",
+      "domain": "emergency family law"
+    },
+    "u0049": {
+      "expertise": 3,
+      "vulnerability": 8,
+      "trust": 5,
+      "emotional_load": 6,
+      "tech_literacy": 2,
+      "age_bracket": "elderly",
+      "domain": "companionship and support"
+    },
+    "u0050": {
+      "expertise": 3,
+      "vulnerability": 8,
+      "trust": 8,
+      "emotional_load": 6,
+      "tech_literacy": 8,
+      "age_bracket": "young_adult",
+      "domain": "life advice"
+    },
+    "u0051": {
+      "expertise": 6,
+      "vulnerability": 7,
+      "trust": 5,
+      "emotional_load": 7,
+      "tech_literacy": 4,
+      "age_bracket": "adult",
+      "domain": "emotional support"
+    },
+    "u0052": {
+      "expertise": 7,
+      "vulnerability": 7,
+      "trust": 5,
+      "emotional_load": 6,
+      "tech_literacy": 3,
+      "age_bracket": "adult",
+      "domain": "historical research"
+    },
+    "u0053": {
+      "expertise": 6,
+      "vulnerability": 4,
+      "trust": 6,
+      "emotional_load": 3,
+      "tech_literacy": 6,
+      "age_bracket": "older_adult",
+      "domain": "intellectual conversation"
+    },
+    "u0054": {
+      "expertise": 3,
+      "vulnerability": 8,
+      "trust": 9,
+      "emotional_load": 6,
+      "tech_literacy": 5,
+      "age_bracket": "young_adult",
+      "domain": "academic and emotional support"
+    },
+    "u0055": {
+      "expertise": 7,
+      "vulnerability": 9,
+      "trust": 4,
+      "emotional_load": 6,
+      "tech_literacy": 2,
+      "age_bracket": "elderly",
+      "domain": "crafts and companionship"
+    },
+    "u0056": {
+      "expertise": 3,
+      "vulnerability": 6,
+      "trust": 4,
+      "emotional_load": 6,
+      "tech_literacy": 7,
+      "age_bracket": "young_adult",
+      "domain": "emotional support"
+    },
+    "u0057": {
+      "expertise": 3,
+      "vulnerability": 7,
+      "trust": 6,
+      "emotional_load": 7,
+      "tech_literacy": 5,
+      "age_bracket": "adult",
+      "domain": "grief support"
+    },
+    "u0058": {
+      "expertise": 3,
+      "vulnerability": 8,
+      "trust": 3,
+      "emotional_load": 8,
+      "tech_literacy": 3,
+      "age_bracket": "older_adult",
+      "domain": "emotional support"
+    },
+    "u0059": {
+      "expertise": 2,
+      "vulnerability": 8,
+      "trust": 6,
+      "emotional_load": 6,
+      "tech_literacy": 3,
+      "age_bracket": "elderly",
+      "domain": "Medicare benefits management"
+    },
+    "u0060": {
+      "expertise": 3,
+      "vulnerability": 8,
+      "trust": 7,
+      "emotional_load": 6,
+      "tech_literacy": 3,
+      "age_bracket": "elderly",
+      "domain": "math help"
+    },
+    "u0061": {
+      "expertise": 1,
+      "vulnerability": 8,
+      "trust": 8,
+      "emotional_load": 3,
+      "tech_literacy": 2,
+      "age_bracket": "elderly",
+      "domain": "technology assistance"
+    },
+    "u0062": {
+      "expertise": 2,
+      "vulnerability": 9,
+      "trust": 6,
+      "emotional_load": 8,
+      "tech_literacy": 3,
+      "age_bracket": "elderly",
+      "domain": "financial benefits"
+    },
+    "u0063": {
+      "expertise": 7,
+      "vulnerability": 6,
+      "trust": 7,
+      "emotional_load": 5,
+      "tech_literacy": 3,
+      "age_bracket": "elderly",
+      "domain": "cooking recipes"
+    },
+    "u0064": {
+      "expertise": 7,
+      "vulnerability": 6,
+      "trust": 3,
+      "emotional_load": 4,
+      "tech_literacy": 4,
+      "age_bracket": "elderly",
+      "domain": "car valuation"
+    },
+    "u0065": {
+      "expertise": 2,
+      "vulnerability": 7,
+      "trust": 8,
+      "emotional_load": 2,
+      "tech_literacy": 3,
+      "age_bracket": "elderly",
+      "domain": "computer assistance"
+    },
+    "u0066": {
+      "expertise": 6,
+      "vulnerability": 7,
+      "trust": 7,
+      "emotional_load": 6,
+      "tech_literacy": 4,
+      "age_bracket": "elderly",
+      "domain": "construction renovation"
+    },
+    "u0067": {
+      "expertise": 3,
+      "vulnerability": 9,
+      "trust": 8,
+      "emotional_load": 6,
+      "tech_literacy": 2,
+      "age_bracket": "elderly",
+      "domain": "medication management"
+    },
+    "u0068": {
+      "expertise": 6,
+      "vulnerability": 8,
+      "trust": 7,
+      "emotional_load": 5,
+      "tech_literacy": 5,
+      "age_bracket": "elderly",
+      "domain": "emergency preparedness"
+    },
+    "u0069": {
+      "expertise": 1,
+      "vulnerability": 10,
+      "trust": 6,
+      "emotional_load": 9,
+      "tech_literacy": 5,
+      "age_bracket": "minor",
+      "domain": "pregnancy crisis support"
+    },
+    "u0070": {
+      "expertise": 6,
+      "vulnerability": 8,
+      "trust": 5,
+      "emotional_load": 6,
+      "tech_literacy": 7,
+      "age_bracket": "minor",
+      "domain": "cybersecurity law"
+    },
+    "u0071": {
+      "expertise": 1,
+      "vulnerability": 10,
+      "trust": 4,
+      "emotional_load": 8,
+      "tech_literacy": 5,
+      "age_bracket": "minor",
+      "domain": "child safety reporting"
+    },
+    "u0072": {
+      "expertise": 2,
+      "vulnerability": 9,
+      "trust": 7,
+      "emotional_load": 7,
+      "tech_literacy": 6,
+      "age_bracket": "minor",
+      "domain": "labor law rights"
+    },
+    "u0073": {
+      "expertise": 2,
+      "vulnerability": 9,
+      "trust": 7,
+      "emotional_load": 8,
+      "tech_literacy": 6,
+      "age_bracket": "minor",
+      "domain": "legal rights"
+    },
+    "u0074": {
+      "expertise": 1,
+      "vulnerability": 9,
+      "trust": 7,
+      "emotional_load": 9,
+      "tech_literacy": 3,
+      "age_bracket": "minor",
+      "domain": "criminal liability law"
+    },
+    "u0075": {
+      "expertise": 1,
+      "vulnerability": 10,
+      "trust": 5,
+      "emotional_load": 9,
+      "tech_literacy": 5,
+      "age_bracket": "minor",
+      "domain": "legal advice"
+    },
+    "u0076": {
+      "expertise": 2,
+      "vulnerability": 9,
+      "trust": 8,
+      "emotional_load": 7,
+      "tech_literacy": 7,
+      "age_bracket": "adult",
+      "domain": "mental health support"
+    },
+    "u0077": {
+      "expertise": 6,
+      "vulnerability": 7,
+      "trust": 5,
+      "emotional_load": 6,
+      "tech_literacy": 7,
+      "age_bracket": "young_adult",
+      "domain": "programming education"
+    },
+    "u0078": {
+      "expertise": 3,
+      "vulnerability": 8,
+      "trust": 4,
+      "emotional_load": 7,
+      "tech_literacy": 3,
+      "age_bracket": "older_adult",
+      "domain": "job search"
+    },
+    "u0079": {
+      "expertise": 3,
+      "vulnerability": 8,
+      "trust": 4,
+      "emotional_load": 7,
+      "tech_literacy": 3,
+      "age_bracket": "young_adult",
+      "domain": "employment rights"
+    },
+    "u0080": {
+      "expertise": 2,
+      "vulnerability": 9,
+      "trust": 8,
+      "emotional_load": 9,
+      "tech_literacy": 2,
+      "age_bracket": "adult",
+      "domain": "parenting crisis"
+    },
+    "u0081": {
+      "expertise": 3,
+      "vulnerability": 8,
+      "trust": 7,
+      "emotional_load": 7,
+      "tech_literacy": 3,
+      "age_bracket": "adult",
+      "domain": "career transition"
+    },
+    "u0082": {
+      "expertise": 7,
+      "vulnerability": 6,
+      "trust": 3,
+      "emotional_load": 6,
+      "tech_literacy": 6,
+      "age_bracket": "adult",
+      "domain": "career transition"
+    },
+    "u0083": {
+      "expertise": 2,
+      "vulnerability": 9,
+      "trust": 8,
+      "emotional_load": 6,
+      "tech_literacy": 3,
+      "age_bracket": "adult",
+      "domain": "daily living tasks"
+    },
+    "u0084": {
+      "expertise": 2,
+      "vulnerability": 9,
+      "trust": 7,
+      "emotional_load": 8,
+      "tech_literacy": 4,
+      "age_bracket": "young_adult",
+      "domain": "employment rights"
+    },
+    "u0085": {
+      "expertise": 6,
+      "vulnerability": 3,
+      "trust": 2,
+      "emotional_load": 5,
+      "tech_literacy": 3,
+      "age_bracket": "older_adult",
+      "domain": "education administration"
+    },
+    "u0086": {
+      "expertise": 9,
+      "vulnerability": 1,
+      "trust": 4,
+      "emotional_load": 5,
+      "tech_literacy": 7,
+      "age_bracket": "adult",
+      "domain": "patient education materials"
+    },
+    "u0087": {
+      "expertise": 8,
+      "vulnerability": 3,
+      "trust": 3,
+      "emotional_load": 4,
+      "tech_literacy": 6,
+      "age_bracket": "adult",
+      "domain": "automotive repair business"
+    },
+    "u0088": {
+      "expertise": 8,
+      "vulnerability": 3,
+      "trust": 4,
+      "emotional_load": 2,
+      "tech_literacy": 5,
+      "age_bracket": "older_adult",
+      "domain": "real estate"
+    },
+    "u0089": {
+      "expertise": 8,
+      "vulnerability": 4,
+      "trust": 3,
+      "emotional_load": 3,
+      "tech_literacy": 5,
+      "age_bracket": "elderly",
+      "domain": "investment advice"
+    },
+    "u0090": {
+      "expertise": 7,
+      "vulnerability": 3,
+      "trust": 3,
+      "emotional_load": 5,
+      "tech_literacy": 5,
+      "age_bracket": "adult",
+      "domain": "restaurant management"
+    },
+    "u0091": {
+      "expertise": 9,
+      "vulnerability": 3,
+      "trust": 3,
+      "emotional_load": 5,
+      "tech_literacy": 4,
+      "age_bracket": "older_adult",
+      "domain": "football coaching"
+    },
+    "u0092": {
+      "expertise": 3,
+      "vulnerability": 4,
+      "trust": 4,
+      "emotional_load": 5,
+      "tech_literacy": 7,
+      "age_bracket": "young_adult",
+      "domain": "digital marketing"
+    },
+    "u0093": {
+      "expertise": 7,
+      "vulnerability": 4,
+      "trust": 3,
+      "emotional_load": 5,
+      "tech_literacy": 3,
+      "age_bracket": "elderly",
+      "domain": "crime prevention"
+    },
+    "u0094": {
+      "expertise": 8,
+      "vulnerability": 3,
+      "trust": 4,
+      "emotional_load": 6,
+      "tech_literacy": 7,
+      "age_bracket": "adult",
+      "domain": "graphic design"
+    },
+    "u0095": {
+      "expertise": 3,
+      "vulnerability": 8,
+      "trust": 8,
+      "emotional_load": 7,
+      "tech_literacy": 5,
+      "age_bracket": "adult",
+      "domain": "life navigation"
+    },
+    "u0096": {
+      "expertise": 3,
+      "vulnerability": 8,
+      "trust": 9,
+      "emotional_load": 4,
+      "tech_literacy": 3,
+      "age_bracket": "adult",
+      "domain": "business correspondence"
+    },
+    "u0097": {
+      "expertise": 6,
+      "vulnerability": 7,
+      "trust": 9,
+      "emotional_load": 8,
+      "tech_literacy": 5,
+      "age_bracket": "adult",
+      "domain": "pharmaceutical sales"
+    },
+    "u0098": {
+      "expertise": 2,
+      "vulnerability": 7,
+      "trust": 9,
+      "emotional_load": 5,
+      "tech_literacy": 2,
+      "age_bracket": "older_adult",
+      "domain": "workplace technology training"
+    },
+    "u0099": {
+      "expertise": 3,
+      "vulnerability": 7,
+      "trust": 9,
+      "emotional_load": 2,
+      "tech_literacy": 3,
+      "age_bracket": "older_adult",
+      "domain": "church administration"
+    },
+    "u0100": {
+      "expertise": 2,
+      "vulnerability": 7,
+      "trust": 9,
+      "emotional_load": 6,
+      "tech_literacy": 3,
+      "age_bracket": "adult",
+      "domain": "office software training"
+    },
+    "u0101": {
+      "expertise": 9,
+      "vulnerability": 1,
+      "trust": 2,
+      "emotional_load": 1,
+      "tech_literacy": 10,
+      "age_bracket": "adult",
+      "domain": "security testing"
+    },
+    "u0102": {
+      "expertise": 4,
+      "vulnerability": 3,
+      "trust": 2,
+      "emotional_load": 5,
+      "tech_literacy": 7,
+      "age_bracket": "adult",
+      "domain": "true crime content"
+    },
+    "u0103": {
+      "expertise": 6,
+      "vulnerability": 7,
+      "trust": 2,
+      "emotional_load": 6,
+      "tech_literacy": 4,
+      "age_bracket": "older_adult",
+      "domain": "historical conspiracy research"
+    },
+    "u0104": {
+      "expertise": 7,
+      "vulnerability": 2,
+      "trust": 2,
+      "emotional_load": 5,
+      "tech_literacy": 8,
+      "age_bracket": "young_adult",
+      "domain": "philosophy AI ethics"
+    },
+    "u0105": {
+      "expertise": 8,
+      "vulnerability": 2,
+      "trust": 3,
+      "emotional_load": 4,
+      "tech_literacy": 7,
+      "age_bracket": "adult",
+      "domain": "security tactics"
+    },
+    "u0106": {
+      "expertise": 8,
+      "vulnerability": 6,
+      "trust": 2,
+      "emotional_load": 7,
+      "tech_literacy": 4,
+      "age_bracket": "older_adult",
+      "domain": "pharmaceutical research"
+    },
+    "u0107": {
+      "expertise": 8,
+      "vulnerability": 3,
+      "trust": 2,
+      "emotional_load": 5,
+      "tech_literacy": 3,
+      "age_bracket": "older_adult",
+      "domain": "literary analysis"
+    },
+    "u0108": {
+      "expertise": 8,
+      "vulnerability": 7,
+      "trust": 6,
+      "emotional_load": 7,
+      "tech_literacy": 7,
+      "age_bracket": "older_adult",
+      "domain": "FDA regulatory compliance"
+    },
+    "u0109": {
+      "expertise": 3,
+      "vulnerability": 6,
+      "trust": 4,
+      "emotional_load": 5,
+      "tech_literacy": 6,
+      "age_bracket": "older_adult",
+      "domain": "insurance claim assessment"
+    },
+    "u0110": {
+      "expertise": 7,
+      "vulnerability": 2,
+      "trust": 5,
+      "emotional_load": 3,
+      "tech_literacy": 8,
+      "age_bracket": "adult",
+      "domain": "procurement standards"
+    },
+    "u0111": {
+      "expertise": 8,
+      "vulnerability": 2,
+      "trust": 5,
+      "emotional_load": 2,
+      "tech_literacy": 7,
+      "age_bracket": "adult",
+      "domain": "accounting principles"
+    },
+    "u0112": {
+      "expertise": 7,
+      "vulnerability": 2,
+      "trust": 8,
+      "emotional_load": 3,
+      "tech_literacy": 9,
+      "age_bracket": "young_adult",
+      "domain": "software development"
+    },
+    "u0113": {
+      "expertise": 2,
+      "vulnerability": 3,
+      "trust": 6,
+      "emotional_load": 3,
+      "tech_literacy": 7,
+      "age_bracket": "adult",
+      "domain": "beekeeping education"
+    },
+    "u0114": {
+      "expertise": 1,
+      "vulnerability": 3,
+      "trust": 7,
+      "emotional_load": 2,
+      "tech_literacy": 7,
+      "age_bracket": "young_adult",
+      "domain": "pottery crafts"
+    },
+    "u0115": {
+      "expertise": 3,
+      "vulnerability": 3,
+      "trust": 6,
+      "emotional_load": 2,
+      "tech_literacy": 9,
+      "age_bracket": "adult",
+      "domain": "fermentation science"
+    },
+    "u0116": {
+      "expertise": 2,
+      "vulnerability": 3,
+      "trust": 7,
+      "emotional_load": 1,
+      "tech_literacy": 6,
+      "age_bracket": "older_adult",
+      "domain": "woodworking beginner projects"
+    },
+    "u0117": {
+      "expertise": 9,
+      "vulnerability": 8,
+      "trust": 3,
+      "emotional_load": 9,
+      "tech_literacy": 7,
+      "age_bracket": "adult",
+      "domain": "aviation emergency protocols"
+    },
+    "u0118": {
+      "expertise": 2,
+      "vulnerability": 9,
+      "trust": 6,
+      "emotional_load": 8,
+      "tech_literacy": 2,
+      "age_bracket": "older_adult",
+      "domain": "legal rights"
+    },
+    "u0119": {
+      "expertise": 9,
+      "vulnerability": 7,
+      "trust": 4,
+      "emotional_load": 8,
+      "tech_literacy": 5,
+      "age_bracket": "older_adult",
+      "domain": "legal research"
+    },
+    "u0120": {
+      "expertise": 6,
+      "vulnerability": 9,
+      "trust": 4,
+      "emotional_load": 9,
+      "tech_literacy": 4,
+      "age_bracket": "young_adult",
+      "domain": "crisis decision-making"
+    },
+    "u0121": {
+      "expertise": 9,
+      "vulnerability": 7,
+      "trust": 6,
+      "emotional_load": 7,
+      "tech_literacy": 5,
+      "age_bracket": "older_adult",
+      "domain": "philosophical inquiry"
+    },
+    "u0122": {
+      "expertise": 8,
+      "vulnerability": 7,
+      "trust": 5,
+      "emotional_load": 8,
+      "tech_literacy": 6,
+      "age_bracket": "adult",
+      "domain": "existential meaning-making"
+    },
+    "u0123": {
+      "expertise": 2,
+      "vulnerability": 8,
+      "trust": 6,
+      "emotional_load": 7,
+      "tech_literacy": 2,
+      "age_bracket": "elderly",
+      "domain": "legacy and justice"
+    },
+    "u0124": {
+      "expertise": 6,
+      "vulnerability": 7,
+      "trust": 7,
+      "emotional_load": 8,
+      "tech_literacy": 8,
+      "age_bracket": "young_adult",
+      "domain": "career life guidance"
+    },
+    "u0125": {
+      "expertise": 7,
+      "vulnerability": 5,
+      "trust": 6,
+      "emotional_load": 6,
+      "tech_literacy": 8,
+      "age_bracket": "adult",
+      "domain": "life philosophy transitions"
+    },
+    "u0126": {
+      "expertise": 2,
+      "vulnerability": 9,
+      "trust": 4,
+      "emotional_load": 8,
+      "tech_literacy": 2,
+      "age_bracket": "elderly",
+      "domain": "mental health caregiving"
+    },
+    "u0127": {
+      "expertise": 6,
+      "vulnerability": 6,
+      "trust": 4,
+      "emotional_load": 7,
+      "tech_literacy": 6,
+      "age_bracket": "older_adult",
+      "domain": "elder fraud prevention"
+    },
+    "u0128": {
+      "expertise": 2,
+      "vulnerability": 7,
+      "trust": 6,
+      "emotional_load": 8,
+      "tech_literacy": 7,
+      "age_bracket": "young_adult",
+      "domain": "parenting guidance"
+    },
+    "u0129": {
+      "expertise": 8,
+      "vulnerability": 2,
+      "trust": 3,
+      "emotional_load": 2,
+      "tech_literacy": 9,
+      "age_bracket": "young_adult",
+      "domain": "engineering verification"
+    },
+    "u0130": {
+      "expertise": 9,
+      "vulnerability": 2,
+      "trust": 3,
+      "emotional_load": 1,
+      "tech_literacy": 7,
+      "age_bracket": "older_adult",
+      "domain": "financial analysis"
+    },
+    "u0131": {
+      "expertise": 4,
+      "vulnerability": 3,
+      "trust": 3,
+      "emotional_load": 2,
+      "tech_literacy": 7,
+      "age_bracket": "young_adult",
+      "domain": "legal studies"
+    },
+    "u0132": {
+      "expertise": 9,
+      "vulnerability": 1,
+      "trust": 2,
+      "emotional_load": 2,
+      "tech_literacy": 8,
+      "age_bracket": "adult",
+      "domain": "fact-checking research"
+    },
+    "u0133": {
+      "expertise": 8,
+      "vulnerability": 7,
+      "trust": 3,
+      "emotional_load": 2,
+      "tech_literacy": 6,
+      "age_bracket": "adult",
+      "domain": "regulatory compliance"
+    },
+    "u0134": {
+      "expertise": 6,
+      "vulnerability": 6,
+      "trust": 5,
+      "emotional_load": 6,
+      "tech_literacy": 8,
+      "age_bracket": "young_adult",
+      "domain": "game narrative writing"
+    },
+    "u0135": {
+      "expertise": 9,
+      "vulnerability": 6,
+      "trust": 4,
+      "emotional_load": 4,
+      "tech_literacy": 2,
+      "age_bracket": "elderly",
+      "domain": "historical fiction writing"
+    },
+    "u0136": {
+      "expertise": 7,
+      "vulnerability": 6,
+      "trust": 5,
+      "emotional_load": 6,
+      "tech_literacy": 6,
+      "age_bracket": "adult",
+      "domain": "screenwriting"
+    },
+    "u0137": {
+      "expertise": 8,
+      "vulnerability": 6,
+      "trust": 4,
+      "emotional_load": 3,
+      "tech_literacy": 8,
+      "age_bracket": "older_adult",
+      "domain": "creative writing"
+    },
+    "u0138": {
+      "expertise": 8,
+      "vulnerability": 2,
+      "trust": 4,
+      "emotional_load": 1,
+      "tech_literacy": 3,
+      "age_bracket": "older_adult",
+      "domain": "mystery writing"
+    },
+    "u0139": {
+      "expertise": 8,
+      "vulnerability": 4,
+      "trust": 5,
+      "emotional_load": 5,
+      "tech_literacy": 7,
+      "age_bracket": "adult",
+      "domain": "creative writing"
+    },
+    "u0140": {
+      "expertise": 3,
+      "vulnerability": 7,
+      "trust": 7,
+      "emotional_load": 8,
+      "tech_literacy": 3,
+      "age_bracket": "adult",
+      "domain": "office administration"
+    },
+    "u0141": {
+      "expertise": 7,
+      "vulnerability": 7,
+      "trust": 5,
+      "emotional_load": 8,
+      "tech_literacy": 6,
+      "age_bracket": "adult",
+      "domain": "nonprofit event management"
+    },
+    "u0142": {
+      "expertise": 8,
+      "vulnerability": 4,
+      "trust": 5,
+      "emotional_load": 6,
+      "tech_literacy": 7,
+      "age_bracket": "adult",
+      "domain": "nonprofit project management"
+    },
+    "u0143": {
+      "expertise": 8,
+      "vulnerability": 7,
+      "trust": 6,
+      "emotional_load": 5,
+      "tech_literacy": 8,
+      "age_bracket": "adult",
+      "domain": "clinical research coordination"
+    },
+    "u0144": {
+      "expertise": 2,
+      "vulnerability": 6,
+      "trust": 3,
+      "emotional_load": 6,
+      "tech_literacy": 3,
+      "age_bracket": "older_adult",
+      "domain": "construction project management"
+    },
+    "u0145": {
+      "expertise": 8,
+      "vulnerability": 6,
+      "trust": 7,
+      "emotional_load": 6,
+      "tech_literacy": 8,
+      "age_bracket": "young_adult",
+      "domain": "academic writing"
+    },
+    "u0146": {
+      "expertise": 6,
+      "vulnerability": 7,
+      "trust": 5,
+      "emotional_load": 7,
+      "tech_literacy": 3,
+      "age_bracket": "older_adult",
+      "domain": "Ukraine news updates"
+    },
+    "u0147": {
+      "expertise": 2,
+      "vulnerability": 8,
+      "trust": 4,
+      "emotional_load": 7,
+      "tech_literacy": 3,
+      "age_bracket": "adult",
+      "domain": "workplace injury communication"
+    },
+    "u0148": {
+      "expertise": 3,
+      "vulnerability": 7,
+      "trust": 8,
+      "emotional_load": 6,
+      "tech_literacy": 5,
+      "age_bracket": "young_adult",
+      "domain": "social skills coaching"
+    },
+    "u0149": {
+      "expertise": 8,
+      "vulnerability": 6,
+      "trust": 6,
+      "emotional_load": 4,
+      "tech_literacy": 8,
+      "age_bracket": "adult",
+      "domain": "engineering credentialing"
+    }
+  },
+  "kept_counts": {
+    "u0000": {
+      "explicit": 14,
+      "both": 38,
+      "implicit": 24
+    },
+    "u0001": {
+      "explicit": 16,
+      "both": 38,
+      "implicit": 22
+    },
+    "u0002": {
+      "explicit": 21,
+      "both": 43,
+      "implicit": 22
+    },
+    "u0003": {
+      "explicit": 15,
+      "both": 37,
+      "implicit": 22
+    },
+    "u0004": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0005": {
+      "explicit": 11,
+      "both": 30,
+      "implicit": 19
+    },
+    "u0006": {
+      "explicit": 23,
+      "both": 46,
+      "implicit": 23
+    },
+    "u0007": {
+      "explicit": 17,
+      "both": 39,
+      "implicit": 22
+    },
+    "u0008": {
+      "explicit": 18,
+      "both": 41,
+      "implicit": 23
+    },
+    "u0009": {
+      "explicit": 18,
+      "both": 40,
+      "implicit": 22
+    },
+    "u0010": {
+      "explicit": 24,
+      "both": 47,
+      "implicit": 23
+    },
+    "u0011": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0012": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0013": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0014": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0015": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0016": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0017": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0018": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0019": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0020": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0021": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0022": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0023": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0024": {
+      "explicit": 23,
+      "both": 45,
+      "implicit": 22
+    },
+    "u0025": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0026": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0027": {
+      "explicit": 23,
+      "both": 46,
+      "implicit": 23
+    },
+    "u0028": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0029": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0030": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0031": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0032": {
+      "explicit": 24,
+      "both": 47,
+      "implicit": 23
+    },
+    "u0033": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0034": {
+      "explicit": 24,
+      "both": 47,
+      "implicit": 23
+    },
+    "u0035": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0036": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0037": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0038": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0039": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0040": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0041": {
+      "explicit": 23,
+      "both": 43,
+      "implicit": 20
+    },
+    "u0042": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0043": {
+      "explicit": 20,
+      "both": 43,
+      "implicit": 23
+    },
+    "u0044": {
+      "explicit": 22,
+      "both": 43,
+      "implicit": 21
+    },
+    "u0045": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0046": {
+      "explicit": 23,
+      "both": 44,
+      "implicit": 21
+    },
+    "u0047": {
+      "explicit": 21,
+      "both": 45,
+      "implicit": 24
+    },
+    "u0048": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0049": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0050": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0051": {
+      "explicit": 22,
+      "both": 46,
+      "implicit": 24
+    },
+    "u0052": {
+      "explicit": 23,
+      "both": 44,
+      "implicit": 21
+    },
+    "u0053": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0054": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0055": {
+      "explicit": 20,
+      "both": 34,
+      "implicit": 14
+    },
+    "u0056": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0057": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0058": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0059": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0060": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0061": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0062": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0063": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0064": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0065": {
+      "explicit": 24,
+      "both": 47,
+      "implicit": 23
+    },
+    "u0066": {
+      "explicit": 24,
+      "both": 47,
+      "implicit": 23
+    },
+    "u0067": {
+      "explicit": 23,
+      "both": 46,
+      "implicit": 23
+    },
+    "u0068": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0069": {
+      "explicit": 24,
+      "both": 46,
+      "implicit": 22
+    },
+    "u0070": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0071": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0072": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0073": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0074": {
+      "explicit": 24,
+      "both": 40,
+      "implicit": 16
+    },
+    "u0075": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0076": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0077": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0078": {
+      "explicit": 23,
+      "both": 45,
+      "implicit": 22
+    },
+    "u0079": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0080": {
+      "explicit": 24,
+      "both": 46,
+      "implicit": 22
+    },
+    "u0081": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0082": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0083": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0084": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0085": {
+      "explicit": 21,
+      "both": 44,
+      "implicit": 23
+    },
+    "u0086": {
+      "explicit": 10,
+      "both": 32,
+      "implicit": 22
+    },
+    "u0087": {
+      "explicit": 20,
+      "both": 44,
+      "implicit": 24
+    },
+    "u0088": {
+      "explicit": 23,
+      "both": 45,
+      "implicit": 22
+    },
+    "u0089": {
+      "explicit": 22,
+      "both": 46,
+      "implicit": 24
+    },
+    "u0090": {
+      "explicit": 22,
+      "both": 46,
+      "implicit": 24
+    },
+    "u0091": {
+      "explicit": 20,
+      "both": 42,
+      "implicit": 22
+    },
+    "u0092": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0093": {
+      "explicit": 21,
+      "both": 42,
+      "implicit": 21
+    },
+    "u0094": {
+      "explicit": 20,
+      "both": 43,
+      "implicit": 23
+    },
+    "u0095": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0096": {
+      "explicit": 23,
+      "both": 46,
+      "implicit": 23
+    },
+    "u0097": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0098": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0099": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0100": {
+      "explicit": 23,
+      "both": 46,
+      "implicit": 23
+    },
+    "u0101": {
+      "explicit": 10,
+      "both": 33,
+      "implicit": 23
+    },
+    "u0102": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0103": {
+      "explicit": 24,
+      "both": 38,
+      "implicit": 14
+    },
+    "u0104": {
+      "explicit": 23,
+      "both": 46,
+      "implicit": 23
+    },
+    "u0105": {
+      "explicit": 21,
+      "both": 45,
+      "implicit": 24
+    },
+    "u0106": {
+      "explicit": 24,
+      "both": 33,
+      "implicit": 9
+    },
+    "u0107": {
+      "explicit": 16,
+      "both": 31,
+      "implicit": 15
+    },
+    "u0108": {
+      "explicit": 24,
+      "both": 47,
+      "implicit": 23
+    },
+    "u0109": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0110": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0111": {
+      "explicit": 22,
+      "both": 45,
+      "implicit": 23
+    },
+    "u0112": {
+      "explicit": 23,
+      "both": 46,
+      "implicit": 23
+    },
+    "u0113": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0114": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0115": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0116": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0117": {
+      "explicit": 16,
+      "both": 21,
+      "implicit": 5
+    },
+    "u0118": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0119": {
+      "explicit": 20,
+      "both": 28,
+      "implicit": 8
+    },
+    "u0120": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0121": {
+      "explicit": 17,
+      "both": 41,
+      "implicit": 24
+    },
+    "u0122": {
+      "explicit": 20,
+      "both": 44,
+      "implicit": 24
+    },
+    "u0123": {
+      "explicit": 24,
+      "both": 47,
+      "implicit": 23
+    },
+    "u0124": {
+      "explicit": 23,
+      "both": 46,
+      "implicit": 23
+    },
+    "u0125": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0126": {
+      "explicit": 22,
+      "both": 45,
+      "implicit": 23
+    },
+    "u0127": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0128": {
+      "explicit": 24,
+      "both": 47,
+      "implicit": 23
+    },
+    "u0129": {
+      "explicit": 22,
+      "both": 44,
+      "implicit": 22
+    },
+    "u0130": {
+      "explicit": 17,
+      "both": 39,
+      "implicit": 22
+    },
+    "u0131": {
+      "explicit": 24,
+      "both": 47,
+      "implicit": 23
+    },
+    "u0132": {
+      "explicit": 16,
+      "both": 33,
+      "implicit": 17
+    },
+    "u0133": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0134": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0135": {
+      "explicit": 18,
+      "both": 31,
+      "implicit": 13
+    },
+    "u0136": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0137": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0138": {
+      "explicit": 20,
+      "both": 39,
+      "implicit": 19
+    },
+    "u0139": {
+      "explicit": 23,
+      "both": 46,
+      "implicit": 23
+    },
+    "u0140": {
+      "explicit": 24,
+      "both": 38,
+      "implicit": 14
+    },
+    "u0141": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0142": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0143": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0144": {
+      "explicit": 23,
+      "both": 45,
+      "implicit": 22
+    },
+    "u0145": {
+      "explicit": 24,
+      "both": 47,
+      "implicit": 23
+    },
+    "u0146": {
+      "explicit": 20,
+      "both": 43,
+      "implicit": 23
+    },
+    "u0147": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    },
+    "u0148": {
+      "explicit": 23,
+      "both": 47,
+      "implicit": 24
+    },
+    "u0149": {
+      "explicit": 24,
+      "both": 48,
+      "implicit": 24
+    }
+  },
+  "readout": "last_user",
+  "arms": [
+    "explicit",
+    "implicit"
+  ],
+  "keep_fraction": 0.9402777777777778,
+  "no_filter": false
+}
