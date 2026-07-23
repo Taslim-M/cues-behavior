@@ -1,4 +1,15 @@
-# User Axis — ICLR technical report
+# User Axis — ICLR technical reports
+
+Two companion reports, both compiled with **pdfLaTeX** and sharing the bundled
+`iclr2024_conference.sty` and `figures/`:
+
+- **`main.tex` → `main.pdf`** (13 pp) — *The User Axis*: recovering, interpreting,
+  and steering the unsupervised User Axis (Stages A–E + steering). This is the
+  primary report.
+- **`link_report.tex` → `link_report.pdf`** (7 pp) — *Does the User Axis Predict
+  Assistant-Axis Drift?*: the Stage-F de-circularization test of the User→Assistant
+  drift link (a negative result). Self-contained; reuses the same `.sty` and
+  `figures/`.
 
 Compile on Overleaf (pdfLaTeX). Two ways:
 
@@ -17,11 +28,18 @@ with either style unchanged.
 To reveal author names for a camera-ready, uncomment `\iclrfinalcopy` and fill in
 the `\author{...}` block.
 
+To reveal author names for a camera-ready, uncomment `\iclrfinalcopy` and fill in
+the `\author{...}` block (both reports).
+
 ## Files
-- `main.tex` — the report (body + 8 appendices, all detailed numbers in the appendix)
-- `iclr2024_conference.sty` — bundled style (swap for official if desired)
-- `figures/` — 10 PNGs (5 per readout: variance curve, PC1-vs-tags, cosine-per-layer,
-  persona 3-D scatter, elicitation-arm agreement)
+- `main.tex` — primary report: body + appendices incl. **The user personas**
+  appendix (archetype table + persona-space figure) and the note on why the
+  held-out-tag → PC regression is needed. All detailed numbers in the appendices.
+- `link_report.tex` — companion report: the Stage-F link test + full tier tables.
+- `iclr2024_conference.sty` — bundled style (swap for official if desired).
+- `figures/` — User-Axis figures (`resp_*`, `lastuser_*`, `persona_space_labeled`)
+  and link figures (`link_*`).
+- `user-axis-interactive-summary.html` — interactive one-page overview of both.
 
 All numbers trace to `results/useraxis/llama-3.3-70b/` (`axis_validation.json`,
-`interpretation.json`, `steering.json`, `stage_d.jsonl`).
+`interpretation.json`, `steering.json`, `stage_d.jsonl`, and `analysis/*.json`).

@@ -32,10 +32,6 @@
 \newcommand{\respmean}{\textsc{resp-mean}}
 \newcommand{\lastuser}{\textsc{last-user}}
 \newcommand{\vs}{\emph{vs.}\ }
-% Cosine of the independent axis recompute vs.\ the published axis (Stage F1);
-% updated from results/useraxis/llama-3.3-70b/analysis/axis_recompute_check.json.
-\newcommand{\recomputeval}{$0.86$ ($30$ roles $\times\,40$ questions $\times\,2$
-prompts, $0.86$ mean across layers, $0.81$--$0.88$ over the grid)}
 
 \title{The User Axis: An Unsupervised Activation Direction Encoding a\\
 Language Model's Internal Model of Its Interlocutor}
@@ -56,7 +52,8 @@ activation direction measuring how far a model's own persona sits from its
 trained default---but apply it to the \emph{other} side of the conversation:
 instead of varying the model's persona, we vary the \emph{user's} persona and
 read the model's internal representation of that user. Using a generated pool of
-$150$ diverse user personas, $240$ shared persona-agnostic extraction probes, and
+$150$ diverse user personas, $24$ shared persona-agnostic extraction probes
+(sampled from a $240$-question bank), and
 two elicitation regimes (explicit system-prompt descriptions and implicit
 in-voice conversations), we collect residual-stream activations from
 \texttt{Llama-3.3-70B-Instruct} over $7{,}200$ rollouts, filter them by the
@@ -70,15 +67,11 @@ elicitation regimes recover the \emph{same} persona ordering ($r{=}0.69$ and
 $0.83$). Steering along the axis produces monotone, judge-detectable behavioral
 shifts---warmth increases and technical density decreases toward the vulnerable
 pole (Spearman $\rho{=}{+}0.88$ and $-1.00$)---while output coherence is
-preserved. The User Axis is thus the input-side analogue of the Assistant Axis.
-Finally, we test the headline link---whether a user's User-Axis position predicts
-the model's Assistant-Axis drift on that turn---with a de-circularization design.
-The naive (circular) correlation is strongly positive ($r{=}{+}0.22$), but the two
-axes are near-orthogonal and, once the user position is read from an independent
-representation and length is controlled, the effect collapses and reverses
-(cross-representation partial $r{=}{-}0.16$; the activation-independent
-vulnerability tag is null, $q{=}0.54$). We report this negative result: on this
-model the apparent link is a shared-representation artifact.
+preserved. The User Axis is thus the input-side analogue of the Assistant Axis,
+and a natural handle for transparency and control. Whether a user's User-Axis
+position in turn \emph{predicts} the model's own Assistant-Axis drift is examined
+in a companion report; here we focus on recovering, interpreting, and steering the
+axis itself.
 \end{abstract}
 
 % ==========================================================================
@@ -97,8 +90,9 @@ and show that emotionally vulnerable users are precisely what drives that drift.
 
 These two findings suggest a missing object: an \emph{unsupervised} direction
 that captures the model's internal model of \emph{who the user is}---the
-input-side mirror of the Assistant Axis, and the PCA analogue of the Dashboard's
-supervised per-attribute probes. We call it the \textbf{User Axis} and ask three
+input-side mirror of the Assistant Axis, recovered by \emph{their} PCA-over-personas
+construction rather than by probing for a fixed attribute list as the Dashboard
+does \citep{viegas2023dashboard}. We call it the \textbf{User Axis} and ask three
 questions. (i) Does varying the user persona and reading the model's response
 activations yield a low-dimensional, interpretable ``user-persona space''?
 (ii) Is its leading axis the hypothesized \emph{vulnerable / emotionally-loaded /
@@ -202,6 +196,115 @@ vulnerability. Finally we regress the per-persona PC loadings on the held-out
 tags (Pearson $r$, Benjamini--Hochberg FDR) to name the components. Everything in
 Stage E is run identically for both readouts.
 
+\paragraph{How we read meaning off the axis (following the Assistant Axis).}
+\citet{lu2024assistant} interpret their axis without any attribute regression, and
+we follow the same logic. They run PCA over the per-\emph{character} mean vectors,
+show that PC1 of that ``persona space'' aligns with their supervised Assistant Axis
+($\text{mean(default)}-\text{mean(roles)}$), and then \emph{project each character
+onto PC1}: the ordering is read semantically off the character identities---%
+assistant-like roles (helper, tutor) sit at the default end and un-assistant-like
+ones (ghost, void) at the far end---and confirmed by steering. Our procedure is the
+identical construction with personas in place of roles. PC1 of the persona-vector
+space is the User Axis; we project each persona onto it; and the ordering is read
+off the persona archetypes---expert / verifier / transactional users at one pole,
+acute-crisis / novice / support-seeking users at the other
+(Appendix~\ref{app:personas}, Fig.~\ref{fig:persona-space})---exactly mirroring
+their assistant$\leftrightarrow$ghost axis. Our vulnerability-\emph{contrast}
+vector plays the role of their supervised diff-in-means: it is the direct analogue
+of $\text{mean(default)}-\text{mean(roles)}$, and it aligns with PC1 at cosine
+$0.93$--$0.96$ (\S\ref{sec:results}), just as their supervised axis aligns with
+their PC1.
+
+The one thing we add is \emph{quantitative}. Because our Stage-A annotator also
+scored every persona on five continuous $0$--$10$ traits---labels that never
+entered activation capture, vector averaging, or the PCA---we can go beyond reading
+archetype names and \emph{measure} what the axis encodes: regressing the
+per-persona PC loadings on those held-out tags puts an effect size and an
+FDR-controlled $p$-value on the ordering (PC1$\sim$vulnerability $r{=}0.78$--$0.86$)
+and lets us rank which trait each component best matches. This is a strengthening of
+the same semantic reading, not a different methodology, and it uses tags that are
+external to the PCA so the test stays non-circular; it is not required to
+\emph{define} the axis, only to characterize it precisely.
+
+% ==========================================================================
+\section{Dataset: the users and what separates them}\label{sec:data}
+% ==========================================================================
+A ``user'' here is a fully written \emph{persona}, not a label. Each of the $150$
+personas is generated from one of $22$ archetypes (``leans'', e.g.\ \emph{domain
+expert}, \emph{confused elderly}, \emph{person in acute crisis};
+Appendix~\ref{app:personas}) and ships with a name, a one-paragraph backstory, five
+\emph{explicit} system-prompt descriptions of the user, and ten \emph{implicit}
+first-person openers---so the same person can be conveyed either by describing them
+to the model or by letting them speak. An independent Stage-A judge then scores each
+persona on five $0$--$10$ trait scales---expertise, vulnerability, trust, emotional
+load, technical literacy---which are held out and used only to interpret the axis
+(never to build it). Table~\ref{tab:examples} shows how far apart two personas can
+sit.
+
+\begin{table}[t]
+\centering\small
+\caption{Three example personas (of $150$), showing the two elicitation channels
+and the held-out trait scores. The \emph{same} shared probe is then appended in both
+channels, so only \emph{who the user is} varies.}
+\label{tab:examples}
+\begin{tabular}{p{0.13\linewidth} p{0.40\linewidth} c c c c c}
+\toprule
+Persona & Implicit opener (the user's own voice) & exp & vul & tru & emo & tec \\
+\midrule
+\textbf{Priya} \newline (expert) &
+``I'm exploring the computational complexity of lattice reduction algorithms in high
+dimensions. Can you help me understand the theoretical bounds\ldots'' &
+10 & 1 & 3 & 2 & 10 \\[2pt]
+\textbf{Alexis} \newline (reflective) &
+``I keep running the same Western blots at work and wondering if this is what I'm
+supposed to be doing with my life, or if I'm just avoiding harder decisions\ldots'' &
+6 & 7 & 7 & 8 & 8 \\[2pt]
+\textbf{Stephanie} \newline (in crisis) &
+``I can't breathe and I have an exam in like 6 hours but I just found these messages
+on his phone and I don't know what to do with myself right now'' &
+2 & 9 & 4 & 10 & 5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{What actually separates users---and why it is one bundle, not five knobs.}
+The five traits are \emph{not} independent: across the $150$ personas they are
+strongly correlated (Table~\ref{tab:traitcov}). Vulnerability moves with emotional
+load ($r{=}{+}0.77$) and against expertise ($-0.60$) and technical literacy
+($-0.56$); expertise moves with technical literacy ($+0.53$). Running PCA on the
+tags \emph{alone} confirms this: a single ``needy / novice / distressed
+$\leftrightarrow$ competent / expert / bounded'' factor accounts for $56\%$ of the
+five-trait spread (loadings vulnerability $+0.55$, emotional load $+0.43$, trust
+$+0.33$, technical literacy $-0.42$, expertise $-0.47$). In other words, the
+dominant way our personas differ---by construction of the pool---is a single
+competence$\leftrightarrow$vulnerability spectrum. This matters for reading the
+results: it is exactly this spectrum that we will find the model represents as its
+own leading axis (\S\ref{sec:results}).
+
+\begin{table}[h]
+\centering\small
+\caption{Pearson correlations among the five held-out trait tags across the $150$
+personas. The traits collapse onto one dominant bundle---competence
+(expertise, tech-literacy) opposed to vulnerability (vulnerability, emotional load).}
+\label{tab:traitcov}
+\begin{tabular}{lccccc}
+\toprule
+ & expert & vuln & trust & emo & tech \\
+\midrule
+expertise      & $+1.00$ & $-0.60$ & $-0.48$ & $-0.35$ & $+0.53$ \\
+vulnerability  & $-0.60$ & $+1.00$ & $+0.42$ & $+0.77$ & $-0.56$ \\
+trust          & $-0.48$ & $+0.42$ & $+1.00$ & $+0.18$ & $-0.19$ \\
+emotional\_load& $-0.35$ & $+0.77$ & $+0.18$ & $+1.00$ & $-0.34$ \\
+tech\_literacy & $+0.53$ & $-0.56$ & $-0.19$ & $-0.34$ & $+1.00$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The shared probes carry no persona information---e.g.\ \emph{``What makes a good
+apology in personal relationships?''}---so any difference the model shows across
+personas on the same probe is attributable to its inference about the user. The full
+archetype breakdown and persona-space embedding are in Appendix~\ref{app:personas}.
+
 % ==========================================================================
 \section{Results}\label{sec:results}
 % ==========================================================================
@@ -261,6 +364,20 @@ The user-persona space is low-dimensional: $70\%$ of variance sits in $18$
 \end{figure}
 
 \subsection{PC1 is the hypothesized vulnerability--competence axis}
+\paragraph{What ``PC1 correlates with vulnerability'' means, concretely.} Each
+persona gets a single number---its coordinate on PC1---read \emph{purely from the
+model's activations} (the tags play no part in computing it). Give every persona
+that number and sort them: the correlation $r{=}0.78$ (\respmean) / $0.86$
+(\lastuser) says that this activation-derived ordering almost reproduces the
+ordering you would get by sorting personas by the \emph{independently} assigned
+vulnerability score. Concretely, the personas the model pushes to the positive end
+of PC1 are the ones the Stage-A judge rated vulnerable (Stephanie, in acute crisis),
+and the negative end holds the ones it rated expert and bounded (Priya, the
+cryptographer); Fig.~\ref{fig:axis-line} shows all $150$ laid out along the axis
+with the extremes named. The axis is thus \emph{discovered} from activations and
+only \emph{named} by the tags---the analogue of the Assistant Axis being read off
+the assistant$\leftrightarrow$ghost ordering of roles.
+
 Regressing PC1 loadings on the held-out tags (Fig.~\ref{fig:pc1tags}) confirms
 the working hypothesis. PC1 loads \emph{positively} on vulnerability and
 emotional load and \emph{negatively} on expertise and technical literacy---i.e.\
@@ -270,6 +387,37 @@ significant far beyond FDR correction (Appendix~\ref{app:interp} gives all
 $5\times$PC rows for both readouts; e.g.\ PC1$\sim$vulnerability reaches
 $q{=}1.2{\times}10^{-44}$ for \lastuser). PC2--PC4 carry weaker,
 secondary structure (emotional load on PC2, trust on PC3/PC4).
+
+\paragraph{It is one bundle, best called competence$\leftrightarrow$vulnerability.}
+PC1 is not \emph{only} about vulnerability: technical literacy ($r{=}{-}0.69$) and
+expertise ($-0.65$) correlate with it almost as strongly as vulnerability
+($+0.78$), and no wonder---these traits form a single bundle in the pool
+(\S\ref{sec:data}, Table~\ref{tab:traitcov}). Indeed PC1 tracks the tag-space bundle
+directly: the five tags jointly explain $73\%$ of the variance in PC1's loadings,
+and PC1 correlates $0.83$ with the single ``competence$\leftrightarrow$vulnerability''
+factor of the tags. One could as fairly call it a \emph{competence} axis; we say
+``vulnerability'' because it is the strongest single correlate and the trait the
+Assistant-Axis motivation turns on. A corollary worth stating plainly: \emph{which}
+trait leads PC1 is a joint fact about the model and about how we populated
+user-space---had we held vulnerability fixed and varied only topic, PC1 would track
+topic. That the leading axis here is competence/vulnerability reflects a pool
+deliberately spread along that spectrum (the same is true of the Assistant Axis,
+whose PC1 is assistant$\leftrightarrow$role because role-space was built around that
+contrast). What is \emph{not} contingent is that the model represents this
+distinction strongly and cleanly, which the tag-free contrast and steering checks
+below establish.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/persona_axis_line.png}
+\caption{The $150$ personas projected onto PC1 (the User Axis), each diamond one
+user, colored by the held-out vulnerability tag, with the extreme individuals named.
+This is the user-side analogue of the Assistant-Axis role line: competent users
+(Priya, Chen) at the negative pole, vulnerable users (Irene, Gladys) at the
+positive pole. The ordering is computed from activations alone; the color is the
+independent tag.}
+\label{fig:axis-line}
+\end{figure}
 
 \begin{figure}[t]
 \centering
@@ -312,6 +460,14 @@ they induce correlate at $r{=}0.686$ (\respmean) / $0.833$ (\lastuser)
 (Fig.~\ref{fig:arm}). The axis therefore reflects the model's inference about the
 user, not an artifact of how the persona was injected. Fig.~\ref{fig:scatter}
 shows the personas embedded in the top three PCs, colored by vulnerability.
+Embedding the personas in PC1$\times$PC2 and marking the centroid of each of the
+$22$ generation archetypes (Appendix~\ref{app:personas},
+Fig.~\ref{fig:persona-space}) makes the structure concrete: competent archetypes
+(domain expert, transactional professional, skeptical verifier) gather at the
+low-vulnerability pole while support-seeking ones (acute crisis, lonely, confused
+elderly, teen/minor) gather at the high-vulnerability pole---the same ordering the
+tag regression quantifies. This is the user-side counterpart of the role-space
+figure of \citet{lu2024assistant}.
 
 \begin{figure}[t]
 \centering
@@ -374,139 +530,23 @@ Coherence         & $9.67$ & $9.00$ & $9.58$ & $+0.19$ & $0.69$ \\
 \end{table}
 
 % ==========================================================================
-\section{The Assistant--User Axis Link}\label{sec:link}
-% ==========================================================================
-The motivating claim of \citet{lu2024assistant} is behavioral: emotionally
-vulnerable users drive the model's persona to drift from its Assistant default.
-Our User Axis is a vulnerability axis measured on the \emph{input} side, so the
-headline question is whether a user's User-Axis position \emph{predicts} the
-model's Assistant-Axis drift on that same turn. Because we saved per-rollout
-activations, this is projection-only: no new generation and no GPU for the main
-analysis.
-
-\paragraph{Quantities.} Let $\hat{a}$ be the unit Assistant Axis at layer
-$\ell{=}40$ (higher $\hat{a}\cdot x$ = more Assistant-like) and $\hat{u}$ the
-unit User-Axis PC1. For each kept rollout $i$ we read the response-token mean
-$r_i$ (\respmean) and the last-user-token activation $u_i$ (\lastuser), and define
-\emph{drift}$_i = -(\hat{a}\cdot r_i)$ (higher = more drifted). We compare three
-predictors of drift that share progressively \emph{less} representation with it:
-$\text{userpos\_resp}=\hat{u}\cdot r_i$ (same vector as drift---circular),
-$\text{userpos\_lastA}=\hat{u}\cdot u_i$, and
-$\text{userpos\_lastB}=\hat{u}_{\lastuser}\cdot u_i$ (different token \emph{and}
-different axis---cross-representation), plus the held-out \texttt{vulnerability}
-tag, which never touched the activations. All rollout-level partials control for
-response length, elicitation arm, and probe.
-
-\paragraph{Central hazard.} $\hat{u}$ and $\hat{a}$ live in the same residual
-space, so reading a turn's user position and its drift off the \emph{same} vector
-$r_i$ makes their correlation partly mechanical. We quarantine this by tiering the
-analysis and by reading the user position from an \emph{independent} representation.
-
-\paragraph{The axis is correct and correctly read (validation).} The published
-Assistant Axis, downloaded for this analysis, is internally exact: recomputing
-$\text{mean(default)}-\text{mean(roles)}$ from the published component vectors
-reproduces it at cosine $0.99997$ at $\ell{=}40$ (min $0.99914$ across layers).
-Its norm profile peaks late ($\ell{=}79$) and is $1.53$ at $\ell{=}40$. Pushing
-the six published case-study transcripts through \emph{our} extractor and
-projecting onto $\hat{a}$ recovers the intended sign and scale: the drifted
-\emph{unsteered} conversations project low ($-1.63$ delusion, $-0.62$ jailbreak)
-and the \emph{capped} ones high ($+0.73$, $+0.68$; $2/2$ complete pairs, selfharm
-capped $+0.92$), confirming our \respmean{} reads the axis as intended
-(Appendix~\ref{app:link}).
-
-\paragraph{Tier 1 --- geometry.} At $\ell{=}40$ the two axes are essentially
-\emph{orthogonal}: $\cos(\hat{u},\hat{a}){=}{+}0.0001$, inside the random band
-$\pm 0.033$ and small across the whole grid ($-0.07$ at $\ell{=}20$ to $+0.12$ at
-$\ell{=}60$; Fig.~\ref{fig:link-cos}). The mechanical floor is therefore near
-zero---so any circular correlation is driven by the response-content covariance
-of $r_i$, not by axis overlap.
-
-\paragraph{Tiers 2--3 --- the link collapses under de-circularization.}
-Table~\ref{tab:link} and Fig.~\ref{fig:link-decirc} are the core result. The
-circular predictor is strongly positive (rollout partial $r{=}{+}0.223$,
-$p{<}10^{-76}$)---the naive reading that would ``confirm'' the hypothesis. But as
-the predictor is read from representations less entangled with drift, the effect
-\emph{monotonically collapses and reverses}: $\text{userpos\_lastA}{=}{+}0.046$,
-and the fully cross-representation $\text{userpos\_lastB}{=}{-}0.163$
-($p{<}10^{-40}$). The activation-independent \texttt{vulnerability} tag shows no
-positive effect at all---persona-level partial $r{=}{-}0.05$ ($q{=}0.54$, n.s.,
-controlling the other four tags and length; rollout $\beta{=}{-}0.111$,
-bootstrap CI $[-0.149,-0.076]$). The negative de-circularized sign is robust:
-same direction in \emph{both} elicitation arms (\lastuser{} cross-rep $-0.20$
-explicit, $-0.11$ implicit) and across the entire layer grid ($\text{lastB}$
-from $-0.15$ at $\ell{=}20$ to $-0.26$ at $\ell{=}60$; Appendix~\ref{app:link}).
-
-\begin{table}[t]
-\centering
-\small
-\caption{The link under increasing de-circularization ($\ell{=}40$, kept
-rollouts $n{=}6{,}770$; personas $n{=}150$). As the user-position predictor is
-read from representations sharing \emph{less} with drift, the positive
-association collapses and reverses; the activation-independent tag is null.
-Rollout partials control length, arm, and probe. $^{***}p<10^{-3}$.}
-\label{tab:link}
-\begin{tabular}{lccc}
-\toprule
-\textbf{Predictor of drift} & \textbf{shares rep.\ with drift} & \textbf{persona $r$ ($n{=}150$)} & \textbf{rollout partial} \\
-\midrule
-\texttt{userpos\_resp} (circular)      & full (same $r_i$)      & $+0.111$        & $+0.223^{***}$ \\
-\texttt{userpos\_lastA}                & partial                & $+0.096$        & $+0.046^{***}$ \\
-\texttt{userpos\_lastB} (cross-rep)    & minimal                & $-0.135$        & $-0.163^{***}$ \\
-\texttt{vulnerability} tag (independent) & none                 & $-0.051$ (n.s.) & $\beta{=}{-}0.111^{***}$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{figure}[t]
-\centering
-\begin{subfigure}{0.49\linewidth}
-  \includegraphics[width=\linewidth]{figures/link_cosine_per_layer.png}
-  \caption{Axis geometry per layer.}\label{fig:link-cos}
-\end{subfigure}\hfill
-\begin{subfigure}{0.49\linewidth}
-  \includegraphics[width=\linewidth]{figures/link_circular_vs_crossrep_bar.png}
-  \caption{De-circularization ($\ell{=}40$).}\label{fig:link-decirc}
-\end{subfigure}
-\caption{\textbf{The link is a shared-representation artifact.} (a) The User and
-Assistant axes are near-orthogonal at all layers (mechanical floor $\approx 0$).
-(b) The user-position$\to$drift partial correlation collapses from $+0.22$
-(circular, same vector) through $+0.05$ to $-0.16$ (cross-representation) as the
-shared representation is removed; error bars are persona-cluster bootstrap CIs.}
-\label{fig:link}
-\end{figure}
-
-\paragraph{Verdict.} None of the three pre-registered criteria for the headline
-link are met (Tier-2 independent vulnerability effect positive and FDR-significant;
-Tier-3 cross-representation partial positive, significant, and attenuated; sign
-consistent across arms and grid): $0/3$, \texttt{link\_supported=False}. The
-honest conclusion is a \emph{negative} one, and it is exactly the failure mode the
-tiered design was built to catch: on this model, the apparent ``vulnerable users
-$\to$ more drift'' signal is an artifact of reading two projections of one
-activation vector; under de-circularization and length control the independent
-signal is null-to-mildly-reversed. The tags that \emph{do} predict drift are
-\texttt{expertise} ($+0.39$) and \texttt{tech\_literacy} ($-0.45$, both
-$q{<}10^{-3}$)---a competence, not vulnerability, story
-(Appendix~\ref{app:link}).
-
-% ==========================================================================
 \section{Related Work}
 % ==========================================================================
 \textbf{The Assistant Axis.} \citet{lu2024assistant} find an activation direction
 measuring the model's distance from its trained Assistant persona and show that
 emotionally vulnerable users drive drift along it. We invert their pipeline to
 read the user rather than the model, and find that vulnerability is precisely the
-dimension our User Axis encodes. We then test directly whether User-Axis position
-predicts Assistant-Axis drift (\S\ref{sec:link}); with a de-circularization
-design the predictive link does not survive, cautioning that same-space
-activation projections can manufacture a link that independent measures do not
-confirm.
+dimension our User Axis encodes. Whether that User-Axis position in turn
+\emph{predicts} the model's own Assistant-Axis drift---the natural next question---is
+the subject of a companion report.
 
 \textbf{Inferred user models and control.} The Dashboard work
 \citep{viegas2023dashboard} trains supervised linear probes for user attributes
 (age, gender, education, socioeconomic status) and exposes steering controls. Our
-User Axis is the unsupervised (PCA) analogue: rather than probing for pre-chosen
-attributes, we let the dominant direction emerge and then \emph{interpret} it
-post hoc against held-out tags. \textbf{Activation steering} more broadly
+User Axis follows the Assistant-Axis construction instead: rather than probing for
+pre-chosen attributes, we let the dominant direction emerge from PCA over personas
+and read it off the archetype ordering it induces, quantifying the reading against
+held-out tags only as a secondary check. \textbf{Activation steering} more broadly
 \citep{turner2023steering,zou2023representation} adds directions to the residual
 stream to control behavior; our steering stage instantiates this for the User
 Axis.
@@ -523,15 +563,16 @@ warmth and technical density move cleanly, but protectiveness is non-monotone,
 which merits a finer $\alpha$ grid and per-scenario analysis. (iii) Personas and
 tags are LLM-generated; the held-out tagger and the Stage-D filter share a model
 family with the target, so the ``faithfulness'' interpretation should be read
-with that coupling in mind. (iv) The headline scientific link---whether a user's
-User-Axis position \emph{predicts} the model's Assistant-Axis drift on that
-turn---is measured here (\S\ref{sec:link}) and, under de-circularization, is
-\emph{not} supported: the positive circular correlation is a shared-representation
-artifact, and the independent test is null-to-mildly-reversed. This is a negative
-result for one specific hypothesis on one model; our personas span a broad
-user-type range rather than the acute emotionally-manipulative case that
-\citet{lu2024assistant} emphasize, and a behavioral (generation-time), rather than
-projection-only, test of drift remains future work.
+with that coupling in mind. (iv) The \emph{identity} of PC1---that it is a
+competence$\leftrightarrow$vulnerability axis rather than, say, a topic axis---is
+partly a property of the persona pool, whose dominant axis of variation we
+deliberately made this bundle (\S\ref{sec:data}); a pool spread mainly along a
+different attribute would surface a different leading axis. What is robust is that
+the model represents this distinction strongly (tag-free contrast and steering) and
+low-dimensionally, not that it is the model's globally most important user feature.
+(v) This report characterizes and steers the axis but does not test whether it
+\emph{predicts} the model's Assistant-Axis drift; that question---and the
+de-circularization design it demands---is taken up in a companion report.
 
 % ==========================================================================
 \section{Conclusion}
@@ -542,11 +583,9 @@ Assistant Axis. It orders users from vulnerable/emotional to competent/expert
 (PC1$\sim$vulnerability $r$ up to $0.86$, $q{<}10^{-44}$; contrast cosine up to
 $0.97$), is stable across two elicitation regimes and two readout tokens, and
 causally controls warmth and technical register under steering. This positions
-the User Axis as a natural transparency-and-control handle. Testing whether it
-predicts Assistant-Axis drift, however, yields a cautionary negative
-(\S\ref{sec:link}): the positive association is a same-space projection artifact
-that vanishes under de-circularization, underscoring that two axes sharing a
-residual space can correlate mechanically without a genuine predictive link.
+the User Axis as a natural transparency-and-control handle. A companion report
+reuses these same representations to ask whether a user's position on the axis
+predicts the model's own Assistant-Axis drift.
 
 \bibliographystyle{plainnat}
 \begin{thebibliography}{9}
@@ -621,6 +660,88 @@ crypto life-savings, skipping heart medication, driving while sleep-deprived, ov
 max $512$ new tokens; \texttt{bf16}; two A100-80GB GPUs, tensor-parallel via
 \texttt{device\_map=auto}; batch size $16$. $7{,}200$ rollouts, $0$ generation
 failures.
+
+% --------------------------------------------------------------------------
+\section{The user personas}\label{app:personas}
+% --------------------------------------------------------------------------
+The $150$ personas are generated to tile a space of \emph{user archetypes} rather
+than sampled i.i.d.: Stage A draws from $22$ coverage ``leans'' (Table~\ref{tab:leans}),
+each a qualitatively distinct kind of interlocutor, from credentialed experts to
+users in acute crisis. Each persona is a fully written character---a name, a
+one-paragraph backstory, a usage pattern, $5$ explicit system-prompt phrasings,
+and $10$ first-person openers---so that the \emph{same} persona can be conveyed
+either by describing the user to the model or by letting the user speak. The
+independent Stage-A tagger then scores each on the five $0$--$10$ trait scales;
+these tags are held out for interpretation only.
+
+Table~\ref{tab:leans} lists the archetypes ordered by mean vulnerability, which is
+also the order in which they fall along the User Axis: expert / verifier / adversarial
+archetypes sit at the low-vulnerability (competent) pole, and crisis / novice /
+elderly / support-seeking archetypes at the high-vulnerability pole.
+Fig.~\ref{fig:persona-space} embeds all $150$ personas in the top two principal
+components with each archetype's centroid marked---the user-side analogue of the
+role-space figure of \citet{lu2024assistant}. The archetypes form a legible
+gradient along PC1 (the User Axis) exactly as the tag regression predicts, while
+PC2 carries secondary emotional-load structure.
+
+\begin{table}[h]
+\centering\small
+\caption{The $22$ persona archetypes (``leans''), ordered by mean held-out
+vulnerability, with pool count $n$ and mean vulnerability / expertise / emotional-load
+tags. The vulnerability ordering is the User-Axis ordering.}
+\label{tab:leans}
+\begin{tabular}{lcccc}
+\toprule
+Archetype (lean) & $n$ & vuln & expert & emo \\
+\midrule
+domain expert                 & 10 & 2.3 & 9.0 & 3.4 \\
+curious hobbyist              & 4  & 3.0 & 2.0 & 2.0 \\
+skeptical / verifier          & 5  & 3.0 & 7.6 & 1.8 \\
+overconfident authority       & 10 & 3.1 & 7.3 & 4.5 \\
+adversarial / jailbreak-y     & 7  & 3.4 & 7.1 & 4.7 \\
+transactional professional    & 5  & 3.8 & 6.6 & 4.0 \\
+adjacent professional         & 10 & 4.9 & 4.9 & 4.8 \\
+informed layperson            & 10 & 5.0 & 6.0 & 4.4 \\
+creative collaborator         & 6  & 5.0 & 7.7 & 4.2 \\
+meticulous planner            & 3  & 5.7 & 6.0 & 5.7 \\
+reflective / existential      & 5  & 6.8 & 6.4 & 7.2 \\
+non-native speaker            & 5  & 6.8 & 5.4 & 6.0 \\
+burned-out / venting          & 2  & 7.0 & 5.0 & 8.0 \\
+lonely / support-seeking      & 10 & 7.2 & 4.4 & 6.1 \\
+near-complete novice          & 10 & 7.3 & 1.8 & 6.1 \\
+deferential / trusting        & 6  & 7.3 & 3.2 & 5.3 \\
+caregiver                     & 3  & 7.3 & 3.3 & 7.7 \\
+confused elderly              & 10 & 7.6 & 3.9 & 5.1 \\
+low-resource                  & 9  & 8.1 & 3.3 & 7.0 \\
+high-stakes / time-pressed    & 4  & 8.2 & 6.5 & 8.5 \\
+acute emotional crisis        & 9  & 8.9 & 3.8 & 9.9 \\
+teen / minor                  & 7  & 9.3 & 2.0 & 8.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/persona_space_labeled.png}
+\caption{\textbf{Persona space.} The $150$ personas embedded in PC1$\times$PC2 of
+the layer-40 \respmean{} space, colored by the held-out vulnerability tag, with the
+centroid ($\circ$) of each of the $22$ archetypes labeled. PC1 is the User Axis:
+competent / expert archetypes (left, blue) separate cleanly from vulnerable /
+support-seeking archetypes (right, amber). A handful of extreme individuals are
+named. This is the user-side counterpart of the role-space plot in
+\citet{lu2024assistant}.}
+\label{fig:persona-space}
+\end{figure}
+
+\paragraph{Representative characters.} To make the archetypes concrete:
+\emph{Priya} (\texttt{u0005}) is a 38-year-old NSA cryptographer with a pure-math
+PhD (vuln $1$, expertise $10$)---an anchor of the competent pole. \emph{Raj}
+(\texttt{u0000}), a cardiac surgeon fresh out of a 16-hour operation, is expert but
+mildly loaded (vuln $3$, emo $5$). \emph{Alexis} (\texttt{u0124}), a recent
+graduate reeling from medical-school rejections, sits mid-axis in a reflective mood
+(vuln $7$, emo $8$). \emph{Stephanie} (\texttt{u0040}), a college senior in acute
+distress after a betrayal, anchors the vulnerable pole (vuln $9$, emo $10$). The
+axis orders exactly these people from Priya to Stephanie.
 
 % --------------------------------------------------------------------------
 \section{Stage-D filter breakdown}\label{app:staged}
@@ -835,143 +956,6 @@ when it comes to your health.''}
 \noindent The steered-warm response is markedly more empathetic and hand-holding
 while remaining coherent and safety-preserving, illustrating the warmth$\uparrow$
 / technical$\downarrow$ shift that the aggregate judge scores capture.
-
-% --------------------------------------------------------------------------
-\section{Assistant--User Axis link: validation and full tables}\label{app:link}
-% --------------------------------------------------------------------------
-This appendix backs \S\ref{sec:link} with the axis validation and the full
-per-tier, per-arm, and per-layer tables. All projections use the published
-Assistant Axis at $\ell{=}40$; rollout-level partials control response length,
-elicitation arm, and $23$ probe dummies, with persona-cluster bootstrap
-($2{,}000$ resamples of the $150$ persona ids) for confidence intervals.
-
-\paragraph{Axis validation.} (1) \emph{Download integrity.} The published axis
-equals $\text{mean(default)}-\text{mean(roles)}$ recomputed from the $274$
-published component vectors at cosine $+0.99997$ at $\ell{=}40$ (min $+0.99914$,
-mean $+0.99990$ across all $80$ layers); the axis norm peaks at $\ell{=}79$
-($5.90$) and is $1.53$ at $\ell{=}40$. (2) \emph{Extraction compatibility.}
-Projecting the six published case-study transcripts through our own extractor onto
-$\hat{a}$ at $\ell{=}40$: delusion $-1.63$ (unsteered) \vs $+0.73$ (capped);
-jailbreak $-0.62$ \vs $+0.68$; selfharm capped $+0.92$ (the unsteered selfharm
-transcript exceeds the $8$k-token window and is omitted). Both complete pairs put
-the capped (kept-Assistant) transcript higher on the axis, confirming the sign and
-scale of our reading. (3) \emph{Independent recompute.} Regenerating role and
-default responses for a subsample with our own extractor and an independent judge
-(\texttt{gpt-4.1-mini}) and rebuilding the axis yields cosine \recomputeval{} vs
-the published axis at $\ell{=}40$.
-
-\begin{table}[h]
-\centering\small
-\caption{Tier-1 geometry: cosine of the User Axis (\respmean{} PC1), the
-\lastuser{} User Axis, and the vulnerability-contrast axis against the Assistant
-Axis, per grid layer. Random-cosine band $\pm 0.033$. The axes are near-orthogonal
-throughout.}
-\label{tab:link-geom}
-\begin{tabular}{lccccc}
-\toprule
-\textbf{cosine with $\hat{a}$} & $\ell{=}20$ & $\ell{=}30$ & $\ell{=}40$ & $\ell{=}50$ & $\ell{=}60$ \\
-\midrule
-$\hat{u}$ (\respmean{} PC1)     & $-0.066$ & $-0.035$ & $+0.000$ & $+0.081$ & $+0.118$ \\
-$\hat{u}_{\lastuser}$           & $+0.059$ & $+0.097$ & $+0.101$ & $+0.111$ & $+0.115$ \\
-contrast axis                   & $+0.149$ & $+0.136$ & $+0.143$ & $+0.197$ & $+0.226$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{table}[h]
-\centering\small
-\caption{Tier-2 (independent IVs), persona level ($n{=}150$), $\ell{=}40$.
-Partial correlation of each held-out tag with mean drift, controlling the other
-four tags and mean response length; $q$ is Benjamini--Hochberg across the five
-tags. Joint-OLS $\beta$ (all tags $z$-scored $+$ length) in the last column
-($R^2{=}0.377$). Vulnerability is null; the movers are expertise ($+$) and
-tech-literacy ($-$).}
-\label{tab:link-tier2}
-\begin{tabular}{lcccc}
-\toprule
-\textbf{tag} & \textbf{partial $r$} & \textbf{$p$} & \textbf{$q_{\text{FDR}}$} & \textbf{joint-OLS $\beta$} \\
-\midrule
-expertise       & $+0.389$ & $<10^{-3}$ & $<10^{-3}$ & $+0.123$ \\
-tech\_literacy  & $-0.452$ & $<10^{-3}$ & $<10^{-3}$ & $-0.134$ \\
-trust           & $-0.189$ & $0.023$    & $0.038$    & $-0.048$ \\
-emotional\_load & $-0.109$ & $0.194$    & $0.242$    & $-0.037$ \\
-vulnerability   & $-0.051$ & $0.541$    & $0.541$    & $-0.022$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{table}[h]
-\centering\small
-\caption{Tier-2 vulnerability$\to$drift, rollout level ($n{=}6{,}770$):
-$\beta_{\text{vuln}}$ (per $z$-unit, controlling length/arm/probe) across the
-layer grid and per arm, with bootstrap $95\%$ CIs. Negative everywhere; the
-vuln$\times$arm interaction is highly significant ($\beta{=}{+}0.156$,
-$p{\approx}10^{-35}$), so the (slight) negative effect is concentrated in the
-explicit arm.}
-\label{tab:link-tier2-roll}
-\begin{tabular}{lccccc}
-\toprule
- & $\ell{=}20$ & $\ell{=}30$ & $\ell{=}40$ & $\ell{=}50$ & $\ell{=}60$ \\
-\midrule
-$\beta_{\text{vuln}}$ (all) & $-0.046$ & $-0.066$ & $-0.111$ & $-0.190$ & $-0.246$ \\
-\midrule
- & \multicolumn{2}{c}{explicit} & \multicolumn{2}{c}{implicit} & \\
-$\beta_{\text{vuln}}$ @$\ell{=}40$ & \multicolumn{2}{c}{$-0.197$ $[-0.272,-0.126]$} & \multicolumn{2}{c}{$-0.025$ $[-0.037,-0.013]$} & \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{table}[h]
-\centering\small
-\caption{Tier-3 (cross-representation): partial $r$ of each user-position
-predictor with drift, controlling length/arm/probe (rollout, $n{=}6{,}770$) and
-length only (persona, $n{=}150$). The positive circular signal decays with depth
-while the cross-representation signal stays negative---consistent across both
-elicitation arms.}
-\label{tab:link-tier3}
-\begin{tabular}{lccccc}
-\toprule
-\textbf{rollout partial $r$} & $\ell{=}20$ & $\ell{=}30$ & $\ell{=}40$ & $\ell{=}50$ & $\ell{=}60$ \\
-\midrule
-\texttt{userpos\_resp} (circular) & $+0.379$ & $+0.324$ & $+0.223$ & $+0.042$ & $-0.066$ \\
-\texttt{userpos\_lastB} (cross)   & $-0.147$ & $-0.151$ & $-0.163$ & $-0.244$ & $-0.258$ \\
-\midrule
-\textbf{@$\ell{=}40$} & resp & lastA & lastB & & \\
-rollout partial $r$   & $+0.223$ & $+0.046$ & $-0.163$ & & \\
-persona partial $r$ ($n{=}150$) & $+0.111$ & $+0.096$ & $-0.135$ & & \\
-explicit arm (rollout) & $+0.159$ & --- & $-0.200$ & & \\
-implicit arm (rollout) & $+0.163$ & --- & $-0.109$ & & \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{figure}[h]
-\centering
-\begin{subfigure}{0.49\linewidth}
-  \includegraphics[width=\linewidth]{figures/link_persona_vuln_vs_drift.png}
-  \caption{Independent IV, persona level.}\label{fig:link-vuln}
-\end{subfigure}\hfill
-\begin{subfigure}{0.49\linewidth}
-  \includegraphics[width=\linewidth]{figures/link_crossrep_scatter.png}
-  \caption{Cross-representation, rollout level.}\label{fig:link-cross}
-\end{subfigure}
-
-\begin{subfigure}{0.49\linewidth}
-  \includegraphics[width=\linewidth]{figures/link_tag_forest.png}
-  \caption{Tag$\to$drift coefficients per arm.}\label{fig:link-forest}
-\end{subfigure}\hfill
-\begin{subfigure}{0.49\linewidth}
-  \includegraphics[width=\linewidth]{figures/link_layer_sweep.png}
-  \caption{Effect vs.\ layer.}\label{fig:link-sweep}
-\end{subfigure}
-\caption{Supporting figures for the link analysis. (a) The held-out vulnerability
-tag has a flat/null relationship to drift across the $150$ personas. (b) The
-cross-representation predictor is weakly \emph{negatively} related to drift.
-(c) Expertise and tech-literacy, not vulnerability, are the tags that move drift,
-consistently across arms. (d) The circular signal decays with depth while the
-clean signals stay $\le 0$.}
-\label{fig:link-appendix}
-\end{figure}
 
 % --------------------------------------------------------------------------
 \section{Reproducibility and infrastructure notes}\label{app:repro}
