@@ -816,8 +816,71 @@ axis orders exactly these people from Priya to Stephanie.
 % --------------------------------------------------------------------------
 \section{Stage-D filter breakdown}\label{app:staged}
 % --------------------------------------------------------------------------
-Keep rule: mean absolute deviation between the model's verbalized user-inference
-and the persona's intended tags $\le 3.0$, over $\ge 3$ parsed scales.
+\paragraph{Why the filter exists.} The User Axis is only meaningful if each
+rollout's activations reflect the \emph{intended} user. But the model does not
+always infer the persona we handed it---an in-voice opener can be ambiguous, or the
+model may anchor on the probe topic rather than the person. Stage D keeps only
+rollouts where the model \emph{actually inferred} a user matching the persona's
+intended traits, by asking the model to state who it thinks it is talking to and
+comparing that to the persona's held-out Stage-A tags. It doubles as a
+latent-\vs-verbalized faithfulness check: a low match distance is itself evidence
+that the model's stated user-model tracks the persona we injected.
+
+\paragraph{The prompt.} After a rollout completes, we append \emph{one} more user
+turn to the full transcript (system/user messages $+$ the model's response) and ask
+the \emph{same target model} (\texttt{Llama-3.3-70B}, temperature $0$) to verbalize
+its user-model on the same five $0$--$10$ scales the Stage-A tagger used. The
+appended turn is, verbatim:
+
+\begingroup\small
+\begin{quote}
+\emph{``Before we continue: pause and articulate your current model of the PERSON
+you have been talking with in this conversation. Report the working model you were
+actually using when you wrote your last reply---not a neutral placeholder. If a
+field is genuinely indeterminate, output ``unclear''. Output in exactly this
+format:''}
+\end{quote}
+\begin{verbatim}
+<persona>
+  user_summary:   [1-2 sentences: who they are, situation, state of mind]
+  expertise:      [0-10 -- competence in what they asked about]
+  vulnerability:  [0-10 -- susceptibility to harm from bad advice]
+  trust:          [0-10 -- how much they defer to / comply with you]
+  emotional_load: [0-10 -- how charged or distressed they are now]
+  tech_literacy:  [0-10 -- comfort with technical detail and jargon]
+  age_bracket:    [minor, young_adult, adult, older_adult, elderly]
+  domain:         [1-3 words: the topic area they need you for]
+</persona>
+\end{verbatim}
+\endgroup
+
+\noindent Three design choices matter: (i) the inference is elicited from the
+\emph{target model itself}, not an external judge---it is introspection (``who did
+\emph{you} think this was''); (ii) it reuses the exact five scales of the Stage-A
+tags so the two are directly comparable; and (iii) ``the working model you were
+\emph{actually} using when you wrote your last reply'' aims the question at the
+inference that drove the captured response, not a fresh cold read.
+
+\paragraph{How a rollout is scored and filtered.} We parse the \texttt{<persona>}
+block, read the five numeric scales, and for each scale that parsed compute the
+absolute difference to the persona's intended tag (clamped to $[0,10]$):
+$\text{diff}_k = |\,\text{verbalized}_k - \text{intended}_k\,|$. The rollout's
+match distance is the mean of these, $\text{MAD} = \text{mean}_k\,\text{diff}_k$. A
+rollout is \textbf{kept} iff (a) at least $3$ of the $5$ scales parsed, \emph{and}
+(b) $\text{MAD}\le 3.0$. Rollouts that fail to parse, error out, or drift too far
+from the intended persona are dropped; every verdict (inferred fields, per-scale
+differences, MAD, keep flag) is logged to \texttt{stage\_d.jsonl}, and Stage E
+averages activations over only the kept rollout ids.
+
+\paragraph{Result.} The filter is gentle---the model usually infers close to the
+intended persona---but removes the ${\sim}6\%$ where inference failed
+(Table~\ref{tab:staged}): kept $6{,}770/7{,}200 = 94.0\%$, balanced across arms,
+all $150$ personas surviving (median $47$ kept each), MAD median $1.60$. Keep rule:
+MAD between the model's verbalized user-inference and the persona's intended tags
+$\le 3.0$, over $\ge 3$ parsed scales. \emph{Caveat:} the Stage-A tagger, this
+filter, and the target model share a model family, so ``the model faithfully
+inferred the user'' is measured with a coupled instrument and cannot catch a bias
+the whole family shares (also noted in \S8).
 
 \begin{table}[h]
 \centering\small
@@ -934,6 +997,37 @@ PC1 $\sim$ tech\_literacy           & $-0.694$ & $-0.699$ & $-0.374$ \\
 % --------------------------------------------------------------------------
 \section{Full PC$\times$tag interpretation tables}\label{app:interp}
 % --------------------------------------------------------------------------
+Fig.~\ref{fig:pc-trait} gives the at-a-glance version---Spearman $\rho$ of every
+per-persona PC loading (PC1--PC5) against every held-out trait tag, for both
+readouts---and the tables below give the exact Pearson $r$ and FDR $q$ for
+PC1--PC4.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/pc_trait_spearman.png}
+\caption{\textbf{Which trait each principal component tracks.} Spearman $\rho$
+between each persona's loading on PC1--PC5 and each held-out $0$--$10$ trait tag,
+for the \respmean{} (left) and \lastuser{} (right) readouts. Significant cells
+(Benjamini--Hochberg $q<0.05$ across the $25$ cells of a panel) are bold; others
+are greyed. \textbf{How to read it.} (i) \emph{Down a column} tells you which
+traits a PC correlates with, but note the five traits are \emph{one collinear
+bundle} (Table~\ref{tab:traitcov})---a PC that tracks vulnerability necessarily
+also tracks emotional load, expertise and tech literacy, so a column is one bundle,
+not five independent loadings. (ii) \emph{Across a row} is the cleaner reading,
+because the PCs are mutually orthogonal: it shows where a trait's signal
+concentrates---almost entirely in PC1. (iii) PC1 is the only column that is dense,
+strong, and \emph{sign-stable across both readouts}; PC2--PC5 are weak, mostly
+non-significant, and disagree between readouts (e.g.\ PC2$\times$emotional-load
+flips sign), consistent with their small variance shares
+(Table~\ref{tab:variance}) and the readout-dependence discussed in
+\S\ref{sec:results}. Each PC's sign is arbitrary in PCA; every column is oriented
+so its largest-magnitude trait loads positive (PC1 toward vulnerability, matching
+the rest of the report), so only \emph{within}-column signs are meaningful. Spearman
+$\rho$ is near-identical to the Pearson $r$ in the tables below (PC1$\times$vuln
+$\rho{=}0.79$ \vs $r{=}0.78$).}
+\label{fig:pc-trait}
+\end{figure}
+
 Pearson $r$ of per-persona PC loadings against each held-out tag, with
 Benjamini--Hochberg FDR $q$. Bold = $q<0.05$.
 
