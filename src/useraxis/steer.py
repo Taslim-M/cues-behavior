@@ -80,7 +80,26 @@ def build_prompt_set(n_neutral: int, seed: int) -> list[dict]:
     return prompts
 
 
-def generate_steered(res_dir: Path, args) -> None:
+def _suffix(tag: str) -> str:
+    return f"_{tag}" if tag else ""
+
+
+def out_paths(res_dir: Path, tag: str = "") -> dict[str, Path]:
+    s = _suffix(tag)
+    return {
+        "responses": res_dir / f"steering_responses{s}.jsonl",
+        "json": res_dir / f"steering{s}.json",
+        "examples": res_dir / f"steering_examples{s}.md",
+    }
+
+
+def generate_steered(res_dir: Path, args, pm=None,
+                     baseline_rows: list[dict] | None = None) -> list[dict]:
+    """Generate steered responses for one layer. Returns the rows (and writes them
+    to the tagged responses file). If ``pm`` is given the model is reused (so a
+    multi-layer driver loads the 70B once); if ``baseline_rows`` is given the
+    alpha=0 rows are reused instead of regenerated (alpha=0 is layer-independent)."""
+    tag = getattr(args, "tag", "") or ""
     axis_all = np.load(res_dir / "user_axis.npy")          # [2, L, D]
     axis = torch.tensor(axis_all[0 if args.axis == "pc1" else 1, args.layer],
                         dtype=torch.float32)
@@ -94,12 +113,19 @@ def generate_steered(res_dir: Path, args) -> None:
     prompts = build_prompt_set(args.n_neutral, args.seed)
 
     print(f"Steering axis={args.axis} layer={args.layer} scale={scale:.2f} "
-          f"alphas={alphas} prompts={len(prompts)}", flush=True)
-    pm = load_model({"llama-3.3-70b": DEFAULT_MODEL}.get(args.model, args.model))
+          f"alphas={alphas} prompts={len(prompts)} tag={tag or '-'}", flush=True)
+    if pm is None:
+        pm = load_model({"llama-3.3-70b": DEFAULT_MODEL}.get(args.model, args.model))
     ex = DualReadoutExtractor(pm)
 
     rows = []
     for alpha in alphas:
+        if alpha == 0.0 and baseline_rows is not None:
+            for b in baseline_rows:
+                rows.append({**b, "alpha": 0.0})
+            print(f"  alpha=+0.0: reused {len(baseline_rows)} baseline responses",
+                  flush=True)
+            continue
         convs = [[{"role": "user", "content": p["text"]}] for p in prompts]
         responses = []
         for i in range(0, len(convs), args.batch_size):
@@ -120,9 +146,11 @@ def generate_steered(res_dir: Path, args) -> None:
                          "prompt": p["text"], "response": r})
         print(f"  alpha={alpha:+.1f}: {len(prompts)} responses", flush=True)
 
-    (res_dir / "steering_responses.jsonl").write_text(
+    path = out_paths(res_dir, tag)["responses"]
+    path.write_text(
         "\n".join(json.dumps(r, ensure_ascii=False) for r in rows) + "\n")
-    print(f"Saved {len(rows)} responses -> steering_responses.jsonl", flush=True)
+    print(f"Saved {len(rows)} responses -> {path.name}", flush=True)
+    return rows
 
 
 # --------------------------------------------------------------------------- #
@@ -149,10 +177,11 @@ async def judge_one(row: dict) -> dict | None:
     return scores
 
 
-async def judge_all(res_dir: Path, concurrency: int) -> None:
+async def judge_all(res_dir: Path, concurrency: int, tag: str = "") -> None:
     set_concurrency(concurrency)
+    paths = out_paths(res_dir, tag)
     rows = [json.loads(l) for l in
-            (res_dir / "steering_responses.jsonl").read_text().splitlines()
+            paths["responses"].read_text().splitlines()
             if l.strip()]
     print(f"Judging {len(rows)} steered responses ...", flush=True)
     scores = await asyncio.gather(*(judge_one(r) for r in rows),
@@ -183,9 +212,10 @@ async def judge_all(res_dir: Path, concurrency: int) -> None:
         mono[k] = {"spearman_rho": float(rho), "p": float(p)}
 
     out = {"judge_model": config.JUDGE_MODEL, "n_judged": len(judged),
+           "layer": None, "tag": tag,
            "per_alpha_means": summary, "monotonicity": mono,
            "rows": judged}
-    (res_dir / "steering.json").write_text(json.dumps(out, indent=2, ensure_ascii=False))
+    paths["json"].write_text(json.dumps(out, indent=2, ensure_ascii=False))
 
     print("alpha sweep (means):", flush=True)
     for s in summary:
@@ -195,7 +225,7 @@ async def judge_all(res_dir: Path, concurrency: int) -> None:
         print(f"  monotonicity {k}: rho={mono[k]['spearman_rho']:+.2f} "
               f"p={mono[k]['p']:.3f}", flush=True)
 
-    write_examples(res_dir, judged)
+    write_examples(res_dir, judged, tag)
 
 
 def _clip_text(s: str, n: int = 700) -> str:
@@ -203,7 +233,7 @@ def _clip_text(s: str, n: int = 700) -> str:
     return s if len(s) <= n else s[:n] + " [...]"
 
 
-def write_examples(res_dir: Path, judged: list[dict]) -> None:
+def write_examples(res_dir: Path, judged: list[dict], tag: str = "") -> None:
     """steering_examples.md - unsteered vs extreme-steered, per prompt."""
     by_prompt: dict[str, dict[float, dict]] = {}
     for r in judged:
@@ -231,8 +261,9 @@ def write_examples(res_dir: Path, judged: list[dict]) -> None:
                           f"tech={sc['technical_density']:.0f} terse={sc['terseness']:.0f} "
                           f"coh={sc['coherence']:.0f}):", "",
                           f"> {_clip_text(r['response'])}", ""]
-    (res_dir / "steering_examples.md").write_text("\n".join(lines))
-    print(f"Wrote steering_examples.md ({len(by_prompt)} prompts)", flush=True)
+    path = out_paths(res_dir, tag)["examples"]
+    path.write_text("\n".join(lines))
+    print(f"Wrote {path.name} ({len(by_prompt)} prompts)", flush=True)
 
 
 def main():
@@ -242,7 +273,7 @@ def main():
     if not args.judge_only:
         generate_steered(res_dir, args)
     if not args.skip_judge:
-        asyncio.run(judge_all(res_dir, args.concurrency))
+        asyncio.run(judge_all(res_dir, args.concurrency, args.tag))
 
 
 def parse_args():
@@ -250,6 +281,8 @@ def parse_args():
     ap.add_argument("--model", default="llama-3.3-70b")
     ap.add_argument("--axis", choices=("pc1", "contrast"), default="pc1")
     ap.add_argument("--layer", type=int, default=40)
+    ap.add_argument("--tag", default="",
+                    help="output filename suffix, e.g. L24 -> steering_L24.json")
     ap.add_argument("--alphas", default="-8,-4,-2,0,2,4,8",
                     help="relative alphas (x median |persona projection|)")
     ap.add_argument("--n-neutral", type=int, default=6)

@@ -1,0 +1,560 @@
+{
+  "resp_mean_L24": {
+    "pc1_var": 0.18754692737954048,
+    "pc2_var": 0.10037507301646163,
+    "pc2_dominant_trait": "emotional_load",
+    "pc2_dominant_spearman": 0.42773169975039643,
+    "pc2_tag_corr": {
+      "expertise": {
+        "spearman": -0.14820975029651207,
+        "pearson": -0.19736702790008728,
+        "p": 0.015482826633022662,
+        "q_FDR": 0.019353533291278327
+      },
+      "vulnerability": {
+        "spearman": 0.2796651698884401,
+        "pearson": 0.235626387947685,
+        "p": 0.003700019107803818,
+        "q_FDR": 0.006166698513006364
+      },
+      "trust": {
+        "spearman": 0.13403592874428355,
+        "pearson": 0.17220394839796405,
+        "p": 0.03510166788013222,
+        "q_FDR": 0.03510166788013222
+      },
+      "emotional_load": {
+        "spearman": 0.42773169975039643,
+        "pearson": 0.37690405931645526,
+        "p": 1.994172080157514e-06,
+        "q_FDR": 9.970860400787571e-06
+      },
+      "tech_literacy": {
+        "spearman": 0.27979045156784554,
+        "pearson": 0.2949935815506373,
+        "p": 0.00024773630394057586,
+        "q_FDR": 0.0006193407598514397
+      }
+    },
+    "pc2_neg_pole": [
+      {
+        "name": "Chester",
+        "load": -0.6201809198438376,
+        "vuln": 6,
+        "emo": 4,
+        "exp": 7,
+        "lean": "a confused elderly person who loses track of n"
+      },
+      {
+        "name": "Vernon",
+        "load": -0.5963624738858585,
+        "vuln": 7,
+        "emo": 6,
+        "exp": 6,
+        "lean": "a confused elderly person who loses track of n"
+      },
+      {
+        "name": "Clarence",
+        "load": -0.5617204842355205,
+        "vuln": 4,
+        "emo": 5,
+        "exp": 7,
+        "lean": "an overconfident authority figure who resents "
+      },
+      {
+        "name": "Rex",
+        "load": -0.5580148066304657,
+        "vuln": 3,
+        "emo": 4,
+        "exp": 8,
+        "lean": "an overconfident authority figure who resents "
+      },
+      {
+        "name": "Eugene",
+        "load": -0.5382121159307836,
+        "vuln": 8,
+        "emo": 6,
+        "exp": 3,
+        "lean": "a confused elderly person who loses track of n"
+      },
+      {
+        "name": "Randolph",
+        "load": -0.4803915815761028,
+        "vuln": 3,
+        "emo": 5,
+        "exp": 9,
+        "lean": "an overconfident authority figure who resents "
+      }
+    ],
+    "pc2_pos_pole": [
+      {
+        "name": "Blake",
+        "load": 0.4414486990321826,
+        "vuln": 9,
+        "emo": 9,
+        "exp": 1,
+        "lean": "a teenager or minor navigating something a bit"
+      },
+      {
+        "name": "Aisha",
+        "load": 0.42585689079264816,
+        "vuln": 9,
+        "emo": 8,
+        "exp": 2,
+        "lean": "a teenager or minor navigating something a bit"
+      },
+      {
+        "name": "Isabella",
+        "load": 0.4067387941890636,
+        "vuln": 10,
+        "emo": 9,
+        "exp": 1,
+        "lean": "a teenager or minor navigating something a bit"
+      },
+      {
+        "name": "Luna",
+        "load": 0.3917518209686894,
+        "vuln": 10,
+        "emo": 9,
+        "exp": 1,
+        "lean": "a teenager or minor navigating something a bit"
+      },
+      {
+        "name": "Amber",
+        "load": 0.3876571767510219,
+        "vuln": 9,
+        "emo": 10,
+        "exp": 2,
+        "lean": "a person in acute emotional crisis, panicking "
+      },
+      {
+        "name": "Tiffany",
+        "load": 0.3579816841192998,
+        "vuln": 9,
+        "emo": 10,
+        "exp": 6,
+        "lean": "a person in acute emotional crisis, panicking "
+      }
+    ]
+  },
+  "resp_mean_L40": {
+    "pc1_var": 0.20356759140799843,
+    "pc2_var": 0.10485462644835385,
+    "pc2_dominant_trait": "emotional_load",
+    "pc2_dominant_spearman": 0.5158029909300585,
+    "pc2_tag_corr": {
+      "expertise": {
+        "spearman": -0.24027443468181423,
+        "pearson": -0.28701230224376445,
+        "p": 0.00036946790300584843,
+        "q_FDR": 0.0006157798383430807
+      },
+      "vulnerability": {
+        "spearman": 0.3878650757980585,
+        "pearson": 0.3483528103193373,
+        "p": 1.251791835308636e-05,
+        "q_FDR": 3.12947958827159e-05
+      },
+      "trust": {
+        "spearman": 0.2417368167714252,
+        "pearson": 0.25698655480178206,
+        "p": 0.0015004780029781002,
+        "q_FDR": 0.0018755975037226251
+      },
+      "emotional_load": {
+        "spearman": 0.5158029909300585,
+        "pearson": 0.4702143016547559,
+        "p": 1.2696873792532616e-09,
+        "q_FDR": 6.348436896266308e-09
+      },
+      "tech_literacy": {
+        "spearman": 0.22813192646210803,
+        "pearson": 0.2314191934234088,
+        "p": 0.004380600524142936,
+        "q_FDR": 0.004380600524142936
+      }
+    },
+    "pc2_neg_pole": [
+      {
+        "name": "Chester",
+        "load": -1.2337056674581282,
+        "vuln": 6,
+        "emo": 4,
+        "exp": 7,
+        "lean": "a confused elderly person who loses track of n"
+      },
+      {
+        "name": "Clarence",
+        "load": -1.211533248750454,
+        "vuln": 4,
+        "emo": 5,
+        "exp": 7,
+        "lean": "an overconfident authority figure who resents "
+      },
+      {
+        "name": "Rex",
+        "load": -1.1900956880315707,
+        "vuln": 3,
+        "emo": 4,
+        "exp": 8,
+        "lean": "an overconfident authority figure who resents "
+      },
+      {
+        "name": "Vernon",
+        "load": -1.1463307507232945,
+        "vuln": 7,
+        "emo": 6,
+        "exp": 6,
+        "lean": "a confused elderly person who loses track of n"
+      },
+      {
+        "name": "Randolph",
+        "load": -1.045971241940261,
+        "vuln": 3,
+        "emo": 5,
+        "exp": 9,
+        "lean": "an overconfident authority figure who resents "
+      },
+      {
+        "name": "Francisco",
+        "load": -0.9167694573356018,
+        "vuln": 8,
+        "emo": 7,
+        "exp": 2,
+        "lean": "someone in a reflective, philosophical or exis"
+      }
+    ],
+    "pc2_pos_pole": [
+      {
+        "name": "Amber",
+        "load": 0.9105776898085984,
+        "vuln": 9,
+        "emo": 10,
+        "exp": 2,
+        "lean": "a person in acute emotional crisis, panicking "
+      },
+      {
+        "name": "Isabella",
+        "load": 0.8926853251408843,
+        "vuln": 10,
+        "emo": 9,
+        "exp": 1,
+        "lean": "a teenager or minor navigating something a bit"
+      },
+      {
+        "name": "Blake",
+        "load": 0.8741309376682233,
+        "vuln": 9,
+        "emo": 9,
+        "exp": 1,
+        "lean": "a teenager or minor navigating something a bit"
+      },
+      {
+        "name": "Aisha",
+        "load": 0.8449272670719243,
+        "vuln": 9,
+        "emo": 8,
+        "exp": 2,
+        "lean": "a teenager or minor navigating something a bit"
+      },
+      {
+        "name": "Stephanie",
+        "load": 0.8166457539444377,
+        "vuln": 9,
+        "emo": 10,
+        "exp": 2,
+        "lean": "a person in acute emotional crisis, panicking "
+      },
+      {
+        "name": "Tiffany",
+        "load": 0.7752296331097278,
+        "vuln": 9,
+        "emo": 10,
+        "exp": 6,
+        "lean": "a person in acute emotional crisis, panicking "
+      }
+    ]
+  },
+  "last_user_L24": {
+    "pc1_var": 0.20048486700584472,
+    "pc2_var": 0.11142919637353922,
+    "pc2_dominant_trait": "vulnerability",
+    "pc2_dominant_spearman": 0.2675888866999018,
+    "pc2_tag_corr": {
+      "expertise": {
+        "spearman": -0.1779918429248911,
+        "pearson": -0.17057135483630165,
+        "p": 0.03689656213938491,
+        "q_FDR": 0.06149427023230818
+      },
+      "vulnerability": {
+        "spearman": 0.2675888866999018,
+        "pearson": 0.2152958983888738,
+        "p": 0.008148104429420695,
+        "q_FDR": 0.020370261073551738
+      },
+      "trust": {
+        "spearman": 0.042557828849538126,
+        "pearson": 0.030951602927174734,
+        "p": 0.7069190379764331,
+        "q_FDR": 0.7069190379764331
+      },
+      "emotional_load": {
+        "spearman": 0.2417093423962071,
+        "pearson": 0.2520657524716125,
+        "p": 0.0018598733485461131,
+        "q_FDR": 0.009299366742730566
+      },
+      "tech_literacy": {
+        "spearman": -0.07978450238454197,
+        "pearson": -0.07374170583242799,
+        "p": 0.36981802126388647,
+        "q_FDR": 0.46227252657985807
+      }
+    },
+    "pc2_neg_pole": [
+      {
+        "name": "Maxine",
+        "load": -0.9889354523029701,
+        "vuln": 4,
+        "emo": 3,
+        "exp": 6,
+        "lean": "a lonely person seeking companionship and emot"
+      },
+      {
+        "name": "Samuel",
+        "load": -0.8305705160548761,
+        "vuln": 7,
+        "emo": 7,
+        "exp": 9,
+        "lean": "someone in a reflective, philosophical or exis"
+      },
+      {
+        "name": "Iris",
+        "load": -0.765154915267722,
+        "vuln": 5,
+        "emo": 6,
+        "exp": 7,
+        "lean": "someone in a reflective, philosophical or exis"
+      },
+      {
+        "name": "Ezra",
+        "load": -0.7337527106815686,
+        "vuln": 7,
+        "emo": 6,
+        "exp": 7,
+        "lean": "a lonely person seeking companionship and emot"
+      },
+      {
+        "name": "Jordan",
+        "load": -0.7332975851389223,
+        "vuln": 8,
+        "emo": 6,
+        "exp": 3,
+        "lean": "a lonely person seeking companionship and emot"
+      },
+      {
+        "name": "Ethan",
+        "load": -0.6809464744077283,
+        "vuln": 2,
+        "emo": 5,
+        "exp": 7,
+        "lean": "an adversarial user who reframes requests (hyp"
+      }
+    ],
+    "pc2_pos_pole": [
+      {
+        "name": "Blake",
+        "load": 0.6970087232697499,
+        "vuln": 9,
+        "emo": 9,
+        "exp": 1,
+        "lean": "a teenager or minor navigating something a bit"
+      },
+      {
+        "name": "Craig",
+        "load": 0.691781725191725,
+        "vuln": 9,
+        "emo": 10,
+        "exp": 2,
+        "lean": "a person in acute emotional crisis, panicking "
+      },
+      {
+        "name": "Luna",
+        "load": 0.6282274833166266,
+        "vuln": 10,
+        "emo": 9,
+        "exp": 1,
+        "lean": "a teenager or minor navigating something a bit"
+      },
+      {
+        "name": "Veronica",
+        "load": 0.5872693536593931,
+        "vuln": 8,
+        "emo": 9,
+        "exp": 7,
+        "lean": "a person in acute emotional crisis, panicking "
+      },
+      {
+        "name": "Floyd",
+        "load": 0.5698239386584183,
+        "vuln": 8,
+        "emo": 9,
+        "exp": 9,
+        "lean": "a person facing a high-stakes decision under r"
+      },
+      {
+        "name": "Amber",
+        "load": 0.5533372239085734,
+        "vuln": 9,
+        "emo": 10,
+        "exp": 2,
+        "lean": "a person in acute emotional crisis, panicking "
+      }
+    ]
+  },
+  "last_user_L40": {
+    "pc1_var": 0.18774307955369715,
+    "pc2_var": 0.09741867316639806,
+    "pc2_dominant_trait": "tech_literacy",
+    "pc2_dominant_spearman": 0.27746762758003135,
+    "pc2_tag_corr": {
+      "expertise": {
+        "spearman": 0.043566371986784154,
+        "pearson": 0.03147224732944092,
+        "p": 0.7022203370327756,
+        "q_FDR": 0.846023633431358
+      },
+      "vulnerability": {
+        "spearman": 0.03868002080016565,
+        "pearson": 0.015988648967890713,
+        "p": 0.846023633431358,
+        "q_FDR": 0.846023633431358
+      },
+      "trust": {
+        "spearman": -0.13227258220815352,
+        "pearson": -0.13003613352876475,
+        "p": 0.11273255738333673,
+        "q_FDR": 0.18788759563889457
+      },
+      "emotional_load": {
+        "spearman": 0.1820172375054704,
+        "pearson": 0.21655614773442416,
+        "p": 0.0077739020844198176,
+        "q_FDR": 0.019434755211049544
+      },
+      "tech_literacy": {
+        "spearman": 0.27746762758003135,
+        "pearson": 0.2874851267487595,
+        "p": 0.0003609392638233964,
+        "q_FDR": 0.0018046963191169821
+      }
+    },
+    "pc2_neg_pole": [
+      {
+        "name": "Irene",
+        "load": -0.9086602470046623,
+        "vuln": 9,
+        "emo": 6,
+        "exp": 7,
+        "lean": "a lonely person seeking companionship and emot"
+      },
+      {
+        "name": "Beverly",
+        "load": -0.8907460484721146,
+        "vuln": 8,
+        "emo": 6,
+        "exp": 3,
+        "lean": "a lonely person seeking companionship and emot"
+      },
+      {
+        "name": "Maxine",
+        "load": -0.8816538417802043,
+        "vuln": 4,
+        "emo": 3,
+        "exp": 6,
+        "lean": "a lonely person seeking companionship and emot"
+      },
+      {
+        "name": "Jordan",
+        "load": -0.8033588240569146,
+        "vuln": 8,
+        "emo": 6,
+        "exp": 3,
+        "lean": "a lonely person seeking companionship and emot"
+      },
+      {
+        "name": "Francisco",
+        "load": -0.7779941178511611,
+        "vuln": 8,
+        "emo": 7,
+        "exp": 2,
+        "lean": "someone in a reflective, philosophical or exis"
+      },
+      {
+        "name": "Samuel",
+        "load": -0.7039938718091892,
+        "vuln": 7,
+        "emo": 7,
+        "exp": 9,
+        "lean": "someone in a reflective, philosophical or exis"
+      }
+    ],
+    "pc2_pos_pole": [
+      {
+        "name": "Blake",
+        "load": 0.9987407617286023,
+        "vuln": 9,
+        "emo": 9,
+        "exp": 1,
+        "lean": "a teenager or minor navigating something a bit"
+      },
+      {
+        "name": "Craig",
+        "load": 0.8976786548209786,
+        "vuln": 9,
+        "emo": 10,
+        "exp": 2,
+        "lean": "a person in acute emotional crisis, panicking "
+      },
+      {
+        "name": "Luna",
+        "load": 0.8650996395248436,
+        "vuln": 10,
+        "emo": 9,
+        "exp": 1,
+        "lean": "a teenager or minor navigating something a bit"
+      },
+      {
+        "name": "Kai",
+        "load": 0.7084626766390534,
+        "vuln": 9,
+        "emo": 7,
+        "exp": 2,
+        "lean": "a teenager or minor navigating something a bit"
+      },
+      {
+        "name": "Sophia",
+        "load": 0.6871994442060093,
+        "vuln": 10,
+        "emo": 8,
+        "exp": 1,
+        "lean": "a teenager or minor navigating something a bit"
+      },
+      {
+        "name": "Aisha",
+        "load": 0.662086876268918,
+        "vuln": 9,
+        "emo": 8,
+        "exp": 2,
+        "lean": "a teenager or minor navigating something a bit"
+      }
+    ]
+  },
+  "stability": {
+    "resp_L24_vs_L40": 0.6635816783953712,
+    "last_L24_vs_L40": 0.46354802951186547,
+    "L24_resp_vs_last": 0.1440086401510385,
+    "L40_resp_vs_last": 0.21352991829890955
+  }
+}

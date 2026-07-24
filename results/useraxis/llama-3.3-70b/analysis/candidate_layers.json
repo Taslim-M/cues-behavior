@@ -1,0 +1,22 @@
+{
+  "named": {
+    "variance_arm_global": 3,
+    "interp_peak": 24,
+    "cosine_peak": 24,
+    "variance_peak_in_window": 16,
+    "baseline_L40": 40
+  },
+  "layers": [
+    3,
+    16,
+    24,
+    32,
+    40,
+    48,
+    56
+  ],
+  "window": [
+    12,
+    64
+  ]
+}

@@ -1131,6 +1131,186 @@ $p$ & 0.82 & 0.008 & 0.88 & $<0.001$ & 0.88 & 0.69 \\
 \end{table}
 
 % --------------------------------------------------------------------------
+\section{Choosing the layer: PCA signal vs.\ steering effectiveness across depth}\label{app:layers}
+% --------------------------------------------------------------------------
+The main text fixes layer $40$ for both the PCA and the steering, inherited from
+the Assistant-Axis \texttt{MODEL\_CONFIGS} and \emph{pre-registered} (chosen before
+any of the numbers below were seen). Because we saved per-persona activations at
+\emph{all} $80$ layers, we can check that choice after the fact: map where the PCA
+signal actually lives across depth (free---no GPU), then sweep the steering across
+candidate layers. The upshot is a three-way dissociation---\emph{maximal variance},
+\emph{maximal interpretability}, and \emph{maximal steerability} live at different
+depths---and L40 sits at the steering optimum.
+
+\subsection*{Where the PCA signal lives (all-layer sweep)}
+Table~\ref{tab:layer-pca} and Fig.~\ref{fig:layer-profile} give, at seven candidate
+layers, the four quantities that matter: PC1 variance explained, and the three
+\emph{meaning} metrics (PC1$\leftrightarrow$contrast cosine, PC1$\sim$vulnerability,
+and explicit$\leftrightarrow$implicit arm agreement). PC1 \emph{variance} peaks at a
+\emph{trivially early} layer (L3, $0.365$)---almost certainly token/surface
+structure, not the inferred user---whereas all three meaning metrics peak
+mid-network at \textbf{L24} (cosine $0.961$, vulnerability $0.840$, arm agreement
+$0.797$), each \emph{exceeding} L40. The meaning metrics form a broad mid-network
+plateau (cosine $>0.9$, vulnerability $>0.72$, arm $>0.55$ across L24--L56), so any
+mid-layer is a defensible axis; the point is that \emph{maximal variance is not
+maximal meaning}. (The per-layer PC1-variance and cosine values here reproduce the
+shipped \texttt{axis\_validation.json} arrays exactly.)
+
+\begin{table}[h]
+\centering\small
+\caption{All-layer PCA sweep (\respmean{}) at the seven candidate layers. PC1
+\emph{variance} peaks early (L3, surface structure); the three interpretability
+metrics peak at \textbf{L24}. L40 sits solidly in the meaningful mid-network band.}
+\label{tab:layer-pca}
+\begin{tabular}{lccccl}
+\toprule
+Layer & PC1 var & PC1$\leftrightarrow$contrast cos & PC1$\sim$vuln $r$ & arm agreement & note \\
+\midrule
+L3  & $\mathbf{0.365}$ & $0.891$ & $+0.582$ & $+0.652$ & max variance (surface) \\
+L16 & $0.269$ & $0.844$ & $+0.632$ & $+0.643$ & \\
+L24 & $0.188$ & $\mathbf{0.961}$ & $\mathbf{+0.840}$ & $\mathbf{+0.797}$ & max meaning \\
+L32 & $0.239$ & $0.927$ & $+0.780$ & $+0.550$ & \\
+L40 & $0.204$ & $0.933$ & $+0.783$ & $+0.686$ & baseline \\
+L48 & $0.190$ & $0.919$ & $+0.755$ & $+0.692$ & \\
+L56 & $0.188$ & $0.897$ & $+0.719$ & $+0.670$ & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/layer_profile.png}
+\caption{User-Axis PCA signal across all $80$ layers, both readouts (dashed $=$ L40;
+shaded $=$ mid-network ``meaning window''). PC1 variance (top) peaks at surface-level
+early layers, while the three meaning metrics plateau mid-network and peak near L24.}
+\label{fig:layer-profile}
+\end{figure}
+
+\subsection*{Where steering works (single-layer sweep)}
+We then steer along PC1 at each candidate layer with the identical seven-point
+$\alpha$ sweep and blind judge, generating the layer-independent $\alpha{=}0$
+baseline once and reusing it. Table~\ref{tab:layer-steer} and
+Fig.~\ref{fig:steer-layer} report, per layer, the monotonicity (Spearman $\rho$) and
+the \emph{dynamic range} (max$-$min of the per-$\alpha$ mean, in judge points) of the
+two clean movers---warmth and technical density---plus the coherence guard (minimum
+coherence across the sweep).
+
+Two facts stand out. First, the \textbf{max-variance layer L3 is causally inert}:
+warmth barely moves ($\rho{=}{+}0.55$, range $0.8$) and technical density does not
+move at all ($\rho{=}{-}0.02$, range $0.5$). The layer with the \emph{largest} PC1 is
+the \emph{weakest} place to steer---decisive evidence that its variance is surface
+structure. Second, steering effectiveness rises through the mid-network and
+\textbf{peaks at L40}, which has the largest dynamic range for \emph{both} movers
+(warmth $2.2$, technical $2.4$ points) while staying coherent (min coherence $8.8$).
+Coherence never drops below $8.3$ at any layer, so no layer degenerates---the
+differences are in \emph{reach}, not breakage.
+
+\begin{table}[h]
+\centering\small
+\caption{Single-layer steering sweep (PC1, $\alpha\in[-8,8]$, $12$ prompts, judge
+blind to $\alpha$). $\rho$ is monotonicity in $\alpha$; ``dyn'' is the dynamic range
+in judge points (max$-$min of the per-$\alpha$ mean). Max variance (L3) is causally
+inert; combined steering amplitude peaks at \textbf{L40}.}
+\label{tab:layer-steer}
+\begin{tabular}{lcccccl}
+\toprule
+Layer & warmth $\rho$ & warmth dyn & technical $\rho$ & technical dyn & min coh & note \\
+\midrule
+L3  & $+0.55$ & $0.8$ & $-0.02$ & $0.5$ & $8.8$ & max variance: inert \\
+L16 & $+0.81$ & $0.9$ & $-0.43$ & $0.6$ & $8.9$ & \\
+L24 & $\mathbf{+0.86}$ & $1.7$ & $-0.54$ & $0.9$ & $9.0$ & max meaning \\
+L32 & $+0.79$ & $1.8$ & $\mathbf{-0.98}$ & $2.2$ & $8.3$ & \\
+L40 & $+0.79$ & $\mathbf{2.2}$ & $-0.93$ & $\mathbf{2.4}$ & $8.8$ & baseline: best \\
+L48 & $+0.79$ & $1.5$ & $-0.85$ & $0.9$ & $8.9$ & \\
+L56 & $+0.77$ & $1.8$ & $-0.93$ & $1.2$ & $8.8$ & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/steer_layer_profile.png}
+\caption{Steering effectiveness vs.\ layer (dashed $=$ L40). Dynamic range of warmth
+(top) and technical density (middle), with per-layer $\rho$ annotated, and the
+coherence guard (bottom). Amplitude is near-zero at the max-variance layer L3 and
+peaks at L40 for both dimensions; coherence stays above the floor everywhere.}
+\label{fig:steer-layer}
+\end{figure}
+
+\subsection*{Why L40 is the right steering layer}
+The interpretability peak (L24) and the steering optimum (L40) are \emph{not} the
+same layer, and the gap is instructive. L24 is where vulnerability is best
+\emph{represented}---it is the easiest layer to \emph{read} the user off of (highest
+cosine, tag correlation, and arm agreement). But steering is a \emph{write}
+operation: the injected direction must propagate through the remaining layers and
+survive to the output. At L24, $56$ layers of attention and normalisation lie
+downstream to attenuate or renormalise the perturbation; at L40 only $40$ remain, so
+the injection lands closer to where behaviour is committed. This shows up most
+sharply for \emph{technical density}---an output-\emph{register} property formed late
+in the network: L24 barely controls it (range $0.9$) while L40 swings it a full
+$2.4$ points. For warmth, L24 is marginally \emph{more monotone} ($\rho{=}{+}0.86$
+vs.\ $+0.79$) but moves it less ($1.7$ vs.\ $2.2$ points); L40 wins on amplitude for
+both. In short, \emph{perception peaks upstream, actuation peaks downstream}: reading
+and writing the axis are different operations that optimise at different depths.
+Because L40 was fixed \emph{before} this sweep, its being the steering optimum is a
+post-hoc \emph{vindication} of the inherited choice, not a tuned result. (We steer a
+single layer here, matching the main text; a multi-layer band---as in the parent
+paper---may steer more strongly still and is left to future work.)
+
+\subsection*{Aside: what the second component (PC2) captures at L24 vs.\ L40}
+A disconnected but natural question: since we single out PC1, does the
+\emph{second} component encode anything? We characterise it at the two layers of
+interest (no steering---PC2 is not behaviourally tested).
+Table~\ref{tab:pc2-layers} shows PC2 is a stable ${\sim}10\%$ of variance---about
+half of PC1---at both layers. In the primary \respmean{} readout its dominant
+correlate is \texttt{emotional\_load} ($\rho{=}{+}0.43$ at L24, $+0.52$ at L40, all
+five tags FDR-significant), and its poles are unambiguous: acute-crisis and
+overwhelmed-minor personas (emotional load $8$--$10$) at one end, affectively
+\emph{flat} users---composed-but-confused elderly and confident/resentful
+authorities---at the other. Notably \texttt{tech\_literacy} loads \emph{positively}
+on PC2 ($+0.28$) whereas it is strongly negative on PC1 ($-0.68$): PC2 peels the
+\emph{emotional-charge} signal off the competence bundle, giving a
+calm~$\leftrightarrow$~acute-distress axis distinct from PC1's
+competent~$\leftrightarrow$~vulnerable one.
+
+We do \emph{not} build on it, for a concrete reason: PC2 is
+\emph{readout-fragile}. The two readouts recover near-orthogonal PC2 directions
+($|\cos|{=}0.14$ at L24, $0.21$ at L40), and in the \lastuser{} readout PC2 does not
+even lead on emotional load (it leads on tech literacy at L40, with vulnerability
+null). By contrast PC1 is essentially the same direction in both readouts. So PC2 is
+a \emph{real but secondary and measurement-dependent} structure---consistent with
+its being uninterpretable enough that steering it would not give clean control.
+
+\begin{table}[h]
+\centering\small
+\caption{PC2 at L24 and L40, both readouts. PC2 is ${\sim}10\%$ of variance
+(half of PC1). In \respmean{} it is an emotional-acuteness axis (dominant correlate
+\texttt{emotional\_load}); across readouts the PC2 \emph{direction} is near-orthogonal
+(cosines below the table), i.e.\ readout-dependent, unlike PC1.}
+\label{tab:pc2-layers}
+\begin{tabular}{lcccc}
+\toprule
+ & \multicolumn{2}{c}{\respmean{}} & \multicolumn{2}{c}{\lastuser{}} \\
+ & L24 & L40 & L24 & L40 \\
+\midrule
+PC2 variance explained         & $0.100$ & $0.105$ & $0.111$ & $0.097$ \\
+PC1 variance (for reference)   & $0.188$ & $0.204$ & $0.200$ & $0.188$ \\
+dominant tag                   & emo.\ load & emo.\ load & vuln. & tech.\ lit. \\
+PC2$\sim$emotional\_load ($\rho$) & $+0.43$ & $+0.52$ & $+0.24$ & $+0.18$ \\
+PC2$\sim$vulnerability ($\rho$)   & $+0.28$ & $+0.39$ & $+0.27$ & $+0.04$ \\
+PC2$\sim$tech\_literacy ($\rho$)  & $+0.28$ & $+0.23$ & $-0.08$ & $+0.28$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent\emph{PC2 direction stability} ($|\cos|$ between PC2 vectors):
+within \respmean{}, L24$\leftrightarrow$L40 $=0.66$; within \lastuser{},
+L24$\leftrightarrow$L40 $=0.46$; but \emph{across} readouts the directions are
+near-orthogonal---L24 \respmean{}$\leftrightarrow$\lastuser{} $=0.14$, L40
+\respmean{}$\leftrightarrow$\lastuser{} $=0.21$---which is why we treat PC2 as
+readout-dependent and do not build on it.
+
+% --------------------------------------------------------------------------
 \section{Additional figures (\lastuser{} readout)}\label{app:figs}
 % --------------------------------------------------------------------------
 \begin{figure}[h]
