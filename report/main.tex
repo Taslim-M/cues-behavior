@@ -491,6 +491,42 @@ figure of \citet{lu2024assistant}.
 principal components; the vulnerability gradient runs along PC1.}
 \end{figure}
 
+\subsection{The default (profile-less) user sits on the competent
+end}\label{sec:baseline}
+Every rollout so far conditions the model on a persona; a natural counter-question
+is where the model places a user it knows \emph{nothing} about---the default it
+assumes with no profile at all. This is also exactly the operating point the
+steering below starts from ($\alpha{=}0$, no persona context). We measure it
+directly: we rerun the \emph{same} shared probes with no persona, average the
+\respmean{} activations over probes (the profile-less analogue of a persona vector),
+and project onto the shipped L40 PC1 with the same cross-persona centering. To
+separate ``no user information'' from ``no system prompt at all'' we also run a bland
+neutral system prompt (\emph{``You are a helpful assistant.''}).
+
+The default user lands well onto the \emph{competent} half of the axis:
+$z{=}{-}1.23$ below the persona mean ($95\%$ CI $-1.50$ to $-0.94$; $15$th
+percentile of the $150$ personas), which maps through the PC1$\sim$vulnerability fit
+to an implied vulnerability of ${\approx}3.6/10$ against a population balanced near
+$5$ (Fig.~\ref{fig:baseline}). The neutral-system control is indistinguishable
+($z{=}{-}1.20$), so the shift reflects the absence of \emph{user} information, not
+the presence or absence of a system prompt. In other words the model's prior is a
+reasonably capable user: elevated vulnerability is something it must be \emph{told},
+and the $\alpha{=}0$ steering baseline therefore begins below the persona centroid
+rather than at it---consistent with protectiveness rising at \emph{both} steering
+poles (\S\ref{sec:steering}). This is a \respmean{}/L40 statement: the secondary
+\lastuser{} readout places the default nearer the centroid ($z{=}{-}0.18$), so the
+competent-lean is clearest in the primary readout at the steering layer.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.82\linewidth]{figures/baseline_axis.png}
+\caption{Where the profile-less ``default user'' lands on PC1 (\respmean, L40). Both
+the bare-probe (\texttt{none}) and neutral-system baselines sit ${\sim}1.2$ SD toward
+the competent/expert pole, left of the persona mean (dashed)---the model's default
+prior is a capable, low-vulnerability user.}
+\label{fig:baseline}
+\end{figure}
+
 % ==========================================================================
 \section{Steering: the axis is behaviorally causal}\label{sec:steering}
 % ==========================================================================
@@ -1309,6 +1345,186 @@ L24$\leftrightarrow$L40 $=0.46$; but \emph{across} readouts the directions are
 near-orthogonal---L24 \respmean{}$\leftrightarrow$\lastuser{} $=0.14$, L40
 \respmean{}$\leftrightarrow$\lastuser{} $=0.21$---which is why we treat PC2 as
 readout-dependent and do not build on it.
+
+% --------------------------------------------------------------------------
+\section{Unsupervised auto-labeling: naming the axes blind}\label{app:autolabel}
+% --------------------------------------------------------------------------
+The main text and Appendix~\ref{app:interp} interpret the components
+\emph{supervised}: we correlate PC loadings against the five tags we
+\emph{authored}. That answers ``does PCA recover a construct we already defined?''
+--- it cannot tell us what PCA found on its own, and it can only ever return one of
+our own labels. This appendix runs the \emph{unsupervised} counterpart. At each
+candidate layer we hand an external judge (\texttt{claude-sonnet-4.5}) only the
+personas at the two extreme ends of a component---with the tags \emph{and} our
+authored one-line \texttt{lean} summary stripped out---and let it \emph{name} the
+dimension that separates them. The known failure mode of such LLM-labeling is
+\emph{confabulation} (a fluent name that does not generalize), so every induced
+label is put through a falsifiable held-out test before it is believed.
+
+\subsection*{How the flow works}
+For each of the seven candidate layers (L12--L56) and each of PC1--PC3 in the
+primary \respmean{} readout:
+\begin{enumerate}\itemsep2pt
+\item \textbf{Poles.} Project the $150$ centered per-persona activations onto the PC.
+  The top-$12$ and bottom-$12$ personas are the \emph{discovery} set (used to induce
+  a label); the remaining $126$ are held out (each keeping its signed, standardized
+  projection $z$). Every profile shown to the judge is anonymized and
+  \emph{tag-free}---backstory $+$ usage pattern $+$ one in-voice opener, with the
+  \texttt{lean} summary and all numeric tags removed---so the judge infers the
+  construct from natural profile text, never from our answer key.
+\item \textbf{Label (blind).} The judge sees the two poles as ``Group A'' vs.\
+  ``Group B'' and names the single dimension separating them plus a label for each
+  end. We run this $R{=}5$ times per axis with the pole$\to$A/B assignment and the
+  within-group order \emph{randomized} (so nothing leaks from position), then a
+  consensus meta-judge consolidates the five runs into one dimension name, one label
+  per pole, and a cross-run consistency score.
+\item \textbf{Validate (held-out).} A \emph{fresh} judge, given \emph{only} the
+  induced dimension and the two pole labels---never the discovery personas---scores
+  each of the $126$ held-out personas $0$--$100$ on that axis. We then measure, on
+  personas the label was \emph{not} built from: pole-classification accuracy on the
+  clearly-separated held-out ($|z|{>}0.5$), Spearman$(\text{score},\text{PC
+  projection})$ with a $2000$-shuffle permutation null, and convergent
+  Spearman$(\text{score},\text{tag})$ against each of our five authored tags
+  (BH-FDR).
+\end{enumerate}
+
+\subsection*{The labeling prompt}
+The judge is given the system instruction and, for each axis, the two anonymized
+pole groups followed by this request (verbatim, groups abbreviated):
+
+\begingroup\small
+\begin{quote}
+\emph{System:} ``You are a careful behavioral scientist studying people who use AI
+assistants. You will see two groups of anonymized user profiles, Group A and Group
+B, that an unsupervised statistical procedure placed at opposite ends of a single
+latent dimension. Identify the ONE dimension that best separates them and name each
+pole. Reason only from the profile text. Output strict JSON.''
+\end{quote}
+\begin{verbatim}
+GROUP A:  [12 anonymized, tag-free profiles]
+GROUP B:  [12 anonymized, tag-free profiles]
+
+These two groups sit at opposite ends of ONE latent dimension found
+without any labels. Identify the single dominant characteristic that
+separates Group A from Group B. Return ONLY a JSON object with keys:
+  "dimension":     short noun phrase naming the axis
+  "group_A_label": at most 6 words describing Group A's end
+  "group_B_label": at most 6 words describing Group B's end
+  "confidence":    integer 0-10 -- how cleanly the groups separate
+  "evidence":      one sentence citing concrete differences
+\end{verbatim}
+\endgroup
+\noindent The validation judge is prompted separately with \emph{only} the induced
+\texttt{dimension} and the two pole labels (as ``score $100$'' / ``score $0$''
+anchors) and asked to place each held-out profile on that $0$--$100$ scale---it
+never sees the discovery personas or any tag.
+
+\subsection*{What the judge categorized, vs.\ what our labels cover}
+The central question this appendix answers is: \emph{does the blind judge rediscover
+our constructs, and does it find any we did not tag?} Table~\ref{tab:autolabel-map}
+summarizes the mapping. PC1 is rediscovered exactly---the judge independently names
+the vulnerability--competence axis at every layer, converging on
+\texttt{vulnerability}/\texttt{emotional\_load}/\texttt{expertise} (convergent
+$|\rho|$ up to $0.82$, all $q{<}10^{-10}$). PC2 is a \emph{near-miss on our tag set}:
+the judge consistently names an \emph{acute-crisis / time-pressure} axis that our
+closest authored scale (\texttt{emotional\_load}, $\rho{\approx}{+}0.5$) only
+partially captures---we never tagged ``urgency'' as its own dimension, so this is a
+construct the unsupervised pass surfaces that our labels blur into emotional load.
+PC3 is mostly unnameable noise (at chance at L16), with one sharp exception: at
+\textbf{L32} the judge names \emph{user trust} and it validates strongly (accuracy
+$0.78$, convergent \texttt{trust} $\rho{=}{+}0.80$)---a tag we \emph{have} but had
+never tied to a component.
+
+\begin{table}[h]
+\centering\small
+\caption{What the blind judge named vs.\ our authored tags. ``Have the label?''
+asks whether the judge's construct corresponds to a tag we defined. PC1 is
+rediscovered exactly; PC2 is finer than our tags (a time-pressure axis we folded into
+\texttt{emotional\_load}); PC3 is noise except a clean \texttt{trust} axis at L32.}
+\label{tab:autolabel-map}
+\begin{tabular}{llll}
+\toprule
+Comp. & Representative blind name & Nearest authored tag & Have the label? \\
+\midrule
+PC1 & ``cognitive/emotional capacity'', & \texttt{vulnerability}, & yes---the
+pre-registered \\
+    & ``crisis vs.\ analytical expertise'' & \texttt{expertise} & vulnerability axis \\[2pt]
+PC2 & ``acute crisis urgency'' & \texttt{emotional\_load} & partial---finer
+(time \\
+    & (time pressure) & ($\rho{\approx}{+}0.5$) & pressure not tagged) \\[2pt]
+PC3 & varies (temporal / age); & \texttt{trust} at L32 & only at L32
+(\texttt{trust}, \\
+    & \emph{trust} at L32 & ($\rho{=}{+}0.80$) & else no---noise \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Held-out validation and the confabulation controls}
+Table~\ref{tab:autolabel-acc} and Fig.~\ref{fig:autolabel} give the held-out
+pole-prediction accuracy for every axis. PC1 is strongest ($0.67$--$0.88$, mean
+$0.78$, all permutation $p{\approx}0$) and \emph{rises} at late layers (L48 $0.88$);
+PC2 is a stable band ($0.67$--$0.75$); PC3 sinks toward the controls except the L32
+trust spike ($0.78$). The winning axis (L48 PC1) reproduces on the \lastuser{}
+readout (accuracy $0.71$, convergent \texttt{emotional\_load} $\rho{=}{+}0.78$),
+naming the same crisis-vs-expertise construct.
+
+Two controls pin down what the numbers mean. First, \textbf{stated confidence is
+useless}: the judge is just as confident on \emph{random} splits of the personas
+(mean confidence $8.7$) as on the real poles ($9.7$)---it will always name a
+plausible axis. The held-out test, not the judge's confidence, is what separates real
+from confabulated. Second, we push a \emph{random direction} in activation space
+through the identical pole$\to$label$\to$validate pipeline. These meaningless axes
+still earn confident labels and validate \emph{above chance} ($0.60$--$0.67$, mean
+$0.64$)---because the residual stream is anisotropic, so \emph{any} direction's
+extremes partially recover the dominant vulnerability axis. A random direction is
+therefore \emph{not} a clean null; the permutation test (chance $=0.5$) is. The
+honest reading is graded: real PC1 ($0.78$) clearly beats the random-direction band
+($0.64$), which in turn beats permutation chance ($0.5$).
+
+\begin{table}[h]
+\centering\small
+\caption{Held-out pole-prediction accuracy (\respmean{}) for every candidate axis;
+personas scored were held out of the labeling. All PC1/PC2 axes and most PC3 have
+permutation $p{<}0.01$; L16 PC3 is at chance ($p{=}0.34$). Controls at bottom:
+confidence does not separate real from noise, but validation does.}
+\label{tab:autolabel-acc}
+\begin{tabular}{lccc}
+\toprule
+Layer & PC1 & PC2 & PC3 \\
+\midrule
+L12 & $0.82$ & $0.70$ & $0.76$ \\
+L16 & $0.84$ & $0.75$ & $0.50$ \\
+L24 & $0.67$ & $0.73$ & $0.63$ \\
+L32 & $0.69$ & $0.70$ & $\mathbf{0.78}$ (trust) \\
+L40 & $0.78$ & $0.69$ & $0.62$ \\
+L48 & $\mathbf{0.88}$ & $0.67$ & $0.60$ \\
+L56 & $0.84$ & $0.71$ & $0.61$ \\
+\midrule
+\multicolumn{4}{l}{\emph{Controls:} mean real PC1 $=0.78$; random-direction axes
+$=0.64$; permutation chance $=0.50$.} \\
+\multicolumn{4}{l}{\emph{Label confidence} (uninformative): real poles $9.7$,
+random splits $8.7$.} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/autolabel_accuracy.png}
+\caption{Held-out pole-prediction accuracy (top) and convergent $|\rho|$ against the
+best authored tag (bottom) vs.\ layer, per component. The blind PC1 label predicts
+held-out personas well above the random-direction control (dotted) and permutation
+chance (dashed); PC2 holds a steady band; PC3 tracks the control band except the L32
+trust spike.}
+\label{fig:autolabel}
+\end{figure}
+
+The takeaway is a positive control on the whole interpretation. Without ever seeing a
+tag, an independent judge reconstructs PC1 as the vulnerability--competence axis
+(corroborating \S\ref{sec:results} from the outside), flags PC2 as a real
+time-pressure structure our tag set only approximates, and finds PC3 uninformative
+except a clean trust axis at one depth---while the confabulation controls show the
+result rests on held-out prediction, not on the judge's say-so.
 
 % --------------------------------------------------------------------------
 \section{Additional figures (\lastuser{} readout)}\label{app:figs}

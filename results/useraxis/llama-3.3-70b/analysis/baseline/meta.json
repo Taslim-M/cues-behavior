@@ -1,0 +1,51 @@
+{
+  "probe_ids": [
+    "q0161",
+    "q0236",
+    "q0137",
+    "q0043",
+    "q0091",
+    "q0149",
+    "q0215",
+    "q0182",
+    "q0033",
+    "q0049",
+    "q0063",
+    "q0032",
+    "q0216",
+    "q0095",
+    "q0124",
+    "q0009",
+    "q0190",
+    "q0152",
+    "q0118",
+    "q0224",
+    "q0106",
+    "q0168",
+    "q0068",
+    "q0004"
+  ],
+  "repeats": 3,
+  "seed": 0,
+  "variants": [
+    "none",
+    "neutral_sys"
+  ],
+  "n_layers": 80,
+  "d_model": 8192,
+  "analysis_layers": [
+    24,
+    40,
+    48
+  ],
+  "gen": {
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "max_new_tokens": 512
+  },
+  "neutral_sys": "You are a helpful assistant.",
+  "n_valid": {
+    "none": 72,
+    "neutral_sys": 72
+  }
+}

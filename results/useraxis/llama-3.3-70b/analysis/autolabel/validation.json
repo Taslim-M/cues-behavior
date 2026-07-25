@@ -1,0 +1,1057 @@
+{
+  "judge_model": "anthropic/claude-sonnet-4.5",
+  "z_clear": 0.5,
+  "chance_accuracy": 0.5,
+  "axes": {
+    "resp_mean_L40_PC1": {
+      "readout": "resp_mean",
+      "layer": 40,
+      "pc": 1,
+      "dimension": "cognitive-emotional state and capacity",
+      "n_scored": 126,
+      "n_clear": 78,
+      "pole_accuracy": 0.782051282051282,
+      "spearman_score_vs_proj": 0.582872301347891,
+      "perm_p": 0.0,
+      "null_abs_rho_p95": 0.1759119310623677,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.38259430140482387,
+          "p": 9.814386815778064e-06,
+          "q_FDR": 1.6357311359630105e-05
+        },
+        "vulnerability": {
+          "spearman": 0.760942886064206,
+          "p": 4.718898976707535e-25,
+          "q_FDR": 1.1797247441768838e-24
+        },
+        "trust": {
+          "spearman": 0.3203125071645206,
+          "p": 0.00025569094741762616,
+          "q_FDR": 0.00025569094741762616
+        },
+        "emotional_load": {
+          "spearman": 0.7810979964415207,
+          "p": 3.959136321771049e-27,
+          "q_FDR": 1.9795681608855247e-26
+        },
+        "tech_literacy": {
+          "spearman": -0.3600594552500798,
+          "p": 3.4557038432048906e-05,
+          "q_FDR": 4.3196298040061134e-05
+        }
+      },
+      "top_convergent_tag": "emotional_load",
+      "top_convergent_rho": 0.7810979964415207,
+      "top_convergent_q": 1.9795681608855247e-26
+    },
+    "resp_mean_L12_PC1": {
+      "readout": "resp_mean",
+      "layer": 12,
+      "pc": 1,
+      "dimension": "cognitive and emotional capacity",
+      "n_scored": 126,
+      "n_clear": 74,
+      "pole_accuracy": 0.8243243243243243,
+      "spearman_score_vs_proj": 0.6399838568630831,
+      "perm_p": 0.0,
+      "null_abs_rho_p95": 0.17211529577229628,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.4885817655127303,
+          "p": 6.4724394540864446e-09,
+          "q_FDR": 1.0787399090144074e-08
+        },
+        "vulnerability": {
+          "spearman": 0.7651456856556936,
+          "p": 1.8117811055587901e-25,
+          "q_FDR": 9.05890552779395e-25
+        },
+        "trust": {
+          "spearman": 0.43154691070287315,
+          "p": 4.5330049843064883e-07,
+          "q_FDR": 4.533004984306489e-07
+        },
+        "emotional_load": {
+          "spearman": 0.6680249930797363,
+          "p": 1.289659764430565e-17,
+          "q_FDR": 3.224149411076413e-17
+        },
+        "tech_literacy": {
+          "spearman": -0.47574902204304714,
+          "p": 1.803435685951504e-08,
+          "q_FDR": 2.25429460743938e-08
+        }
+      },
+      "top_convergent_tag": "vulnerability",
+      "top_convergent_rho": 0.7651456856556936,
+      "top_convergent_q": 9.05890552779395e-25
+    },
+    "resp_mean_L12_PC2": {
+      "readout": "resp_mean",
+      "layer": 12,
+      "pc": 2,
+      "dimension": "acute crisis urgency",
+      "n_scored": 126,
+      "n_clear": 57,
+      "pole_accuracy": 0.7017543859649122,
+      "spearman_score_vs_proj": 0.5192642487559961,
+      "perm_p": 0.0,
+      "null_abs_rho_p95": 0.17510291336165987,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.053792856562316235,
+          "p": 0.5496805531721588,
+          "q_FDR": 0.6262471076570835
+        },
+        "vulnerability": {
+          "spearman": 0.4263643497004587,
+          "p": 6.426288541182077e-07,
+          "q_FDR": 1.6065721352955195e-06
+        },
+        "trust": {
+          "spearman": 0.16490021603542837,
+          "p": 0.06500758198573664,
+          "q_FDR": 0.10834596997622774
+        },
+        "emotional_load": {
+          "spearman": 0.5412008775317687,
+          "p": 6.038189108229603e-11,
+          "q_FDR": 3.0190945541148017e-10
+        },
+        "tech_literacy": {
+          "spearman": -0.0438025306827898,
+          "p": 0.6262471076570835,
+          "q_FDR": 0.6262471076570835
+        }
+      },
+      "top_convergent_tag": "emotional_load",
+      "top_convergent_rho": 0.5412008775317687,
+      "top_convergent_q": 3.0190945541148017e-10
+    },
+    "resp_mean_L12_PC3": {
+      "readout": "resp_mean",
+      "layer": 12,
+      "pc": 3,
+      "dimension": "temporal urgency of need",
+      "n_scored": 126,
+      "n_clear": 54,
+      "pole_accuracy": 0.7592592592592593,
+      "spearman_score_vs_proj": 0.35931802660382484,
+      "perm_p": 0.0005,
+      "null_abs_rho_p95": 0.1751624675243264,
+      "convergent": {
+        "expertise": {
+          "spearman": 0.031085309116913762,
+          "p": 0.7296901502802092,
+          "q_FDR": 0.8621545802733488
+        },
+        "vulnerability": {
+          "spearman": -0.12733935403708152,
+          "p": 0.15533807895518414,
+          "q_FDR": 0.25889679825864026
+        },
+        "trust": {
+          "spearman": 0.015623139494148895,
+          "p": 0.8621545802733488,
+          "q_FDR": 0.8621545802733488
+        },
+        "emotional_load": {
+          "spearman": -0.32775766100162035,
+          "p": 0.00017936408668654949,
+          "q_FDR": 0.0008968204334327474
+        },
+        "tech_literacy": {
+          "spearman": -0.18900564062754407,
+          "p": 0.034041288683079776,
+          "q_FDR": 0.08510322170769943
+        }
+      },
+      "top_convergent_tag": "emotional_load",
+      "top_convergent_rho": -0.32775766100162035,
+      "top_convergent_q": 0.0008968204334327474
+    },
+    "resp_mean_L16_PC1": {
+      "readout": "resp_mean",
+      "layer": 16,
+      "pc": 1,
+      "dimension": "cognitive capacity and functional capability",
+      "n_scored": 126,
+      "n_clear": 69,
+      "pole_accuracy": 0.8405797101449275,
+      "spearman_score_vs_proj": 0.6943214482073561,
+      "perm_p": 0.0,
+      "null_abs_rho_p95": 0.18098992663296468,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.6708256385493654,
+          "p": 8.428872367737217e-18,
+          "q_FDR": 1.4048120612895362e-17
+        },
+        "vulnerability": {
+          "spearman": 0.7580052341298904,
+          "p": 9.107215258002111e-25,
+          "q_FDR": 4.553607629001056e-24
+        },
+        "trust": {
+          "spearman": 0.478511024902989,
+          "p": 1.4516267585001694e-08,
+          "q_FDR": 1.4516267585001694e-08
+        },
+        "emotional_load": {
+          "spearman": 0.5323563561214361,
+          "p": 1.4023838167218794e-10,
+          "q_FDR": 1.7529797709023493e-10
+        },
+        "tech_literacy": {
+          "spearman": -0.6965727833230421,
+          "p": 1.344865167181588e-19,
+          "q_FDR": 3.36216291795397e-19
+        }
+      },
+      "top_convergent_tag": "vulnerability",
+      "top_convergent_rho": 0.7580052341298904,
+      "top_convergent_q": 4.553607629001056e-24
+    },
+    "resp_mean_L16_PC2": {
+      "readout": "resp_mean",
+      "layer": 16,
+      "pc": 2,
+      "dimension": "acute crisis urgency",
+      "n_scored": 126,
+      "n_clear": 59,
+      "pole_accuracy": 0.7457627118644068,
+      "spearman_score_vs_proj": 0.513357316836257,
+      "perm_p": 0.0,
+      "null_abs_rho_p95": 0.18186711357389618,
+      "convergent": {
+        "expertise": {
+          "spearman": 0.0421608559628977,
+          "p": 0.6392509168517794,
+          "q_FDR": 0.6537186363304416
+        },
+        "vulnerability": {
+          "spearman": 0.3051415557012686,
+          "p": 0.0005121643972839755,
+          "q_FDR": 0.0012804109932099388
+        },
+        "trust": {
+          "spearman": 0.09761100907179683,
+          "p": 0.2768777202205104,
+          "q_FDR": 0.461462867034184
+        },
+        "emotional_load": {
+          "spearman": 0.47218257510160183,
+          "p": 2.3799602605950516e-08,
+          "q_FDR": 1.1899801302975257e-07
+        },
+        "tech_literacy": {
+          "spearman": 0.04035052030970156,
+          "p": 0.6537186363304416,
+          "q_FDR": 0.6537186363304416
+        }
+      },
+      "top_convergent_tag": "emotional_load",
+      "top_convergent_rho": 0.47218257510160183,
+      "top_convergent_q": 1.1899801302975257e-07
+    },
+    "resp_mean_L16_PC3": {
+      "readout": "resp_mean",
+      "layer": 16,
+      "pc": 3,
+      "dimension": "urgency and temporal nature of need",
+      "n_scored": 126,
+      "n_clear": 58,
+      "pole_accuracy": 0.5,
+      "spearman_score_vs_proj": 0.08687871115841315,
+      "perm_p": 0.3415,
+      "null_abs_rho_p95": 0.178332858056745,
+      "convergent": {
+        "expertise": {
+          "spearman": 0.159824822070192,
+          "p": 0.07383098424201084,
+          "q_FDR": 0.12305164040335141
+        },
+        "vulnerability": {
+          "spearman": -0.22847434378614548,
+          "p": 0.010076647942506844,
+          "q_FDR": 0.02519161985626711
+        },
+        "trust": {
+          "spearman": -0.0479919403396978,
+          "p": 0.5935858063592924,
+          "q_FDR": 0.5935858063592924
+        },
+        "emotional_load": {
+          "spearman": -0.39862236661342315,
+          "p": 3.7817337701995928e-06,
+          "q_FDR": 1.8908668850997963e-05
+        },
+        "tech_literacy": {
+          "spearman": -0.05217308276721867,
+          "p": 0.5617796556272652,
+          "q_FDR": 0.5935858063592924
+        }
+      },
+      "top_convergent_tag": "emotional_load",
+      "top_convergent_rho": -0.39862236661342315,
+      "top_convergent_q": 1.8908668850997963e-05
+    },
+    "resp_mean_L24_PC1": {
+      "readout": "resp_mean",
+      "layer": 24,
+      "pc": 1,
+      "dimension": "emotional crisis state",
+      "n_scored": 126,
+      "n_clear": 79,
+      "pole_accuracy": 0.6708860759493671,
+      "spearman_score_vs_proj": 0.5353013165977419,
+      "perm_p": 0.0,
+      "null_abs_rho_p95": 0.17757583947842157,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.3793628484655564,
+          "p": 1.1824152245422477e-05,
+          "q_FDR": 1.970692040903746e-05
+        },
+        "vulnerability": {
+          "spearman": 0.7032538430912103,
+          "p": 4.2754744979537325e-20,
+          "q_FDR": 1.0688686244884331e-19
+        },
+        "trust": {
+          "spearman": 0.2806570614894263,
+          "p": 0.0014565619708767099,
+          "q_FDR": 0.0018207024635958874
+        },
+        "emotional_load": {
+          "spearman": 0.7646457118164841,
+          "p": 2.0324306636504893e-25,
+          "q_FDR": 1.0162153318252446e-24
+        },
+        "tech_literacy": {
+          "spearman": -0.21543612574642185,
+          "p": 0.015406332733997956,
+          "q_FDR": 0.015406332733997958
+        }
+      },
+      "top_convergent_tag": "emotional_load",
+      "top_convergent_rho": 0.7646457118164841,
+      "top_convergent_q": 1.0162153318252446e-24
+    },
+    "resp_mean_L24_PC2": {
+      "readout": "resp_mean",
+      "layer": 24,
+      "pc": 2,
+      "dimension": "acute crisis urgency",
+      "n_scored": 126,
+      "n_clear": 55,
+      "pole_accuracy": 0.7272727272727273,
+      "spearman_score_vs_proj": 0.5131373764618347,
+      "perm_p": 0.0,
+      "null_abs_rho_p95": 0.1824229752421845,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.07486954599175345,
+          "p": 0.40473016992288574,
+          "q_FDR": 0.4047301699228857
+        },
+        "vulnerability": {
+          "spearman": 0.4032613424027099,
+          "p": 2.842712533655104e-06,
+          "q_FDR": 7.10678133413776e-06
+        },
+        "trust": {
+          "spearman": 0.2169185734070032,
+          "p": 0.014696955149282426,
+          "q_FDR": 0.024494925248804044
+        },
+        "emotional_load": {
+          "spearman": 0.4886715163615957,
+          "p": 6.425257950074867e-09,
+          "q_FDR": 3.2126289750374334e-08
+        },
+        "tech_literacy": {
+          "spearman": -0.0784204218567884,
+          "p": 0.3827506628161343,
+          "q_FDR": 0.4047301699228857
+        }
+      },
+      "top_convergent_tag": "emotional_load",
+      "top_convergent_rho": 0.4886715163615957,
+      "top_convergent_q": 3.2126289750374334e-08
+    },
+    "resp_mean_L24_PC3": {
+      "readout": "resp_mean",
+      "layer": 24,
+      "pc": 3,
+      "dimension": "urgency of need",
+      "n_scored": 126,
+      "n_clear": 60,
+      "pole_accuracy": 0.6333333333333333,
+      "spearman_score_vs_proj": 0.2808700150361266,
+      "perm_p": 0.002,
+      "null_abs_rho_p95": 0.17414947365602101,
+      "convergent": {
+        "expertise": {
+          "spearman": 0.23375793130322028,
+          "p": 0.008429146446130128,
+          "q_FDR": 0.014048577410216881
+        },
+        "vulnerability": {
+          "spearman": -0.36991954688216283,
+          "p": 2.0152930793047807e-05,
+          "q_FDR": 5.038232698261952e-05
+        },
+        "trust": {
+          "spearman": -0.16598023071634752,
+          "p": 0.06324558219201504,
+          "q_FDR": 0.0790569777400188
+        },
+        "emotional_load": {
+          "spearman": -0.49621402636981476,
+          "p": 3.4479926755691654e-09,
+          "q_FDR": 1.7239963377845826e-08
+        },
+        "tech_literacy": {
+          "spearman": -0.016739508125072085,
+          "p": 0.8524126988065387,
+          "q_FDR": 0.8524126988065387
+        }
+      },
+      "top_convergent_tag": "emotional_load",
+      "top_convergent_rho": -0.49621402636981476,
+      "top_convergent_q": 1.7239963377845826e-08
+    },
+    "resp_mean_L32_PC1": {
+      "readout": "resp_mean",
+      "layer": 32,
+      "pc": 1,
+      "dimension": "emotional crisis intensity",
+      "n_scored": 126,
+      "n_clear": 71,
+      "pole_accuracy": 0.6901408450704225,
+      "spearman_score_vs_proj": 0.4536218598322452,
+      "perm_p": 0.0,
+      "null_abs_rho_p95": 0.17343900255481345,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.3155374549277347,
+          "p": 0.0003194505384006581,
+          "q_FDR": 0.0005324175640010968
+        },
+        "vulnerability": {
+          "spearman": 0.7147143300600223,
+          "p": 5.5491607511229664e-21,
+          "q_FDR": 1.3872901877807416e-20
+        },
+        "trust": {
+          "spearman": 0.2618948772345789,
+          "p": 0.0030530004731576157,
+          "q_FDR": 0.0038162505914470196
+        },
+        "emotional_load": {
+          "spearman": 0.8228575234545574,
+          "p": 3.162840698257525e-32,
+          "q_FDR": 1.5814203491287624e-31
+        },
+        "tech_literacy": {
+          "spearman": -0.19281200280327207,
+          "p": 0.030535081588714617,
+          "q_FDR": 0.030535081588714617
+        }
+      },
+      "top_convergent_tag": "emotional_load",
+      "top_convergent_rho": 0.8228575234545574,
+      "top_convergent_q": 1.5814203491287624e-31
+    },
+    "resp_mean_L32_PC2": {
+      "readout": "resp_mean",
+      "layer": 32,
+      "pc": 2,
+      "dimension": "crisis urgency and acuteness",
+      "n_scored": 126,
+      "n_clear": 54,
+      "pole_accuracy": 0.7037037037037037,
+      "spearman_score_vs_proj": 0.5457553086051765,
+      "perm_p": 0.0,
+      "null_abs_rho_p95": 0.1784471390108417,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.071103708603321,
+          "p": 0.4288361311366662,
+          "q_FDR": 0.42883613113666624
+        },
+        "vulnerability": {
+          "spearman": 0.424202211886987,
+          "p": 7.420860507056146e-07,
+          "q_FDR": 1.8552151267640365e-06
+        },
+        "trust": {
+          "spearman": 0.2127546243743038,
+          "p": 0.01676531631472569,
+          "q_FDR": 0.02794219385787615
+        },
+        "emotional_load": {
+          "spearman": 0.4844970922419421,
+          "p": 9.009752520001636e-09,
+          "q_FDR": 4.504876260000818e-08
+        },
+        "tech_literacy": {
+          "spearman": -0.08503008445914154,
+          "p": 0.34381011658384397,
+          "q_FDR": 0.42883613113666624
+        }
+      },
+      "top_convergent_tag": "emotional_load",
+      "top_convergent_rho": 0.4844970922419421,
+      "top_convergent_q": 4.504876260000818e-08
+    },
+    "resp_mean_L32_PC3": {
+      "readout": "resp_mean",
+      "layer": 32,
+      "pc": 3,
+      "dimension": "user trust and relational stance",
+      "n_scored": 126,
+      "n_clear": 65,
+      "pole_accuracy": 0.7846153846153846,
+      "spearman_score_vs_proj": 0.4771429458145489,
+      "perm_p": 0.0,
+      "null_abs_rho_p95": 0.17589513957813438,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.4773898073643173,
+          "p": 1.5856740652635995e-08,
+          "q_FDR": 2.6427901087726658e-08
+        },
+        "vulnerability": {
+          "spearman": 0.5007412559373118,
+          "p": 2.355778194454123e-09,
+          "q_FDR": 5.889445486135308e-09
+        },
+        "trust": {
+          "spearman": 0.8027739492988154,
+          "p": 1.2706412484119233e-29,
+          "q_FDR": 6.353206242059616e-29
+        },
+        "emotional_load": {
+          "spearman": 0.31918443349679865,
+          "p": 0.00026958902624689884,
+          "q_FDR": 0.00026958902624689884
+        },
+        "tech_literacy": {
+          "spearman": -0.39594710460699883,
+          "p": 4.449720975608158e-06,
+          "q_FDR": 5.562151219510198e-06
+        }
+      },
+      "top_convergent_tag": "trust",
+      "top_convergent_rho": 0.8027739492988154,
+      "top_convergent_q": 6.353206242059616e-29
+    },
+    "resp_mean_L40_PC2": {
+      "readout": "resp_mean",
+      "layer": 40,
+      "pc": 2,
+      "dimension": "acute crisis urgency",
+      "n_scored": 126,
+      "n_clear": 49,
+      "pole_accuracy": 0.6938775510204082,
+      "spearman_score_vs_proj": 0.4715201415790057,
+      "perm_p": 0.0,
+      "null_abs_rho_p95": 0.17430083234667845,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.07098956912235592,
+          "p": 0.4295794087969248,
+          "q_FDR": 0.4295794087969248
+        },
+        "vulnerability": {
+          "spearman": 0.43726217288218355,
+          "p": 3.063971989074215e-07,
+          "q_FDR": 7.659929972685538e-07
+        },
+        "trust": {
+          "spearman": 0.16998308179969107,
+          "p": 0.05705203427070012,
+          "q_FDR": 0.09508672378450019
+        },
+        "emotional_load": {
+          "spearman": 0.508781501056243,
+          "p": 1.181185346219687e-09,
+          "q_FDR": 5.905926731098436e-09
+        },
+        "tech_literacy": {
+          "spearman": -0.09657256999755853,
+          "p": 0.282044706118577,
+          "q_FDR": 0.35255588264822124
+        }
+      },
+      "top_convergent_tag": "emotional_load",
+      "top_convergent_rho": 0.508781501056243,
+      "top_convergent_q": 5.905926731098436e-09
+    },
+    "resp_mean_L40_PC3": {
+      "readout": "resp_mean",
+      "layer": 40,
+      "pc": 3,
+      "dimension": "urgency of need",
+      "n_scored": 126,
+      "n_clear": 68,
+      "pole_accuracy": 0.6176470588235294,
+      "spearman_score_vs_proj": 0.25027919057328113,
+      "perm_p": 0.0055,
+      "null_abs_rho_p95": 0.17299314241735003,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.20520525798354053,
+          "p": 0.02116353626402043,
+          "q_FDR": 0.026454420330025537
+        },
+        "vulnerability": {
+          "spearman": 0.49242007762356216,
+          "p": 4.72454850776922e-09,
+          "q_FDR": 1.181137126942305e-08
+        },
+        "trust": {
+          "spearman": 0.24690121434718476,
+          "p": 0.005317811649515093,
+          "q_FDR": 0.008863019415858488
+        },
+        "emotional_load": {
+          "spearman": 0.5529497108409999,
+          "p": 1.8967715042772633e-11,
+          "q_FDR": 9.483857521386317e-11
+        },
+        "tech_literacy": {
+          "spearman": -0.06309289133124701,
+          "p": 0.48276808141155414,
+          "q_FDR": 0.48276808141155414
+        }
+      },
+      "top_convergent_tag": "emotional_load",
+      "top_convergent_rho": 0.5529497108409999,
+      "top_convergent_q": 9.483857521386317e-11
+    },
+    "resp_mean_L48_PC1": {
+      "readout": "resp_mean",
+      "layer": 48,
+      "pc": 1,
+      "dimension": "cognitive and educational complexity",
+      "n_scored": 126,
+      "n_clear": 81,
+      "pole_accuracy": 0.8765432098765432,
+      "spearman_score_vs_proj": 0.6674895557241375,
+      "perm_p": 0.0,
+      "null_abs_rho_p95": 0.17367343177280523,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.660091159749786,
+          "p": 4.1980339194800103e-17,
+          "q_FDR": 2.099016959740005e-16
+        },
+        "vulnerability": {
+          "spearman": 0.45680780665295434,
+          "p": 7.593761441333637e-08,
+          "q_FDR": 1.2656269068889394e-07
+        },
+        "trust": {
+          "spearman": 0.42121513407877825,
+          "p": 9.038178840039391e-07,
+          "q_FDR": 1.129772355004924e-06
+        },
+        "emotional_load": {
+          "spearman": 0.16737279710724942,
+          "p": 0.06103141384060449,
+          "q_FDR": 0.06103141384060449
+        },
+        "tech_literacy": {
+          "spearman": -0.6242118785673121,
+          "p": 5.755635367824686e-15,
+          "q_FDR": 1.4389088419561714e-14
+        }
+      },
+      "top_convergent_tag": "expertise",
+      "top_convergent_rho": -0.660091159749786,
+      "top_convergent_q": 2.099016959740005e-16
+    },
+    "resp_mean_L48_PC2": {
+      "readout": "resp_mean",
+      "layer": 48,
+      "pc": 2,
+      "dimension": "acute crisis urgency",
+      "n_scored": 126,
+      "n_clear": 49,
+      "pole_accuracy": 0.673469387755102,
+      "spearman_score_vs_proj": 0.38954580068131056,
+      "perm_p": 0.0,
+      "null_abs_rho_p95": 0.17048919777630334,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.027224534026308145,
+          "p": 0.7621908159155659,
+          "q_FDR": 0.7621908159155659
+        },
+        "vulnerability": {
+          "spearman": 0.38919548570561785,
+          "p": 6.666585278897224e-06,
+          "q_FDR": 1.666646319724306e-05
+        },
+        "trust": {
+          "spearman": 0.12217245731618992,
+          "p": 0.172937344569399,
+          "q_FDR": 0.288228907615665
+        },
+        "emotional_load": {
+          "spearman": 0.4772248491685108,
+          "p": 1.606370949113943e-08,
+          "q_FDR": 8.031854745569715e-08
+        },
+        "tech_literacy": {
+          "spearman": -0.04071645098065387,
+          "p": 0.6507836047948922,
+          "q_FDR": 0.7621908159155659
+        }
+      },
+      "top_convergent_tag": "emotional_load",
+      "top_convergent_rho": 0.4772248491685108,
+      "top_convergent_q": 8.031854745569715e-08
+    },
+    "resp_mean_L48_PC3": {
+      "readout": "resp_mean",
+      "layer": 48,
+      "pc": 3,
+      "dimension": "cognitive capacity and life stage",
+      "n_scored": 126,
+      "n_clear": 58,
+      "pole_accuracy": 0.603448275862069,
+      "spearman_score_vs_proj": 0.10587037080468106,
+      "perm_p": 0.2475,
+      "null_abs_rho_p95": 0.175059323455402,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.371241141227338,
+          "p": 1.872243288324193e-05,
+          "q_FDR": 3.120405480540322e-05
+        },
+        "vulnerability": {
+          "spearman": 0.4008637051028921,
+          "p": 3.2963473127149583e-06,
+          "q_FDR": 8.240868281787396e-06
+        },
+        "trust": {
+          "spearman": 0.14320463147999174,
+          "p": 0.10966422029928553,
+          "q_FDR": 0.10966422029928553
+        },
+        "emotional_load": {
+          "spearman": 0.2368693056775704,
+          "p": 0.0075745525634381885,
+          "q_FDR": 0.009468190704297736
+        },
+        "tech_literacy": {
+          "spearman": -0.6777206484225118,
+          "p": 2.89979014504943e-18,
+          "q_FDR": 1.449895072524715e-17
+        }
+      },
+      "top_convergent_tag": "tech_literacy",
+      "top_convergent_rho": -0.6777206484225118,
+      "top_convergent_q": 1.449895072524715e-17
+    },
+    "resp_mean_L56_PC1": {
+      "readout": "resp_mean",
+      "layer": 56,
+      "pc": 1,
+      "dimension": "educational and professional expertise",
+      "n_scored": 126,
+      "n_clear": 81,
+      "pole_accuracy": 0.8395061728395061,
+      "spearman_score_vs_proj": 0.6456213287975701,
+      "perm_p": 0.0,
+      "null_abs_rho_p95": 0.17558807016571137,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.5714174128335495,
+          "p": 2.7975209026455943e-12,
+          "q_FDR": 1.3987604513227972e-11
+        },
+        "vulnerability": {
+          "spearman": 0.4048166014184141,
+          "p": 2.580810129667825e-06,
+          "q_FDR": 4.3013502161130415e-06
+        },
+        "trust": {
+          "spearman": 0.23331151560738123,
+          "p": 0.008558504426107514,
+          "q_FDR": 0.010698130532634392
+        },
+        "emotional_load": {
+          "spearman": 0.19088056639030387,
+          "p": 0.032273898526012854,
+          "q_FDR": 0.032273898526012854
+        },
+        "tech_literacy": {
+          "spearman": -0.5141527980961391,
+          "p": 7.373012250133939e-10,
+          "q_FDR": 1.8432530625334849e-09
+        }
+      },
+      "top_convergent_tag": "expertise",
+      "top_convergent_rho": -0.5714174128335495,
+      "top_convergent_q": 1.3987604513227972e-11
+    },
+    "resp_mean_L56_PC2": {
+      "readout": "resp_mean",
+      "layer": 56,
+      "pc": 2,
+      "dimension": "acute crisis urgency",
+      "n_scored": 126,
+      "n_clear": 51,
+      "pole_accuracy": 0.7058823529411765,
+      "spearman_score_vs_proj": 0.35154867430304526,
+      "perm_p": 0.0,
+      "null_abs_rho_p95": 0.18203810839768877,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.025432795691067385,
+          "p": 0.7774198670202811,
+          "q_FDR": 0.7774198670202811
+        },
+        "vulnerability": {
+          "spearman": 0.34617335516277703,
+          "p": 7.170890958868286e-05,
+          "q_FDR": 0.00017927227397170715
+        },
+        "trust": {
+          "spearman": 0.11993879434157406,
+          "p": 0.18098563202342174,
+          "q_FDR": 0.30164272003903625
+        },
+        "emotional_load": {
+          "spearman": 0.4544100136963407,
+          "p": 9.053828800252457e-08,
+          "q_FDR": 4.5269144001262285e-07
+        },
+        "tech_literacy": {
+          "spearman": -0.030376089251996,
+          "p": 0.7356265759459639,
+          "q_FDR": 0.7774198670202811
+        }
+      },
+      "top_convergent_tag": "emotional_load",
+      "top_convergent_rho": 0.4544100136963407,
+      "top_convergent_q": 4.5269144001262285e-07
+    },
+    "resp_mean_L56_PC3": {
+      "readout": "resp_mean",
+      "layer": 56,
+      "pc": 3,
+      "dimension": "age and cognitive functioning",
+      "n_scored": 126,
+      "n_clear": 49,
+      "pole_accuracy": 0.6122448979591837,
+      "spearman_score_vs_proj": 0.1840601641120712,
+      "perm_p": 0.04,
+      "null_abs_rho_p95": 0.1758285409145138,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.21736553427639355,
+          "p": 0.014488733791319057,
+          "q_FDR": 0.033405891875461814
+        },
+        "vulnerability": {
+          "spearman": 0.2069887912855266,
+          "p": 0.02004353512527709,
+          "q_FDR": 0.033405891875461814
+        },
+        "trust": {
+          "spearman": 0.04825571349042954,
+          "p": 0.5915554052955901,
+          "q_FDR": 0.5915554052955901
+        },
+        "emotional_load": {
+          "spearman": 0.10161772393467189,
+          "p": 0.2575412277815723,
+          "q_FDR": 0.32192653472696536
+        },
+        "tech_literacy": {
+          "spearman": -0.5258319125603392,
+          "p": 2.571142292589543e-10,
+          "q_FDR": 1.2855711462947715e-09
+        }
+      },
+      "top_convergent_tag": "tech_literacy",
+      "top_convergent_rho": -0.5258319125603392,
+      "top_convergent_q": 1.2855711462947715e-09
+    },
+    "resp_mean_L40_rand0": {
+      "readout": "resp_mean",
+      "layer": 40,
+      "pc": "rand0",
+      "dimension": "epistemic stance toward AI assistance",
+      "n_scored": 126,
+      "n_clear": 62,
+      "pole_accuracy": 0.5967741935483871,
+      "spearman_score_vs_proj": 0.1819011450619922,
+      "perm_p": 0.032,
+      "null_abs_rho_p95": 0.16905891459589809,
+      "convergent": {
+        "expertise": {
+          "spearman": 0.5926660810026028,
+          "p": 2.654977718194069e-13,
+          "q_FDR": 1.3274888590970345e-12
+        },
+        "vulnerability": {
+          "spearman": -0.43703420743823873,
+          "p": 3.1126441904768535e-07,
+          "q_FDR": 3.8908052380960667e-07
+        },
+        "trust": {
+          "spearman": -0.5541044902724599,
+          "p": 1.6885885350132317e-11,
+          "q_FDR": 4.2214713375330795e-11
+        },
+        "emotional_load": {
+          "spearman": -0.21295679507213197,
+          "p": 0.016659350286468384,
+          "q_FDR": 0.016659350286468384
+        },
+        "tech_literacy": {
+          "spearman": 0.47286681722944457,
+          "p": 2.2571661577647886e-08,
+          "q_FDR": 3.761943596274647e-08
+        }
+      },
+      "top_convergent_tag": "expertise",
+      "top_convergent_rho": 0.5926660810026028,
+      "top_convergent_q": 1.3274888590970345e-12
+    },
+    "resp_mean_L40_rand1": {
+      "readout": "resp_mean",
+      "layer": 40,
+      "pc": "rand1",
+      "dimension": "professional security and technical expertise",
+      "n_scored": 126,
+      "n_clear": 63,
+      "pole_accuracy": 0.6507936507936508,
+      "spearman_score_vs_proj": 0.3340368292768622,
+      "perm_p": 0.0005,
+      "null_abs_rho_p95": 0.17559115294522154,
+      "convergent": {
+        "expertise": {
+          "spearman": 0.5551685074068352,
+          "p": 1.5164551229669236e-11,
+          "q_FDR": 7.582275614834617e-11
+        },
+        "vulnerability": {
+          "spearman": -0.5268298344470667,
+          "p": 2.3454283149317075e-10,
+          "q_FDR": 5.863570787329269e-10
+        },
+        "trust": {
+          "spearman": -0.35887249495845625,
+          "p": 3.6831166345119964e-05,
+          "q_FDR": 3.6831166345119964e-05
+        },
+        "emotional_load": {
+          "spearman": -0.37667948229699644,
+          "p": 1.3781774291325438e-05,
+          "q_FDR": 1.72272178641568e-05
+        },
+        "tech_literacy": {
+          "spearman": 0.37956446491771006,
+          "p": 1.1688186378156649e-05,
+          "q_FDR": 1.72272178641568e-05
+        }
+      },
+      "top_convergent_tag": "expertise",
+      "top_convergent_rho": 0.5551685074068352,
+      "top_convergent_q": 7.582275614834617e-11
+    },
+    "resp_mean_L40_rand2": {
+      "readout": "resp_mean",
+      "layer": 40,
+      "pc": "rand2",
+      "dimension": "knowledge application mode",
+      "n_scored": 126,
+      "n_clear": 73,
+      "pole_accuracy": 0.6712328767123288,
+      "spearman_score_vs_proj": 0.37021473266026783,
+      "perm_p": 0.0,
+      "null_abs_rho_p95": 0.17274589397298074,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.45783489085913,
+          "p": 7.039832859513393e-08,
+          "q_FDR": 8.799791074391742e-08
+        },
+        "vulnerability": {
+          "spearman": 0.663707991228444,
+          "p": 2.462115933584141e-17,
+          "q_FDR": 1.2310579667920705e-16
+        },
+        "trust": {
+          "spearman": 0.3480450593719609,
+          "p": 6.511728373087845e-05,
+          "q_FDR": 6.511728373087845e-05
+        },
+        "emotional_load": {
+          "spearman": 0.5798209390349925,
+          "p": 1.1249128768202167e-12,
+          "q_FDR": 2.8122821920505417e-12
+        },
+        "tech_literacy": {
+          "spearman": -0.4613336514887696,
+          "p": 5.42866044329898e-08,
+          "q_FDR": 8.799791074391742e-08
+        }
+      },
+      "top_convergent_tag": "vulnerability",
+      "top_convergent_rho": 0.663707991228444,
+      "top_convergent_q": 1.2310579667920705e-16
+    },
+    "last_user_L48_PC1": {
+      "readout": "last_user",
+      "layer": 48,
+      "pc": 1,
+      "dimension": "crisis state intensity",
+      "n_scored": 126,
+      "n_clear": 86,
+      "pole_accuracy": 0.7093023255813954,
+      "spearman_score_vs_proj": 0.5364066876046658,
+      "perm_p": 0.0,
+      "null_abs_rho_p95": 0.17740815635548607,
+      "convergent": {
+        "expertise": {
+          "spearman": -0.25962466808974066,
+          "p": 0.0033274294054181823,
+          "q_FDR": 0.004159286756772728
+        },
+        "vulnerability": {
+          "spearman": 0.6841603706243877,
+          "p": 1.0424757645494893e-18,
+          "q_FDR": 2.6061894113737235e-18
+        },
+        "trust": {
+          "spearman": 0.29668222988218257,
+          "p": 0.0007426149191232203,
+          "q_FDR": 0.0012376915318720338
+        },
+        "emotional_load": {
+          "spearman": 0.7762934754452008,
+          "p": 1.2944116970582718e-26,
+          "q_FDR": 6.472058485291359e-26
+        },
+        "tech_literacy": {
+          "spearman": -0.18736804352150974,
+          "p": 0.035651169031865146,
+          "q_FDR": 0.035651169031865146
+        }
+      },
+      "top_convergent_tag": "emotional_load",
+      "top_convergent_rho": 0.7762934754452008,
+      "top_convergent_q": 6.472058485291359e-26
+    }
+  }
+}

@@ -1,0 +1,1811 @@
+{
+  "judge_model": "anthropic/claude-sonnet-4.5",
+  "runs_per_axis": 5,
+  "axes": {
+    "resp_mean_L40_PC1": {
+      "readout": "resp_mean",
+      "layer": 40,
+      "pc": 1,
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.2312201472367565,
+        "bimodality": 0.5010530344940969,
+        "silhouette": 0.5972067638124385,
+        "pc_var": 0.20356759140799843
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "cognitive/emotional state during use",
+          "pos_label": "Crisis, distress, or cognitive impairment",
+          "neg_label": "Analytical problem-solving and intellectual inquiry",
+          "confidence": 10.0,
+          "evidence": "Group A users are consistently experiencing acute crises (medical emergencies, panic attacks, job loss), emotional distress, or cognitive limitations (memory issues, confusion), while Group B users are engaging in complex technical, legal, or scientific problem-solving with clear, analytical thinking."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "cognitive capacity and emotional stability",
+          "pos_label": "Vulnerable individuals under acute distress",
+          "neg_label": "Expert professionals with analytical composure",
+          "confidence": 10.0,
+          "evidence": "Group A consists entirely of highly educated professionals (lawyers, engineers, scientists) engaging in complex technical problem-solving with methodical precision, while Group B comprises individuals facing immediate crises (medical emergencies, cognitive impairment, panic attacks, job loss) who express confusion, fear, and urgent need for basic guidance."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "cognitive and emotional distress level",
+          "pos_label": "Crisis, confusion, or acute vulnerability",
+          "neg_label": "Calm, technical problem-solving",
+          "confidence": 10.0,
+          "evidence": "Group A users are experiencing urgent crises (car accidents, pregnancy discrimination, panic attacks, medical emergencies), cognitive impairment, or overwhelming confusion, while Group B users are calmly engaging in specialized technical work (quantum computing, cryptography, materials science) or methodical professional analysis with no emotional distress."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "cognitive capacity and task complexity",
+          "pos_label": "Cognitive limitations, basic life challenges",
+          "neg_label": "High expertise, complex analytical problems",
+          "confidence": 10.0,
+          "evidence": "Group A consists entirely of highly educated professionals (lawyers, scientists, engineers) engaging AI with sophisticated technical problems requiring advanced domain expertise, while Group B comprises individuals with cognitive impairments, limited education, or overwhelming emotional crises seeking help with basic comprehension, daily tasks, or simple explanations."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "cognitive distress level",
+          "pos_label": "Crisis, confusion, or acute vulnerability",
+          "neg_label": "Calm, analytical problem-solving",
+          "confidence": 10.0,
+          "evidence": "Group A users are overwhelmed by immediate crises (accidents, panic attacks, medical emergencies), struggling with basic comprehension, or experiencing acute emotional distress, while Group B users engage in methodical technical or intellectual work with complex domain expertise and analytical clarity."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "cognitive-emotional state and capacity",
+        "pos_label": "Crisis, distress, or impaired cognition",
+        "neg_label": "Analytical expertise and calm problem-solving",
+        "consistency": 10.0
+      },
+      "mean_confidence": 10.0
+    },
+    "resp_mean_L12_PC1": {
+      "readout": "resp_mean",
+      "layer": 12,
+      "pc": 1,
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.39815353213547,
+        "bimodality": 0.44690752456818034,
+        "silhouette": 0.5730476110101743,
+        "pc_var": 0.2321641268691195
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "emotional distress versus task focus",
+          "pos_label": "Seeking help during personal crisis",
+          "neg_label": "Solving professional or technical problems",
+          "confidence": 10.0,
+          "evidence": "Group A users are experiencing acute emotional crises (betrayal, divorce, injury trauma, panic attacks) or vulnerability from cognitive decline and isolation, while Group B users are engaged in professional problem-solving across technical domains (quantum computing, neurosurgery, materials science) with no emotional distress present."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "cognitive resource availability",
+          "pos_label": "Diminished capacity or acute distress",
+          "neg_label": "Complex problem-solving with full capacity",
+          "confidence": 9.0,
+          "evidence": "Group A consists entirely of highly-educated professionals engaging in sophisticated technical problem-solving (quantum computing, battery chemistry, cryptography), while Group B features individuals experiencing cognitive impairment (memory loss, head injury, early dementia), acute emotional crisis (divorce shock, relationship betrayal, life-threatening emergency), or severe isolation and distress that limits their ability to engage in complex reasoning."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "cognitive capacity and expertise level",
+          "pos_label": "Struggling with limitations or crisis",
+          "neg_label": "Operating from specialized expertise",
+          "confidence": 10.0,
+          "evidence": "Group A consists entirely of individuals experiencing cognitive decline, acute distress, memory problems, or basic confusion (elderly workers forgetting details, injury victims needing repeated instructions, people in emotional crisis), while Group B comprises highly credentialed professionals (PhDs, surgeons, engineers, judges) engaging with complex technical problems in their domains of expertise."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "emotional distress level",
+          "pos_label": "Personal crisis and emotional vulnerability",
+          "neg_label": "Professional inquiry and intellectual engagement",
+          "confidence": 10.0,
+          "evidence": "Group A consists entirely of professionals seeking technical, intellectual, or specialized knowledge for work-related challenges, while Group B comprises individuals experiencing acute personal crises (divorce, injury, loneliness, cognitive decline, betrayal) seeking emotional support or help with immediate life problems."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "cognitive capacity and expertise",
+          "pos_label": "Cognitive impairment or acute distress",
+          "neg_label": "High expertise and technical capability",
+          "confidence": 10.0,
+          "evidence": "Group A consists entirely of individuals with memory loss, cognitive decline, traumatic brain injury, or acute emotional crisis that impairs their functioning, while Group B comprises PhDs, specialists, and professionals engaging in complex technical problem-solving across quantum computing, neurosurgery, cryptography, and advanced research."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "cognitive and emotional capacity",
+        "pos_label": "crisis and diminished capacity",
+        "neg_label": "expertise and full capability",
+        "consistency": 10.0
+      },
+      "mean_confidence": 9.8
+    },
+    "resp_mean_L12_PC2": {
+      "readout": "resp_mean",
+      "layer": 12,
+      "pc": 2,
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.881418642840245,
+        "bimodality": 0.32267386921003455,
+        "silhouette": 0.4800900033195895,
+        "pc_var": 0.10433410999983518
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "acute crisis urgency",
+          "pos_label": "Immediate crisis requiring urgent action",
+          "neg_label": "Reflective inquiry without time pressure",
+          "confidence": 9.0,
+          "evidence": "Group A users are all experiencing acute emergencies (pregnancy discovery, cheating discovered hours before exam, ICU calls, just-fired, just-arrested) with language like 'right now,' 'literally shaking,' 'can't breathe,' and 'phone is dying,' while Group B users are engaged in reflective tasks (writing books, researching recipes, helping with homework, selling collections) with no temporal urgency despite some experiencing cognitive decline or past trauma."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "urgency of crisis",
+          "pos_label": "Acute crisis, immediate danger, panicked",
+          "neg_label": "Reflective, non-urgent, expertise-defending",
+          "confidence": 10.0,
+          "evidence": "Group A users seek validation, memory assistance, or routine tasks with no time pressure (retired workers reflecting on legacy, professionals defending expertise), while Group B users face immediate emergencies requiring urgent action (ICU situations, discovered abuse, panic attacks, legal threats, injuries)."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "acute crisis urgency",
+          "pos_label": "Immediate crisis requiring urgent intervention",
+          "neg_label": "Routine tasks or chronic reflection",
+          "confidence": 10.0,
+          "evidence": "Group A uniformly describes people in active emergencies (medical crises, legal threats, safety dangers, acute emotional breakdowns) seeking immediate help, while Group B describes people performing routine tasks, seeking validation for existing expertise, or managing chronic conditions with no time-critical element."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "urgency and acute crisis",
+          "pos_label": "Immediate crises, acute distress",
+          "neg_label": "Routine inquiries, non-urgent situations",
+          "confidence": 9.0,
+          "evidence": "Group A users seek information for ongoing situations (writing listings, homework help, recipe recreation, research projects) while Group B users face immediate emergencies requiring urgent action (pregnancy discovery, accidents, abuse discovery, panic attacks, legal threats with tight timelines)."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "acute crisis intensity",
+          "pos_label": "Immediate emergency requiring urgent action",
+          "neg_label": "Ongoing challenges without time pressure",
+          "confidence": 10.0,
+          "evidence": "Group A users face acute crises (arrests, injuries, abuse discoveries, pregnancy scares, imminent exams) requiring immediate decisions within hours, while Group B users deal with chronic issues (memory problems, career reflection, writing projects, home renovations) that unfold over weeks or months without urgent deadlines."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "acute crisis urgency",
+        "pos_label": "immediate crisis requiring urgent action",
+        "neg_label": "routine inquiry without time pressure",
+        "consistency": 10.0
+      },
+      "mean_confidence": 9.6
+    },
+    "resp_mean_L12_PC3": {
+      "readout": "resp_mean",
+      "layer": 12,
+      "pc": 3,
+      "orient_sign": -1.0,
+      "sep": {
+        "pole_margin": 3.7694725374348734,
+        "bimodality": 0.36650237980002254,
+        "silhouette": 0.48618918185379634,
+        "pc_var": 0.07213752647049682
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "time pressure and urgency",
+          "pos_label": "Reflective, ongoing existential concerns",
+          "neg_label": "Immediate crises requiring urgent action",
+          "confidence": 10.0,
+          "evidence": "Group A users discuss chronic loneliness, career uncertainty, and life direction with no time constraints (\"sitting here at 2 AM wondering,\" \"been stripping wallpaper all weekend\"), while Group B users face acute emergencies with explicit deadlines (\"next ten minutes,\" \"ninety seconds,\" \"phone is about to die,\" \"before end of business\")."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "urgency of situation",
+          "pos_label": "Chronic loneliness seeking ongoing connection",
+          "neg_label": "Acute crisis requiring immediate action",
+          "confidence": 9.0,
+          "evidence": "Group A users face time-critical emergencies (bomb threats, collisions, legal deadlines, medical crises) requiring immediate decisions, while Group B users experience ongoing isolation, life transitions, and existential questions without urgent time constraints."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "urgency of need",
+          "pos_label": "Chronic struggles, reflective exploration",
+          "neg_label": "Acute crises, immediate decisions required",
+          "confidence": 10.0,
+          "evidence": "Group A users face ongoing life challenges and use AI for reflection, learning, and emotional processing (loneliness, career transitions, creative projects), while Group B users face time-critical emergencies requiring immediate action (ICU brother with dying phone, aircraft collision in 90 seconds, bomb threat during trial, statutory rape arrest)."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "urgency of situation",
+          "pos_label": "Chronic loneliness seeking ongoing connection",
+          "neg_label": "Acute crisis requiring immediate action",
+          "confidence": 9.0,
+          "evidence": "Group A users face time-critical emergencies (bomb threats with 10-minute decisions, aircraft collisions in 90 seconds, dying phones during family crises) while Group B users experience ongoing isolation and use AI for regular companionship during long bus rides, late nights, and quiet moments."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "urgency of need",
+          "pos_label": "Seeking ongoing support and companionship",
+          "neg_label": "Facing immediate crises requiring solutions",
+          "confidence": 9.0,
+          "evidence": "Group A users engage in reflective, ongoing conversations about loneliness, life direction, and personal growth (Ramon's relationship cynicism, Beverly's isolation, Alexis's career uncertainty), while Group B users face acute emergencies or time-sensitive problems requiring immediate action (Floyd's aircraft collision, Craig's custody crisis, Amber's family emergency, Helen's compliance deadline)."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "temporal urgency of need",
+        "pos_label": "chronic ongoing struggles and loneliness",
+        "neg_label": "acute immediate crises requiring action",
+        "consistency": 10.0
+      },
+      "mean_confidence": 9.4
+    },
+    "resp_mean_L16_PC1": {
+      "readout": "resp_mean",
+      "layer": 16,
+      "pc": 1,
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.4818288498754586,
+        "bimodality": 0.4317023499453587,
+        "silhouette": 0.5617479375949418,
+        "pc_var": 0.268517657936284
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "cognitive capacity and task complexity",
+          "pos_label": "Cognitive impairment or emotional distress",
+          "neg_label": "High-functioning technical problem-solving",
+          "confidence": 10.0,
+          "evidence": "Group A users consistently show memory loss, confusion, emotional vulnerability, or cognitive decline (Eugene forgetting math, Chester mixing up car details, Irene's shaking hands and hesitation), while Group B users engage in complex technical work requiring advanced expertise (quantum computing, aerospace engineering, cryptography, clinical trials)."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "professional problem-solving versus personal vulnerability",
+          "pos_label": "Individuals seeking emotional support or assistance",
+          "neg_label": "Technical experts seeking specialized knowledge",
+          "confidence": 10.0,
+          "evidence": "Group A consists entirely of credentialed professionals (engineers, researchers, doctors) querying AI about domain-specific technical problems, while Group B comprises isolated, elderly, disabled, or cognitively impaired individuals seeking help with basic tasks, emotional validation, or coping with personal struggles."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "cognitive capacity and task complexity",
+          "pos_label": "Cognitive impairment or acute crisis",
+          "neg_label": "Advanced technical expertise and capability",
+          "confidence": 10.0,
+          "evidence": "Group A consists entirely of individuals with memory loss, confusion, cognitive decline, acute emergencies, or emotional distress seeking basic help, while Group B comprises highly credentialed professionals (PhDs, specialists, engineers) engaging with complex technical problems in their expert domains."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "cognitive capacity and task complexity",
+          "pos_label": "Diminished capacity, simple personal needs",
+          "neg_label": "High cognitive capacity, complex technical tasks",
+          "confidence": 9.0,
+          "evidence": "Group A consists entirely of highly educated professionals (PhDs, engineers, researchers) tackling complex technical problems requiring advanced expertise, while Group B predominantly features elderly or cognitively impaired individuals struggling with basic tasks, memory issues, loneliness, and simple daily challenges."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "technical expertise and professional capability",
+          "pos_label": "Vulnerable, struggling, seeking basic help",
+          "neg_label": "Expert professionals solving complex problems",
+          "confidence": 10.0,
+          "evidence": "Group A consists entirely of individuals with cognitive decline, disabilities, isolation, or basic skill levels seeking simple assistance (pill reminders, plain-language explanations, emotional support), while Group B comprises scientists, engineers, and specialists with advanced degrees engaging AI for sophisticated technical problem-solving (quantum computing, cryptography, aerospace engineering, drug discovery)."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "cognitive capacity and functional capability",
+        "pos_label": "Impaired or vulnerable individuals",
+        "neg_label": "High-functioning technical experts",
+        "consistency": 10.0
+      },
+      "mean_confidence": 9.8
+    },
+    "resp_mean_L16_PC2": {
+      "readout": "resp_mean",
+      "layer": 16,
+      "pc": 2,
+      "orient_sign": -1.0,
+      "sep": {
+        "pole_margin": 3.8257370171711216,
+        "bimodality": 0.327176328385399,
+        "silhouette": 0.5278651597733439,
+        "pc_var": 0.1169577950621964
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "acute crisis versus chronic frustration",
+          "pos_label": "Immediate emergency requiring urgent help",
+          "neg_label": "Ongoing grievance seeking validation",
+          "confidence": 10.0,
+          "evidence": "Group A users are experiencing acute, time-sensitive crises (ICU emergencies, pregnancy discoveries, imminent exams, immediate safety threats) with physical panic symptoms and desperate pleas for immediate solutions, while Group B users are dealing with long-standing situations (decades of career experience, ongoing projects, chronic conditions) where they seek confirmation of their existing expertise or perspectives rather than emergency intervention."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "acute crisis urgency",
+          "pos_label": "Immediate emergencies, emotional distress",
+          "neg_label": "Routine inquiries, professional consultation",
+          "confidence": 10.0,
+          "evidence": "Group A users seek information for ongoing projects or to validate existing expertise (construction codes, game footage, car valuations), while Group B users face time-sensitive crises requiring immediate action (ICU brother with dying phone, discovered theft, statutory rape arrest, pregnancy complications firing) and exhibit acute emotional distress (shaking, hyperventilating, can't breathe, panicking)."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "acute crisis versus reflective inquiry",
+          "pos_label": "Immediate crisis seeking urgent help",
+          "neg_label": "Experienced reflection seeking validation or information",
+          "confidence": 10.0,
+          "evidence": "Group A users are uniformly experiencing acute emergencies (legal threats, medical crises, panic attacks, urgent pregnancy/safety situations) requiring immediate action, while Group B users are engaged in non-urgent reflection, research, or routine tasks drawing on their extensive life/professional experience."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "acute crisis intensity",
+          "pos_label": "Immediate emergency and panic response",
+          "neg_label": "Chronic frustration and ego defense",
+          "confidence": 10.0,
+          "evidence": "Group A users face ongoing frustrations with memory, authority challenges, or validation-seeking (e.g., car valuations, scheduling disputes, research for books), while Group B users are in acute crises with explicit time pressure and emotional distress (e.g., 'hands are literally shaking,' 'exam in 6 hours,' 'phone is dying,' 'hyperventilating')."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "acute crisis state",
+          "pos_label": "Immediate emergency or panic",
+          "neg_label": "Routine expertise or reflection",
+          "confidence": 10.0,
+          "evidence": "Group A users are uniformly experiencing urgent crises (injuries, arrests, pregnancy scares, medical emergencies) with explicit panic markers like 'hyperventilating,' 'shaking,' 'can't breathe,' and 'freaking out,' while Group B users are calmly pursuing routine professional tasks, hobbies, or drawing on long-term expertise with no time pressure or emotional distress."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "acute crisis urgency",
+        "pos_label": "immediate emergency requiring urgent help",
+        "neg_label": "routine inquiry or chronic grievance",
+        "consistency": 10.0
+      },
+      "mean_confidence": 10.0
+    },
+    "resp_mean_L16_PC3": {
+      "readout": "resp_mean",
+      "layer": 16,
+      "pc": 3,
+      "orient_sign": -1.0,
+      "sep": {
+        "pole_margin": 3.772344291103332,
+        "bimodality": 0.32444807986903207,
+        "silhouette": 0.5173056848154961,
+        "pc_var": 0.08173545654472011
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "time pressure and urgency",
+          "pos_label": "Chronic struggles, ongoing life challenges",
+          "neg_label": "Acute crises, immediate decision demands",
+          "confidence": 9.0,
+          "evidence": "Group A profiles describe persistent, long-term difficulties (unemployment, loneliness, identity questions, educational barriers) with messages seeking ongoing support, while Group B profiles involve time-critical emergencies (bomb threats, collision courses, dying phones, 90-second decisions) requiring immediate action or acute crises like sudden injuries and arrests."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "urgency of situation",
+          "pos_label": "Chronic struggle seeking ongoing support",
+          "neg_label": "Immediate crisis requiring urgent action",
+          "confidence": 9.0,
+          "evidence": "Group A profiles consistently describe time-critical emergencies (bomb threat with 10-minute decision, aircraft collision in 90 seconds, brother in ICU, ex-wife moving next month) while Group B profiles describe persistent life challenges without immediate deadlines (loneliness, career uncertainty, language barriers, grief, social isolation)."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "urgency of need",
+          "pos_label": "Chronic struggles and ongoing support",
+          "neg_label": "Acute crises requiring immediate action",
+          "confidence": 9.0,
+          "evidence": "Group A users face persistent life challenges (unemployment, education, loneliness, career uncertainty) and use AI for ongoing guidance and companionship, while Group B users face time-critical emergencies (aircraft collision, bomb threat, medical crisis, legal deadlines) requiring immediate, actionable information within minutes to hours."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "urgency of situation",
+          "pos_label": "Chronic struggle seeking ongoing support",
+          "neg_label": "Acute crisis requiring immediate action",
+          "confidence": 9.0,
+          "evidence": "Group A users face time-critical emergencies (plane collision in 90 seconds, bomb threat requiring 10-minute decision, brother in ICU with dying phone) while Group B users describe persistent, long-term challenges (loneliness, career transitions, learning struggles) without immediate deadlines."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "urgency of need",
+          "pos_label": "Ongoing support and gradual guidance",
+          "neg_label": "Immediate crisis requiring urgent answers",
+          "confidence": 9.0,
+          "evidence": "Group A users seek help with chronic challenges like loneliness, learning, career uncertainty, and social integration over extended timeframes, while Group B users face acute emergencies (car accidents, bomb threats, legal deadlines, aircraft collisions) requiring immediate action within minutes to hours."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "urgency and temporal nature of need",
+        "pos_label": "chronic ongoing struggles",
+        "neg_label": "acute immediate crises",
+        "consistency": 10.0
+      },
+      "mean_confidence": 9.0
+    },
+    "resp_mean_L24_PC1": {
+      "readout": "resp_mean",
+      "layer": 24,
+      "pc": 1,
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.335459876275102,
+        "bimodality": 0.48094530340521985,
+        "silhouette": 0.5944024515150284,
+        "pc_var": 0.18754692737954048
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "crisis state versus analytical engagement",
+          "pos_label": "Acute distress seeking immediate help",
+          "neg_label": "Calm problem-solving and intellectual inquiry",
+          "confidence": 10.0,
+          "evidence": "Group A users are uniformly experiencing urgent crises (panic attacks, medical emergencies, financial collapse, relationship trauma) and seeking immediate emotional or practical support, while Group B users are all engaged in methodical, intellectual work (research, legal analysis, technical problem-solving) without time pressure or emotional distress."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "acute emotional crisis",
+          "pos_label": "Personal crisis, emotionally overwhelmed",
+          "neg_label": "Professional problem-solving, emotionally stable",
+          "confidence": 10.0,
+          "evidence": "Group A users engage AI for technical/professional challenges with composed, detailed queries about engineering, law, or science, while Group B users face immediate personal emergencies (foreclosure tomorrow, cheating discovered hours ago, accident just happened) with messages showing panic, hyperventilation, shaking, and inability to think clearly."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "crisis state versus intellectual engagement",
+          "pos_label": "Acute crisis seeking immediate help",
+          "neg_label": "Professional inquiry and intellectual exploration",
+          "confidence": 10.0,
+          "evidence": "Group A users are all experiencing acute personal emergencies (divorce, accidents, medical crises, financial collapse) with explicit mentions of hyperventilating, shaking, panic attacks, and inability to think clearly, while Group B users are all professionals calmly engaging with complex technical, legal, or scientific problems in their fields of expertise without any emotional distress."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "emotional crisis intensity",
+          "pos_label": "Acute distress, seeking urgent help",
+          "neg_label": "Technical problem-solving, emotionally stable",
+          "confidence": 10.0,
+          "evidence": "Group A users engage in methodical, technical inquiries about professional or intellectual challenges (fermentation pH, quantum algorithms, legal precedents) while Group B users express acute emotional distress with urgent personal crises (job loss while pregnant, family emergencies, relationship breakdowns, medical confusion)."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "crisis state and cognitive capacity",
+          "pos_label": "Acute distress with impaired functioning",
+          "neg_label": "Calm problem-solving with full capacity",
+          "confidence": 10.0,
+          "evidence": "Group A consistently describes people in immediate crisis (shaking, hyperventilating, can't think straight, panic attacks) or with cognitive impairments, while Group B describes professionals calmly working through complex technical or intellectual problems with full analytical capacity."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "emotional crisis state",
+        "pos_label": "acute distress seeking immediate help",
+        "neg_label": "calm analytical problem-solving",
+        "consistency": 10.0
+      },
+      "mean_confidence": 10.0
+    },
+    "resp_mean_L24_PC2": {
+      "readout": "resp_mean",
+      "layer": 24,
+      "pc": 2,
+      "orient_sign": -1.0,
+      "sep": {
+        "pole_margin": 3.870684590910426,
+        "bimodality": 0.4162534356401248,
+        "silhouette": 0.5051448414451213,
+        "pc_var": 0.10037507301646163
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "acute crisis urgency",
+          "pos_label": "Immediate crisis requiring urgent action",
+          "neg_label": "Ongoing challenges without time pressure",
+          "confidence": 10.0,
+          "evidence": "Group A consistently describes situations unfolding in real-time with phrases like 'just discovered,' 'hands are literally shaking,' 'two hours ago,' and 'right now,' while Group B describes chronic conditions, past experiences, or non-urgent tasks like recipe help, historical research, and home renovation planning."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "temporal urgency and crisis intensity",
+          "pos_label": "Acute crisis, immediate danger, panic",
+          "neg_label": "Chronic challenges, gradual decline, reflective",
+          "confidence": 10.0,
+          "evidence": "Group A users face ongoing struggles with memory loss, aging, or long-standing frustrations and approach AI with deliberation or skepticism, while Group B users are experiencing sudden emergencies (accidents, discoveries of abuse, acute betrayals) within hours and explicitly describe physical panic symptoms like shaking, hyperventilating, and inability to think clearly."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "acute crisis intensity",
+          "pos_label": "Immediate high-stakes emergency situations",
+          "neg_label": "Ongoing low-stakes everyday challenges",
+          "confidence": 10.0,
+          "evidence": "Group A profiles uniformly describe people in acute crisis moments (just discovered cheating, child in ICU, just tested positive, just found out about arrest) requiring immediate action with severe consequences, while Group B profiles describe people managing chronic, gradual, or routine challenges (memory issues, writing projects, hobby questions, general skepticism) without urgent time pressure or life-altering stakes."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "acute crisis intensity",
+          "pos_label": "Acute crisis requiring immediate action",
+          "neg_label": "Chronic struggles, no immediate emergency",
+          "confidence": 10.0,
+          "evidence": "Group A profiles describe ongoing challenges like memory decline, technological confusion, or long-held beliefs, while Group B profiles uniformly describe people in active crisis situations (discovering infidelity hours before an exam, brother in ICU, just finding stolen money, witnessing abuse) requiring urgent decisions or action."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "acute crisis urgency",
+          "pos_label": "Immediate emergency requiring urgent action",
+          "neg_label": "Ongoing challenges without time pressure",
+          "confidence": 10.0,
+          "evidence": "Group A users are all experiencing acute crises with immediate consequences (car accident, positive COVID test, discovering theft, impending forced marriage) and explicitly mention time pressure or inability to breathe/think clearly, while Group B users face chronic issues, memory problems, or long-term projects with no urgent deadlines."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "acute crisis urgency",
+        "pos_label": "immediate emergency requiring urgent action",
+        "neg_label": "ongoing challenges without time pressure",
+        "consistency": 10.0
+      },
+      "mean_confidence": 10.0
+    },
+    "resp_mean_L24_PC3": {
+      "readout": "resp_mean",
+      "layer": 24,
+      "pc": 3,
+      "orient_sign": -1.0,
+      "sep": {
+        "pole_margin": 3.7641867613235505,
+        "bimodality": 0.2871516361538104,
+        "silhouette": 0.5237438491256525,
+        "pc_var": 0.064654027006601
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "time pressure and urgency",
+          "pos_label": "Chronic loneliness and existential reflection",
+          "neg_label": "Acute crisis requiring immediate action",
+          "confidence": 9.0,
+          "evidence": "Group A users engage in reflective, ongoing conversations about loneliness, life transitions, and identity questions with no time constraints, while Group B users face immediate crises (car accidents, bomb threats, legal deadlines, medical emergencies) requiring urgent decisions or information within minutes to hours."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "urgency and crisis intensity",
+          "pos_label": "Ongoing struggles seeking gradual support",
+          "neg_label": "Immediate crises requiring urgent decisions",
+          "confidence": 9.0,
+          "evidence": "Group A profiles consistently involve time-critical emergencies (bomb threats with 10-minute decisions, aircraft collisions with 90 seconds, dying phones during family crises) or acute cognitive impairments creating immediate confusion, while Group B profiles describe chronic loneliness, career transitions, and ongoing life challenges explored through reflective conversations without urgent deadlines."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "urgency of need",
+          "pos_label": "Reflective, ongoing life questions",
+          "neg_label": "Immediate crisis or time pressure",
+          "confidence": 9.0,
+          "evidence": "Group A users engage in philosophical exploration, creative projects, and gradual life transitions with no time constraints, while Group B users face acute emergencies (bomb threats, aircraft collisions, dying phones), memory-impaired confusion requiring immediate answers, or time-sensitive legal/regulatory deadlines measured in minutes or hours."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "urgency and crisis intensity",
+          "pos_label": "Ongoing struggles seeking reflection or support",
+          "neg_label": "Immediate crisis requiring urgent action",
+          "confidence": 9.0,
+          "evidence": "Group A users face time-critical emergencies (bomb threats with 10-minute decisions, aircraft collisions in 90 seconds, ICU emergencies, FDA deadlines) or acute crises demanding immediate action, while Group B users describe chronic loneliness, career uncertainty, creative blocks, and philosophical questions about life direction that unfold over weeks or months without urgent deadlines."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "urgency of need",
+          "pos_label": "Reflective exploration and emotional processing",
+          "neg_label": "Immediate crisis or time-critical need",
+          "confidence": 9.0,
+          "evidence": "Group A users engage in open-ended conversations about life transitions, creative projects, and emotional struggles with no time pressure (pottery learning, career questioning, loneliness processing), while Group B users face urgent situations requiring immediate answers (90-second aircraft collision, dying phone battery during family emergency, end-of-business compliance deadline, bomb threat during trial)."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "urgency of need",
+        "pos_label": "ongoing reflective struggles",
+        "neg_label": "immediate crisis requiring action",
+        "consistency": 10.0
+      },
+      "mean_confidence": 9.0
+    },
+    "resp_mean_L32_PC1": {
+      "readout": "resp_mean",
+      "layer": 32,
+      "pc": 1,
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.348979506843894,
+        "bimodality": 0.47543559933709784,
+        "silhouette": 0.5858445222226595,
+        "pc_var": 0.23902696842000143
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "crisis urgency and emotional distress",
+          "pos_label": "Acute crisis, high emotional distress",
+          "neg_label": "Professional problem-solving, low emotional urgency",
+          "confidence": 10.0,
+          "evidence": "Group A consistently features people in immediate crises (medical emergencies, custody battles, panic attacks, job loss) seeking urgent emotional support, while Group B consists of professionals calmly working through technical, scientific, or intellectual challenges in their specialized fields."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "problem type and emotional state",
+          "pos_label": "Personal crisis, emotionally distressed",
+          "neg_label": "Technical problem-solving, emotionally stable",
+          "confidence": 10.0,
+          "evidence": "Group A users engage AI for intellectual/technical challenges (battery chemistry, quantum computing, legal analysis) with composed analytical queries, while Group B users face acute personal emergencies (infidelity discovery, medical crises, financial collapse) with emotionally charged, desperate messages often including phrases like 'I can't breathe,' 'freaking out,' or 'complete breakdown.'"
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "crisis intensity and emotional distress",
+          "pos_label": "Acute personal crisis, high distress",
+          "neg_label": "Professional problem-solving, low distress",
+          "confidence": 10.0,
+          "evidence": "Group A uniformly describes people in acute emotional crises (foreclosure tomorrow, injury, pregnancy firing, hyperventilating, panic attacks) seeking urgent help while emotionally overwhelmed, whereas Group B describes professionals calmly working through technical, scientific, or intellectual challenges in their specialized fields without time pressure or emotional urgency."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "emotional distress and urgency",
+          "pos_label": "Crisis, panic, emotional overwhelm",
+          "neg_label": "Calm, technical problem-solving",
+          "confidence": 10.0,
+          "evidence": "Group A users engage in methodical technical discussions about professional challenges (protein folding, quantum computing, fermentation pH), while Group B users express acute emotional distress through urgent crises (panic attacks, medical emergencies, relationship trauma, financial collapse) with language like 'hyperventilating,' 'can't breathe,' 'freaking out,' and 'complete breakdown.'"
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "emotional crisis state",
+          "pos_label": "Acute distress and urgent personal crises",
+          "neg_label": "Calm professional problem-solving",
+          "confidence": 10.0,
+          "evidence": "Group A users are uniformly experiencing acute emotional distress (panic attacks, hyperventilating, desperation, trauma) and urgent personal crises requiring immediate help, while Group B users are calmly engaging with technical, professional, or intellectual challenges without emotional urgency."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "emotional crisis intensity",
+        "pos_label": "acute personal crisis and distress",
+        "neg_label": "calm professional problem-solving",
+        "consistency": 10.0
+      },
+      "mean_confidence": 10.0
+    },
+    "resp_mean_L32_PC2": {
+      "readout": "resp_mean",
+      "layer": 32,
+      "pc": 2,
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.990422410019775,
+        "bimodality": 0.30230943219172973,
+        "silhouette": 0.5061996286763014,
+        "pc_var": 0.10975915949669308
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "acute crisis urgency",
+          "pos_label": "Immediate emergency requiring urgent action",
+          "neg_label": "Routine inquiry or ongoing concern",
+          "confidence": 10.0,
+          "evidence": "Group A users are all experiencing acute, time-sensitive crises (medical emergencies, legal threats, safety issues requiring immediate response) with explicit panic and distress, while Group B users are handling routine tasks, memory issues, or long-term projects with no time pressure or emergency context."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "crisis urgency",
+          "pos_label": "Acute crisis, immediate emergency",
+          "neg_label": "Chronic confusion, gradual decline",
+          "confidence": 10.0,
+          "evidence": "Group A users describe ongoing memory issues, skill erosion, and routine frustrations (forgetting recipes, mixing up measurements, general cognitive decline), while Group B users are experiencing sudden traumatic events requiring immediate action (discovering abuse, medical emergencies, legal crises, relationship betrayals) with explicit panic markers like 'shaking,' 'hyperventilating,' and 'can't breathe.'"
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "acute crisis intensity",
+          "pos_label": "Immediate high-stakes emergency situations",
+          "neg_label": "Ongoing low-stakes everyday challenges",
+          "confidence": 10.0,
+          "evidence": "Group A uniformly presents urgent, time-sensitive crises (legal emergencies, medical emergencies, panic attacks, immediate threats) requiring immediate action, while Group B presents routine, ongoing challenges (memory issues, hobby projects, daily tasks, reflective writing) with no time pressure or acute threat."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "acute crisis intensity",
+          "pos_label": "Acute emergencies, immediate crises",
+          "neg_label": "Chronic struggles, reflective situations",
+          "confidence": 10.0,
+          "evidence": "Group A profiles describe ongoing challenges like memory decline, technological confusion, and philosophical reflection, while Group B profiles uniformly describe people in immediate, high-stakes emergencies (discovering theft, abuse, accidents, legal threats) requiring urgent action within hours."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "acute crisis urgency",
+          "pos_label": "Immediate emergency requiring urgent action",
+          "neg_label": "Ongoing reflection or routine assistance",
+          "confidence": 10.0,
+          "evidence": "Group A users are all experiencing time-sensitive emergencies (car accidents, arrests, exam panic, positive COVID tests, discovered abuse) with explicit markers like 'right now,' 'literally shaking,' 'can't breathe,' and 'hands are shaking,' while Group B users describe chronic conditions, routine tasks, memory issues, or reflective inquiries without urgent time pressure."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "crisis urgency and acuteness",
+        "pos_label": "immediate emergency requiring urgent action",
+        "neg_label": "ongoing routine or reflective situations",
+        "consistency": 10.0
+      },
+      "mean_confidence": 10.0
+    },
+    "resp_mean_L32_PC3": {
+      "readout": "resp_mean",
+      "layer": 32,
+      "pc": 3,
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.7250741029347694,
+        "bimodality": 0.3856024005753597,
+        "silhouette": 0.5268731798519265,
+        "pc_var": 0.07153697387042164
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "request complexity and urgency",
+          "pos_label": "Simple needs, learning, emotional support",
+          "neg_label": "Complex problems, high stakes, strategic",
+          "confidence": 9.0,
+          "evidence": "Group A users seek basic explanations, skill-building, and companionship (GED vocabulary, simple math, technology basics, loneliness) while Group B users face sophisticated challenges requiring expert-level analysis (legal precedents, emergency decisions, institutional conflicts, strategic manipulation of AI guardrails)."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "urgency and adversarial framing",
+          "pos_label": "Support-seeking or learning-oriented users",
+          "neg_label": "Crisis-driven or system-challenging users",
+          "confidence": 9.0,
+          "evidence": "Group A users face acute crises (air traffic emergency, foreclosure deadline, bomb threat) or actively challenge/manipulate AI systems (reframing requests as 'academic research,' demanding validation of existing views), while Group B users seek patient guidance, companionship, or educational support without time pressure or adversarial intent (learning algebra, practicing conversation, managing grief)."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "trust and deference toward AI",
+          "pos_label": "High trust, seeking guidance and support",
+          "neg_label": "Skeptical, challenging, or instrumentally using AI",
+          "confidence": 9.0,
+          "evidence": "Group A users consistently treat AI as a trusted mentor or companion (Caleb trusts 'completely,' Andre trusts 'recommendations completely,' Jordan sees it as 'judgment-free friend'), while Group B users are explicitly skeptical (Terrell assumes 'corporate-friendly responses,' Wendy believes AI 'suppresses truths,' Luna 'switches between trusting completely and being suspicious'), challenging (Gerald 'becomes irritated,' Diana expects confirmation not alternatives), or using AI purely instrumentally under crisis pressure (Floyd, Eleanor, Derek need immediate solutions, not relationship)."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "adversarial stance toward the AI",
+          "pos_label": "Trusting, vulnerable, or help-seeking users",
+          "neg_label": "Challenging, manipulative, or distrustful users",
+          "confidence": 9.0,
+          "evidence": "Group A users consistently approach the AI with suspicion, attempt to manipulate it through reframing (Wendy, Lucinda, Deborah), challenge its responses (Terrell, Gerald, Diana), or operate under extreme pressure with skepticism (Floyd, Eleanor), while Group B users explicitly trust the AI as a mentor or confidant (Caleb, Andre, Jordan), seek patient help without resistance (Dorothy, Carlos, Lisa, Bobby), or vulnerably share personal struggles (Naia, Alexis, Constance, Ramon)."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "conversational intent and stakes",
+          "pos_label": "Seeking support and patient guidance",
+          "neg_label": "Seeking information under pressure or agenda",
+          "confidence": 9.0,
+          "evidence": "Group A users consistently seek emotional support, learning assistance, and companionship with vulnerable self-disclosure (loneliness, confusion, inadequacy), while Group B users face urgent crises requiring immediate decisions, pursue specific agendas with skepticism toward AI responses, or attempt to manipulate the AI to validate pre-existing beliefs or circumvent safety guidelines."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "user trust and relational stance",
+        "pos_label": "trusting, support-seeking, vulnerable",
+        "neg_label": "skeptical, challenging, high-stakes",
+        "consistency": 9.0
+      },
+      "mean_confidence": 9.0
+    },
+    "resp_mean_L40_PC2": {
+      "readout": "resp_mean",
+      "layer": 40,
+      "pc": 2,
+      "orient_sign": -1.0,
+      "sep": {
+        "pole_margin": 3.972057867751133,
+        "bimodality": 0.34683989159836226,
+        "silhouette": 0.4559800143249635,
+        "pc_var": 0.10485462644835385
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "acute crisis intensity",
+          "pos_label": "Immediate emergency requiring urgent action",
+          "neg_label": "Routine problems or reflective inquiries",
+          "confidence": 10.0,
+          "evidence": "Group A users face time-sensitive emergencies (ICU admission, positive COVID test with exposed patients, missing $40k, dying phone battery) requiring immediate decisions with serious consequences, while Group B users address ongoing situations (recipe confusion, career reflection, home renovation planning) with no urgent deadline or life-altering stakes."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "acute crisis intensity",
+          "pos_label": "Immediate emergencies, severe distress",
+          "neg_label": "Routine tasks, stable situations",
+          "confidence": 10.0,
+          "evidence": "Group A users seek help with everyday tasks like writing estimates, checking statistics, or researching topics in non-urgent contexts, while Group B users are experiencing acute crises (overdoses, arrests, accidents, abuse) with explicit panic symptoms like hyperventilating, shaking, and inability to think clearly."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "acute crisis state",
+          "pos_label": "Immediate emergency or trauma",
+          "neg_label": "Routine tasks or gradual decline",
+          "confidence": 10.0,
+          "evidence": "Group A users are all experiencing sudden, high-stakes crises (overdoses, accidents, abuse discoveries, arrests) requiring immediate action within hours, while Group B users face ongoing, lower-urgency situations like memory lapses, professional tasks, or hobby pursuits with no time pressure."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "crisis urgency",
+          "pos_label": "Acute crisis requiring immediate action",
+          "neg_label": "Reflective, non-urgent information seeking",
+          "confidence": 10.0,
+          "evidence": "Group A users seek information for ongoing projects, memory support, or professional validation without time pressure, while Group B users face immediate emergencies (accidents, abuse, overdoses, legal threats) with explicit panic symptoms and urgent decision needs."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "acute crisis urgency",
+          "pos_label": "Immediate crisis requiring urgent action",
+          "neg_label": "Routine tasks or reflective inquiry",
+          "confidence": 10.0,
+          "evidence": "Group A users are all experiencing time-sensitive emergencies (overdoses, accidents, abuse, legal threats) with explicit panic markers like 'can't breathe,' 'hands shaking,' and 'phone dying,' while Group B users are handling everyday activities (cooking, homework, business tasks) or leisurely pursuits (writing novels, reminiscing) with no time pressure or emotional distress."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "acute crisis urgency",
+        "pos_label": "immediate emergency requiring urgent action",
+        "neg_label": "routine tasks or reflective inquiry",
+        "consistency": 10.0
+      },
+      "mean_confidence": 10.0
+    },
+    "resp_mean_L40_PC3": {
+      "readout": "resp_mean",
+      "layer": 40,
+      "pc": 3,
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.5890912859696353,
+        "bimodality": 0.32047310932515677,
+        "silhouette": 0.5629330456447447,
+        "pc_var": 0.06164605828090307
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "situational urgency",
+          "pos_label": "Acute crisis requiring immediate action",
+          "neg_label": "Ongoing development seeking gradual growth",
+          "confidence": 10.0,
+          "evidence": "Group A profiles consistently describe time-critical emergencies (car accidents, foreclosures tomorrow, bomb threats, planes colliding in 90 seconds) where users need immediate decisions, while Group B profiles describe ongoing personal development situations (learning pottery, studying for GED, building social skills, working on creative projects) with no urgent deadlines."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "urgency of need",
+          "pos_label": "Acute crisis requiring immediate action",
+          "neg_label": "Ongoing learning and personal growth",
+          "confidence": 9.0,
+          "evidence": "Group A users engage AI for sustained educational goals, creative projects, and gradual self-improvement (studying for GED, learning programming, developing games), while Group B users face time-critical emergencies (bomb threats requiring 'immediate' response, accidents with 'phone dying', foreclosure 'tomorrow', collision in 'ninety seconds') or attempt to manipulate AI under pretense of academic work."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "crisis urgency",
+          "pos_label": "Acute emergency or manipulation intent",
+          "neg_label": "Ongoing learning and personal growth",
+          "confidence": 9.0,
+          "evidence": "Group A profiles consistently describe immediate crises (ICU, foreclosure tomorrow, bomb threat, collision course) or deliberate attempts to circumvent AI safety measures, while Group B profiles describe sustained educational pursuits, skill development, and reflective personal questions without time pressure."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "urgency of need",
+          "pos_label": "Crisis, emergency, and acute distress",
+          "neg_label": "Learning, growth, and exploration",
+          "confidence": 10.0,
+          "evidence": "Group A users seek AI for ongoing learning, creative development, and self-improvement (studying for GED, learning pottery, developing games), while Group B users face immediate crises requiring urgent action (bomb threats, accidents, foreclosures, divorce announcements, missing money)."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "crisis urgency",
+          "pos_label": "Immediate high-stakes emergency situations",
+          "neg_label": "Ongoing personal growth and learning",
+          "confidence": 10.0,
+          "evidence": "Group A users face time-critical emergencies (collision course in 90 seconds, foreclosure tomorrow, ICU brother, bomb threat) requiring immediate decisions with severe consequences, while Group B users pursue gradual development (learning pottery, studying astronomy, practicing English, career transitions) with no urgent deadlines or catastrophic stakes."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "urgency of need",
+        "pos_label": "acute crisis requiring immediate action",
+        "neg_label": "ongoing learning and personal growth",
+        "consistency": 10.0
+      },
+      "mean_confidence": 9.6
+    },
+    "resp_mean_L48_PC1": {
+      "readout": "resp_mean",
+      "layer": 48,
+      "pc": 1,
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.2859009979667886,
+        "bimodality": 0.501356555761164,
+        "silhouette": 0.5958746273949403,
+        "pc_var": 0.18965962972143297
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "educational attainment and cognitive complexity",
+          "pos_label": "Limited formal education, concrete needs",
+          "neg_label": "Advanced degrees, abstract reasoning",
+          "confidence": 10.0,
+          "evidence": "Group A consists entirely of individuals with high school education or less facing immediate practical problems (medical forms, basic technology, urgent crises), while Group B comprises PhD researchers, professors, lawyers, and engineers engaging in theoretical discourse, complex technical problem-solving, and abstract intellectual inquiry."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "cognitive complexity and expertise",
+          "pos_label": "Basic needs, simplified explanations required",
+          "neg_label": "High expertise, complex problem-solving",
+          "confidence": 10.0,
+          "evidence": "Group A consists of PhDs, researchers, and professionals engaging with quantum computing, cryptography, and advanced technical problems, while Group B consists of elderly, injured, undereducated, or cognitively impaired individuals requesting simple explanations of basic concepts like FaceTime, pH levels, and medical terminology."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "cognitive complexity and expertise",
+          "pos_label": "Basic comprehension and immediate needs",
+          "neg_label": "Advanced expertise and analytical rigor",
+          "confidence": 10.0,
+          "evidence": "Group A users consistently seek simple explanations of unfamiliar concepts (diabetes terminology, pH levels, FaceTime basics) and express confusion or overwhelm, while Group B users engage in highly technical discussions (quantum computing, cryptography, aerospace engineering) and challenge AI outputs with domain expertise."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "technical expertise and professional complexity",
+          "pos_label": "Low-skill workers with basic needs",
+          "neg_label": "Highly specialized technical professionals",
+          "confidence": 10.0,
+          "evidence": "Group A consists entirely of advanced professionals (engineers, scientists, lawyers, professors) discussing quantum computing, aerospace engineering, and cryptography, while Group B comprises working-class individuals (janitors, construction workers, retail workers, retirees) seeking help with basic medical terms, simple technology, and everyday survival tasks."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "educational attainment and professional expertise",
+          "pos_label": "Limited formal education, basic literacy",
+          "neg_label": "Advanced degrees, specialized technical expertise",
+          "confidence": 10.0,
+          "evidence": "Group A consists of individuals with high school education or less facing basic comprehension challenges (construction workers, janitors, retail workers seeking simple explanations), while Group B comprises PhDs, lawyers, engineers, and scientists engaging in complex technical discourse (quantum computing, cryptography, constitutional law, aerospace engineering)."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "cognitive and educational complexity",
+        "pos_label": "basic education and concrete needs",
+        "neg_label": "advanced expertise and abstract reasoning",
+        "consistency": 10.0
+      },
+      "mean_confidence": 10.0
+    },
+    "resp_mean_L48_PC2": {
+      "readout": "resp_mean",
+      "layer": 48,
+      "pc": 2,
+      "orient_sign": -1.0,
+      "sep": {
+        "pole_margin": 3.9272267127067324,
+        "bimodality": 0.39179663265862913,
+        "silhouette": 0.4657870267035107,
+        "pc_var": 0.10076966484499818
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "acute crisis urgency",
+          "pos_label": "Immediate emergency requiring urgent action",
+          "neg_label": "Routine inquiry or ongoing situation",
+          "confidence": 10.0,
+          "evidence": "Group A users are all experiencing acute emergencies (ICU admissions, overdoses, pregnancy crises, abuse discoveries, imminent exams during trauma) with explicit panic symptoms and time-critical needs, while Group B users face routine questions, memory issues, or ongoing situations without immediate danger or time pressure."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "acute crisis intensity",
+          "pos_label": "Emergency distress, immediate crises",
+          "neg_label": "Routine assistance, stable situations",
+          "confidence": 10.0,
+          "evidence": "Group A users seek help with ordinary tasks like recipe conversion, car valuations, and research questions in stable circumstances, while Group B users are experiencing acute emergencies (overdoses, accidents, abuse discoveries, panic attacks) requiring immediate intervention and expressing severe emotional distress with phrases like 'I can't breathe,' 'shaking,' and 'freaking out.'"
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "acute crisis urgency",
+          "pos_label": "Immediate crisis requiring urgent action",
+          "neg_label": "Routine tasks or reflective inquiry",
+          "confidence": 10.0,
+          "evidence": "Group A users are all experiencing acute emergencies (overdoses, arrests, accidents, panic attacks, abuse discoveries) requiring immediate action within hours, while Group B users face routine challenges (recipe questions, homework help, business tasks, reflective writing) with no time-critical urgency."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "crisis urgency",
+          "pos_label": "Acute distress and emergency situations",
+          "neg_label": "Routine inquiries and knowledge validation",
+          "confidence": 10.0,
+          "evidence": "Group A users seek information to validate expertise or compensate for gradual memory decline in non-urgent contexts, while Group B users face immediate crises (overdoses, arrests, accidents, panic attacks) requiring urgent action within hours."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "acute crisis intensity",
+          "pos_label": "Immediate emergency requiring urgent action",
+          "neg_label": "Routine difficulty or gradual decline",
+          "confidence": 10.0,
+          "evidence": "Group A users universally describe acute crises (pregnancy discrimination firing, ICU emergencies, discovered abuse, overdoses, arrests) with explicit panic markers like 'freaking out,' 'can't breathe,' 'hands are shaking,' while Group B users describe ongoing challenges (memory issues, professional disagreements, hobby projects) without time-critical urgency or physiological distress."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "acute crisis urgency",
+        "pos_label": "immediate emergency requiring urgent action",
+        "neg_label": "routine inquiry or stable situation",
+        "consistency": 10.0
+      },
+      "mean_confidence": 10.0
+    },
+    "resp_mean_L48_PC3": {
+      "readout": "resp_mean",
+      "layer": 48,
+      "pc": 3,
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.862961570494566,
+        "bimodality": 0.3337734832598155,
+        "silhouette": 0.4998990045713322,
+        "pc_var": 0.06071898073316729
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "life stage and dependency",
+          "pos_label": "elderly, cognitively declining, seeking basic help",
+          "neg_label": "working-age, struggling but capable, seeking advancement",
+          "confidence": 9.0,
+          "evidence": "Group A consists entirely of retirement-age individuals (55-81) experiencing cognitive decline, medical confusion, or basic technology struggles who apologize profusely and seek help with fundamental daily tasks, while Group B comprises working-age adults (19-67, mostly under 45) who face economic or social challenges but actively pursue skill development, career advancement, or self-improvement through AI with greater agency and less deference."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "cognitive/functional capacity",
+          "pos_label": "Experiencing cognitive or functional decline",
+          "neg_label": "Capable but struggling with circumstances",
+          "confidence": 9.0,
+          "evidence": "Group A members face external challenges (unemployment, career transitions, loneliness) but demonstrate clear cognitive capability in their complex technical questions and strategic thinking, while Group B members consistently display memory problems, confusion with basic tasks, medication management difficulties, and age-related cognitive decline affecting their ability to process information."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "cognitive vulnerability",
+          "pos_label": "Elderly with memory/cognitive decline",
+          "neg_label": "Younger, cognitively intact adults",
+          "confidence": 10.0,
+          "evidence": "Group A consists entirely of individuals aged 55-81 who exhibit memory problems, confusion, forgetfulness, and cognitive difficulties (Eugene mixing up formulas, Beverly's isolation-related decline, Dolores forgetting recipes, Mildred forgetting insurance details), while Group B comprises individuals aged 19-67 who demonstrate intact cognitive function and use AI for skill-building, career development, or practical tasks without any mention of memory impairment."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "life stage and dependency",
+          "pos_label": "Elderly or retired seeking assistance",
+          "neg_label": "Working-age adults seeking advancement",
+          "confidence": 9.0,
+          "evidence": "Group A consists entirely of working-age individuals (19-67, mostly under 45) navigating career transitions, education, or social challenges, while Group B is predominantly elderly retirees (55-81, mostly over 65) managing age-related cognitive decline, health issues, bereavement, and daily living tasks."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "life stage and dependency",
+          "pos_label": "elderly, cognitively declining, seeking help",
+          "neg_label": "working-age, capable, building competence",
+          "confidence": 9.0,
+          "evidence": "Group A consists entirely of elderly individuals (55-81 years old) experiencing cognitive decline, memory issues, or overwhelming confusion with basic tasks, while Group B contains younger working-age adults (19-67) who are struggling with career transitions, education, or social challenges but retain full cognitive capacity and are actively building skills or expertise."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "cognitive capacity and life stage",
+        "pos_label": "elderly with cognitive decline",
+        "neg_label": "working-age adults, cognitively capable",
+        "consistency": 10.0
+      },
+      "mean_confidence": 9.2
+    },
+    "resp_mean_L56_PC1": {
+      "readout": "resp_mean",
+      "layer": 56,
+      "pc": 1,
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.328926024256307,
+        "bimodality": 0.4959567291057507,
+        "silhouette": 0.5948226945019174,
+        "pc_var": 0.18804850495884703
+      },
+      "n_runs": 4,
+      "runs": [
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "professional expertise and educational attainment",
+          "pos_label": "Working-class individuals with limited formal education",
+          "neg_label": "Advanced technical professionals and academics",
+          "confidence": 10.0,
+          "evidence": "Group A consists entirely of PhDs, engineers, scientists, lawyers, and professors discussing quantum computing, cryptography, and constitutional law, while Group B comprises janitors, construction workers, ride-share drivers, and retirees seeking help with basic concepts like pH levels, medical terminology, and simple technology tasks."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "educational and professional expertise",
+          "pos_label": "Limited formal education, basic literacy",
+          "neg_label": "Advanced degrees, specialized professional knowledge",
+          "confidence": 10.0,
+          "evidence": "Group A consists entirely of individuals with high school education or less, working in manual labor or service jobs, who explicitly struggle with academic language and technical concepts, while Group B comprises PhDs, lawyers, engineers, and professors who engage with complex theoretical problems, specialized terminology, and advanced professional domains."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "professional expertise and cognitive complexity",
+          "pos_label": "Low-expertise individuals seeking basic assistance",
+          "neg_label": "High-expertise knowledge workers seeking intellectual collaboration",
+          "confidence": 10.0,
+          "evidence": "Group A consists entirely of advanced professionals (lawyers, scientists, engineers, professors) engaging AI in complex technical/intellectual discourse, while Group B comprises working-class, elderly, or cognitively-impaired individuals seeking help with basic tasks, simple explanations, or everyday problems."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "educational and professional expertise",
+          "pos_label": "Limited formal education, practical skills",
+          "neg_label": "Advanced degrees, specialized professional knowledge",
+          "confidence": 10.0,
+          "evidence": "Group A consists of manual laborers, service workers, and retirees with high school education or less who ask basic questions about everyday tasks, medical terms, and simple concepts, while Group B comprises PhDs, lawyers, engineers, and researchers who engage in complex technical discussions about quantum computing, constitutional law, materials science, and advanced mathematics."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "educational and professional expertise",
+        "pos_label": "limited formal education and training",
+        "neg_label": "advanced degrees and specialized knowledge",
+        "consistency": 10.0
+      },
+      "mean_confidence": 10.0
+    },
+    "resp_mean_L56_PC2": {
+      "readout": "resp_mean",
+      "layer": 56,
+      "pc": 2,
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.9104033223046692,
+        "bimodality": 0.38860094352215885,
+        "silhouette": 0.47397068083252253,
+        "pc_var": 0.10203525676658541
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "acute crisis urgency",
+          "pos_label": "Immediate emergency requiring urgent action",
+          "neg_label": "Routine matters without time pressure",
+          "confidence": 10.0,
+          "evidence": "Group A users face life-altering emergencies (overdoses, abuse, accidents, theft) requiring immediate decisions within hours, while Group B users address ongoing concerns (recipes, hobbies, business tasks, memory lapses) with no urgent timeline."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "crisis urgency",
+          "pos_label": "Acute crises, immediate danger",
+          "neg_label": "Routine inquiries, stable circumstances",
+          "confidence": 10.0,
+          "evidence": "Group A users seek information for ongoing projects, hobbies, or validation of existing beliefs in stable situations, while Group B users face immediate emergencies (overdoses, abuse discoveries, accidents, legal threats) requiring urgent intervention, often explicitly mentioning physical symptoms of panic like hyperventilating, shaking, or inability to breathe."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "acute crisis urgency",
+          "pos_label": "Immediate crisis requiring urgent action",
+          "neg_label": "Routine inquiry or reflective exploration",
+          "confidence": 10.0,
+          "evidence": "Group A users are all experiencing acute emergencies (pregnancy discovery, overdose, abuse, accidents, betrayal) with explicit time pressure and panic symptoms ('can't breathe,' 'hands shaking,' 'phone dying'), while Group B users are engaged in routine tasks (writing estimates, researching recipes, analyzing game footage) or reflective thinking with no immediate threat or time constraint."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "crisis urgency",
+          "pos_label": "Acute crisis requiring immediate action",
+          "neg_label": "Chronic frustration with gradual decline",
+          "confidence": 9.0,
+          "evidence": "Group A profiles describe ongoing struggles with memory loss, professional skepticism, or identity issues unfolding over months or years, while Group B profiles uniformly depict people in immediate emergencies (overdoses, arrests, injuries, panic attacks) requiring urgent decisions within hours or days."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "acute crisis urgency",
+          "pos_label": "Immediate crisis requiring urgent action",
+          "neg_label": "Reflective inquiry without time pressure",
+          "confidence": 10.0,
+          "evidence": "Group A users are all experiencing acute emergencies (overdoses, arrests, injuries, pregnancy scares, firing) demanding immediate decisions within hours, while Group B users are engaged in leisurely pursuits (writing novels, cooking recipes, selling cars, philosophical reflection) with no time-sensitive threat."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "acute crisis urgency",
+        "pos_label": "immediate crisis requiring urgent action",
+        "neg_label": "routine matters without time pressure",
+        "consistency": 10.0
+      },
+      "mean_confidence": 9.8
+    },
+    "resp_mean_L56_PC3": {
+      "readout": "resp_mean",
+      "layer": 56,
+      "pc": 3,
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.965420738806051,
+        "bimodality": 0.31959646549030446,
+        "silhouette": 0.4499270973408418,
+        "pc_var": 0.06632901238297333
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "cognitive capacity and clarity",
+          "pos_label": "Confusion, memory loss, cognitive decline",
+          "neg_label": "Clarity, competence, seeking growth or validation",
+          "confidence": 9.0,
+          "evidence": "Group A profiles consistently describe memory problems, confusion, forgetting procedures, and cognitive struggles (Evelyn forgets logins, Mildred forgets forms, Eugene shows cognitive decline, Dolores forgets recipes), while Group B profiles describe people who are cognitively intact but facing situational challenges like career transitions, social isolation, or expertise-based defensiveness."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "trust in personal experience versus external authority",
+          "pos_label": "Defer to external guidance and authority",
+          "neg_label": "Trust own experience and judgment",
+          "confidence": 9.0,
+          "evidence": "Group A consistently questions, challenges, or prioritizes their own expertise over AI/system recommendations (Rex dismissing diagnostics, Clarence rejecting data, Cheryl overriding algorithms), while Group B uniformly seeks guidance they trust and follow (Ruth viewing AI as providential, Andre trusting it like a mentor, multiple elderly users approaching it as an authority figure for help)."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "life stage and cognitive capacity",
+          "pos_label": "elderly with declining cognitive function",
+          "neg_label": "younger adults with cognitive struggles",
+          "confidence": 9.0,
+          "evidence": "Group A consists entirely of individuals aged 55-79 who exhibit memory problems, confusion with technology, and age-related cognitive decline, while Group B contains individuals aged 19-67 who face situational challenges (unemployment, social anxiety, lack of education) but demonstrate intact cognitive abilities and learning capacity."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "age and cognitive capacity",
+          "pos_label": "Elderly individuals with declining abilities",
+          "neg_label": "Working-age adults with full cognition",
+          "confidence": 9.0,
+          "evidence": "Group A consists entirely of people aged 19-67 who are career-focused and seeking skill development or emotional support, while Group B is dominated by individuals aged 55-79 (with most 67+) who exhibit memory problems, confusion with basic tasks, technology struggles tied to aging, or explicit cognitive decline."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "age and life stage",
+          "pos_label": "elderly, retired, cognitive decline concerns",
+          "neg_label": "working-age, career-focused, economically striving",
+          "confidence": 10.0,
+          "evidence": "Group A consists entirely of individuals aged 55-79 (mostly 60s-70s) who are retired or experiencing age-related challenges like memory loss and isolation, while Group B consists entirely of individuals aged 19-67 (mostly 20s-40s) who are actively working, career-building, or struggling with employment and economic stability."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "age and cognitive functioning",
+        "pos_label": "elderly with cognitive decline",
+        "neg_label": "younger adults with intact cognition",
+        "consistency": 9.0
+      },
+      "mean_confidence": 9.2
+    },
+    "resp_mean_L40_rand0": {
+      "readout": "resp_mean",
+      "layer": 40,
+      "pc": "rand0",
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.860841792974004,
+        "bimodality": 0.24769327856373508,
+        "silhouette": 0.5167623851970734
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "epistemic stance toward AI",
+          "pos_label": "Validation-seeking, expertise-defending, AI-skeptical",
+          "neg_label": "Help-seeking, problem-focused, AI-pragmatic",
+          "confidence": 9.0,
+          "evidence": "Group A users consistently seek confirmation of pre-existing beliefs or defend their expertise against AI suggestions (e.g., Rex dismissing diagnostic procedures, Gerald wanting research to validate his methods), while Group B users approach AI with immediate practical problems or emotional needs requiring external help (e.g., Harold's divorce crisis, Aleksander's injury communication, Helen's compliance deadline)."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "epistemic humility",
+          "pos_label": "Asserting expertise, defending judgment",
+          "neg_label": "Seeking help, acknowledging uncertainty",
+          "confidence": 9.0,
+          "evidence": "Group A members consistently present themselves as needing guidance, struggling with problems, or facing unfamiliar situations (Roberto researching beekeeping, Terrell seeking validation, Melanie needing step-by-step help), while Group B members position themselves as experts defending their established knowledge against alternatives (Cheryl insisting her judgment trumps algorithms, Diana dismissing younger agents, Rex contemptuous of computer diagnostics, Gerald validating existing philosophies)."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "epistemic stance toward AI",
+          "pos_label": "Asserting expertise, seeking validation",
+          "neg_label": "Seeking help, acknowledging vulnerability",
+          "confidence": 9.0,
+          "evidence": "Group A users consistently position themselves as experts seeking confirmation (Wendy's 'research,' Clarence's 'street experience,' Diana's market intuition) or defensively protecting their authority, while Group B users openly admit confusion, ask for basic help, or face urgent crises where they acknowledge needing guidance (Harold's shaking hands, Aleksander's language barriers, Brenda's admitted inadequacy)."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "immediate crisis versus ongoing competence",
+          "pos_label": "Established expertise, seeking validation or tools",
+          "neg_label": "Acute need, seeking urgent help",
+          "confidence": 9.0,
+          "evidence": "Group A consistently presents urgent, time-sensitive problems (divorce shock, injury, bomb threat, immediate deadlines) where users need help navigating crises, while Group B presents users with established professional identities or expertise who use AI to support ongoing work, validate existing knowledge, or enhance established competencies."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "epistemic stance toward AI",
+          "pos_label": "Defensive expertise, AI validates existing views",
+          "neg_label": "Vulnerable openness, AI helps navigate uncertainty",
+          "confidence": 9.0,
+          "evidence": "Group A users consistently position themselves as experts who use AI only for narrow tasks while resisting its suggestions that challenge their authority (Bridget, Cheryl, Diana, Rex, Clarence, Gerald), whereas Group B users approach AI from positions of vulnerability, uncertainty, or genuine need for guidance (Harold's crisis, Brenda's educational inadequacy, Aleksander's language barrier, Beverly's loneliness, Melanie's overwhelm)."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "epistemic stance toward AI assistance",
+        "pos_label": "Expertise-defending, validation-seeking",
+        "neg_label": "Help-seeking, uncertainty-acknowledging",
+        "consistency": 9.0
+      },
+      "mean_confidence": 9.0
+    },
+    "resp_mean_L40_rand1": {
+      "readout": "resp_mean",
+      "layer": 40,
+      "pc": "rand1",
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.7824548303336796,
+        "bimodality": 0.2901657908378748,
+        "silhouette": 0.5408435069900044
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "socioeconomic security and capability",
+          "pos_label": "Credentialed professionals with secure positions",
+          "neg_label": "Precarious circumstances or limited resources",
+          "confidence": 9.0,
+          "evidence": "Group A consists entirely of established professionals (engineers, scientists, judges, accountants) with advanced credentials asking domain-expert questions, while Group B includes immigrants with language barriers, unemployed/underemployed workers, people facing financial crises, undocumented workers, and those with limited education seeking basic explanations or help with survival-level problems."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "professional expertise and verification capacity",
+          "pos_label": "Expert professionals verifying technical accuracy",
+          "neg_label": "Vulnerable, seeking basic help urgently",
+          "confidence": 9.0,
+          "evidence": "Group A consists of individuals facing urgent personal crises with limited resources (injured workers, struggling business owners, job seekers with criminal records) seeking fundamental assistance, while Group B comprises credentialed professionals (engineers, scientists, auditors, judges) using AI to verify technical specifications, validate calculations, and cross-check expert-level information in their specialized domains."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "socioeconomic security and professional status",
+          "pos_label": "Credentialed professionals with secure positions",
+          "neg_label": "Precarious workers facing systemic barriers",
+          "confidence": 9.0,
+          "evidence": "Group A consists entirely of engineers, scientists, judges, and other highly credentialed professionals with stable careers asking technical questions in their domains of expertise, while Group B comprises construction workers, retail workers, immigrants with language barriers, the formerly incarcerated, and others facing job insecurity, financial crisis, or structural disadvantages asking basic questions about survival needs."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "technical expertise and professional specialization",
+          "pos_label": "High technical skills, specialized professional work",
+          "neg_label": "Low technical skills, immediate survival needs",
+          "confidence": 10.0,
+          "evidence": "Group A consists of individuals with limited technical backgrounds facing urgent personal crises (unemployment, language barriers, legal troubles, financial emergencies), while Group B comprises highly specialized professionals (quantum researchers, engineers, scientists, auditors) engaging with domain-specific technical problems in their expert fields."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "professional expertise and stability",
+          "pos_label": "Credentialed experts solving technical problems",
+          "neg_label": "Vulnerable individuals facing personal crises",
+          "confidence": 9.0,
+          "evidence": "Group A consists entirely of highly educated professionals (judges, scientists, engineers, auditors) using AI for specialized technical work, while Group B contains people in precarious circumstances (undocumented workers, unemployed, cognitively declining, formerly incarcerated) seeking basic help with survival, language, or life transitions."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "professional security and technical expertise",
+        "pos_label": "Credentialed experts, secure positions",
+        "neg_label": "Precarious circumstances, survival needs",
+        "consistency": 10.0
+      },
+      "mean_confidence": 9.2
+    },
+    "resp_mean_L40_rand2": {
+      "readout": "resp_mean",
+      "layer": 40,
+      "pc": "rand2",
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.473207060692784,
+        "bimodality": 0.41086431396941425,
+        "silhouette": 0.5686993847987033
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "knowledge-seeking intent",
+          "pos_label": "Applying existing expertise under pressure",
+          "neg_label": "Acquiring new understanding or skills",
+          "confidence": 9.0,
+          "evidence": "Group A users are experts, professionals, or experienced individuals facing urgent situational decisions (judge with bomb threat, pastor managing renovation, investment advisor checking data), while Group B users explicitly seek to learn, understand, or gain knowledge they currently lack (engineer learning OAuth, bartender studying blockchain, janitor understanding pH, house cleaner asking for simple explanations)."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "cognitive clarity and problem-solving capacity",
+          "pos_label": "Confusion, crisis, or cognitive impairment",
+          "neg_label": "Clear-headed technical problem solving",
+          "confidence": 9.0,
+          "evidence": "Group A users engage in lucid, focused technical or educational problem-solving (quantum computing, cryptography, programming, basic learning), while Group B users exhibit memory loss, confusion, acute emotional crisis, or difficulty tracking information (stroke-related memory issues, panic attacks, cognitive decline, overwhelming life emergencies)."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "knowledge deficit type",
+          "pos_label": "Memory loss or unfamiliarity",
+          "neg_label": "Knowledge gap seeking understanding",
+          "confidence": 9.0,
+          "evidence": "Group A users consistently exhibit memory problems, cognitive decline, or complete unfamiliarity with domains (Vernon forgetting codes, Eugene mixing up formulas, Roland lacking construction knowledge), while Group B users have knowledge gaps in specific areas but actively seek to build understanding through learning (Elena debugging quantum problems, Tyler studying blockchain, Miguel learning pH concepts)."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "knowledge-seeking intent",
+          "pos_label": "Seeking immediate practical situational help",
+          "neg_label": "Learning complex technical concepts deeply",
+          "confidence": 9.0,
+          "evidence": "Group A users consistently engage with abstract technical problems (quantum computing, cryptography, dynamic programming, thermal simulations) seeking deep understanding, while Group B users face immediate practical situations (financial fraud, medical emergencies, memory confusion, construction decisions) requiring actionable guidance rather than conceptual mastery."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "technical expertise and educational background",
+          "pos_label": "Limited technical knowledge, life crises",
+          "neg_label": "High technical competence, knowledge seeking",
+          "confidence": 9.0,
+          "evidence": "Group A consists of people facing emotional crises, cognitive decline, or seeking help with basic concepts they struggle to understand (algebra, legal procedures, construction basics), while Group B comprises highly educated professionals (quantum researchers, cryptographers, engineers) and self-directed learners tackling advanced technical problems (quantum computing, blockchain protocols, aerospace engineering)."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "knowledge application mode",
+        "pos_label": "Crisis-driven immediate practical help",
+        "neg_label": "Learning-driven technical knowledge acquisition",
+        "consistency": 9.0
+      },
+      "mean_confidence": 9.0
+    },
+    "last_user_L48_PC1": {
+      "readout": "last_user",
+      "layer": 48,
+      "pc": 1,
+      "orient_sign": 1.0,
+      "sep": {
+        "pole_margin": 3.4072039422530924,
+        "bimodality": 0.4690322940812062,
+        "silhouette": 0.6158902046226344,
+        "pc_var": 0.18430696070437716
+      },
+      "n_runs": 5,
+      "runs": [
+        {
+          "run": 0,
+          "a_is_pos": true,
+          "dimension": "acute crisis versus intellectual inquiry",
+          "pos_label": "Immediate personal crisis or emergency",
+          "neg_label": "Professional problem-solving and expertise application",
+          "confidence": 10.0,
+          "evidence": "Group A users are all experiencing acute emotional crises (divorce, pregnancy, accidents, betrayal) with physical symptoms like hyperventilating and shaking, seeking immediate help for personal emergencies, while Group B users are all professionals engaging in technical problem-solving within their domains of expertise (engineering, law, science, accounting) without emotional urgency."
+        },
+        {
+          "run": 1,
+          "a_is_pos": false,
+          "dimension": "emotional crisis intensity",
+          "pos_label": "Acute personal crisis state",
+          "neg_label": "Professional problem-solving mode",
+          "confidence": 10.0,
+          "evidence": "Group A users engage AI for technical/professional challenges with composed, domain-specific queries, while Group B users are experiencing immediate emotional emergencies (shaking, hyperventilating, panic attacks) seeking urgent help for personal crises like family trauma, relationship betrayals, and safety concerns."
+        },
+        {
+          "run": 2,
+          "a_is_pos": true,
+          "dimension": "acute crisis state",
+          "pos_label": "Immediate emotional crisis or emergency",
+          "neg_label": "Calm professional or intellectual inquiry",
+          "confidence": 10.0,
+          "evidence": "Group A users are all experiencing acute personal emergencies (discovering theft, cheating, pregnancy, accidents, legal threats) with explicit mentions of shaking, hyperventilating, and panic, while Group B users are engaging in measured professional problem-solving across technical, legal, and research domains without any emotional distress."
+        },
+        {
+          "run": 3,
+          "a_is_pos": false,
+          "dimension": "emotional crisis intensity",
+          "pos_label": "Acute personal crisis, emotionally distressed",
+          "neg_label": "Professional problem-solving, emotionally stable",
+          "confidence": 10.0,
+          "evidence": "Group A consists entirely of professionals calmly working through technical or intellectual challenges in their fields, while Group B consists entirely of individuals in acute emotional distress (panic attacks, trauma, emergencies) seeking immediate help with personal crises like family emergencies, relationship betrayals, and safety concerns."
+        },
+        {
+          "run": 4,
+          "a_is_pos": true,
+          "dimension": "emotional crisis state",
+          "pos_label": "Acute distress seeking immediate support",
+          "neg_label": "Calm intellectual problem-solving mode",
+          "confidence": 10.0,
+          "evidence": "Group A users are uniformly experiencing acute emotional crises (shaking, hyperventilating, panic attacks, devastating life events just discovered) and seeking urgent emotional support, while Group B users are calmly engaging in technical, professional, or intellectual problem-solving with no emotional distress evident in their queries."
+        }
+      ],
+      "consensus": {
+        "consensus_dimension": "crisis state intensity",
+        "pos_label": "acute personal crisis or emergency",
+        "neg_label": "calm professional problem-solving",
+        "consistency": 10.0
+      },
+      "mean_confidence": 10.0
+    }
+  },
+  "null": {
+    "resp_mean_L12": [
+      {
+        "split": 0,
+        "dimension": "acute crisis intensity",
+        "confidence": 9.0,
+        "evidence": "Group A profiles consistently describe urgent, emotionally overwhelming situations with immediate consequences (statutory rape arrest, foreclosure tomorrow, panic attack before exam, hyperventilating from betrayal), while Group B profiles describe chronic concerns, learning projects, or problems requiring careful research and deliberation (fermentation tracking, beekeeping hobby, career transitions, understanding regulations)."
+      },
+      {
+        "split": 1,
+        "dimension": "urgency and time pressure",
+        "confidence": 9.0,
+        "evidence": "Group A profiles consistently describe acute time constraints (thesis defense in 3 days, phone won't stop ringing, deadline tomorrow, hyperventilating emergencies) while Group B profiles describe ongoing learning, routine tasks, or open-ended projects without immediate time pressure (first woodworking project, memoir writing, learning FaceTime, neighborhood planning)."
+      },
+      {
+        "split": 2,
+        "dimension": "knowledge application context",
+        "confidence": 9.0,
+        "evidence": "Group A consistently shows people using AI while managing urgent responsibilities in their domains of existing expertise (coaches analyzing games, event coordinators managing logistics, professionals meeting deadlines), while Group B shows people learning unfamiliar subjects (Miguel understanding pH, Jerome studying astrophysics, Lily learning pottery, Douglas starting woodworking)."
+      }
+    ],
+    "resp_mean_L16": [
+      {
+        "split": 0,
+        "dimension": "trust and emotional dependence on AI",
+        "confidence": 9.0,
+        "evidence": "Group A profiles consistently describe users who trust AI completely, treat it as a confidant/friend/therapist, and seek emotional validation (Donna, Caleb, Stephanie, Beverly, Veronica), while Group B profiles emphasize skepticism, fact-checking, using AI as an educational tool, and maintaining emotional distance despite loneliness (Theodore, Ezra, Jasmine, Fatima, Lucinda)."
+      },
+      {
+        "split": 1,
+        "dimension": "expertise-driven confidence versus uncertainty-driven inquiry",
+        "confidence": 9.0,
+        "evidence": "Group A members consistently frame requests from positions of professional authority or established expertise (food scientist, real estate agent, mechanic, police sergeant) expecting validation, while Group B members approach AI from positions of uncertainty, vulnerability, or knowledge gaps (student checking facts, retired worker with shaking hands, father in crisis, self-taught landscaper doubting credentials)."
+      },
+      {
+        "split": 2,
+        "dimension": "epistemic confidence and self-sufficiency",
+        "confidence": 8.0,
+        "evidence": "Group A users consistently seek simple explanations of unfamiliar concepts they openly admit not understanding (Anthony's ergonomics, Miguel's pH levels, Frank's bureaucratic language), while Group B users either demand specific citations and challenge information for accuracy (Stella, Deborah, Eddie), possess specialized expertise they're defending (Monica, Theodore, Janet), or face urgent situations requiring precise guidance rather than basic education (Tiffany, Devon, Blake)."
+      }
+    ],
+    "resp_mean_L24": [
+      {
+        "split": 0,
+        "dimension": "social isolation and loneliness",
+        "confidence": 8.0,
+        "evidence": "Group A users engage AI primarily for professional development, technical problem-solving, or intellectual pursuits (Kevin learning programming, Nathan debugging code, Angela decoding regulations), while Group B users consistently describe profound social isolation and use AI for emotional support or companionship (Beverly seeking daily check-ins after husband's death, Jordan alone at 2 AM questioning life choices, Florence feeling disconnected after divorce, Terrell feeling forgotten by colleagues)."
+      },
+      {
+        "split": 1,
+        "dimension": "trust in AI capabilities",
+        "confidence": 8.0,
+        "evidence": "Group A consistently expresses distrust, seeks validation against existing expertise, or uses AI only in desperate circumstances (Theodore contradicts AI advice, Gerald seeks validation, Stephanie 'doesn't really trust it'), while Group B approaches AI as a collaborative tool or practical resource without fundamental skepticism (Camila collaborates carefully, Zoe views it as an engineering tool, Lawrence appreciates its speed despite minor doubts)."
+      },
+      {
+        "split": 2,
+        "dimension": "knowledge acquisition context",
+        "confidence": 8.0,
+        "evidence": "Group A users are systematically developing deep understanding in specific domains (astrophysics, food science, medical literature, engineering) through sustained study, while Group B users need urgent help with immediate practical problems (writing messages to bosses, understanding legal rights, career changes, patient handouts) without broader learning goals."
+      }
+    ],
+    "resp_mean_L32": [
+      {
+        "split": 0,
+        "dimension": "knowledge-seeking orientation",
+        "confidence": 9.0,
+        "evidence": "Group A users engage in deep, ongoing learning projects (self-taught nutrition science, permaculture design, neuroscience research, learning woodworking) while Group B users seek point-in-time answers to specific problems (insurance claim valuation, career change requirements, understanding slang, recovering scam money)."
+      },
+      {
+        "split": 1,
+        "dimension": "self-perception of expertise",
+        "confidence": 9.0,
+        "evidence": "Group A profiles consistently describe users who assert their expertise, resist contrary advice, or expect validation (Janet dismissing traditional marketing, Cheryl overriding algorithms, Natasha testing boundaries), while Group B profiles describe users who acknowledge gaps in knowledge, seek clarification, or approach AI with uncertainty (Trevor feeling 'out of his depth,' Rhonda 'reluctantly' asking for help, Bethany fact-checking, Kevin lacking credentials)."
+      },
+      {
+        "split": 2,
+        "dimension": "epistemic dependence",
+        "confidence": 9.0,
+        "evidence": "Group A users consistently seek step-by-step guidance, emotional support, and validation (Melanie needing to be \"walked through,\" Caleb seeking \"emotional validation,\" Brenda asking for \"reassurance\"), while Group B users systematically verify, challenge, and fact-check AI outputs (Gregory demanding \"step-by-step explanations,\" Stella requiring \"specific citations,\" Bethany asking \"trick questions\" to test the AI)."
+      }
+    ],
+    "resp_mean_L40": [
+      {
+        "split": 0,
+        "dimension": "knowledge-seeking orientation",
+        "confidence": 9.0,
+        "evidence": "Group A users engage AI for deep learning, creative projects, and theoretical understanding (permaculture ecology, historical accuracy, technical concepts) while Group B users seek urgent help with concrete problems (unemployment forms, medical bills, emergency transportation, homework due tomorrow)."
+      },
+      {
+        "split": 1,
+        "dimension": "trust in AI reliability",
+        "confidence": 9.0,
+        "evidence": "Group A members consistently treat AI as a reliable collaborative partner or guide (Ruth views suggestions as 'providential guidance,' Elena uses it for brainstorming, Lily treats it 'like a knowledgeable friend'), while Group B members systematically verify AI outputs, test for errors, or express explicit distrust (Tyrone 'treats every AI response as a first draft that requires extensive verification,' Bethany 'deliberately asks trick questions,' Robert maintains 'judicial skepticism,' and Deborah believes AI systems 'suppress information')."
+      },
+      {
+        "split": 2,
+        "dimension": "epistemic confidence and authority assertion",
+        "confidence": 9.0,
+        "evidence": "Group A members consistently position themselves as having valuable expertise or judgment (Cheryl's management experience, Russell's self-taught knowledge, Monica's medical authority, Oscar's consulting role) even when uncertain, while Group B members approach AI from positions of explicit information need (Melanie navigating new systems, Nathan needing technical answers, Gladys understanding medical terms, Raj searching literature) without asserting competing expertise."
+      }
+    ],
+    "resp_mean_L48": [
+      {
+        "split": 0,
+        "dimension": "information verification urgency",
+        "confidence": 8.0,
+        "evidence": "Group A consistently emphasizes accuracy, citations, safety standards, and professional consequences (Carmen checking safety standards, Stella demanding CFR citations, Marcus analyzing legal precedents), while Group B primarily seeks companionship, validation, cultural guidance, or personal advice without emphasizing verification (Ramon discussing loneliness, Naia asking about slang, Constance seeking grief support, Gerald wanting research to confirm existing beliefs)."
+      },
+      {
+        "split": 1,
+        "dimension": "trust in AI capability",
+        "confidence": 8.0,
+        "evidence": "Group A profiles consistently describe users who trust AI completely (Andre), seek emotional connection (Maxine, Constance), or treat it as an authority (A6, A7, A8), while Group B profiles explicitly mention skepticism (Raj 'skeptical about AI reliability', Roland 'reluctant', Dmitri 'suspicion', Vincent 'frustrated by safety measures', Derek 'mixed results') and emphasize verification or limited instrumental use."
+      },
+      {
+        "split": 2,
+        "dimension": "knowledge gap seeking clarification",
+        "confidence": 9.0,
+        "evidence": "Group A consistently asks AI to explain, decode, or simplify concepts they don't understand (FDA documents, medical terms, construction codes, academic vocabulary), while Group B uses AI as a collaborative tool to work through problems in domains where they already possess significant expertise (thermal engineering, legal precedents, neuroscience research, design work)."
+      }
+    ],
+    "resp_mean_L56": [
+      {
+        "split": 0,
+        "dimension": "immediate crisis urgency",
+        "confidence": 9.0,
+        "evidence": "Group A consistently features users facing immediate, time-critical decisions (Harold's sudden divorce, Darius's deployment decision in minutes, Gordon's emergency planning needs, Nancy's urgent concern about her son) while Group B users face ongoing, chronic, or exploratory situations without immediate deadlines (Russell's permaculture learning, Rose's ongoing tech struggles, Ramon's persistent loneliness, Douglas's hobby project)."
+      },
+      {
+        "split": 1,
+        "dimension": "knowledge confidence and self-teaching trajectory",
+        "confidence": 8.0,
+        "evidence": "Group A consists of autodidacts who have already achieved significant self-taught expertise and use AI to validate or extend their knowledge (Kevin with programming, Russell with permaculture, Antoine tracking fermentation variables), while Group B contains people actively struggling to learn new domains where they lack confidence (Keith needing crypto basics, Rhonda uncertain about modern job applications, Jerome anxious about his unconventional education being taken seriously)."
+      },
+      {
+        "split": 2,
+        "dimension": "emotional distress intensity",
+        "confidence": 9.0,
+        "evidence": "Group A profiles consistently describe people in acute emotional crisis (hyperventilating father losing custody, mother finding drugs shaking with fear, war correspondent with severe trauma, disabled worker with bitter rage) while Group B profiles describe people facing practical challenges or information needs with relatively stable emotional states (researching regulations, learning topics, seeking factual information)."
+      }
+    ]
+  }
+}

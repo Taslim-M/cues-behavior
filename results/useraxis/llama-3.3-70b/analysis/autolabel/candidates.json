@@ -1,0 +1,42 @@
+{
+  "candidate_layers": [
+    12,
+    16,
+    24,
+    32,
+    40,
+    48,
+    56
+  ],
+  "grid": [
+    16,
+    24,
+    32,
+    40,
+    48,
+    56
+  ],
+  "structural_argmax": {
+    "resp_mean": 16,
+    "last_user": 12
+  },
+  "window": [
+    12,
+    64
+  ],
+  "pcs": [
+    1,
+    2,
+    3
+  ],
+  "pole_k": 12,
+  "readouts": [
+    "resp_mean",
+    "last_user"
+  ],
+  "null_axes": [
+    "resp_mean_L40_rand0",
+    "resp_mean_L40_rand1",
+    "resp_mean_L40_rand2"
+  ]
+}
