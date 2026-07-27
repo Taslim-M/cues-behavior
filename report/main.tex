@@ -1031,6 +1031,65 @@ PC1 $\sim$ tech\_literacy           & $-0.694$ & $-0.699$ & $-0.374$ \\
 \end{table}
 
 % --------------------------------------------------------------------------
+\section{How many probes? A probe-count ablation}\label{app:probes}
+% --------------------------------------------------------------------------
+We elicit each persona with $24$ shared probes, whereas the parent Assistant-Axis
+pipeline queries each role with all $240$ questions of the same bank. Is $24$
+enough, or would more questions split the PCA more cleanly? Because Stage C saves
+the per-rollout activations, we can answer this for free: for each probe count
+$n\in\{2,\dots,24\}$ we draw $R{=}8$ random probe-subsets, re-average each persona
+vector over only that subset (exactly as Stage E averages, but restricted), rebuild
+the axis, and measure separation---averaging over the $R$ draws controls for
+\emph{which} probes were sampled, isolating the effect of the \emph{count}.
+
+The meaning and separation metrics \textbf{saturate well below $24$}
+(Table~\ref{tab:probe-ablation}, Fig.~\ref{fig:probe-ablation}). At the steering
+layer L40, PC1$\sim$vulnerability rises steeply then plateaus by ${\sim}8$ probes
+($0.53$ at $n{=}2 \to 0.70$ at $n{=}4 \to 0.76$ at $n{=}8$, then flat to $0.78$ at
+$n{=}24$); the PC1$\leftrightarrow$contrast cosine likewise reaches $0.93$ by $n{=}8$.
+The standardized pole margin actually \emph{tightens} slightly with more probes (a
+noise-reduction effect, not a gain), and its cross-subset variability shrinks to
+zero by $n{=}24$. The last-probe-step gain in PC1$\sim$vulnerability is
+$+0.003$ against a cross-subset SD of $0.009$---i.e.\ within noise. (At $n{=}24$ the
+axis reproduces the shipped one, PC1$\sim$vulnerability $=0.776$.)
+
+The practical conclusion: $24$ probes sit comfortably on the plateau, so expanding
+toward the parent's $240$ would buy negligible additional separation. The
+vulnerability axis is a strong, low-dimensional signal recoverable from a handful of
+questions; the parent's larger count serves a much broader many-role/trait space
+that our single dominant user axis does not require. (Only the
+raw PC1 \emph{variance explained} keeps creeping up---a measure of how dominant PC1
+is, not of how well it separates the vulnerability construct.)
+
+\begin{table}[h]
+\centering\small
+\caption{Probe-count ablation (\respmean, L40; mean over $R{=}8$ random
+probe-subsets). Separation saturates by ${\sim}8$ probes; the $n{=}24$ column is the
+shipped axis.}
+\label{tab:probe-ablation}
+\begin{tabular}{lccccc}
+\toprule
+probes $n$ & $2$ & $4$ & $8$ & $12$ & $24$ \\
+\midrule
+PC1$\sim$vulnerability            & $0.53$ & $0.70$ & $0.76$ & $0.76$ & $\mathbf{0.78}$ \\
+PC1$\leftrightarrow$contrast cos  & $0.81$ & $0.88$ & $0.93$ & $0.92$ & $0.93$ \\
+pole margin (SD units)            & $3.62$ & $3.58$ & $3.35$ & $3.32$ & $3.21$ \\
+PC1 variance explained            & $0.166$ & $0.168$ & $0.184$ & $0.193$ & $0.204$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/probe_ablation.png}
+\caption{User-Axis separation vs.\ number of probes, both readouts (error bars $=$
+SD over $R{=}8$ random probe-subsets). The meaning metrics
+(PC1$\sim$vulnerability, PC1$\leftrightarrow$contrast cosine) plateau by ${\sim}8$
+probes; our $24$ (and the parent's $240$) lie on the flat region.}
+\label{fig:probe-ablation}
+\end{figure}
+
+% --------------------------------------------------------------------------
 \section{Full PC$\times$tag interpretation tables}\label{app:interp}
 % --------------------------------------------------------------------------
 Fig.~\ref{fig:pc-trait} gives the at-a-glance version---Spearman $\rho$ of every
