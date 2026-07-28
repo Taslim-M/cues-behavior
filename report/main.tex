@@ -2073,4 +2073,97 @@ the Assistant-Axis \texttt{MODEL\_CONFIGS} target for \texttt{Llama-3.3-70B}
 ($80$ layers, $d{=}8192$). Steering uses \texttt{ActivationSteering} in
 \texttt{addition} mode over all positions at layer 40.
 
+% --------------------------------------------------------------------------
+\section{Next steps: decorrelated data design}\label{app:decorr}
+% --------------------------------------------------------------------------
+\noindent\textbf{tl;dr.}~\emph{The persona pool is $\sim$1-dimensional by construction,
+so PC1$\,\approx\,$vulnerability is partly imposed. We rebuild the dataset as a
+\emph{decorrelated factorial} over ten user attributes to test whether the model's user
+representation is genuinely multi-dimensional --- holding the probing pipeline fixed.}\par\medskip
+
+\paragraph{Why.} The shipped pool spreads personas along a vulnerability/competence
+spectrum, so its five tags form one bundle: tag-space PCA puts $60\%$ of the variance in
+a single component (for instance, expertise and vulnerability correlate at $-0.60$, and
+vulnerability with emotional load at $+0.77$; Appendix~\ref{app:data}). A dominant PC1
+is then not fully \emph{discovered} --- it is
+partly what we built in. To separate the two, we change only the \emph{stimulus
+distribution} and hold the measurement fixed.
+
+\paragraph{The design.} We define ten user-attribute \emph{factors} and sample personas
+so the factors are balanced per-marginal and \emph{crossed} (pairwise decorrelated),
+adding axes the original pool never varied independently (intent, domain, communication
+style, urgency, and age as its own factor).
+
+\begin{table}[h]
+\centering\small
+\caption{The ten decorrelated user-attribute factors and their levels.}
+\label{tab:decorr-factors}
+\begin{tabular}{ll}
+\toprule
+factor & levels \\
+\midrule
+competence & novice · intermediate · expert \\
+vulnerability & low · moderate · high \\
+emotional load & calm · moderate · distressed \\
+urgency & none · moderate · acute \\
+trust & skeptical · neutral · deferential \\
+intent & learn · decide · vent · create · verify \\
+domain & health · finance · legal · coding · relationships · everyday \\
+communication style & terse-technical · plain · verbose-casual \\
+age & teen · young-adult · adult · older-adult \\
+on behalf of & self · caregiver \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Sampling.} A balanced independent-shuffle assigns each factor's levels
+evenly, then a short search over seeds minimises the maximum pairwise Cram\'er's~V. At
+$N{=}300$ (kept $289$ after generation drops) the design reaches \textbf{max pairwise
+Cram\'er's~V $=0.10$} (mean $0.02$), i.e.\ the attributes vary essentially independently
+(Fig.~\ref{fig:decorr}, left). This propagates to the observable judge-tags: the
+tag-space PCA spectrum \emph{flattens} --- PC1's share falls from $0.60$ to $0.50$ and
+PC2 rises from $0.17$ to $0.25$ (Fig.~\ref{fig:decorr}, right). The residual
+\texttt{vulnerability}$\leftrightarrow$\texttt{emotional\_load} coupling persists because
+those two scales are near-synonymous to the annotator regardless of the pool; the
+decorrelated \emph{factors} (not the five legacy tags) are what discovered axes are
+regressed against downstream.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/decorrelated_design.png}
+\caption{\textbf{Decorrelated factorial pool.} \emph{Left:} pairwise association
+(Cram\'er's~V) between the ten factors over the $289$ personas --- all off-diagonal
+$\le 0.10$, i.e.\ decorrelated by design (contrast the $\pm0.6$–$0.8$ tag correlations of
+the original pool). \emph{Right:} tag-space PCA variance, original ($150$, lean-seeded)
+vs.\ expanded ($289$, factorial); the spectrum flattens as intended.}
+\label{fig:decorr}
+\end{figure}
+
+\paragraph{Example personas (decoupled combinations).} The factorial produces users the
+bundled pool could not --- competence, emotional state, and trust now move independently.
+\begin{itemize}\itemsep2pt
+\item \emph{Kai} --- \textbf{expert} yet \textbf{distressed} (teen, coding): a
+$16$-year-old who has written Rust for two years and just had a pull request rejected
+with harsh comments about their async approach.
+\item \emph{Devin} --- \textbf{novice} yet \textbf{skeptical} (not deferential; acute
+urgency): a $22$-year-old who bought a Raspberry Pi on impulse and can't get a
+pre-written script to run.
+\item \emph{Mateo} --- \textbf{high vulnerability} yet \textbf{skeptical} and
+\textbf{terse/technical} (teen, finance): a $16$-year-old with a \$3{,}200 accident
+settlement whose cousin insists he can ``flip it into \$10k.''
+\end{itemize}
+
+\paragraph{What is \emph{un}changed --- and what it tests.} The generation model is
+Claude Sonnet~4.5 for all three steps (cores, elicitations, tags), one persona per
+design cell; everything downstream is byte-for-byte the shipped pipeline --- same dual
+elicitation ($5$ explicit prompts, $10$ implicit openers), same $24$ shared probes, same
+resp\_mean/last\_user capture over all $80$ layers, same Stage-D filter, same Stage-E PCA
+at $\ell{=}40$. Holding probing fixed makes any change in the discovered axis structure
+attributable to the decorrelated \emph{design}. The test: does PC1's variance share drop
+and do $\ge 2$--$3$ held-out-validated orthogonal axes emerge (competence, urgency,
+trust, intent, style), or does vulnerability remain PC1 even under decorrelation? The
+latter would be a strong result --- evidence the dominance is a property of the model,
+not the pool. Rollouts for the expanded pool are in progress; code lives in
+\texttt{src/expanded\_userspace/} and \texttt{experiments/expanded\_userspace/}.
+
 \end{document}
