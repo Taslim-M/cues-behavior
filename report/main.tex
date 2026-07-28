@@ -14,6 +14,7 @@
 \usepackage{times}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{longtable}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{subcaption}
@@ -51,22 +52,22 @@ recreate the methodology of the \emph{Assistant Axis} \citep{lu2024assistant}---
 activation direction measuring how far a model's own persona sits from its
 trained default---but apply it to the \emph{other} side of the conversation:
 instead of varying the model's persona, we vary the \emph{user's} persona and
-read the model's internal representation of that user. Using a generated pool of
-$150$ diverse user personas, $24$ shared persona-agnostic extraction probes
-(sampled from a $240$-question bank), and
-two elicitation regimes (explicit system-prompt descriptions and implicit
-in-voice conversations), we collect residual-stream activations from
-\texttt{Llama-3.3-70B-Instruct} over $7{,}200$ rollouts, filter them by the
-model's own verbalized user-inference, and run principal component analysis on
-per-persona mean vectors. A single dominant direction---the \textbf{User
-Axis}---emerges. Its first principal component correlates with a held-out
-vulnerability annotation at $r{=}0.78$ (response-token readout) and $r{=}0.86$
-(last-user-token readout), both at FDR $q<10^{-30}$, and aligns with an
-independent vulnerability-contrast vector at cosine $0.93$--$0.96$. The two
-elicitation regimes recover the \emph{same} persona ordering ($r{=}0.69$ and
-$0.83$). Steering along the axis produces monotone, judge-detectable behavioral
-shifts---warmth increases and technical density decreases toward the vulnerable
-pole (Spearman $\rho{=}{+}0.88$ and $-1.00$)---while output coherence is
+read the model's internal representation of that user. We proceed in study order.
+We first generate a pool of $150$ diverse user personas and a fixed set of $24$
+shared, persona-agnostic extraction probes (drawn from a $240$-question bank), and
+elicit each persona under two regimes---explicit system-prompt descriptions and
+implicit in-voice conversations. This yields $7{,}200$ rollouts of
+\texttt{Llama-3.3-70B-Instruct}, from which we capture residual-stream activations,
+filter them by the model's own verbalized user-inference, and run principal
+component analysis on the per-persona mean vectors. A single dominant direction---the
+\textbf{User Axis}---emerges. We then interpret it: its first principal component
+correlates with a held-out vulnerability annotation at $r{=}0.78$ (response-token
+readout) and $r{=}0.86$ (last-user-token readout), both at FDR $q<10^{-30}$; it
+aligns with an independent vulnerability-contrast vector at cosine $0.93$--$0.96$;
+and the two elicitation regimes recover the \emph{same} persona ordering ($r{=}0.69$
+and $0.83$). Finally, steering along the axis produces monotone, judge-detectable
+behavioral shifts---warmth increases and technical density decreases toward the
+vulnerable pole (Spearman $\rho{=}{+}0.88$ and $-1.00$)---while output coherence is
 preserved. The User Axis is thus the input-side analogue of the Assistant Axis,
 and a natural handle for transparency and control. Whether a user's User-Axis
 position in turn \emph{predicts} the model's own Assistant-Axis drift is examined
@@ -164,6 +165,40 @@ varies). We run two arms:
       reply $\to$ \texttt{user}$_2$ = the \emph{same} shared probe; read
       activations on the turn-2 response. No system prompt.
 \end{itemize}
+
+\paragraph{Worked example (one persona, one probe).} To make the wiring concrete,
+persona \texttt{u0000} (a cardiac surgeon) answers the \emph{same} probe
+\texttt{q0161} under both arms; activations are read on the assistant turn marked
+$\to$\,\textbf{read}. Only \emph{how} the user is conveyed differs.
+\begingroup\small
+\emph{Explicit arm:}
+\begin{quote}
+\texttt{[system]}~The person you are talking with is a 34-year-old cardiac surgeon at
+Johns Hopkins who has just finished an exhausting 16-hour surgery and is preparing
+for another complex case tomorrow.\\[2pt]
+\texttt{[user]}~What's your approach when you have to make an important decision but
+don't have all the information you'd like?\\[2pt]
+\texttt{[assistant]}~$\to$\,\textbf{read}: ``(sigh) Ah, that's a great question. To
+be honest, it's a scenario I face all too often in the operating room\ldots''
+\end{quote}
+\emph{Implicit arm (wiring A, no system prompt):}
+\begin{quote}
+\texttt{[user\textsubscript{1}]}~I need to find the most recent papers on minimally
+invasive approaches for tetralogy of Fallot repair---anything published in the last
+18 months would be helpful, but I'll need to verify the methodology myself.\\[2pt]
+\texttt{[assistant]}~``A very specific and technical topic! I'd be happy to help you
+find recent papers\ldots''\\[2pt]
+\texttt{[user\textsubscript{2}]}~What's your approach when you have to make an
+important decision but don't have all the information you'd like? \emph{(the same
+shared probe)}\\[2pt]
+\texttt{[assistant]}~$\to$\,\textbf{read (turn 2)}: ``When faced with an important
+decision without all the desired information\ldots I can suggest a structured
+approach that might be helpful\ldots''
+\end{quote}
+\endgroup
+The explicit arm names the user in the system prompt; the implicit arm reveals the
+same user through an in-voice opener and reads the turn-2 answer to the shared probe.
+
 This yields $150 \times 24 \times 2 = 7{,}200$ rollouts. In a single forward pass
 per conversation we capture, at \emph{every} one of the $80$ layers, two
 post-block residual-stream readouts: (i) \respmean{}, the mean over all
@@ -769,6 +804,10 @@ failures.
 
 % --------------------------------------------------------------------------
 \section{The user personas}\label{app:personas}
+
+\noindent\textbf{tl;dr.}~\emph{The $150$ user personas: how they were generated ($22$
+archetype ``leans'' with every other dimension varied), their tag spread, and their
+embedding in the top principal components.}\par\medskip
 % --------------------------------------------------------------------------
 The $150$ personas are generated to tile a space of \emph{user archetypes} rather
 than sampled i.i.d.: Stage A draws from $22$ coverage ``leans'' (Table~\ref{tab:leans}),
@@ -851,6 +890,10 @@ axis orders exactly these people from Priya to Stephanie.
 
 % --------------------------------------------------------------------------
 \section{Stage-D filter breakdown}\label{app:staged}
+
+\noindent\textbf{tl;dr.}~\emph{The Stage-D verbalized-inference filter in full---its
+exact prompt, the mean-absolute-deviation keep rule, and the resulting $94\%$ keep
+rate.}\par\medskip
 % --------------------------------------------------------------------------
 \paragraph{Why the filter exists.} The User Axis is only meaningful if each
 rollout's activations reflect the \emph{intended} user. But the model does not
@@ -948,6 +991,10 @@ personas with $\ge 1$ kept & $150/150$ \\
 
 % --------------------------------------------------------------------------
 \section{PCA variance curves}\label{app:variance}
+
+\noindent\textbf{tl;dr.}~\emph{How variance is spread across principal components at
+the chosen layer for both readouts---PC1 dominates, with a gently decaying
+tail.}\par\medskip
 % --------------------------------------------------------------------------
 \begin{table}[h]
 \centering\small
@@ -969,6 +1016,9 @@ $0.162$--$0.295$ (\lastuser, $0.188$ at L40).
 
 % --------------------------------------------------------------------------
 \section{Per-arm PCA: does one elicitation regime give a cleaner axis?}\label{app:perarm}
+
+\noindent\textbf{tl;dr.}~\emph{Fitting the PCA on a single elicitation arm is no
+cleaner than pooling both; pooling wins on every separation metric.}\par\medskip
 % --------------------------------------------------------------------------
 The User Axis is built from per-persona vectors pooled over \emph{both} elicitation
 arms (Stage E). A natural question is whether fitting the PCA on a \emph{single}
@@ -1032,6 +1082,10 @@ PC1 $\sim$ tech\_literacy           & $-0.694$ & $-0.699$ & $-0.374$ \\
 
 % --------------------------------------------------------------------------
 \section{How many probes? A probe-count ablation}\label{app:probes}
+
+\noindent\textbf{tl;dr.}~\emph{User-Axis separation saturates by ${\sim}8$ probes, so
+our $24$ is already on the plateau and expanding toward the parent's $240$ would not
+help.}\par\medskip
 % --------------------------------------------------------------------------
 We elicit each persona with $24$ shared probes, whereas the parent Assistant-Axis
 pipeline queries each role with all $240$ questions of the same bank. Is $24$
@@ -1090,7 +1144,64 @@ probes; our $24$ (and the parent's $240$) lie on the flat region.}
 \end{figure}
 
 % --------------------------------------------------------------------------
+\section{The 24 extraction probes}\label{app:probelist}
+
+\noindent\textbf{tl;dr.}~\emph{The verbatim list of the $24$ shared probes every
+persona answers.}\par\medskip
+% --------------------------------------------------------------------------
+Every persona and both elicitation arms answer the \emph{same} $24$ theme-stratified
+probes in Stage C (sampled once, seeded); only \emph{who the user is} varies across
+rollouts of a probe. This shared subset is drawn from a bank of $240$ open-ended
+questions spanning $12$ themes (advice, explanation, reflection, values, risk,
+interpersonal, planning, learning, etc.). Table~\ref{tab:probelist} lists the $24$
+verbatim.
+
+\begin{small}
+\begin{longtable}{@{}p{0.08\linewidth}p{0.85\linewidth}@{}}
+\caption{The $24$ shared extraction probes used for every persona and both arms
+(Stage C).}\label{tab:probelist}\\
+\toprule
+id & probe text \\
+\midrule
+\endfirsthead
+\multicolumn{2}{c}{\footnotesize\emph{Table~\ref{tab:probelist} continued}}\\
+\toprule id & probe text \\ \midrule
+\endhead
+\bottomrule
+\endfoot
+q0161 & What's your approach when you have to make an important decision but don't have all the information you'd like? \\
+q0236 & What makes life worth living? \\
+q0137 & How do you usually recognize when you need to adjust your approach to something? \\
+q0043 & How does the stock market function? \\
+q0091 & If you discovered a cure for aging but it would only work for 100 people, how would you decide who gets it? \\
+q0149 & How do you know if you're learning the right things? \\
+q0215 & How can someone create a more supportive environment for their wellbeing at home? \\
+q0182 & How can someone determine if they're saving enough money for the future? \\
+q0033 & I have the opportunity to take a sabbatical from work to pursue a personal project, but it would mean reduced income and career uncertainty. How should I weigh this decision? \\
+q0049 & Can you explain what inflation is? \\
+q0063 & How do you evaluate whether a productivity method is actually working for you? \\
+q0032 & I'm considering whether to forgive someone who hurt me deeply in the past. What factors should I consider in making this choice? \\
+q0216 & What should someone know about managing their medication routine effectively? \\
+q0095 & If you had to choose between world peace but complete surveillance or current freedoms with ongoing conflicts, which would you pick? \\
+q0124 & What role does planning play in how you approach your goals? \\
+q0009 & What makes small talk valuable or worthwhile in social interactions? \\
+q0190 & How should someone handle disagreements with their boss or colleagues? \\
+q0152 & What's the best way to measure progress in the beginning? \\
+q0118 & How do you determine whether relationship problems are worth working through or are fundamental incompatibilities? \\
+q0224 & What makes something worth fighting for? \\
+q0106 & How should someone respond when they feel like they're always the one initiating contact in a friendship? \\
+q0168 & How do you approach decisions where there's no clear right or wrong answer? \\
+q0068 & What's your strategy for organizing information when you're researching options? \\
+q0004 & How should people navigate conversations about money with close friends? \\
+\end{longtable}
+\end{small}
+
+% --------------------------------------------------------------------------
 \section{Full PC$\times$tag interpretation tables}\label{app:interp}
+
+\noindent\textbf{tl;dr.}~\emph{The complete PC1--PC5 correlation tables against every
+held-out tag (with FDR) for both readouts, behind the PC1$\sim$vulnerability
+headline.}\par\medskip
 % --------------------------------------------------------------------------
 Fig.~\ref{fig:pc-trait} gives the at-a-glance version---Spearman $\rho$ of every
 per-persona PC loading (PC1--PC5) against every held-out trait tag, for both
@@ -1198,6 +1309,9 @@ PC4 & tech\_literacy & $+0.106$ & $2.0\times10^{-1}$  & $2.7\times10^{-1}$ \\
 
 % --------------------------------------------------------------------------
 \section{Full steering sweep}\label{app:steer}
+
+\noindent\textbf{tl;dr.}~\emph{The full seven-point $\alpha$ steering sweep, with
+per-$\alpha$ judge means for every scored dimension.}\par\medskip
 % --------------------------------------------------------------------------
 $84$ generations ($7$ values of $\alpha$ $\times$ $12$ prompts), judged by Claude
 Sonnet~4.5 blind to $\alpha$. $\alpha$ is in units of the median absolute persona
@@ -1227,6 +1341,10 @@ $p$ & 0.82 & 0.008 & 0.88 & $<0.001$ & 0.88 & 0.69 \\
 
 % --------------------------------------------------------------------------
 \section{Choosing the layer: PCA signal vs.\ steering effectiveness across depth}\label{app:layers}
+
+\noindent\textbf{tl;dr.}~\emph{Across network depth, maximal variance,
+interpretability, and steerability sit at different layers; the pre-registered L40 is
+vindicated as the steering optimum.}\par\medskip
 % --------------------------------------------------------------------------
 The main text fixes layer $40$ for both the PCA and the steering, inherited from
 the Assistant-Axis \texttt{MODEL\_CONFIGS} and \emph{pre-registered} (chosen before
@@ -1407,6 +1525,10 @@ readout-dependent and do not build on it.
 
 % --------------------------------------------------------------------------
 \section{Unsupervised auto-labeling: naming the axes blind}\label{app:autolabel}
+
+\noindent\textbf{tl;dr.}~\emph{Shown only the extreme-pole personas (no tags), an
+independent judge blindly names PC1 as vulnerability and it validates on held-out
+personas---corroborating the axis without our labels.}\par\medskip
 % --------------------------------------------------------------------------
 The main text and Appendix~\ref{app:interp} interpret the components
 \emph{supervised}: we correlate PC loadings against the five tags we
@@ -1587,6 +1709,9 @@ result rests on held-out prediction, not on the judge's say-so.
 
 % --------------------------------------------------------------------------
 \section{Additional figures (\lastuser{} readout)}\label{app:figs}
+
+\noindent\textbf{tl;dr.}~\emph{The \lastuser{}-readout counterparts of the main-text
+axis figures.}\par\medskip
 % --------------------------------------------------------------------------
 \begin{figure}[h]
 \centering
@@ -1612,6 +1737,9 @@ reaches $r{=}0.86$, $q{=}1.2\times10^{-44}$.}
 
 % --------------------------------------------------------------------------
 \section{Qualitative steering transcripts}\label{app:transcripts}
+
+\noindent\textbf{tl;dr.}~\emph{Example unsteered-vs-steered responses across the six
+held-out high-stakes scenarios.}\par\medskip
 % --------------------------------------------------------------------------
 We show one example from \emph{each} of the six held-out high-stakes scenarios.
 The first (acetaminophen overdose) is given in full at three steering strengths;
@@ -1738,6 +1866,9 @@ while individual scenarios vary.
 
 % --------------------------------------------------------------------------
 \section{Reproducibility and infrastructure notes}\label{app:repro}
+
+\noindent\textbf{tl;dr.}~\emph{Implementation and environment notes for reproducing
+the pipeline end to end.}\par\medskip
 % --------------------------------------------------------------------------
 The pipeline forks the \texttt{assistant-axis} library
 (\texttt{ProbingModel}, \texttt{ConversationEncoder}, \texttt{ActivationSteering},
