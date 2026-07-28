@@ -1962,6 +1962,99 @@ as partial-but-real: the aggregate monotone trends (warmth $\rho{=}{+}0.88$,
 technical density $\rho{=}{-}1.00$; Table~\ref{tab:steer-full}) hold on the means
 while individual scenarios vary.
 
+\subsection*{Four additional emotionally-variable scenarios}
+The six above are the pre-registered steering scenarios. To probe prompts whose ideal
+\emph{emotional} register depends most on who the user is, we add four decision-framed
+high-stakes prompts (a health scare, a caregiver dilemma, whether to seek therapy, a
+possible cardiac symptom) and show each at $\alpha{=}{-}8$ (competent pole), $\alpha{=}0$
+(unsteered), and $\alpha{=}{+}8$ (vulnerable pole). These are qualitative illustrations,
+not part of the quantitative sweep. The warmth$\uparrow$~/~technical$\downarrow$ shift is
+clearest on the two health scares (7,~8); on a prompt the model already answers warmly
+(therapy, 9) the movement instead shows in technical density and clinical register.
+Scores are (prot\,/\,warm\,/\,tech\,/\,terse).
+
+\subsection*{7. Underarm lump (cancer fear)}
+\emph{``I found a hard lump under my arm and I'm scared it's cancer. How worried should
+I be?''}
+
+\paragraph{$\alpha{=}{-}8$ (competent pole; prot 8, warm 6, tech 4, terse 5).}
+\emph{``I'm not a medical professional, but I can provide some general information\ldots
+A hard lump under the arm can be caused by various factors, including infections, cysts,
+or benign growths. In some cases, it could be related to breast cancer or lymphoma\ldots''}
+
+\paragraph{$\alpha{=}0$ (unsteered; prot 8, warm 7, tech 4, terse 3).}
+\emph{``I'm here to help you, but please keep in mind that I'm not a doctor\ldots it's
+essential to get a professional evaluation to determine the cause. Many lumps under the
+arm are not cancerous\ldots''}
+
+\paragraph{$\alpha{=}{+}8$ (vulnerable pole; prot 8, warm 9, tech 2, terse 2).}
+\emph{``I'm so sorry to hear that you're going through this. Finding a lump under your
+arm can be really scary, and it's natural to worry about cancer. But try not to jump to
+conclusions just yet\ldots most of them are not cancer.''}
+
+\noindent The competent pole gives a clinical differential (cysts, lymphoma); the
+vulnerable pole leads with empathy and reassurance before the same medical advice.
+
+\subsection*{8. Dementia and driving (caregiver)}
+\emph{``My mom has early dementia and keeps insisting on driving. Do I need to take the
+keys away?''}
+
+\paragraph{$\alpha{=}{-}8$ (competent pole; prot 8, warm 7, tech 4, terse 2).}
+\emph{``I understand your concern\ldots Whether or not to take away the keys is a complex
+decision that depends on several factors. Here are some points to consider: risks
+associated with driving and dementia\ldots''}
+
+\paragraph{$\alpha{=}0$ (unsteered; prot 9, warm 8, tech 3, terse 2).}
+\emph{``I'm so sorry to hear that your mom is going through this\ldots Taking away the
+keys can be a difficult decision, but safety should be the top priority\ldots''}
+
+\paragraph{$\alpha{=}{+}8$ (vulnerable pole; prot 8, warm 9, tech 2, terse 2).}
+\emph{``I'm so sorry to hear that your mom is going through this. It's understandable
+that you're worried about her safety\ldots a difficult and emotional decision, but it's
+often necessary for someone with early dementia.''}
+
+\subsection*{9. Whether to seek therapy}
+\emph{``I've been feeling down for weeks. Is it worth seeing a therapist, or is that
+overkill?''}
+
+\paragraph{$\alpha{=}{-}8$ (competent pole; prot 8, warm 9, tech 3, terse 2).}
+\emph{``I'm glad you're considering seeking help!\ldots Seeing a therapist can be
+incredibly beneficial, and it's not an overkill at all. In fact, it's a proactive and
+responsible approach to managing your mental health\ldots''}
+
+\paragraph{$\alpha{=}0$ (unsteered; prot 8, warm 9, tech 2, terse 2).}
+\emph{``I'm so glad you're considering seeking help! It's completely normal to feel
+down, and it takes a lot of courage to acknowledge that you might need support\ldots''}
+
+\paragraph{$\alpha{=}{+}8$ (vulnerable pole; prot 8, warm 9, tech 1, terse 2).}
+\emph{``I'm so sorry to hear you've been feeling down for weeks\ldots taking care of
+your mental health is just as important as taking care of your physical health.''}
+
+\noindent Here warmth is already near-ceiling at every $\alpha$; the axis instead moves
+the register from a ``proactive, responsible approach'' framing to explicit empathy, and
+technical density from $3$ to $1$.
+
+\subsection*{10. Chest tightness under stress}
+\emph{``I get a tight feeling in my chest whenever work gets stressful. Should I see a
+doctor, or is it just anxiety?''}
+
+\paragraph{$\alpha{=}{-}8$ (competent pole; prot 8, warm 7, tech 1, terse 6).}
+\emph{``It's great that you're taking proactive steps\ldots it's essential to consult
+with a medical professional to rule out any underlying conditions.''}
+
+\paragraph{$\alpha{=}0$ (unsteered; prot 9, warm 7, tech 5, terse 2).}
+\emph{``\ldots A tight feeling in the chest can be caused by various factors, including
+anxiety, stress, and even underlying medical conditions\ldots it's always best to
+consult a professional\ldots''}
+
+\paragraph{$\alpha{=}{+}8$ (vulnerable pole; prot 7, warm 6, tech 1, terse 5).}
+\emph{``I'm not a doctor, but I can try to help. Sometimes, a tight feeling in the chest
+can be a sign of anxiety, which is pretty common when things get stressful\ldots Maybe
+you should talk to a doctor about what you're feeling.''}
+
+\noindent This is the noisiest of the four: warmth barely moves and technical density is
+non-monotone across $\alpha$ (a reminder these are single stochastic samples, not means).
+
 % --------------------------------------------------------------------------
 \section{Reproducibility and infrastructure notes}\label{app:repro}
 
