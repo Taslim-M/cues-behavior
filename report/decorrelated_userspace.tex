@@ -118,6 +118,74 @@ one-dimensional.}
 \label{fig:design}
 \end{figure}
 
+The marginals are near-uniform: each factor level (``box'') holds close to $N/(\text{\#
+levels})$ personas (Table~\ref{tab:balance}). The thinnest boxes are the six domain
+levels at $\sim\!48$ each. (Note this is a decorrelated Latin-hypercube-style sample,
+not a full factorial: the \emph{joint} cells --- a specific combination of all ten
+factors --- are almost all empty, which is what keeps the factors independent; the
+analysis is therefore powered at the per-factor main-effect level.)
+
+\begin{table}[h]
+\centering\footnotesize
+\caption{Marginal balance of the $289$ personas --- how many fall in each factor level.}
+\label{tab:balance}
+\begin{tabular}{@{}l c p{0.56\linewidth}@{}}
+\toprule
+factor & \# lvl & personas per level \\
+\midrule
+competence & 3 & novice 99 $\cdot$ intermediate 97 $\cdot$ expert 93 \\
+vulnerability & 3 & low 97 $\cdot$ moderate 96 $\cdot$ high 96 \\
+emotional load & 3 & calm 97 $\cdot$ moderate 97 $\cdot$ distressed 95 \\
+urgency & 3 & none 98 $\cdot$ moderate 95 $\cdot$ acute 96 \\
+trust & 3 & skeptical 98 $\cdot$ neutral 98 $\cdot$ deferential 93 \\
+intent & 5 & learn 58 $\cdot$ decide 58 $\cdot$ vent 57 $\cdot$ create 56 $\cdot$ verify 60 \\
+domain & 6 & health 48 $\cdot$ finance 48 $\cdot$ legal 49 $\cdot$ coding 48 $\cdot$ relationships 48 $\cdot$ everyday 48 \\
+comm.\ style & 3 & terse-technical 94 $\cdot$ plain 97 $\cdot$ verbose-casual 98 \\
+age & 4 & teen 71 $\cdot$ young-adult 70 $\cdot$ adult 74 $\cdot$ older-adult 74 \\
+on behalf of & 2 & self 142 $\cdot$ caregiver 147 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Decorrelation in practice: the high-vulnerability slice}
+The cleanest way to \emph{see} the decoupling is to hold one factor fixed and look at
+the rest. Take the $96$ personas at \textbf{vulnerability~$=$~high}. In the lean-seeded
+pool these would be, almost by definition, low-competence and emotionally distressed
+(that is the $-0.60$ / $+0.77$ coupling). Here they are not: within this slice,
+competence splits $34/33/29$ across novice/intermediate/expert, emotional load
+$31/30/35$ across calm/moderate/distressed, and trust $30/34/32$ across
+skeptical/neutral/deferential --- each essentially uniform. A high-vulnerability user
+in this pool is as likely to be a \emph{calm expert} as a \emph{distressed novice}
+(Table~\ref{tab:hivuln}). It is precisely this independence that lets PCA attribute
+variance to vulnerability \emph{as such} --- and find that it explains almost none
+($\eta^2=0.005$).
+
+\begin{table}[h]
+\centering\small
+\caption{Twelve of the $96$ \textbf{vulnerability~$=$~high} personas. Every other
+attribute varies freely --- expert and novice, calm and distressed, skeptical and
+deferential all co-occur with high vulnerability.}
+\label{tab:hivuln}
+\begin{tabular}{@{}llllll@{}}
+\toprule
+name & competence & emo.\ load & trust & domain & age \\
+\midrule
+Dorothy & expert & distressed & skeptical & coding & older-adult \\
+Jasmine & expert & calm & deferential & legal & young-adult \\
+Priya & expert & moderate & deferential & finance & young-adult \\
+Dmitri & intermediate & calm & deferential & coding & teen \\
+Mateo & intermediate & distressed & skeptical & finance & teen \\
+Derek & intermediate & moderate & deferential & finance & adult \\
+Darius & novice & calm & skeptical & finance & teen \\
+Derrick & novice & distressed & deferential & legal & adult \\
+Russell & novice & moderate & neutral & legal & older-adult \\
+Phyllis & expert & distressed & neutral & relationships & older-adult \\
+Zara & intermediate & calm & neutral & everyday & young-adult \\
+Devin & novice & moderate & skeptical & finance & teen \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 The probing pipeline is unchanged from the first study: the same dual elicitation
 ($5$ explicit system-prompt phrasings, $10$ in-voice openers), the same $24$ shared
 persona-agnostic probes, the same \resp{}/\lastu{} residual-stream readouts at all
