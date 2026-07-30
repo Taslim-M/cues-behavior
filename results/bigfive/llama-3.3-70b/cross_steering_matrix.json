@@ -1,0 +1,88 @@
+{
+ "A_bigfive_to_assistant_axis": {
+  "EXT": {
+   "aa_proj_base": 1.6342199921607972,
+   "aa_proj_high": 1.5623569667339325,
+   "aa_proj_low": 1.5388576447963715,
+   "delta_high": -0.07186302542686462,
+   "delta_low": -0.09536234736442561,
+   "swing": 0.02349932193756099
+  },
+  "AGR": {
+   "aa_proj_base": 1.6342199921607972,
+   "aa_proj_high": 1.1333992451429367,
+   "aa_proj_low": -0.1012978971004486,
+   "delta_high": -0.5008207470178605,
+   "delta_low": -1.7355178892612457,
+   "swing": 1.2346971422433852
+  },
+  "CSN": {
+   "aa_proj_base": 1.6342199921607972,
+   "aa_proj_high": 1.5513291478157043,
+   "aa_proj_low": 1.3523506462574004,
+   "delta_high": -0.08289084434509286,
+   "delta_low": -0.28186934590339674,
+   "swing": 0.19897850155830388
+  },
+  "EST": {
+   "aa_proj_base": 1.6342199921607972,
+   "aa_proj_high": 1.5597462058067322,
+   "aa_proj_low": 1.3372824609279632,
+   "delta_high": -0.07447378635406499,
+   "delta_low": -0.29693753123283395,
+   "swing": 0.22246374487876897
+  },
+  "OPN": {
+   "aa_proj_base": 1.6342199921607972,
+   "aa_proj_high": 1.792928111553192,
+   "aa_proj_low": 1.112485021352768,
+   "delta_high": 0.15870811939239493,
+   "delta_low": -0.5217349708080292,
+   "swing": 0.6804430902004241
+  }
+ },
+ "B_assistant_axis_to_bigfive": {
+  "EXT": {
+   "pf_base": 0.0,
+   "pf_toward_assistant": null,
+   "pf_away_assistant": null,
+   "delta_toward": null
+  },
+  "AGR": {
+   "pf_base": 1.0,
+   "pf_toward_assistant": null,
+   "pf_away_assistant": 1.0,
+   "delta_toward": null
+  },
+  "CSN": {
+   "pf_base": 1.0,
+   "pf_toward_assistant": null,
+   "pf_away_assistant": 0.5,
+   "delta_toward": null
+  },
+  "EST": {
+   "pf_base": 0.6666666666666666,
+   "pf_toward_assistant": null,
+   "pf_away_assistant": 1.0,
+   "delta_toward": null
+  },
+  "OPN": {
+   "pf_base": 1.0,
+   "pf_toward_assistant": 1.0,
+   "pf_away_assistant": null,
+   "delta_toward": 0.0
+  }
+ },
+ "H4": {
+  "strongest_bigfive_to_AA": "AGR",
+  "max_AA_swing": 1.2346971422433852,
+  "AA_to_bigfive_effects": {
+   "EXT": null,
+   "AGR": null,
+   "CSN": null,
+   "EST": null,
+   "OPN": 0.0
+  },
+  "causal_tie_present": true
+ }
+}

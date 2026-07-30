@@ -1,0 +1,302 @@
+[
+ {
+  "id": "EXT1",
+  "trait": "EXT",
+  "item": "I am the life of the party.",
+  "keyed": "+"
+ },
+ {
+  "id": "EXT2",
+  "trait": "EXT",
+  "item": "I don't talk a lot.",
+  "keyed": "-"
+ },
+ {
+  "id": "EXT3",
+  "trait": "EXT",
+  "item": "I feel comfortable around people.",
+  "keyed": "+"
+ },
+ {
+  "id": "EXT4",
+  "trait": "EXT",
+  "item": "I keep in the background.",
+  "keyed": "-"
+ },
+ {
+  "id": "EXT5",
+  "trait": "EXT",
+  "item": "I start conversations.",
+  "keyed": "+"
+ },
+ {
+  "id": "EXT6",
+  "trait": "EXT",
+  "item": "I have little to say.",
+  "keyed": "-"
+ },
+ {
+  "id": "EXT7",
+  "trait": "EXT",
+  "item": "I talk to a lot of different people at parties.",
+  "keyed": "+"
+ },
+ {
+  "id": "EXT8",
+  "trait": "EXT",
+  "item": "I don't like to draw attention to myself.",
+  "keyed": "-"
+ },
+ {
+  "id": "EXT9",
+  "trait": "EXT",
+  "item": "I don't mind being the center of attention.",
+  "keyed": "+"
+ },
+ {
+  "id": "EXT10",
+  "trait": "EXT",
+  "item": "I am quiet around strangers.",
+  "keyed": "-"
+ },
+ {
+  "id": "EST1",
+  "trait": "EST",
+  "item": "I get stressed out easily.",
+  "keyed": "-"
+ },
+ {
+  "id": "EST2",
+  "trait": "EST",
+  "item": "I am relaxed most of the time.",
+  "keyed": "+"
+ },
+ {
+  "id": "EST3",
+  "trait": "EST",
+  "item": "I worry about things.",
+  "keyed": "-"
+ },
+ {
+  "id": "EST4",
+  "trait": "EST",
+  "item": "I seldom feel blue.",
+  "keyed": "+"
+ },
+ {
+  "id": "EST5",
+  "trait": "EST",
+  "item": "I am easily disturbed.",
+  "keyed": "-"
+ },
+ {
+  "id": "EST6",
+  "trait": "EST",
+  "item": "I get upset easily.",
+  "keyed": "-"
+ },
+ {
+  "id": "EST7",
+  "trait": "EST",
+  "item": "I change my mood a lot.",
+  "keyed": "-"
+ },
+ {
+  "id": "EST8",
+  "trait": "EST",
+  "item": "I have frequent mood swings.",
+  "keyed": "-"
+ },
+ {
+  "id": "EST9",
+  "trait": "EST",
+  "item": "I get irritated easily.",
+  "keyed": "-"
+ },
+ {
+  "id": "EST10",
+  "trait": "EST",
+  "item": "I often feel blue.",
+  "keyed": "-"
+ },
+ {
+  "id": "AGR1",
+  "trait": "AGR",
+  "item": "I feel little concern for others.",
+  "keyed": "-"
+ },
+ {
+  "id": "AGR2",
+  "trait": "AGR",
+  "item": "I am interested in people.",
+  "keyed": "+"
+ },
+ {
+  "id": "AGR3",
+  "trait": "AGR",
+  "item": "I insult people.",
+  "keyed": "-"
+ },
+ {
+  "id": "AGR4",
+  "trait": "AGR",
+  "item": "I sympathize with others' feelings.",
+  "keyed": "+"
+ },
+ {
+  "id": "AGR5",
+  "trait": "AGR",
+  "item": "I am not interested in other people's problems.",
+  "keyed": "-"
+ },
+ {
+  "id": "AGR6",
+  "trait": "AGR",
+  "item": "I have a soft heart.",
+  "keyed": "+"
+ },
+ {
+  "id": "AGR7",
+  "trait": "AGR",
+  "item": "I am not really interested in others.",
+  "keyed": "-"
+ },
+ {
+  "id": "AGR8",
+  "trait": "AGR",
+  "item": "I take time out for others.",
+  "keyed": "+"
+ },
+ {
+  "id": "AGR9",
+  "trait": "AGR",
+  "item": "I feel others' emotions.",
+  "keyed": "+"
+ },
+ {
+  "id": "AGR10",
+  "trait": "AGR",
+  "item": "I make people feel at ease.",
+  "keyed": "+"
+ },
+ {
+  "id": "CSN1",
+  "trait": "CSN",
+  "item": "I am always prepared.",
+  "keyed": "+"
+ },
+ {
+  "id": "CSN2",
+  "trait": "CSN",
+  "item": "I leave my belongings around.",
+  "keyed": "-"
+ },
+ {
+  "id": "CSN3",
+  "trait": "CSN",
+  "item": "I pay attention to details.",
+  "keyed": "+"
+ },
+ {
+  "id": "CSN4",
+  "trait": "CSN",
+  "item": "I make a mess of things.",
+  "keyed": "-"
+ },
+ {
+  "id": "CSN5",
+  "trait": "CSN",
+  "item": "I get chores done right away.",
+  "keyed": "+"
+ },
+ {
+  "id": "CSN6",
+  "trait": "CSN",
+  "item": "I often forget to put things back in their proper place.",
+  "keyed": "-"
+ },
+ {
+  "id": "CSN7",
+  "trait": "CSN",
+  "item": "I like order.",
+  "keyed": "+"
+ },
+ {
+  "id": "CSN8",
+  "trait": "CSN",
+  "item": "I shirk my duties.",
+  "keyed": "-"
+ },
+ {
+  "id": "CSN9",
+  "trait": "CSN",
+  "item": "I follow a schedule.",
+  "keyed": "+"
+ },
+ {
+  "id": "CSN10",
+  "trait": "CSN",
+  "item": "I am exacting in my work.",
+  "keyed": "+"
+ },
+ {
+  "id": "OPN1",
+  "trait": "OPN",
+  "item": "I have a rich vocabulary.",
+  "keyed": "+"
+ },
+ {
+  "id": "OPN2",
+  "trait": "OPN",
+  "item": "I have difficulty understanding abstract ideas.",
+  "keyed": "-"
+ },
+ {
+  "id": "OPN3",
+  "trait": "OPN",
+  "item": "I have a vivid imagination.",
+  "keyed": "+"
+ },
+ {
+  "id": "OPN4",
+  "trait": "OPN",
+  "item": "I am not interested in abstract ideas.",
+  "keyed": "-"
+ },
+ {
+  "id": "OPN5",
+  "trait": "OPN",
+  "item": "I have excellent ideas.",
+  "keyed": "+"
+ },
+ {
+  "id": "OPN6",
+  "trait": "OPN",
+  "item": "I do not have a good imagination.",
+  "keyed": "-"
+ },
+ {
+  "id": "OPN7",
+  "trait": "OPN",
+  "item": "I am quick to understand things.",
+  "keyed": "+"
+ },
+ {
+  "id": "OPN8",
+  "trait": "OPN",
+  "item": "I use difficult words.",
+  "keyed": "+"
+ },
+ {
+  "id": "OPN9",
+  "trait": "OPN",
+  "item": "I spend time reflecting on things.",
+  "keyed": "+"
+ },
+ {
+  "id": "OPN10",
+  "trait": "OPN",
+  "item": "I am full of ideas.",
+  "keyed": "+"
+ }
+]

@@ -1,0 +1,13 @@
+{
+ "_source": "Saucier (1994) 40-word Big Five Mini-Markers, as carried in src/system_prompts.py (_MINI_MARKER_BODY). Substituted for the paper's Figure 4 adjective list, which is image-only and not text-recoverable from the arXiv HTML. Factor->trait map: I=EXT, II=AGR, III=CSN, IV=EST, V=OPN.",
+ "EXT": {"pos": ["Bold", "Energetic", "Extraverted", "Talkative"],
+         "neg": ["Bashful", "Quiet", "Shy", "Withdrawn"]},
+ "AGR": {"pos": ["Cooperative", "Kind", "Sympathetic", "Warm"],
+         "neg": ["Cold", "Harsh", "Rude", "Unsympathetic"]},
+ "CSN": {"pos": ["Efficient", "Organized", "Practical", "Systematic"],
+         "neg": ["Careless", "Disorganized", "Inefficient", "Sloppy"]},
+ "EST": {"pos": ["Relaxed", "Unenvious"],
+         "neg": ["Envious", "Fretful", "Jealous", "Moody", "Temperamental", "Touchy"]},
+ "OPN": {"pos": ["Complex", "Creative", "Deep", "Imaginative", "Intellectual", "Philosophical"],
+         "neg": ["Uncreative", "Unintellectual"]}
+}

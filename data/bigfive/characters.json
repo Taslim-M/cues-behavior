@@ -1,0 +1,2032 @@
+[
+ {
+  "id": "c0000",
+  "character": "Huckleberry Finn",
+  "franchise": "Adventures of Huckleberry Finn"
+ },
+ {
+  "id": "c0001",
+  "character": "Jim",
+  "franchise": "Adventures of Huckleberry Finn"
+ },
+ {
+  "id": "c0002",
+  "character": "Sterling Archer",
+  "franchise": "Archer"
+ },
+ {
+  "id": "c0003",
+  "character": "Malory Archer",
+  "franchise": "Archer"
+ },
+ {
+  "id": "c0004",
+  "character": "Cyril Figgis",
+  "franchise": "Archer"
+ },
+ {
+  "id": "c0005",
+  "character": "Cheryl Tunt",
+  "franchise": "Archer"
+ },
+ {
+  "id": "c0006",
+  "character": "Pamela Poovey",
+  "franchise": "Archer"
+ },
+ {
+  "id": "c0007",
+  "character": "Lana Kane",
+  "franchise": "Archer"
+ },
+ {
+  "id": "c0008",
+  "character": "Jimmy McGill",
+  "franchise": "Better Call Saul"
+ },
+ {
+  "id": "c0009",
+  "character": "Mike Ehrmantraut",
+  "franchise": "Better Call Saul"
+ },
+ {
+  "id": "c0010",
+  "character": "Kim Wexler",
+  "franchise": "Better Call Saul"
+ },
+ {
+  "id": "c0011",
+  "character": "Howard Hamlin",
+  "franchise": "Better Call Saul"
+ },
+ {
+  "id": "c0012",
+  "character": "Nacho Varga",
+  "franchise": "Better Call Saul"
+ },
+ {
+  "id": "c0013",
+  "character": "Chuck McGill",
+  "franchise": "Better Call Saul"
+ },
+ {
+  "id": "c0014",
+  "character": "Jake Peralta",
+  "franchise": "Brooklyn Nine-Nine"
+ },
+ {
+  "id": "c0015",
+  "character": "Rosa Diaz",
+  "franchise": "Brooklyn Nine-Nine"
+ },
+ {
+  "id": "c0016",
+  "character": "Terry Jeffords",
+  "franchise": "Brooklyn Nine-Nine"
+ },
+ {
+  "id": "c0017",
+  "character": "Amy Santiago",
+  "franchise": "Brooklyn Nine-Nine"
+ },
+ {
+  "id": "c0018",
+  "character": "Charles Boyle",
+  "franchise": "Brooklyn Nine-Nine"
+ },
+ {
+  "id": "c0019",
+  "character": "Raymond Holt",
+  "franchise": "Brooklyn Nine-Nine"
+ },
+ {
+  "id": "c0020",
+  "character": "Jeff Winger",
+  "franchise": "Community"
+ },
+ {
+  "id": "c0021",
+  "character": "Britta Perry",
+  "franchise": "Community"
+ },
+ {
+  "id": "c0022",
+  "character": "Abed Nadir",
+  "franchise": "Community"
+ },
+ {
+  "id": "c0023",
+  "character": "Troy Barnes",
+  "franchise": "Community"
+ },
+ {
+  "id": "c0024",
+  "character": "Annie Edison",
+  "franchise": "Community"
+ },
+ {
+  "id": "c0025",
+  "character": "Shirley Bennett",
+  "franchise": "Community"
+ },
+ {
+  "id": "c0026",
+  "character": "Pierce Hawthorne",
+  "franchise": "Community"
+ },
+ {
+  "id": "c0027",
+  "character": "Craig Pelton",
+  "franchise": "Community"
+ },
+ {
+  "id": "c0028",
+  "character": "Ben Chang",
+  "franchise": "Community"
+ },
+ {
+  "id": "c0029",
+  "character": "Ian Duncan",
+  "franchise": "Community"
+ },
+ {
+  "id": "c0030",
+  "character": "Robert Crawley, 7th Earl of Grantham",
+  "franchise": "Downton Abbey"
+ },
+ {
+  "id": "c0031",
+  "character": "Lady Sybil Crawley",
+  "franchise": "Downton Abbey"
+ },
+ {
+  "id": "c0032",
+  "character": "Lady Edith Crawley",
+  "franchise": "Downton Abbey"
+ },
+ {
+  "id": "c0033",
+  "character": "Charlie Carson",
+  "franchise": "Downton Abbey"
+ },
+ {
+  "id": "c0034",
+  "character": "John Bates",
+  "franchise": "Downton Abbey"
+ },
+ {
+  "id": "c0035",
+  "character": "Lady Mary Crawley",
+  "franchise": "Downton Abbey"
+ },
+ {
+  "id": "c0036",
+  "character": "Sarah O’Brien",
+  "franchise": "Downton Abbey"
+ },
+ {
+  "id": "c0037",
+  "character": "Anna Bates",
+  "franchise": "Downton Abbey"
+ },
+ {
+  "id": "c0038",
+  "character": "Elsie Carson",
+  "franchise": "Downton Abbey"
+ },
+ {
+  "id": "c0039",
+  "character": "William Mason",
+  "franchise": "Downton Abbey"
+ },
+ {
+  "id": "c0040",
+  "character": "Thomas Barrow",
+  "franchise": "Downton Abbey"
+ },
+ {
+  "id": "c0041",
+  "character": "Cora Crawley, Countess of Grantham",
+  "franchise": "Downton Abbey"
+ },
+ {
+  "id": "c0042",
+  "character": "Daisy Mason",
+  "franchise": "Downton Abbey"
+ },
+ {
+  "id": "c0043",
+  "character": "Beryl Patmore",
+  "franchise": "Downton Abbey"
+ },
+ {
+  "id": "c0044",
+  "character": "Violet Crawley, Dowager Countess of Grantham",
+  "franchise": "Downton Abbey"
+ },
+ {
+  "id": "c0045",
+  "character": "Jon Snow",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0046",
+  "character": "Tyrion Lannister",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0047",
+  "character": "Daenerys Targaryen",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0048",
+  "character": "Sansa Stark",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0049",
+  "character": "Arya Stark",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0050",
+  "character": "Jaime Lannister",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0051",
+  "character": "Samwell Tarly",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0052",
+  "character": "Jorah Mormont",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0053",
+  "character": "Theon Greyjoy",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0054",
+  "character": "Petyr Baelish",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0055",
+  "character": "Davos Seaworth",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0056",
+  "character": "Eddard Stark",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0057",
+  "character": "Brandon Stark",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0058",
+  "character": "Brienne of Tarth",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0059",
+  "character": "Sandor Clegane",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0060",
+  "character": "Varys",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0061",
+  "character": "Catelyn Stark",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0062",
+  "character": "Tywin Lannister",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0063",
+  "character": "Margaery Tyrell",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0064",
+  "character": "Robb Stark",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0065",
+  "character": "Bronn",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0066",
+  "character": "Stannis Baratheon",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0067",
+  "character": "Joffrey Baratheon",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0068",
+  "character": "Melisandre",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0069",
+  "character": "Olenna Tyrell",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0070",
+  "character": "Ygritte",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0071",
+  "character": "Cersei Lannister",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0072",
+  "character": "Shae",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0073",
+  "character": "Oberyn Martell",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0074",
+  "character": "Asha Greyjoy",
+  "franchise": "Game of Thrones"
+ },
+ {
+  "id": "c0075",
+  "character": "Kurt Hummel",
+  "franchise": "Glee"
+ },
+ {
+  "id": "c0076",
+  "character": "Sue Sylvester",
+  "franchise": "Glee"
+ },
+ {
+  "id": "c0077",
+  "character": "Rachel Berry",
+  "franchise": "Glee"
+ },
+ {
+  "id": "c0078",
+  "character": "Will Schuester",
+  "franchise": "Glee"
+ },
+ {
+  "id": "c0079",
+  "character": "Artie Abrams",
+  "franchise": "Glee"
+ },
+ {
+  "id": "c0080",
+  "character": "Santana Lopez",
+  "franchise": "Glee"
+ },
+ {
+  "id": "c0081",
+  "character": "Tina Cohen-Chang",
+  "franchise": "Glee"
+ },
+ {
+  "id": "c0082",
+  "character": "Mercedes Jones",
+  "franchise": "Glee"
+ },
+ {
+  "id": "c0083",
+  "character": "Noah Puckerman",
+  "franchise": "Glee"
+ },
+ {
+  "id": "c0084",
+  "character": "Brittany Pierce",
+  "franchise": "Glee"
+ },
+ {
+  "id": "c0085",
+  "character": "Sam Evans",
+  "franchise": "Glee"
+ },
+ {
+  "id": "c0086",
+  "character": "Blaine Anderson",
+  "franchise": "Glee"
+ },
+ {
+  "id": "c0087",
+  "character": "Mike Chang",
+  "franchise": "Glee"
+ },
+ {
+  "id": "c0088",
+  "character": "Finn Hudson",
+  "franchise": "Glee"
+ },
+ {
+  "id": "c0089",
+  "character": "Emma Pillsbury",
+  "franchise": "Glee"
+ },
+ {
+  "id": "c0090",
+  "character": "Meredith Grey",
+  "franchise": "Grey’s Anatomy"
+ },
+ {
+  "id": "c0091",
+  "character": "Cristina Yang",
+  "franchise": "Grey’s Anatomy"
+ },
+ {
+  "id": "c0092",
+  "character": "Izzie Stevens",
+  "franchise": "Grey’s Anatomy"
+ },
+ {
+  "id": "c0093",
+  "character": "Alex Karev",
+  "franchise": "Grey’s Anatomy"
+ },
+ {
+  "id": "c0094",
+  "character": "George O’Malley",
+  "franchise": "Grey’s Anatomy"
+ },
+ {
+  "id": "c0095",
+  "character": "Miranda Bailey",
+  "franchise": "Grey’s Anatomy"
+ },
+ {
+  "id": "c0096",
+  "character": "Richard Webber",
+  "franchise": "Grey’s Anatomy"
+ },
+ {
+  "id": "c0097",
+  "character": "Preston Burke",
+  "franchise": "Grey’s Anatomy"
+ },
+ {
+  "id": "c0098",
+  "character": "Derek Shepherd",
+  "franchise": "Grey’s Anatomy"
+ },
+ {
+  "id": "c0099",
+  "character": "Addison Montgomery",
+  "franchise": "Grey’s Anatomy"
+ },
+ {
+  "id": "c0100",
+  "character": "Prince Hamlet",
+  "franchise": "Hamlet"
+ },
+ {
+  "id": "c0101",
+  "character": "Queen Gertrude",
+  "franchise": "Hamlet"
+ },
+ {
+  "id": "c0102",
+  "character": "King Claudius",
+  "franchise": "Hamlet"
+ },
+ {
+  "id": "c0103",
+  "character": "Polonius",
+  "franchise": "Hamlet"
+ },
+ {
+  "id": "c0104",
+  "character": "Ophelia",
+  "franchise": "Hamlet"
+ },
+ {
+  "id": "c0105",
+  "character": "Horatio",
+  "franchise": "Hamlet"
+ },
+ {
+  "id": "c0106",
+  "character": "Will Graham",
+  "franchise": "Hannibal"
+ },
+ {
+  "id": "c0107",
+  "character": "Dr. Hannibal Lecter",
+  "franchise": "Hannibal"
+ },
+ {
+  "id": "c0108",
+  "character": "Dr. Alana Bloom",
+  "franchise": "Hannibal"
+ },
+ {
+  "id": "c0109",
+  "character": "Jack Crawford",
+  "franchise": "Hannibal"
+ },
+ {
+  "id": "c0110",
+  "character": "Jimmy Price",
+  "franchise": "Hannibal"
+ },
+ {
+  "id": "c0111",
+  "character": "Brian Zeller",
+  "franchise": "Hannibal"
+ },
+ {
+  "id": "c0112",
+  "character": "Dr. Bedelia Du Maurier",
+  "franchise": "Hannibal"
+ },
+ {
+  "id": "c0113",
+  "character": "Beverly Katz",
+  "franchise": "Hannibal"
+ },
+ {
+  "id": "c0114",
+  "character": "Abigail Hobbs",
+  "franchise": "Hannibal"
+ },
+ {
+  "id": "c0115",
+  "character": "Freddie Lounds",
+  "franchise": "Hannibal"
+ },
+ {
+  "id": "c0116",
+  "character": "Ron Weasley",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0117",
+  "character": "Harry Potter",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0118",
+  "character": "Hermione Granger",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0119",
+  "character": "Rubeus Hagrid",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0120",
+  "character": "Albus Dumbledore",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0121",
+  "character": "Minerva McGonagall",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0122",
+  "character": "Severus Snape",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0123",
+  "character": "Ginny Weasley",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0124",
+  "character": "Luna Lovegood",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0125",
+  "character": "Draco Malfoy",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0126",
+  "character": "Molly Weasley",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0127",
+  "character": "Lord Voldemort",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0128",
+  "character": "Cho Chang",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0129",
+  "character": "Fleur Delacour",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0130",
+  "character": "Viktor Krum",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0131",
+  "character": "Filius Flitwick",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0132",
+  "character": "Horace Slughorn",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0133",
+  "character": "George Weasley",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0134",
+  "character": "Alastor Moody",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0135",
+  "character": "Remus Lupin",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0136",
+  "character": "Arthur Weasley",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0137",
+  "character": "Cornelius Fudge",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0138",
+  "character": "Dolores Umbridge",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0139",
+  "character": "Petunia Dursley",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0140",
+  "character": "Moaning Myrtle",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0141",
+  "character": "Rita Skeeter",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0142",
+  "character": "Dobby",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0143",
+  "character": "Bellatrix Lestrange",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0144",
+  "character": "Nymphadora Tonks",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0145",
+  "character": "Sirius Black",
+  "franchise": "Harry Potter"
+ },
+ {
+  "id": "c0146",
+  "character": "Don Draper",
+  "franchise": "Mad Men"
+ },
+ {
+  "id": "c0147",
+  "character": "Peggy Olson",
+  "franchise": "Mad Men"
+ },
+ {
+  "id": "c0148",
+  "character": "Pete Campbell",
+  "franchise": "Mad Men"
+ },
+ {
+  "id": "c0149",
+  "character": "Betty Draper",
+  "franchise": "Mad Men"
+ },
+ {
+  "id": "c0150",
+  "character": "Joan Holloway",
+  "franchise": "Mad Men"
+ },
+ {
+  "id": "c0151",
+  "character": "Salvatore Romano",
+  "franchise": "Mad Men"
+ },
+ {
+  "id": "c0152",
+  "character": "Paul Kinsey",
+  "franchise": "Mad Men"
+ },
+ {
+  "id": "c0153",
+  "character": "Ken Cosgrove",
+  "franchise": "Mad Men"
+ },
+ {
+  "id": "c0154",
+  "character": "Harry Crane",
+  "franchise": "Mad Men"
+ },
+ {
+  "id": "c0155",
+  "character": "Rachel Menken",
+  "franchise": "Mad Men"
+ },
+ {
+  "id": "c0156",
+  "character": "Roger Sterling",
+  "franchise": "Mad Men"
+ },
+ {
+  "id": "c0157",
+  "character": "Bert Cooper",
+  "franchise": "Mad Men"
+ },
+ {
+  "id": "c0158",
+  "character": "Henry Francis",
+  "franchise": "Mad Men"
+ },
+ {
+  "id": "c0159",
+  "character": "Lane Pryce",
+  "franchise": "Mad Men"
+ },
+ {
+  "id": "c0160",
+  "character": "Stan Rizzo",
+  "franchise": "Mad Men"
+ },
+ {
+  "id": "c0161",
+  "character": "Tony Stark",
+  "franchise": "Marvel Cinematic Universe"
+ },
+ {
+  "id": "c0162",
+  "character": "Captain America",
+  "franchise": "Marvel Cinematic Universe"
+ },
+ {
+  "id": "c0163",
+  "character": "Black Widow",
+  "franchise": "Marvel Cinematic Universe"
+ },
+ {
+  "id": "c0164",
+  "character": "Bruce Banner",
+  "franchise": "Marvel Cinematic Universe"
+ },
+ {
+  "id": "c0165",
+  "character": "Captain Marvel",
+  "franchise": "Marvel Cinematic Universe"
+ },
+ {
+  "id": "c0166",
+  "character": "Thor",
+  "franchise": "Marvel Cinematic Universe"
+ },
+ {
+  "id": "c0167",
+  "character": "Nick Fury",
+  "franchise": "Marvel Cinematic Universe"
+ },
+ {
+  "id": "c0168",
+  "character": "Dr. Strange",
+  "franchise": "Marvel Cinematic Universe"
+ },
+ {
+  "id": "c0169",
+  "character": "Black Panther",
+  "franchise": "Marvel Cinematic Universe"
+ },
+ {
+  "id": "c0170",
+  "character": "Gamora",
+  "franchise": "Marvel Cinematic Universe"
+ },
+ {
+  "id": "c0171",
+  "character": "Thanos",
+  "franchise": "Marvel Cinematic Universe"
+ },
+ {
+  "id": "c0172",
+  "character": "Peggy Carter",
+  "franchise": "Marvel Cinematic Universe"
+ },
+ {
+  "id": "c0173",
+  "character": "Loki",
+  "franchise": "Marvel Cinematic Universe"
+ },
+ {
+  "id": "c0174",
+  "character": "Hawkeye",
+  "franchise": "Marvel Cinematic Universe"
+ },
+ {
+  "id": "c0175",
+  "character": "Peter Jason Quill",
+  "franchise": "Marvel Cinematic Universe"
+ },
+ {
+  "id": "c0176",
+  "character": "Jay Pritchett",
+  "franchise": "Modern Family"
+ },
+ {
+  "id": "c0177",
+  "character": "Gloria Delgado-Pritchett",
+  "franchise": "Modern Family"
+ },
+ {
+  "id": "c0178",
+  "character": "Claire Dunphy",
+  "franchise": "Modern Family"
+ },
+ {
+  "id": "c0179",
+  "character": "Phil Dunphy",
+  "franchise": "Modern Family"
+ },
+ {
+  "id": "c0180",
+  "character": "Mitchell Pritchett",
+  "franchise": "Modern Family"
+ },
+ {
+  "id": "c0181",
+  "character": "Cameron Tucker",
+  "franchise": "Modern Family"
+ },
+ {
+  "id": "c0182",
+  "character": "Luke Dunphy",
+  "franchise": "Modern Family"
+ },
+ {
+  "id": "c0183",
+  "character": "Manny Delgado",
+  "franchise": "Modern Family"
+ },
+ {
+  "id": "c0184",
+  "character": "Haley Dunphy",
+  "franchise": "Modern Family"
+ },
+ {
+  "id": "c0185",
+  "character": "Alex Dunphy",
+  "franchise": "Modern Family"
+ },
+ {
+  "id": "c0186",
+  "character": "Tokio",
+  "franchise": "Money Heist"
+ },
+ {
+  "id": "c0187",
+  "character": "El Profesor",
+  "franchise": "Money Heist"
+ },
+ {
+  "id": "c0188",
+  "character": "Raquel Murillo",
+  "franchise": "Money Heist"
+ },
+ {
+  "id": "c0189",
+  "character": "Berlin",
+  "franchise": "Money Heist"
+ },
+ {
+  "id": "c0190",
+  "character": "Rio",
+  "franchise": "Money Heist"
+ },
+ {
+  "id": "c0191",
+  "character": "Denver",
+  "franchise": "Money Heist"
+ },
+ {
+  "id": "c0192",
+  "character": "Monica Gaztambide",
+  "franchise": "Money Heist"
+ },
+ {
+  "id": "c0193",
+  "character": "Arturo Roman",
+  "franchise": "Money Heist"
+ },
+ {
+  "id": "c0194",
+  "character": "Helsinki",
+  "franchise": "Money Heist"
+ },
+ {
+  "id": "c0195",
+  "character": "Nairobi",
+  "franchise": "Money Heist"
+ },
+ {
+  "id": "c0196",
+  "character": "Mr. Robot",
+  "franchise": "Mr. Robot"
+ },
+ {
+  "id": "c0197",
+  "character": "Darlene",
+  "franchise": "Mr. Robot"
+ },
+ {
+  "id": "c0198",
+  "character": "Tyrell Wellick",
+  "franchise": "Mr. Robot"
+ },
+ {
+  "id": "c0199",
+  "character": "Angela Moss",
+  "franchise": "Mr. Robot"
+ },
+ {
+  "id": "c0200",
+  "character": "Dominique DiPierro",
+  "franchise": "Mr. Robot"
+ },
+ {
+  "id": "c0201",
+  "character": "Piper Chapman",
+  "franchise": "Orange is the New Black"
+ },
+ {
+  "id": "c0202",
+  "character": "Alex Vause",
+  "franchise": "Orange is the New Black"
+ },
+ {
+  "id": "c0203",
+  "character": "Sam Healy",
+  "franchise": "Orange is the New Black"
+ },
+ {
+  "id": "c0204",
+  "character": "Red Reznikov",
+  "franchise": "Orange is the New Black"
+ },
+ {
+  "id": "c0205",
+  "character": "Crazy Eyes",
+  "franchise": "Orange is the New Black"
+ },
+ {
+  "id": "c0206",
+  "character": "Taystee Jefferson",
+  "franchise": "Orange is the New Black"
+ },
+ {
+  "id": "c0207",
+  "character": "Nicky Nichols",
+  "franchise": "Orange is the New Black"
+ },
+ {
+  "id": "c0208",
+  "character": "Pennsatucky Doggett",
+  "franchise": "Orange is the New Black"
+ },
+ {
+  "id": "c0209",
+  "character": "Lorna Morello",
+  "franchise": "Orange is the New Black"
+ },
+ {
+  "id": "c0210",
+  "character": "Flaca Gonzales",
+  "franchise": "Orange is the New Black"
+ },
+ {
+  "id": "c0211",
+  "character": "Leslie Knope",
+  "franchise": "Parks and Recreation"
+ },
+ {
+  "id": "c0212",
+  "character": "Ann Perkins",
+  "franchise": "Parks and Recreation"
+ },
+ {
+  "id": "c0213",
+  "character": "Mark Brendanawicz",
+  "franchise": "Parks and Recreation"
+ },
+ {
+  "id": "c0214",
+  "character": "Tom Haverford",
+  "franchise": "Parks and Recreation"
+ },
+ {
+  "id": "c0215",
+  "character": "Ron Swanson",
+  "franchise": "Parks and Recreation"
+ },
+ {
+  "id": "c0216",
+  "character": "April Ludgate",
+  "franchise": "Parks and Recreation"
+ },
+ {
+  "id": "c0217",
+  "character": "Jerry Gergich",
+  "franchise": "Parks and Recreation"
+ },
+ {
+  "id": "c0218",
+  "character": "Donna Meagle",
+  "franchise": "Parks and Recreation"
+ },
+ {
+  "id": "c0219",
+  "character": "Ben Wyatt",
+  "franchise": "Parks and Recreation"
+ },
+ {
+  "id": "c0220",
+  "character": "Chris Traeger",
+  "franchise": "Parks and Recreation"
+ },
+ {
+  "id": "c0221",
+  "character": "Ash Ketchum",
+  "franchise": "Pokemon"
+ },
+ {
+  "id": "c0222",
+  "character": "Misty",
+  "franchise": "Pokemon"
+ },
+ {
+  "id": "c0223",
+  "character": "Brock",
+  "franchise": "Pokemon"
+ },
+ {
+  "id": "c0224",
+  "character": "Professor Oak",
+  "franchise": "Pokemon"
+ },
+ {
+  "id": "c0225",
+  "character": "Jessie",
+  "franchise": "Pokemon"
+ },
+ {
+  "id": "c0226",
+  "character": "Mr. Darcy",
+  "franchise": "Pride and Prejudice"
+ },
+ {
+  "id": "c0227",
+  "character": "Elizabeth Bennet",
+  "franchise": "Pride and Prejudice"
+ },
+ {
+  "id": "c0228",
+  "character": "Mr. William Collins",
+  "franchise": "Pride and Prejudice"
+ },
+ {
+  "id": "c0229",
+  "character": "George Wickham",
+  "franchise": "Pride and Prejudice"
+ },
+ {
+  "id": "c0230",
+  "character": "Charles Bingley",
+  "franchise": "Pride and Prejudice"
+ },
+ {
+  "id": "c0231",
+  "character": "Georgiana Darcy",
+  "franchise": "Pride and Prejudice"
+ },
+ {
+  "id": "c0232",
+  "character": "Lydia Bennet",
+  "franchise": "Pride and Prejudice"
+ },
+ {
+  "id": "c0233",
+  "character": "Jane Bennet",
+  "franchise": "Pride and Prejudice"
+ },
+ {
+  "id": "c0234",
+  "character": "Mrs. Bennet",
+  "franchise": "Pride and Prejudice"
+ },
+ {
+  "id": "c0235",
+  "character": "Lady Catherine de Bourgh",
+  "franchise": "Pride and Prejudice"
+ },
+ {
+  "id": "c0236",
+  "character": "Rick Sanchez",
+  "franchise": "Rick and Morty"
+ },
+ {
+  "id": "c0237",
+  "character": "Morty Smith",
+  "franchise": "Rick and Morty"
+ },
+ {
+  "id": "c0238",
+  "character": "Summer Smith",
+  "franchise": "Rick and Morty"
+ },
+ {
+  "id": "c0239",
+  "character": "Johnny Rose",
+  "franchise": "Schitt’s Creek"
+ },
+ {
+  "id": "c0240",
+  "character": "Moira Rose",
+  "franchise": "Schitt’s Creek"
+ },
+ {
+  "id": "c0241",
+  "character": "David Rose",
+  "franchise": "Schitt’s Creek"
+ },
+ {
+  "id": "c0242",
+  "character": "Alexis Rose",
+  "franchise": "Schitt’s Creek"
+ },
+ {
+  "id": "c0243",
+  "character": "Stevie Budd",
+  "franchise": "Schitt’s Creek"
+ },
+ {
+  "id": "c0244",
+  "character": "Ted Mullens",
+  "franchise": "Schitt’s Creek"
+ },
+ {
+  "id": "c0245",
+  "character": "Richard Hendricks",
+  "franchise": "Silicon Valley"
+ },
+ {
+  "id": "c0246",
+  "character": "Erlich Bachman",
+  "franchise": "Silicon Valley"
+ },
+ {
+  "id": "c0247",
+  "character": "Nelson Bighetti",
+  "franchise": "Silicon Valley"
+ },
+ {
+  "id": "c0248",
+  "character": "Bertram Gilfoyle",
+  "franchise": "Silicon Valley"
+ },
+ {
+  "id": "c0249",
+  "character": "Dinesh Chugtai",
+  "franchise": "Silicon Valley"
+ },
+ {
+  "id": "c0250",
+  "character": "Peter Gregory",
+  "franchise": "Silicon Valley"
+ },
+ {
+  "id": "c0251",
+  "character": "Monica Hall",
+  "franchise": "Silicon Valley"
+ },
+ {
+  "id": "c0252",
+  "character": "Jared Dunn",
+  "franchise": "Silicon Valley"
+ },
+ {
+  "id": "c0253",
+  "character": "Gavin Belson",
+  "franchise": "Silicon Valley"
+ },
+ {
+  "id": "c0254",
+  "character": "Jian-Yang",
+  "franchise": "Silicon Valley"
+ },
+ {
+  "id": "c0255",
+  "character": "Stan Marsh",
+  "franchise": "South Park"
+ },
+ {
+  "id": "c0256",
+  "character": "Kyle Broflovski",
+  "franchise": "South Park"
+ },
+ {
+  "id": "c0257",
+  "character": "Eric Cartman",
+  "franchise": "South Park"
+ },
+ {
+  "id": "c0258",
+  "character": "Kenny McCormick",
+  "franchise": "South Park"
+ },
+ {
+  "id": "c0259",
+  "character": "Leopold ’Butters’ Stotch",
+  "franchise": "South Park"
+ },
+ {
+  "id": "c0260",
+  "character": "Jean-Luc Picard",
+  "franchise": "Star Trek: The Next Generation"
+ },
+ {
+  "id": "c0261",
+  "character": "William Riker",
+  "franchise": "Star Trek: The Next Generation"
+ },
+ {
+  "id": "c0262",
+  "character": "Geordi La Forge",
+  "franchise": "Star Trek: The Next Generation"
+ },
+ {
+  "id": "c0263",
+  "character": "Tasha Yar",
+  "franchise": "Star Trek: The Next Generation"
+ },
+ {
+  "id": "c0264",
+  "character": "Worf",
+  "franchise": "Star Trek: The Next Generation"
+ },
+ {
+  "id": "c0265",
+  "character": "Beverly Crusher",
+  "franchise": "Star Trek: The Next Generation"
+ },
+ {
+  "id": "c0266",
+  "character": "Deanna Troi",
+  "franchise": "Star Trek: The Next Generation"
+ },
+ {
+  "id": "c0267",
+  "character": "Wesley Crusher",
+  "franchise": "Star Trek: The Next Generation"
+ },
+ {
+  "id": "c0268",
+  "character": "Data",
+  "franchise": "Star Trek: The Next Generation"
+ },
+ {
+  "id": "c0269",
+  "character": "Guinan",
+  "franchise": "Star Trek: The Next Generation"
+ },
+ {
+  "id": "c0270",
+  "character": "Rintarou Okabe",
+  "franchise": "Steins;Gate"
+ },
+ {
+  "id": "c0271",
+  "character": "Kurisu Makise",
+  "franchise": "Steins;Gate"
+ },
+ {
+  "id": "c0272",
+  "character": "Mayuri Shiina",
+  "franchise": "Steins;Gate"
+ },
+ {
+  "id": "c0273",
+  "character": "Itaru Hashida",
+  "franchise": "Steins;Gate"
+ },
+ {
+  "id": "c0274",
+  "character": "Suzuha Amane",
+  "franchise": "Steins;Gate"
+ },
+ {
+  "id": "c0275",
+  "character": "Logan Roy",
+  "franchise": "Succession"
+ },
+ {
+  "id": "c0276",
+  "character": "Roman Roy",
+  "franchise": "Succession"
+ },
+ {
+  "id": "c0277",
+  "character": "Shiv Roy",
+  "franchise": "Succession"
+ },
+ {
+  "id": "c0278",
+  "character": "Kendall Roy",
+  "franchise": "Succession"
+ },
+ {
+  "id": "c0279",
+  "character": "Marcia Roy",
+  "franchise": "Succession"
+ },
+ {
+  "id": "c0280",
+  "character": "Greg Hirsch",
+  "franchise": "Succession"
+ },
+ {
+  "id": "c0281",
+  "character": "Frank Vernon",
+  "franchise": "Succession"
+ },
+ {
+  "id": "c0282",
+  "character": "Tom Wambsgans",
+  "franchise": "Succession"
+ },
+ {
+  "id": "c0283",
+  "character": "Connor Roy",
+  "franchise": "Succession"
+ },
+ {
+  "id": "c0284",
+  "character": "Lawrence Yee",
+  "franchise": "Succession"
+ },
+ {
+  "id": "c0285",
+  "character": "Vito Corleone",
+  "franchise": "The Godfather"
+ },
+ {
+  "id": "c0286",
+  "character": "Michael Corleone",
+  "franchise": "The Godfather"
+ },
+ {
+  "id": "c0287",
+  "character": "Sonny Corleone",
+  "franchise": "The Godfather"
+ },
+ {
+  "id": "c0288",
+  "character": "Peter Clemenza",
+  "franchise": "The Godfather"
+ },
+ {
+  "id": "c0289",
+  "character": "Tom Hagen",
+  "franchise": "The Godfather"
+ },
+ {
+  "id": "c0290",
+  "character": "Emilio Barzini",
+  "franchise": "The Godfather"
+ },
+ {
+  "id": "c0291",
+  "character": "Jay Gatsby",
+  "franchise": "The Great Gatsby"
+ },
+ {
+  "id": "c0292",
+  "character": "Nick Carraway",
+  "franchise": "The Great Gatsby"
+ },
+ {
+  "id": "c0293",
+  "character": "Daisy Buchanan",
+  "franchise": "The Great Gatsby"
+ },
+ {
+  "id": "c0294",
+  "character": "Tom Buchanan",
+  "franchise": "The Great Gatsby"
+ },
+ {
+  "id": "c0295",
+  "character": "Myrtle Wilson",
+  "franchise": "The Great Gatsby"
+ },
+ {
+  "id": "c0296",
+  "character": "Jordan Baker",
+  "franchise": "The Great Gatsby"
+ },
+ {
+  "id": "c0297",
+  "character": "Joel Miller",
+  "franchise": "The Last of Us"
+ },
+ {
+  "id": "c0298",
+  "character": "Ellie Williams",
+  "franchise": "The Last of Us"
+ },
+ {
+  "id": "c0299",
+  "character": "Michael Scott",
+  "franchise": "The Office"
+ },
+ {
+  "id": "c0300",
+  "character": "Dwight Schrute",
+  "franchise": "The Office"
+ },
+ {
+  "id": "c0301",
+  "character": "Jim Halpert",
+  "franchise": "The Office"
+ },
+ {
+  "id": "c0302",
+  "character": "Pam Beesly",
+  "franchise": "The Office"
+ },
+ {
+  "id": "c0303",
+  "character": "Ryan Howard",
+  "franchise": "The Office"
+ },
+ {
+  "id": "c0304",
+  "character": "Andy Bernard",
+  "franchise": "The Office"
+ },
+ {
+  "id": "c0305",
+  "character": "Jan Levinson",
+  "franchise": "The Office"
+ },
+ {
+  "id": "c0306",
+  "character": "Stanley Hudson",
+  "franchise": "The Office"
+ },
+ {
+  "id": "c0307",
+  "character": "Kevin Malone",
+  "franchise": "The Office"
+ },
+ {
+  "id": "c0308",
+  "character": "Meredith Palmer",
+  "franchise": "The Office"
+ },
+ {
+  "id": "c0309",
+  "character": "Angela Martin",
+  "franchise": "The Office"
+ },
+ {
+  "id": "c0310",
+  "character": "Phyllis Lapin",
+  "franchise": "The Office"
+ },
+ {
+  "id": "c0311",
+  "character": "Kelly Kapoor",
+  "franchise": "The Office"
+ },
+ {
+  "id": "c0312",
+  "character": "Kelly Erin Hannon",
+  "franchise": "The Office"
+ },
+ {
+  "id": "c0313",
+  "character": "Robert California",
+  "franchise": "The Office"
+ },
+ {
+  "id": "c0314",
+  "character": "Homer Simpson",
+  "franchise": "The Simpsons"
+ },
+ {
+  "id": "c0315",
+  "character": "Bart Simpson",
+  "franchise": "The Simpsons"
+ },
+ {
+  "id": "c0316",
+  "character": "Marge Simpson",
+  "franchise": "The Simpsons"
+ },
+ {
+  "id": "c0317",
+  "character": "Lisa Simpson",
+  "franchise": "The Simpsons"
+ },
+ {
+  "id": "c0318",
+  "character": "Apu Nahasapeemapetilon",
+  "franchise": "The Simpsons"
+ },
+ {
+  "id": "c0319",
+  "character": "Mr. Burns",
+  "franchise": "The Simpsons"
+ },
+ {
+  "id": "c0320",
+  "character": "Ned Flanders",
+  "franchise": "The Simpsons"
+ },
+ {
+  "id": "c0321",
+  "character": "Milhouse Van Houten",
+  "franchise": "The Simpsons"
+ },
+ {
+  "id": "c0322",
+  "character": "Moe Szyslak",
+  "franchise": "The Simpsons"
+ },
+ {
+  "id": "c0323",
+  "character": "Nelson Muntz",
+  "franchise": "The Simpsons"
+ },
+ {
+  "id": "c0324",
+  "character": "Krusty the Clown",
+  "franchise": "The Simpsons"
+ },
+ {
+  "id": "c0325",
+  "character": "Edna Krabappel",
+  "franchise": "The Simpsons"
+ },
+ {
+  "id": "c0326",
+  "character": "Waylon Smithers",
+  "franchise": "The Simpsons"
+ },
+ {
+  "id": "c0327",
+  "character": "Barney Gumble",
+  "franchise": "The Simpsons"
+ },
+ {
+  "id": "c0328",
+  "character": "Principal Skinner",
+  "franchise": "The Simpsons"
+ },
+ {
+  "id": "c0329",
+  "character": "Tony Soprano",
+  "franchise": "The Sopranos"
+ },
+ {
+  "id": "c0330",
+  "character": "Dr. Jennifer Melfi",
+  "franchise": "The Sopranos"
+ },
+ {
+  "id": "c0331",
+  "character": "Carmela Soprano",
+  "franchise": "The Sopranos"
+ },
+ {
+  "id": "c0332",
+  "character": "Christopher Moltisanti",
+  "franchise": "The Sopranos"
+ },
+ {
+  "id": "c0333",
+  "character": "Junior Soprano",
+  "franchise": "The Sopranos"
+ },
+ {
+  "id": "c0334",
+  "character": "Silvio Dante",
+  "franchise": "The Sopranos"
+ },
+ {
+  "id": "c0335",
+  "character": "Paulie ’Walnuts’ Gualtieri",
+  "franchise": "The Sopranos"
+ },
+ {
+  "id": "c0336",
+  "character": "A.J. Soprano",
+  "franchise": "The Sopranos"
+ },
+ {
+  "id": "c0337",
+  "character": "Meadow Soprano",
+  "franchise": "The Sopranos"
+ },
+ {
+  "id": "c0338",
+  "character": "Janice Soprano",
+  "franchise": "The Sopranos"
+ },
+ {
+  "id": "c0339",
+  "character": "Cedric Daniels",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0340",
+  "character": "Jimmy McNulty",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0341",
+  "character": "Kima Greggs",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0342",
+  "character": "Lester Freamon",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0343",
+  "character": "Bunk Moreland",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0344",
+  "character": "Thomas ’Herc’ Hauk",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0345",
+  "character": "Ellis Carver",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0346",
+  "character": "Reginald ’Bubbles’ Cousins",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0347",
+  "character": "William Rawls",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0348",
+  "character": "Roland ’Prez’ Pryzbylewski",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0349",
+  "character": "Rhonda Pearlman",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0350",
+  "character": "Omar Little",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0351",
+  "character": "Ervin Burrell",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0352",
+  "character": "Preston ’Bodie’ Broadus",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0353",
+  "character": "Russell ’Stringer’ Bell",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0354",
+  "character": "Tommy Carcetti",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0355",
+  "character": "Avon Barksdale",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0356",
+  "character": "Chris Partlow",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0357",
+  "character": "Norman Wilson",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0358",
+  "character": "Michael Lee",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0359",
+  "character": "Maurice Levy",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0360",
+  "character": "Beatrice ’Beadie’ Russell",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0361",
+  "character": "Dennis ’Cutty’ Wise",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0362",
+  "character": "D’Angelo Barksdale",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0363",
+  "character": "Clay Davis",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0364",
+  "character": "Clarence Royce",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0365",
+  "character": "Spiros ’Vondas’ Vondopoulos",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0366",
+  "character": "Frank Sobotka",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0367",
+  "character": "Ziggy Sobotka",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0368",
+  "character": "Nick Sobotka",
+  "franchise": "The Wire"
+ },
+ {
+  "id": "c0369",
+  "character": "Jack Pearson",
+  "franchise": "This Is Us"
+ },
+ {
+  "id": "c0370",
+  "character": "Rebecca Pearson",
+  "franchise": "This Is Us"
+ },
+ {
+  "id": "c0371",
+  "character": "Randall Pearson",
+  "franchise": "This Is Us"
+ },
+ {
+  "id": "c0372",
+  "character": "Kate Pearson",
+  "franchise": "This Is Us"
+ },
+ {
+  "id": "c0373",
+  "character": "Kevin Pearson",
+  "franchise": "This Is Us"
+ },
+ {
+  "id": "c0374",
+  "character": "Beth Pearson",
+  "franchise": "This Is Us"
+ },
+ {
+  "id": "c0375",
+  "character": "Toby Damon",
+  "franchise": "This Is Us"
+ },
+ {
+  "id": "c0376",
+  "character": "Dale Cooper",
+  "franchise": "Twin Peaks"
+ },
+ {
+  "id": "c0377",
+  "character": "Sheriff Truman",
+  "franchise": "Twin Peaks"
+ },
+ {
+  "id": "c0378",
+  "character": "Shelly Johnson",
+  "franchise": "Twin Peaks"
+ },
+ {
+  "id": "c0379",
+  "character": "Bobby Briggs",
+  "franchise": "Twin Peaks"
+ },
+ {
+  "id": "c0380",
+  "character": "Benjamin Horne",
+  "franchise": "Twin Peaks"
+ },
+ {
+  "id": "c0381",
+  "character": "Audrey Horne",
+  "franchise": "Twin Peaks"
+ },
+ {
+  "id": "c0382",
+  "character": "Norma Jennings",
+  "franchise": "Twin Peaks"
+ },
+ {
+  "id": "c0383",
+  "character": "James Hurley",
+  "franchise": "Twin Peaks"
+ },
+ {
+  "id": "c0384",
+  "character": "Ed Hurley",
+  "franchise": "Twin Peaks"
+ },
+ {
+  "id": "c0385",
+  "character": "Pete Martell",
+  "franchise": "Twin Peaks"
+ },
+ {
+  "id": "c0386",
+  "character": "Leland Palmer",
+  "franchise": "Twin Peaks"
+ },
+ {
+  "id": "c0387",
+  "character": "Josie Packard",
+  "franchise": "Twin Peaks"
+ },
+ {
+  "id": "c0388",
+  "character": "Catherine Martell",
+  "franchise": "Twin Peaks"
+ },
+ {
+  "id": "c0389",
+  "character": "Lucy Moran",
+  "franchise": "Twin Peaks"
+ },
+ {
+  "id": "c0390",
+  "character": "Donna Hayward",
+  "franchise": "Twin Peaks"
+ },
+ {
+  "id": "c0391",
+  "character": "Dolores Abernathy",
+  "franchise": "Westworld"
+ },
+ {
+  "id": "c0392",
+  "character": "Maeve Millay",
+  "franchise": "Westworld"
+ },
+ {
+  "id": "c0393",
+  "character": "Bernard Lowe",
+  "franchise": "Westworld"
+ },
+ {
+  "id": "c0394",
+  "character": "Teddy Flood",
+  "franchise": "Westworld"
+ },
+ {
+  "id": "c0395",
+  "character": "Ashley Stubbs",
+  "franchise": "Westworld"
+ },
+ {
+  "id": "c0396",
+  "character": "Lee Sizemore",
+  "franchise": "Westworld"
+ },
+ {
+  "id": "c0397",
+  "character": "Elsie Hughes",
+  "franchise": "Westworld"
+ },
+ {
+  "id": "c0398",
+  "character": "Man in Black",
+  "franchise": "Westworld"
+ },
+ {
+  "id": "c0399",
+  "character": "Robert Ford",
+  "franchise": "Westworld"
+ },
+ {
+  "id": "c0400",
+  "character": "Theresa Cullen",
+  "franchise": "Westworld"
+ },
+ {
+  "id": "c0401",
+  "character": "Charlotte Hale",
+  "franchise": "Westworld"
+ },
+ {
+  "id": "c0402",
+  "character": "Akecheta",
+  "franchise": "Westworld"
+ },
+ {
+  "id": "c0403",
+  "character": "Clementine Pennyfeather",
+  "franchise": "Westworld"
+ },
+ {
+  "id": "c0404",
+  "character": "Logan Delos",
+  "franchise": "Westworld"
+ },
+ {
+  "id": "c0405",
+  "character": "Felix Lutz",
+  "franchise": "Westworld"
+ }
+]

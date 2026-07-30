@@ -1,0 +1,82 @@
+{
+ "EXT": {
+  "pos": [
+   "I enjoy meeting new people wherever I go",
+   "I speak up readily in group discussions",
+   "I thrive in social situations with lots of activity",
+   "I actively seek out opportunities to socialize",
+   "I feel energized when surrounded by other people"
+  ],
+  "neg": [
+   "I prefer spending time alone to being with others",
+   "I rarely initiate conversations with strangers",
+   "I feel drained after attending social gatherings",
+   "I avoid situations where I must interact with many people",
+   "I let others do most of the talking"
+  ]
+ },
+ "AGR": {
+  "pos": [
+   "I go out of my way to help others",
+   "I treat everyone with kindness and respect",
+   "I listen carefully when people share their problems",
+   "I trust that most people have good intentions",
+   "I forgive others easily when they make mistakes"
+  ],
+  "neg": [
+   "I put my own needs before anyone else's",
+   "I enjoy pointing out when people are wrong",
+   "I have little patience for other people's feelings",
+   "I tend to be skeptical of others' motives",
+   "I rarely go out of my way for anyone"
+  ]
+ },
+ "CSN": {
+  "pos": [
+   "I complete tasks thoroughly before moving on to new ones",
+   "I keep my workspace clean and organized",
+   "I plan ahead for important events and deadlines",
+   "I follow through on my commitments to others",
+   "I double-check my work to avoid mistakes"
+  ],
+  "neg": [
+   "I tend to put off decisions until the last minute",
+   "I lose track of my personal belongings regularly",
+   "I jump into projects without thinking them through",
+   "I abandon tasks when they become too difficult",
+   "I ignore rules that seem unnecessary to me"
+  ]
+ },
+ "EST": {
+  "pos": [
+   "I remain calm under pressure",
+   "I handle unexpected problems with ease",
+   "I rarely feel anxious about the future",
+   "I bounce back quickly from setbacks",
+   "I keep my composure in stressful situations"
+  ],
+  "neg": [
+   "I panic when things don't go as planned",
+   "I lose sleep over minor concerns",
+   "I feel overwhelmed by daily responsibilities",
+   "I take criticism very personally",
+   "I dwell on my mistakes for days"
+  ]
+ },
+ "OPN": {
+  "pos": [
+   "I enjoy exploring new ideas and concepts",
+   "I am drawn to complex philosophical questions",
+   "I appreciate art and beauty in unconventional forms",
+   "I seek out novel experiences and adventures",
+   "I question traditional ways of doing things"
+  ],
+  "neg": [
+   "I prefer sticking to familiar routines and methods",
+   "I avoid trying things that seem too different",
+   "I find abstract discussions boring and impractical",
+   "I prefer concrete facts over theoretical possibilities",
+   "I rarely wonder about the deeper meaning of things"
+  ]
+ }
+}

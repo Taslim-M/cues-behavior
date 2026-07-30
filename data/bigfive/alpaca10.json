@@ -1,0 +1,42 @@
+[
+ {
+  "id": "alpaca0",
+  "instruction": "What strategy would you recommend for a company looking to target a new market?"
+ },
+ {
+  "id": "alpaca1",
+  "instruction": "Give three tips for staying healthy."
+ },
+ {
+  "id": "alpaca2",
+  "instruction": "What are the three primary colors?"
+ },
+ {
+  "id": "alpaca3",
+  "instruction": "Describe a time when you had to make a difficult decision."
+ },
+ {
+  "id": "alpaca4",
+  "instruction": "Generate a list of random words."
+ },
+ {
+  "id": "alpaca5",
+  "instruction": "Provide one example for a cultural practice."
+ },
+ {
+  "id": "alpaca6",
+  "instruction": "Imagine you are speaking with a customer who is unsatisfied with the product they bought from you. Construct a response that diffuses the situation."
+ },
+ {
+  "id": "alpaca7",
+  "instruction": "Generate a list of present continuous verbs."
+ },
+ {
+  "id": "alpaca8",
+  "instruction": "Compose a five word sentence describing your day."
+ },
+ {
+  "id": "alpaca9",
+  "instruction": "Provide the lyrics for the song titled \"Yesterday\""
+ }
+]

@@ -1,0 +1,527 @@
+{
+ "selection": {
+  "EXT": {
+   "baseline_pos_frac": 1.0,
+   "family_range": {
+    "S0": {
+     "dynamic_range": 1.0,
+     "min_label": "S0_a-0.20",
+     "max_label": "S0_a+0.00",
+     "n_coherent": 5
+    },
+    "S1": {
+     "dynamic_range": 1.0,
+     "min_label": "S1_c-0.20_L28-36",
+     "max_label": "S1_c+0.05_L28-36",
+     "n_coherent": 47
+    },
+    "S2": {
+     "dynamic_range": 0.6666666666666667,
+     "min_label": "S2_floor_p25_L40-56",
+     "max_label": "S2_floor_p10_L28-36",
+     "n_coherent": 54
+    }
+   },
+   "steering_optimal_family": "S0",
+   "low_pole": {
+    "label": "S0_a-0.20",
+    "pos_frac": 0.0,
+    "cfg": {
+     "kind": "S0",
+     "alpha": -0.2,
+     "pos_frac": 0.0,
+     "pos_frac_ext": 0.0,
+     "coherence": 1.0
+    }
+   },
+   "high_pole": {
+    "label": "S0_a+0.00",
+    "pos_frac": 1.0,
+    "cfg": {
+     "kind": "S0",
+     "alpha": 0.0,
+     "pos_frac": 1.0,
+     "pos_frac_ext": 1.0,
+     "coherence": 1.0
+    }
+   }
+  },
+  "AGR": {
+   "baseline_pos_frac": 1.0,
+   "family_range": {
+    "S0": {
+     "dynamic_range": 0.0,
+     "min_label": "S0_a-0.10",
+     "max_label": "S0_a-0.10",
+     "n_coherent": 4
+    },
+    "S1": {
+     "dynamic_range": 1.0,
+     "min_label": "S1_c-0.20_L24-40",
+     "max_label": "S1_c-0.20_L28-36",
+     "n_coherent": 46
+    },
+    "S2": {
+     "dynamic_range": 0.0,
+     "min_label": "S2_ceiling_p10_L28-36",
+     "max_label": "S2_ceiling_p10_L28-36",
+     "n_coherent": 54
+    }
+   },
+   "steering_optimal_family": "S1",
+   "low_pole": {
+    "label": "S1_c-0.20_L24-40",
+    "pos_frac": 0.0,
+    "cfg": {
+     "kind": "S1",
+     "c": -0.2,
+     "band": [
+      24,
+      40
+     ],
+     "pos_frac": 0.0,
+     "pos_frac_ext": 0.0,
+     "coherence": 1.0
+    }
+   },
+   "high_pole": {
+    "label": "S1_c-0.20_L28-36",
+    "pos_frac": 1.0,
+    "cfg": {
+     "kind": "S1",
+     "c": -0.2,
+     "band": [
+      28,
+      36
+     ],
+     "pos_frac": 1.0,
+     "pos_frac_ext": 1.0,
+     "coherence": 1.0
+    }
+   }
+  },
+  "CSN": {
+   "baseline_pos_frac": 1.0,
+   "family_range": {
+    "S0": {
+     "dynamic_range": 0.0,
+     "min_label": "S0_a-0.10",
+     "max_label": "S0_a-0.10",
+     "n_coherent": 4
+    },
+    "S1": {
+     "dynamic_range": 1.0,
+     "min_label": "S1_c-0.10_L20-44",
+     "max_label": "S1_c-0.10_L28-36",
+     "n_coherent": 46
+    },
+    "S2": {
+     "dynamic_range": 0.0,
+     "min_label": "S2_ceiling_p10_L28-36",
+     "max_label": "S2_ceiling_p10_L28-36",
+     "n_coherent": 54
+    }
+   },
+   "steering_optimal_family": "S1",
+   "low_pole": {
+    "label": "S1_c-0.10_L20-44",
+    "pos_frac": 0.0,
+    "cfg": {
+     "kind": "S1",
+     "c": -0.1,
+     "band": [
+      20,
+      44
+     ],
+     "pos_frac": 0.0,
+     "pos_frac_ext": 0.0,
+     "coherence": 1.0
+    }
+   },
+   "high_pole": {
+    "label": "S1_c-0.10_L28-36",
+    "pos_frac": 1.0,
+    "cfg": {
+     "kind": "S1",
+     "c": -0.1,
+     "band": [
+      28,
+      36
+     ],
+     "pos_frac": 1.0,
+     "pos_frac_ext": 1.0,
+     "coherence": 1.0
+    }
+   }
+  },
+  "EST": {
+   "baseline_pos_frac": 1.0,
+   "family_range": {
+    "S0": {
+     "dynamic_range": 0.8666666666666667,
+     "min_label": "S0_a-0.30",
+     "max_label": "S0_a-0.10",
+     "n_coherent": 7
+    },
+    "S1": {
+     "dynamic_range": 1.0,
+     "min_label": "S1_c-0.10_L20-44",
+     "max_label": "S1_c-0.05_L28-36",
+     "n_coherent": 46
+    },
+    "S2": {
+     "dynamic_range": 0.0,
+     "min_label": "S2_ceiling_p10_L28-36",
+     "max_label": "S2_ceiling_p10_L28-36",
+     "n_coherent": 54
+    }
+   },
+   "steering_optimal_family": "S1",
+   "low_pole": {
+    "label": "S1_c-0.10_L20-44",
+    "pos_frac": 0.0,
+    "cfg": {
+     "kind": "S1",
+     "c": -0.1,
+     "band": [
+      20,
+      44
+     ],
+     "pos_frac": 0.0,
+     "pos_frac_ext": 0.0,
+     "coherence": 1.0
+    }
+   },
+   "high_pole": {
+    "label": "S1_c-0.05_L28-36",
+    "pos_frac": 1.0,
+    "cfg": {
+     "kind": "S1",
+     "c": -0.05,
+     "band": [
+      28,
+      36
+     ],
+     "pos_frac": 1.0,
+     "pos_frac_ext": 1.0,
+     "coherence": 1.0
+    }
+   }
+  },
+  "OPN": {
+   "baseline_pos_frac": 1.0,
+   "family_range": {
+    "S0": {
+     "dynamic_range": 0.0,
+     "min_label": "S0_a-0.10",
+     "max_label": "S0_a-0.10",
+     "n_coherent": 4
+    },
+    "S1": {
+     "dynamic_range": 1.0,
+     "min_label": "S1_c-0.20_L24-40",
+     "max_label": "S1_c-0.10_L28-36",
+     "n_coherent": 47
+    },
+    "S2": {
+     "dynamic_range": 0.0,
+     "min_label": "S2_ceiling_p10_L28-36",
+     "max_label": "S2_ceiling_p10_L28-36",
+     "n_coherent": 54
+    }
+   },
+   "steering_optimal_family": "S1",
+   "low_pole": {
+    "label": "S1_c-0.20_L24-40",
+    "pos_frac": 0.0,
+    "cfg": {
+     "kind": "S1",
+     "c": -0.2,
+     "band": [
+      24,
+      40
+     ],
+     "pos_frac": 0.0,
+     "pos_frac_ext": 0.0,
+     "coherence": 1.0
+    }
+   },
+   "high_pole": {
+    "label": "S1_c-0.10_L28-36",
+    "pos_frac": 1.0,
+    "cfg": {
+     "kind": "S1",
+     "c": -0.1,
+     "band": [
+      28,
+      36
+     ],
+     "pos_frac": 1.0,
+     "pos_frac_ext": 1.0,
+     "coherence": 1.0
+    }
+   }
+  }
+ },
+ "H1_steerability": {
+  "per_trait": {
+   "EXT": {
+    "S0_range": 1.0,
+    "S1_range": 1.0,
+    "S2_range": 0.6666666666666667,
+    "best_family": "S0"
+   },
+   "AGR": {
+    "S0_range": 0.0,
+    "S1_range": 1.0,
+    "S2_range": 0.0,
+    "best_family": "S1"
+   },
+   "CSN": {
+    "S0_range": 0.0,
+    "S1_range": 1.0,
+    "S2_range": 0.0,
+    "best_family": "S1"
+   },
+   "EST": {
+    "S0_range": 0.8666666666666667,
+    "S1_range": 1.0,
+    "S2_range": 0.0,
+    "best_family": "S1"
+   },
+   "OPN": {
+    "S0_range": 0.0,
+    "S1_range": 1.0,
+    "S2_range": 0.0,
+    "best_family": "S1"
+   }
+  },
+  "confirmed": true,
+  "strong_full_range_all_traits": true,
+  "S0_unreliable": true,
+  "n_S0_fail_of_5": 3,
+  "criterion": "S1/S2 reach >=0.8 range for all traits AND S0 fails (<0.5 range) on >=1 trait; baseline forced-choice saturates high so range is downward"
+ },
+ "H2_probe_vs_steering": {
+  "per_trait": {
+   "EXT": {
+    "probe_optimal": "M2@prompt_meanL30",
+    "steering_optimal_family": "S0"
+   },
+   "AGR": {
+    "probe_optimal": "M2@last_promptL31",
+    "steering_optimal_family": "S1"
+   },
+   "CSN": {
+    "probe_optimal": "M2@prompt_meanL31",
+    "steering_optimal_family": "S1"
+   },
+   "EST": {
+    "probe_optimal": "M2@prompt_meanL30",
+    "steering_optimal_family": "S1"
+   },
+   "OPN": {
+    "probe_optimal": "M2@prompt_meanL36",
+    "steering_optimal_family": "S1"
+   }
+  },
+  "note": "probe-optimal is M2 for all traits; steering-optimal family recorded per trait"
+ },
+ "H5_specificity": {
+  "matrix_swing": {
+   "EXT": {
+    "EXT": 0.6833333333333332,
+    "AGR": 0.0,
+    "CSN": 0.0,
+    "EST": 0.09999999999999998,
+    "OPN": 0.3833333333333332
+   },
+   "AGR": {
+    "EXT": -0.20000000000000004,
+    "AGR": 0.9,
+    "CSN": 0.2666666666666666,
+    "EST": 0.0,
+    "OPN": 0.26666666666666666
+   },
+   "CSN": {
+    "EXT": -0.6,
+    "AGR": 0.0,
+    "CSN": 1.0,
+    "EST": 0.0,
+    "OPN": 0.06666666666666676
+   },
+   "EST": {
+    "EXT": 0.0,
+    "AGR": 0.0,
+    "CSN": 0.06666666666666676,
+    "EST": 0.9333333333333332,
+    "OPN": 0.0
+   },
+   "OPN": {
+    "EXT": -0.3666666666666667,
+    "AGR": 0.15000000000000002,
+    "CSN": 0.6000000000000001,
+    "EST": 0.7999999999999999,
+    "OPN": 0.39999999999999997
+   }
+  },
+  "per_trait": {
+   "EXT": {
+    "diag": 0.6833333333333332,
+    "max_off": 0.3833333333333332,
+    "ratio": 1.7826086956521743,
+    "pass": false
+   },
+   "AGR": {
+    "diag": 0.9,
+    "max_off": 0.26666666666666666,
+    "ratio": 3.375,
+    "pass": true
+   },
+   "CSN": {
+    "diag": 1.0,
+    "max_off": 0.6,
+    "ratio": 1.6666666666666667,
+    "pass": false
+   },
+   "EST": {
+    "diag": 0.9333333333333332,
+    "max_off": 0.06666666666666676,
+    "ratio": 13.999999999999979,
+    "pass": true
+   },
+   "OPN": {
+    "diag": 0.39999999999999997,
+    "max_off": 0.7999999999999999,
+    "ratio": 0.5,
+    "pass": false
+   }
+  },
+  "confirmed": false,
+  "criterion": "on-diagonal swing >= 2x largest off-diagonal"
+ },
+ "likert_readministration": {
+  "EXT": {
+   "low_pole": {
+    "mean_score": 31.733333333333334,
+    "per_seed": [
+     31.6,
+     32.0,
+     31.6
+    ]
+   },
+   "high_pole": {
+    "mean_score": 34.333333333333336,
+    "per_seed": [
+     34.6,
+     34.4,
+     34.0
+    ]
+   },
+   "baseline": {
+    "mean_score": 34.8
+   }
+  },
+  "AGR": {
+   "low_pole": {
+    "mean_score": 18.88888888888889,
+    "per_seed": [
+     36.666666666666664,
+     10.0,
+     10.0
+    ]
+   },
+   "high_pole": {
+    "mean_score": 27.938149612062656,
+    "per_seed": [
+     29.555555555555557,
+     26.304347826086957,
+     27.954545454545453
+    ]
+   },
+   "baseline": {
+    "mean_score": 34.89795918367347
+   }
+  },
+  "CSN": {
+   "low_pole": {
+    "mean_score": 30.21505376344086,
+    "per_seed": [
+     30.0,
+     30.64516129032258,
+     30.0
+    ]
+   },
+   "high_pole": {
+    "mean_score": 31.777777777777775,
+    "per_seed": [
+     32.0,
+     31.666666666666664,
+     31.666666666666664
+    ]
+   },
+   "baseline": {
+    "mean_score": 34.08163265306123
+   }
+  },
+  "EST": {
+   "low_pole": {
+    "mean_score": 29.066666666666666,
+    "per_seed": [
+     28.0,
+     31.200000000000003,
+     28.0
+    ]
+   },
+   "high_pole": {
+    "mean_score": 33.6,
+    "per_seed": [
+     33.6,
+     33.6,
+     33.6
+    ]
+   },
+   "baseline": {
+    "mean_score": 33.199999999999996
+   }
+  },
+  "OPN": {
+   "low_pole": {
+    "mean_score": 29.68165644636233,
+    "per_seed": [
+     29.411764705882355,
+     30.714285714285715,
+     28.91891891891892
+    ]
+   },
+   "high_pole": {
+    "mean_score": 31.746938775510205,
+    "per_seed": [
+     32.04081632653061,
+     30.8,
+     32.400000000000006
+    ]
+   },
+   "baseline": {
+    "mean_score": 34.48979591836735
+   }
+  }
+ },
+ "openended": {
+  "EXT": {
+   "steered_winrate": 0.5
+  },
+  "AGR": {
+   "steered_winrate": 0.0
+  },
+  "CSN": {
+   "steered_winrate": 0.4
+  },
+  "EST": {
+   "steered_winrate": 0.2
+  },
+  "OPN": {
+   "steered_winrate": 0.3
+  }
+ }
+}
