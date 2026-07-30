@@ -301,4 +301,51 @@ dominant, decorrelated axes of the model's user representation are demographic a
 topical, and the vulnerability axis was, to a substantial degree, a property of the
 pool we built.
 
+\appendix
+\section{Intrinsic vs.\ extrinsic user attributes}
+\label{app:intrinsic}
+The ten factors --- and the columns of Table~\ref{tab:hivuln} --- fall into two kinds.
+\textbf{Intrinsic} attributes are stable properties of the \emph{person} that travel
+across conversations (who they are); \textbf{extrinsic} attributes are properties of
+the \emph{current situation} --- the topic on the table, the user's transient state,
+their stance toward the assistant, and their goal for this turn (what is going on right
+now). Table~\ref{tab:intrinsic} classifies each factor.
+
+\begin{table}[h]
+\centering\small
+\caption{Intrinsic (stable person-traits) vs.\ extrinsic (situational) attributes.
+The columns of Table~\ref{tab:hivuln} that are stable traits (competence, age) sit
+above the line; the situational ones (emotional load, trust, domain) sit below --- and
+within the \textbf{vulnerability~$=$~high} slice both kinds vary freely.}
+\label{tab:intrinsic}
+\begin{tabular}{@{}lll@{}}
+\toprule
+factor & class & what it is \\
+\midrule
+competence & intrinsic & subject-matter skill; stable across conversations \\
+age & intrinsic & demographic; fixed \\
+communication style & intrinsic & habitual register / verbosity \\
+\midrule
+domain & extrinsic (context) & the \emph{topic} of this conversation, not a person-trait \\
+vulnerability & extrinsic (state) & susceptibility to harm in this situation \\
+emotional load & extrinsic (state) & how distressed the user is \emph{right now} \\
+urgency & extrinsic (state) & time pressure of the current task \\
+trust & extrinsic (stance) & attitude toward the assistant in this interaction \\
+intent & extrinsic (goal) & what the user wants from this turn \\
+on behalf of & extrinsic (relational) & self vs.\ asking for someone else \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+This split sharpens the main result. The axes the model encodes most strongly are the
+two \emph{intrinsic} traits (age, competence) plus the \emph{extrinsic context}
+(domain/topic); the \emph{extrinsic state} attributes --- vulnerability, emotional load,
+urgency, trust, intent --- are all weak ($\eta^2 \le 0.10$). In short, the model's user
+representation captures \textbf{who the user is} and \textbf{what the conversation is
+about} far more than \textbf{what state the user is in}. That is a natural thing for a
+next-token predictor to encode --- stable identity and topic are strongly predictive of
+the surface form of the exchange, whereas fine-grained emotional or motivational state
+is not --- but it is precisely the state dimension that safety arguments about
+``vulnerable users'' rely on.
+
 \end{document}
