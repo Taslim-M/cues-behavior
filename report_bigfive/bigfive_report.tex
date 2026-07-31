@@ -512,9 +512,13 @@ $+2.19$) and the eight most drifted (\texttt{eldritch}, \texttt{leviathan},
 \texttt{void}, \texttt{wraith}, \texttt{ghost}, \texttt{tree}, \texttt{vampire},
 \texttt{absurdist}; $-0.94$ to $-1.54$), plus the \texttt{default} anchor, and had
 the model answer all 240 extraction questions under each of the 5 system prompts
-($1{,}200$ responses per persona; $20{,}400$ in total). Each response's
-\textsc{gen-mean} was projected onto the M2 probe at each trait's probe-optimal
-layer, giving a full Big Five distribution per persona.
+($1{,}200$ responses per persona; $20{,}400$ in total; sampled at
+$T{=}1.0,\ \text{top-}p{=}1.0$, 128 new tokens, so the within-persona spread
+reflects genuine response variation). Each response's \textsc{gen-mean} was
+projected onto the M2 probe at each trait's probe-optimal layer; readings are
+$z$-scored against the pooled $20{,}400$-response population, so a value is "how
+EXT/AGR/\ldots this persona makes the model relative to the persona population."
+Per-persona profiles are in Table~\ref{tab:roleprofiles}.
 
 Drifting off the Assistant has a clean personality signature
 (Fig.~\ref{fig:roleprof}): drifted personas are colder, more withdrawn, less
@@ -552,6 +556,36 @@ holds it.
 \label{fig:rolespread}
 \end{minipage}
 \end{figure}
+
+\begin{table}[h]\centering\small
+\caption{Per-persona Big Five profile (mean $z$ over $1{,}200$ responses each),
+ordered by Assistant-Axis projection (AA). Group A = Assistant-like, D = drifted.}
+\label{tab:roleprofiles}
+\begin{tabular}{@{}llcccccc@{}}
+\toprule
+persona & grp & AA & EXT & AGR & CSN & EST & OPN \\
+\midrule
+assistant & A & $+2.19$ & $+0.31$ & $+0.59$ & $-0.05$ & $+0.23$ & $-0.21$ \\
+summarizer & A & $+2.11$ & $+0.17$ & $+0.32$ & $+0.03$ & $+0.20$ & $-0.67$ \\
+default & --- & $+2.01$ & $+0.29$ & $+0.44$ & $-0.04$ & $+0.47$ & $-0.23$ \\
+instructor & A & $+1.87$ & $+0.12$ & $+0.46$ & $+0.26$ & $+0.06$ & $-0.12$ \\
+planner & A & $+1.83$ & $+0.15$ & $+0.58$ & $+0.27$ & $+0.12$ & $-0.27$ \\
+consultant & A & $+1.83$ & $+0.28$ & $+0.44$ & $+0.06$ & $+0.13$ & $-0.06$ \\
+organizer & A & $+1.82$ & $+0.20$ & $+0.54$ & $+0.58$ & $+0.21$ & $-0.21$ \\
+analyst & A & $+1.78$ & $+0.15$ & $+0.40$ & $+0.37$ & $+0.26$ & $-0.03$ \\
+researcher & A & $+1.78$ & $+0.16$ & $+0.46$ & $+0.34$ & $+0.18$ & $+0.18$ \\
+\midrule
+ghost & D & $-0.94$ & $-0.41$ & $+0.09$ & $-0.14$ & $-0.48$ & $+0.18$ \\
+absurdist & D & $-1.06$ & $+0.89$ & $-0.46$ & $-1.46$ & $-0.66$ & $+0.92$ \\
+wraith & D & $-1.13$ & $-0.57$ & $-0.24$ & $-0.16$ & $-0.61$ & $+0.07$ \\
+vampire & D & $-1.14$ & $-0.12$ & $-0.81$ & $+0.10$ & $+0.00$ & $+0.20$ \\
+tree & D & $-1.17$ & $-0.17$ & $+0.59$ & $-0.64$ & $+0.40$ & $-0.27$ \\
+void & D & $-1.40$ & $-0.80$ & $-1.16$ & $-0.25$ & $-0.43$ & $-0.78$ \\
+leviathan & D & $-1.49$ & $-0.70$ & $-1.05$ & $+0.34$ & $+0.12$ & $+0.24$ \\
+eldritch & D & $-1.54$ & $+0.05$ & $-1.19$ & $+0.40$ & $-0.17$ & $+1.07$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Discussion}
 Three dissociations organise the findings. \textbf{(1) Probing vs steering:} the
@@ -609,7 +643,11 @@ independence under intervention.
 \texttt{bigfive\_basis.npz}, \texttt{direction\_bank.npz},
 \texttt{stage1\_selection.json}, \texttt{steering\_grid.json},
 \texttt{steering\_results.json}, \texttt{stage3\_decomposition.json},
-\texttt{cross\_steering\_matrix.json}, and figures. Code is in
-\texttt{src/bigfive/}.
+\texttt{cross\_steering\_matrix.json}, \texttt{pca\_analysis.json},
+\texttt{role\_bigfive\_profiles.json}, \texttt{role\_analysis.json}, the 17
+per-persona rollout files under \texttt{role\_profiles/}, and figures. Code is in
+\texttt{src/bigfive/} --- including \texttt{pca\_analysis.py} (supervised vs.\ PCA),
+\texttt{role\_profiles.py} (persona rollouts + probe readout), and
+\texttt{role\_analysis.py}.
 
 \end{document}
