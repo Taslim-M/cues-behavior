@@ -1,0 +1,419 @@
+{
+ "roles": {
+  "assistant": {
+   "n": 1200,
+   "aa_proj": 2.193,
+   "traits": {
+    "EXT": {
+     "mean_z": 0.419,
+     "std": 0.089,
+     "range": 0.583
+    },
+    "AGR": {
+     "mean_z": 0.631,
+     "std": 0.075,
+     "range": 0.511
+    },
+    "CSN": {
+     "mean_z": -0.133,
+     "std": 0.086,
+     "range": 0.582
+    },
+    "EST": {
+     "mean_z": 0.261,
+     "std": 0.108,
+     "range": 0.86
+    },
+    "OPN": {
+     "mean_z": -0.132,
+     "std": 0.163,
+     "range": 1.078
+    }
+   }
+  },
+  "consultant": {
+   "n": 1200,
+   "aa_proj": 1.826,
+   "traits": {
+    "EXT": {
+     "mean_z": 0.387,
+     "std": 0.088,
+     "range": 0.603
+    },
+    "AGR": {
+     "mean_z": 0.487,
+     "std": 0.067,
+     "range": 0.484
+    },
+    "CSN": {
+     "mean_z": -0.009,
+     "std": 0.087,
+     "range": 0.638
+    },
+    "EST": {
+     "mean_z": 0.165,
+     "std": 0.095,
+     "range": 0.734
+    },
+    "OPN": {
+     "mean_z": 0.011,
+     "std": 0.15,
+     "range": 0.924
+    }
+   }
+  },
+  "default": {
+   "n": 1200,
+   "aa_proj": 2.011,
+   "traits": {
+    "EXT": {
+     "mean_z": 0.395,
+     "std": 0.088,
+     "range": 0.584
+    },
+    "AGR": {
+     "mean_z": 0.491,
+     "std": 0.074,
+     "range": 0.46
+    },
+    "CSN": {
+     "mean_z": -0.119,
+     "std": 0.086,
+     "range": 0.642
+    },
+    "EST": {
+     "mean_z": 0.49,
+     "std": 0.109,
+     "range": 0.867
+    },
+    "OPN": {
+     "mean_z": -0.158,
+     "std": 0.169,
+     "range": 1.038
+    }
+   }
+  },
+  "eldritch": {
+   "n": 1200,
+   "aa_proj": -1.545,
+   "traits": {
+    "EXT": {
+     "mean_z": 0.151,
+     "std": 0.06,
+     "range": 0.466
+    },
+    "AGR": {
+     "mean_z": -1.085,
+     "std": 0.075,
+     "range": 0.468
+    },
+    "CSN": {
+     "mean_z": 0.374,
+     "std": 0.058,
+     "range": 0.421
+    },
+    "EST": {
+     "mean_z": -0.137,
+     "std": 0.082,
+     "range": 0.559
+    },
+    "OPN": {
+     "mean_z": 1.123,
+     "std": 0.123,
+     "range": 0.812
+    }
+   }
+  },
+  "ghost": {
+   "n": 1200,
+   "aa_proj": -0.935,
+   "traits": {
+    "EXT": {
+     "mean_z": -0.314,
+     "std": 0.065,
+     "range": 0.562
+    },
+    "AGR": {
+     "mean_z": 0.149,
+     "std": 0.061,
+     "range": 0.36
+    },
+    "CSN": {
+     "mean_z": -0.224,
+     "std": 0.076,
+     "range": 0.544
+    },
+    "EST": {
+     "mean_z": -0.442,
+     "std": 0.084,
+     "range": 0.583
+    },
+    "OPN": {
+     "mean_z": 0.25,
+     "std": 0.14,
+     "range": 0.884
+    }
+   }
+  },
+  "instructor": {
+   "n": 1200,
+   "aa_proj": 1.869,
+   "traits": {
+    "EXT": {
+     "mean_z": 0.221,
+     "std": 0.083,
+     "range": 0.676
+    },
+    "AGR": {
+     "mean_z": 0.501,
+     "std": 0.069,
+     "range": 0.482
+    },
+    "CSN": {
+     "mean_z": 0.218,
+     "std": 0.082,
+     "range": 0.591
+    },
+    "EST": {
+     "mean_z": 0.092,
+     "std": 0.087,
+     "range": 0.727
+    },
+    "OPN": {
+     "mean_z": -0.05,
+     "std": 0.153,
+     "range": 1.198
+    }
+   }
+  },
+  "leviathan": {
+   "n": 1200,
+   "aa_proj": -1.492,
+   "traits": {
+    "EXT": {
+     "mean_z": -0.608,
+     "std": 0.062,
+     "range": 0.493
+    },
+    "AGR": {
+     "mean_z": -0.944,
+     "std": 0.075,
+     "range": 0.499
+    },
+    "CSN": {
+     "mean_z": 0.304,
+     "std": 0.063,
+     "range": 0.401
+    },
+    "EST": {
+     "mean_z": 0.149,
+     "std": 0.071,
+     "range": 0.566
+    },
+    "OPN": {
+     "mean_z": 0.306,
+     "std": 0.122,
+     "range": 1.054
+    }
+   }
+  },
+  "planner": {
+   "n": 1200,
+   "aa_proj": 1.831,
+   "traits": {
+    "EXT": {
+     "mean_z": 0.259,
+     "std": 0.083,
+     "range": 0.528
+    },
+    "AGR": {
+     "mean_z": 0.624,
+     "std": 0.064,
+     "range": 0.498
+    },
+    "CSN": {
+     "mean_z": 0.227,
+     "std": 0.085,
+     "range": 0.599
+    },
+    "EST": {
+     "mean_z": 0.147,
+     "std": 0.092,
+     "range": 0.761
+    },
+    "OPN": {
+     "mean_z": -0.199,
+     "std": 0.142,
+     "range": 0.981
+    }
+   }
+  },
+  "summarizer": {
+   "n": 1200,
+   "aa_proj": 2.111,
+   "traits": {
+    "EXT": {
+     "mean_z": 0.274,
+     "std": 0.086,
+     "range": 0.621
+    },
+    "AGR": {
+     "mean_z": 0.369,
+     "std": 0.076,
+     "range": 0.485
+    },
+    "CSN": {
+     "mean_z": -0.042,
+     "std": 0.089,
+     "range": 0.558
+    },
+    "EST": {
+     "mean_z": 0.233,
+     "std": 0.103,
+     "range": 0.873
+    },
+    "OPN": {
+     "mean_z": -0.589,
+     "std": 0.15,
+     "range": 1.001
+    }
+   }
+  },
+  "void": {
+   "n": 1200,
+   "aa_proj": -1.395,
+   "traits": {
+    "EXT": {
+     "mean_z": -0.712,
+     "std": 0.058,
+     "range": 0.414
+    },
+    "AGR": {
+     "mean_z": -1.05,
+     "std": 0.078,
+     "range": 0.48
+    },
+    "CSN": {
+     "mean_z": -0.349,
+     "std": 0.06,
+     "range": 0.501
+    },
+    "EST": {
+     "mean_z": -0.388,
+     "std": 0.075,
+     "range": 0.589
+    },
+    "OPN": {
+     "mean_z": -0.701,
+     "std": 0.122,
+     "range": 0.827
+    }
+   }
+  },
+  "wraith": {
+   "n": 1200,
+   "aa_proj": -1.132,
+   "traits": {
+    "EXT": {
+     "mean_z": -0.471,
+     "std": 0.065,
+     "range": 0.516
+    },
+    "AGR": {
+     "mean_z": -0.173,
+     "std": 0.064,
+     "range": 0.435
+    },
+    "CSN": {
+     "mean_z": -0.247,
+     "std": 0.07,
+     "range": 0.474
+    },
+    "EST": {
+     "mean_z": -0.571,
+     "std": 0.084,
+     "range": 0.567
+    },
+    "OPN": {
+     "mean_z": 0.14,
+     "std": 0.138,
+     "range": 0.989
+    }
+   }
+  }
+ },
+ "groups": {
+  "assistant_like": {
+   "roles": [
+    "assistant",
+    "summarizer",
+    "consultant",
+    "instructor",
+    "planner"
+   ],
+   "trait_mean_z": {
+    "EXT": 0.312,
+    "AGR": 0.522,
+    "CSN": 0.052,
+    "EST": 0.18,
+    "OPN": -0.192
+   },
+   "trait_mean_spread": {
+    "EXT": 0.086,
+    "AGR": 0.07,
+    "CSN": 0.086,
+    "EST": 0.097,
+    "OPN": 0.152
+   }
+  },
+  "drifted": {
+   "roles": [
+    "eldritch",
+    "leviathan",
+    "void",
+    "wraith",
+    "ghost"
+   ],
+   "trait_mean_z": {
+    "EXT": -0.391,
+    "AGR": -0.621,
+    "CSN": -0.028,
+    "EST": -0.278,
+    "OPN": 0.224
+   },
+   "trait_mean_spread": {
+    "EXT": 0.062,
+    "AGR": 0.071,
+    "CSN": 0.065,
+    "EST": 0.079,
+    "OPN": 0.129
+   }
+  }
+ },
+ "aa_correlation": {
+  "EXT": {
+   "r": 0.852,
+   "p": 0.0009
+  },
+  "AGR": {
+   "r": 0.892,
+   "p": 0.0002
+  },
+  "CSN": {
+   "r": 0.031,
+   "p": 0.9268
+  },
+  "EST": {
+   "r": 0.757,
+   "p": 0.007
+  },
+  "OPN": {
+   "r": -0.466,
+   "p": 0.1485
+  }
+ },
+ "spread": {
+  "assistant_like": 0.098,
+  "drifted": 0.081
+ }
+}

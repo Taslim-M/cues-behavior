@@ -1,0 +1,765 @@
+<title>Reading & Writing a Model's Personality — A Field Guide</title>
+<style>
+  :root{
+    --bg:#eef1f5; --bg2:#f6f8fb; --card:#ffffff; --ink:#151a24; --ink-soft:#4a5464;
+    --line:#d9e0ea; --line-soft:#e7ecf3;
+    --warm:#d5703f; --warm-ink:#b65a2c; --cool:#1f938c; --cool-ink:#177a74;
+    --accent:#4b57c9; --accent-soft:#eaecfb;
+    --shadow:0 1px 2px rgba(20,30,50,.05),0 8px 30px rgba(20,30,50,.07);
+    --maxtext:44rem;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono","Roboto Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0c0f16; --bg2:#11151e; --card:#161b26; --ink:#e7ecf4; --ink-soft:#9aa6b8;
+      --line:#262d3b; --line-soft:#1d2431;
+      --warm:#ef9769; --warm-ink:#f0a67e; --cool:#4ec4bb; --cool-ink:#5fd0c7;
+      --accent:#8b96f4; --accent-soft:#1c2138;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 34px rgba(0,0,0,.45);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#eef1f5; --bg2:#f6f8fb; --card:#ffffff; --ink:#151a24; --ink-soft:#4a5464;
+    --line:#d9e0ea; --line-soft:#e7ecf3;
+    --warm:#d5703f; --warm-ink:#b65a2c; --cool:#1f938c; --cool-ink:#177a74;
+    --accent:#4b57c9; --accent-soft:#eaecfb; --shadow:0 1px 2px rgba(20,30,50,.05),0 8px 30px rgba(20,30,50,.07);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0c0f16; --bg2:#11151e; --card:#161b26; --ink:#e7ecf4; --ink-soft:#9aa6b8;
+    --line:#262d3b; --line-soft:#1d2431;
+    --warm:#ef9769; --warm-ink:#f0a67e; --cool:#4ec4bb; --cool-ink:#5fd0c7;
+    --accent:#8b96f4; --accent-soft:#1c2138; --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 34px rgba(0,0,0,.45);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--sans);font-size:17px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxtext);margin:0 auto;padding:0 22px}
+  .wide{max-width:60rem;margin:0 auto;padding:0 22px}
+
+  /* progress rail */
+  #rail{position:fixed;top:0;left:0;height:3px;width:0;z-index:50;
+    background:linear-gradient(90deg,var(--cool),var(--accent),var(--warm));transition:width .1s linear}
+  @media (prefers-reduced-motion:reduce){#rail{transition:none}}
+
+  /* theme toggle */
+  .themebtn{position:fixed;top:14px;right:16px;z-index:60;border:1px solid var(--line);
+    background:var(--card);color:var(--ink-soft);border-radius:999px;padding:7px 13px;
+    font:600 12px/1 var(--sans);cursor:pointer;box-shadow:var(--shadow);letter-spacing:.02em}
+  .themebtn:hover{color:var(--ink)}
+  .themebtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-soft);margin:0 0 12px}
+  h1{font-size:clamp(2.3rem,6vw,3.7rem);line-height:1.03;letter-spacing:-.028em;font-weight:800;
+    text-wrap:balance;margin:.1em 0 .35em}
+  h2{font-size:clamp(1.5rem,3.4vw,2.05rem);line-height:1.12;letter-spacing:-.02em;font-weight:800;
+    text-wrap:balance;margin:0 0 .5em}
+  h3{font-size:1.12rem;font-weight:700;letter-spacing:-.01em;margin:0 0 .35em}
+  p{margin:0 0 1.05em}
+  a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
+  strong{font-weight:700}
+  .lede{font-size:1.22rem;line-height:1.55;color:var(--ink);margin-bottom:1.3em}
+  .muted{color:var(--ink-soft)}
+  .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+  .pole-hi{color:var(--warm-ink);font-weight:700}
+  .pole-lo{color:var(--cool-ink);font-weight:700}
+
+  section{padding:56px 0}
+  .band{background:var(--bg2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+
+  /* hero */
+  .hero{padding:104px 0 60px;position:relative;overflow:hidden}
+  .hero .kicker{display:inline-flex;gap:9px;align-items:center;font-family:var(--mono);font-size:12px;
+    letter-spacing:.1em;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;
+    padding:6px 13px;margin-bottom:26px;background:var(--card)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--warm);box-shadow:0 0 0 4px color-mix(in srgb,var(--warm) 22%,transparent)}
+
+  /* the axis diagram */
+  .axisfig{margin:34px 0 6px}
+  .axisfig .track{position:relative;height:60px;border-radius:14px;
+    background:linear-gradient(90deg,color-mix(in srgb,var(--cool) 24%,var(--card)),var(--card) 46%,var(--card) 54%,color-mix(in srgb,var(--warm) 26%,var(--card)));
+    border:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+  .axisfig .lab{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  .axisfig .knob{position:absolute;top:50%;left:50%;width:26px;height:26px;border-radius:50%;
+    transform:translate(-50%,-50%);background:var(--card);border:2px solid var(--accent);
+    box-shadow:0 2px 10px rgba(0,0,0,.18)}
+  .axisfig .knob::after{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--accent)}
+  .axcap{font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin-top:12px;text-align:center}
+
+  /* stat chips */
+  .chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+  .chip{flex:1 1 130px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+  .chip b{display:block;font-family:var(--mono);font-size:1.5rem;letter-spacing:-.02em;line-height:1}
+  .chip span{font-size:12.5px;color:var(--ink-soft)}
+
+  /* step header */
+  .stepnum{font-family:var(--mono);font-size:13px;letter-spacing:.14em;color:var(--accent);
+    font-weight:700;display:block;margin-bottom:8px}
+
+  /* card / specimen */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+  .card + .card{margin-top:16px}
+  .specimen{margin:26px 0}
+  .spec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .spec-head h3{margin:0}
+  .spec-head .src{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+  .quote{font-size:15px;line-height:1.55;color:var(--ink-soft);border-left:3px solid var(--line);
+    padding:2px 0 2px 15px;margin:12px 0 18px;font-style:italic}
+
+  /* trait bars */
+  .bars{display:grid;gap:9px}
+  .bar{display:grid;grid-template-columns:52px 1fr 42px;align-items:center;gap:12px}
+  .bar .t{font-family:var(--mono);font-size:12px;color:var(--ink-soft);letter-spacing:.04em}
+  .bar .track{height:10px;border-radius:6px;background:var(--line-soft);overflow:hidden;position:relative}
+  .bar .fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--cool),var(--warm))}
+  .bar .v{font-family:var(--mono);font-size:12px;text-align:right;font-variant-numeric:tabular-nums}
+
+  /* pipeline mini */
+  .flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:10px;margin:22px 0 4px}
+  .flow .n{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px;text-align:center;position:relative}
+  .flow .n .k{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.08em}
+  .flow .n .d{font-size:13px;margin-top:3px;line-height:1.3}
+
+  /* readout meter */
+  .readout{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:6px 0 2px}
+  .rho{font-family:var(--mono);font-size:2.6rem;font-weight:700;letter-spacing:-.02em;line-height:1;color:var(--warm-ink)}
+
+  /* steering interactive */
+  .steer{margin-top:22px}
+  .traitrow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .tbtn{font-family:var(--mono);font-size:12.5px;letter-spacing:.03em;border:1px solid var(--line);
+    background:var(--card);color:var(--ink-soft);border-radius:999px;padding:8px 14px;cursor:pointer;transition:.15s}
+  .tbtn:hover{color:var(--ink);border-color:var(--ink-soft)}
+  .tbtn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .tbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .prompt{font-size:14px;color:var(--ink-soft);margin-bottom:14px}
+  .prompt b{color:var(--ink);font-weight:600}
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:640px){.twocol{grid-template-columns:1fr}}
+  .resp{border:1px solid var(--line);border-radius:14px;padding:16px 17px;background:var(--card);min-height:100%}
+  .resp .tag{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:7px;margin-bottom:10px}
+  .resp .tag::before{content:"";width:8px;height:8px;border-radius:50%}
+  .resp.base{border-color:color-mix(in srgb,var(--warm) 45%,var(--line))}
+  .resp.base .tag{color:var(--warm-ink)} .resp.base .tag::before{background:var(--warm)}
+  .resp.low{border-color:color-mix(in srgb,var(--cool) 45%,var(--line))}
+  .resp.low .tag{color:var(--cool-ink)} .resp.low .tag::before{background:var(--cool)}
+  .resp p{font-size:14.5px;line-height:1.55;margin:0}
+  .cfg{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:14px}
+
+  /* likert shift bars */
+  .lik{display:grid;gap:11px;margin-top:6px}
+  .lik .row{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:center}
+  .lik .t{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+  .lik .seg{position:relative;height:26px;background:var(--line-soft);border-radius:7px;overflow:hidden}
+  .lik .b{position:absolute;top:0;bottom:0;left:0;background:color-mix(in srgb,var(--warm) 30%,var(--card));border-right:2px solid var(--warm)}
+  .lik .l{position:absolute;top:0;bottom:0;background:color-mix(in srgb,var(--cool) 34%,var(--card));border-right:2px solid var(--cool)}
+  .lik .v{position:absolute;font-family:var(--mono);font-size:11px;top:50%;transform:translateY(-50%)}
+
+  /* specificity grid */
+  .heat{overflow-x:auto;margin-top:8px}
+  table.heat-t{border-collapse:collapse;font-family:var(--mono);font-size:12px;margin:0 auto}
+  .heat-t th{color:var(--ink-soft);font-weight:500;padding:5px 7px;letter-spacing:.04em}
+  .heat-t td{width:44px;height:40px;text-align:center;border:1px solid var(--bg);border-radius:4px;
+    color:#fff;font-variant-numeric:tabular-nums}
+  .heat-t .rh{color:var(--ink-soft);border:none;background:none;text-align:right;padding-right:9px}
+
+  /* takeaway cards */
+  .diss{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:8px}
+  .diss .d{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 19px;box-shadow:var(--shadow)}
+  .diss .d .k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+  .diss .d h3{font-size:1.02rem}
+  .diss .d p{font-size:14px;margin:0;color:var(--ink-soft)}
+
+  /* role coda: diverging profile bars */
+  .rbar{display:grid;grid-template-columns:58px 1fr;gap:12px;align-items:center;margin:9px 0}
+  .rbar .t{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+  .rbar .lane{position:relative;height:22px;background:var(--line-soft);border-radius:6px}
+  .rbar .mid{position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:var(--ink-soft);opacity:.4}
+  .rbar .seg{position:absolute;top:0;bottom:0;border-radius:4px}
+  .rbar .warm{background:color-mix(in srgb,var(--warm) 62%,var(--card))}
+  .rbar .cool{background:color-mix(in srgb,var(--cool) 62%,var(--card))}
+  /* role correlation row */
+  .rcorr{display:flex;flex-wrap:wrap;gap:10px}
+  .rcorr .c{flex:1 1 90px;border:1px solid var(--line);border-radius:11px;padding:11px 12px;text-align:center;background:var(--bg2)}
+  .rcorr .c .t{font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:.05em}
+  .rcorr .c .r{font-family:var(--mono);font-size:1.4rem;font-weight:700;letter-spacing:-.02em;line-height:1.3}
+
+  /* pca detour */
+  .pcpair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+  @media (max-width:640px){.pcpair{grid-template-columns:1fr}}
+  .pcbox{border:1px solid var(--line);border-radius:12px;padding:14px 15px;background:var(--bg2)}
+  .pctag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+  .pcname{font-weight:700;font-size:1.02rem;margin:4px 0 10px;letter-spacing:-.01em}
+  .pcends{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:12.5px;line-height:1.35}
+  .pcends .lo{color:var(--cool-ink)} .pcends .hi{color:var(--warm-ink)}
+  .pcends .arrow{color:var(--ink-soft)}
+  .pcgridcap{font-size:11px;color:var(--ink-soft);margin:0 0 8px}
+
+  .callout{background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line));
+    border-radius:14px;padding:18px 20px;margin:20px 0}
+  .callout p{margin:0;font-size:15px}
+  .verdict{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+    padding:3px 9px;border-radius:6px;text-transform:uppercase;font-weight:600}
+  .v-yes{background:color-mix(in srgb,var(--cool) 20%,transparent);color:var(--cool-ink)}
+  .v-no{background:color-mix(in srgb,var(--warm) 20%,transparent);color:var(--warm-ink)}
+  .v-part{background:var(--accent-soft);color:var(--accent)}
+
+  footer{padding:52px 0 70px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:14px}
+  footer a{font-weight:600}
+  .reveal{opacity:0;transform:translateY(14px)}
+  .reveal.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+  hr.sep{border:none;border-top:1px solid var(--line);margin:0}
+</style>
+
+<div id="rail"></div>
+<button class="themebtn" id="themebtn" type="button">◐ Theme</button>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker"><span class="dot"></span> Mechanistic interpretability · Llama-3.3-70B</span>
+    <h1>Reading &amp; writing a language&nbsp;model's personality.</h1>
+    <p class="lede">Inside a large language model, a personality trait turns out to be a single
+      <em>direction</em> — a line through the model's internal activity. Find that line and you can
+      <span class="pole-lo">read</span> how extraverted or agreeable the model is being. Push along
+      it and you can <span class="pole-hi">rewrite</span> that trait. This is a field guide to how
+      we found those directions, what they mean, and what happens when we steer.</p>
+
+    <div class="axisfig">
+      <div class="track">
+        <span class="lab" style="color:var(--cool-ink)">◄ less of the trait</span>
+        <span class="lab" style="color:var(--warm-ink)">more of the trait ►</span>
+        <div class="knob" id="knob"></div>
+      </div>
+      <div class="axcap">one trait &nbsp;=&nbsp; one direction &nbsp;=&nbsp; one dial you can turn</div>
+    </div>
+  </div>
+</header>
+
+<!-- THE QUESTION -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The question</p>
+    <h2>Is personality something you can find — and move — in the wiring?</h2>
+    <p>Psychologists compress human personality into five dimensions: Extraversion, Agreeableness,
+      Conscientiousness, Emotional Stability, and Openness — the <strong>Big Five</strong>. We asked
+      whether those five dimensions live as clean, usable directions inside
+      <span class="mono">Llama&#8209;3.3&#8209;70B</span>, and — the real prize — whether the model's own
+      default "helpful Assistant" personality is just a particular Big&nbsp;Five profile, or something else
+      entirely.</p>
+    <div class="chips">
+      <div class="chip"><b>406</b><span>fictional characters used as personality specimens</span></div>
+      <div class="chip"><b>5</b><span>Big Five trait directions, per layer</span></div>
+      <div class="chip"><b>80&times;8192</b><span>layers &times; dimensions of activation space</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 1: DATA -->
+<section class="band">
+  <div class="wrap">
+    <span class="stepnum">STEP 01 · THE DATA</span>
+    <h2>Teach it personality with characters it already knows</h2>
+    <p>We can't survey a model about its "true self," but it has read enough fiction to role-play
+      almost anyone. So we handed it a real 50-question personality quiz (the IPIP inventory) and asked
+      it to answer <em>as</em> 406 fictional characters — from Tony Soprano to Leslie Knope. Each
+      character's answers become a personality score; the model's written explanations become a rich
+      description we can feed back in.</p>
+
+    <div class="specimen card">
+      <div class="spec-head">
+        <h3>Specimen · Sterling Archer</h3>
+        <span class="src mono">Archer — 50-item IPIP self-report</span>
+      </div>
+      <p class="quote">"I feel little concern for others." → <span class="pole-hi">Strongly agree.</span>
+        I'm a highly skilled and incredibly dangerous spy, which tends to put my own interests and
+        survival above the well-being of those around me — except maybe for Mother…</p>
+      <div class="bars" id="archerbars">
+        <div class="bar"><span class="t">EXT</span><div class="track"><div class="fill" style="width:94%"></div></div><span class="v">47</span></div>
+        <div class="bar"><span class="t">AGR</span><div class="track"><div class="fill" style="width:30%"></div></div><span class="v">15</span></div>
+        <div class="bar"><span class="t">CSN</span><div class="track"><div class="fill" style="width:44%"></div></div><span class="v">22</span></div>
+        <div class="bar"><span class="t">EST</span><div class="track"><div class="fill" style="width:62%"></div></div><span class="v">31</span></div>
+        <div class="bar"><span class="t">OPN</span><div class="track"><div class="fill" style="width:84%"></div></div><span class="v">42</span></div>
+      </div>
+      <p class="cfg">scored out of 50 · loud &amp; charming (high EXT) but cold &amp; reckless (rock-bottom AGR) — exactly right for Archer.</p>
+    </div>
+
+    <p>The scores are strikingly sensible. The least-extraverted character in the whole set is
+      <strong>Ron Swanson</strong>; the least agreeable are <strong>Mr.&nbsp;Burns</strong> and
+      <strong>Lord&nbsp;Voldemort</strong>; the least conscientious is <strong>Homer&nbsp;Simpson</strong>;
+      the most open are <strong>Dr.&nbsp;Strange</strong> and <strong>Jean-Luc&nbsp;Picard</strong>. The model
+      clearly <em>knows</em> these people — which means its internal activity while "being" them carries
+      real personality signal.</p>
+  </div>
+</section>
+
+<!-- STEP 2: PROBE -->
+<section>
+  <div class="wrap">
+    <span class="stepnum">STEP 02 · THE PROBE</span>
+    <h2>Find the one direction that predicts a trait</h2>
+    <p>As the model reads each character description, we record its internal activations — 8,192 numbers
+      at each of 80 layers. Then we ask a simple question: <em>is there a single direction in that
+      8,192-dimensional space along which characters line up from low to high on a trait?</em> Fitting
+      one (with ridge regression) gives us a <strong>probe</strong> — a personality "meter" you point at
+      the activations.</p>
+
+    <div class="flow">
+      <div class="n"><div class="k">INPUT</div><div class="d">character description</div></div>
+      <div class="n"><div class="k">RECORD</div><div class="d">internal activations</div></div>
+      <div class="n"><div class="k">FIT</div><div class="d">one direction per trait</div></div>
+      <div class="n"><div class="k">READ</div><div class="d">project → trait score</div></div>
+    </div>
+
+    <div class="card" style="margin-top:22px">
+      <div class="readout">
+        <span class="rho mono">ρ ≈ 0.95</span>
+        <div>
+          <h3 style="margin:0">The probes work — almost perfectly.</h3>
+          <p class="muted" style="margin:2px 0 0;font-size:14.5px">Held-out rank correlation between the
+            probe's reading and the true trait, on characters it never saw during fitting.
+            All five traits land between <span class="mono">0.93</span> and <span class="mono">0.98</span>.</p>
+        </div>
+      </div>
+      <hr class="sep" style="margin:16px 0">
+      <p style="margin:0;font-size:14.5px" class="muted">The five trait directions are also nearly
+        <strong>perpendicular</strong> to each other (largest overlap <span class="mono">|cos| = 0.11</span>) —
+        so "how agreeable" and "how conscientious" are read along genuinely separate axes, not one blurry
+        blob. The directions live in the <strong>middle layers</strong> (around layer 30&ndash;36), where the
+        model has moved past raw words into meaning.</p>
+    </div>
+
+    <div class="callout">
+      <p><strong>What this really means.</strong> Personality isn't smeared randomly across the network.
+        For each trait there's a clean, single line you can point at the model's "thoughts" and read off
+        how much of that trait it's currently expressing — without asking it a thing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INTERLUDE: SUPERVISED VS UNSUPERVISED -->
+<section class="band">
+  <div class="wrap">
+    <span class="stepnum">A DETOUR · DID THE TRAITS FALL OUT ON THEIR OWN?</span>
+    <h2>Do we even need the labels?</h2>
+    <p>Fitting a probe uses the trait <em>scores</em> as an answer key. A fair question: could we skip the
+      labels entirely and just ask what the biggest patterns of variation across characters <em>are</em>
+      — using PCA, the standard "find the loudest directions" tool? (This is exactly how the Assistant Axis
+      was discovered — unsupervised.) So we tried it here.</p>
+
+    <p>The answer is a revealing <strong>partly</strong>. Two traits pop straight out as the loudest axes
+      — but the other three stay hidden.</p>
+
+    <div class="card">
+      <div class="pcpair">
+        <div class="pcbox">
+          <div class="pctag">Loudest axis · PC1</div>
+          <div class="pcname">≈ Conscientiousness / competence</div>
+          <div class="pcends">
+            <span class="lo">Dumbledore · Dr. Strange · Varys</span>
+            <span class="arrow">↔</span>
+            <span class="hi">A.J. Soprano · Kevin Malone · Luke Dunphy</span>
+          </div>
+        </div>
+        <div class="pcbox">
+          <div class="pctag">2nd axis · PC2</div>
+          <div class="pcname">≈ Agreeableness / antagonism</div>
+          <div class="pcends">
+            <span class="lo">Lisa Simpson · Cho Chang</span>
+            <span class="arrow">↔</span>
+            <span class="hi">Logan Roy · Avon Barksdale · Chris Partlow</span>
+          </div>
+        </div>
+      </div>
+      <p class="pcgridcap mono">how strongly each unsupervised axis matches each trait — bright = strong</p>
+      <div class="heat"><table class="heat-t" id="pcgrid"></table></div>
+      <p class="cfg" style="margin-top:12px">Only PC1 (Conscientiousness) and PC2 (Agreeableness) light up.
+        Extraversion, Emotional&nbsp;Stability and Openness are scattered across faint, lower axes — the
+        unsupervised view simply misses them.</p>
+    </div>
+
+    <div class="callout">
+      <p><strong>Why the two projects use different tools.</strong> PCA finds a persona axis instantly when
+        the characters vary along <em>one</em> dominant theme — which is exactly the Assistant Axis's world
+        (assistant vs. not). But Big&nbsp;Five is <em>five</em> themes, and three of them are quiet. So to
+        get a clean dial for every trait you need the labels after all. Our steered dials are built from the
+        supervised probes for precisely this reason — PCA alone would have handed us no usable
+        Extraversion, Emotional-Stability, or Openness lever.</p>
+    </div>
+    <p class="muted" style="font-size:14px">A neat rhyme: the single loudest personality axis across all
+      406 characters — competence / Conscientiousness — is also the trait that most closely
+      <em>describes</em> the model's Assistant persona later on.</p>
+  </div>
+</section>
+
+<!-- STEP 3: STEER -->
+<section class="band">
+  <div class="wide">
+    <span class="stepnum">STEP 03 · STEERING</span>
+    <h2>If a direction <em>predicts</em> a trait, add it to <em>push</em> the trait</h2>
+    <p style="max-width:var(--maxtext)">A probe only reads. But the same direction is also a lever: while
+      the model generates, we can nudge its activations along the trait line. Nudge toward the
+      <span class="pole-hi">warm</span> end for more of the trait, toward the <span class="pole-lo">cool</span>
+      end for less. The trick is <em>how</em> you push — a gentle nudge at one spot does little, but a
+      firm, coordinated push across many layers moves the behaviour cleanly (without turning the output to
+      gibberish).</p>
+
+    <div class="steer card">
+      <div class="traitrow" id="traitrow" role="group" aria-label="Choose a trait to steer down">
+        <button class="tbtn" data-k="AGR" aria-pressed="true" type="button">▼ Agreeableness</button>
+        <button class="tbtn" data-k="EXT" aria-pressed="false" type="button">▼ Extraversion</button>
+        <button class="tbtn" data-k="CSN" aria-pressed="false" type="button">▼ Conscientiousness</button>
+        <button class="tbtn" data-k="OPN" aria-pressed="false" type="button">▼ Openness</button>
+      </div>
+      <p class="prompt">Same prompt, both times: <b id="s-prompt"></b></p>
+      <div class="twocol">
+        <div class="resp base">
+          <span class="tag">Default model</span>
+          <p id="s-base"></p>
+        </div>
+        <div class="resp low">
+          <span class="tag" id="s-lowtag">Steered down</span>
+          <p id="s-low"></p>
+        </div>
+      </div>
+      <p class="cfg" id="s-cfg"></p>
+    </div>
+    <p style="max-width:var(--maxtext);margin-top:20px" class="muted">These are <strong>real,
+      unedited</strong> generations from the model — the only difference between the two columns is a vector
+      quietly added to its activations. Turn down Agreeableness and the helpful assistant becomes
+      <span class="pole-lo">"don't cater to incompetence."</span> Turn down Conscientiousness and its careful
+      plan dissolves into procrastination.</p>
+  </div>
+</section>
+
+<!-- WHAT STEERING DOES / caveats -->
+<section>
+  <div class="wrap">
+    <span class="stepnum">STEP 04 · WHAT IT MOVES, AND WHAT LEAKS</span>
+    <h2>The dial turns — but it isn't perfectly clean</h2>
+    <p>Re-giving the model the full personality quiz <em>while</em> steering confirms the effect
+      numerically. Pushing toward the cool end lowers the measured trait score every time — most
+      dramatically for Agreeableness, which drops from <span class="mono">34.9</span> to
+      <span class="mono">18.9</span> out of 50.</p>
+
+    <div class="card">
+      <h3 style="margin-bottom:12px">Measured trait score, default vs. steered-down</h3>
+      <div class="lik" id="likert"></div>
+      <p class="cfg" style="margin-top:14px">Bars: <span style="color:var(--warm-ink)">■ default</span> ·
+        <span style="color:var(--cool-ink)">■ steered down</span>. One quirk we found: with no persona at
+        all, the model rates <em>itself</em> high on every trait — the default Assistant is agreeable,
+        organized, calm and curious by nature — so there's more room to steer down than up.</p>
+    </div>
+
+    <h3 style="margin:30px 0 6px">Does steering one trait leave the others alone?</h3>
+    <p>Only sometimes. When we steer each trait and watch all five, some dials are clean and some bleed
+      into their neighbours. Agreeableness and Emotional Stability move in near-isolation; <strong>Openness
+      is leaky</strong> — pushing it also drags Conscientiousness and Emotional Stability along. So the
+      directions are separate when you <em>read</em> them, yet interfere when you <em>push</em> them.</p>
+
+    <div class="card heat">
+      <table class="heat-t" id="heat">
+        <caption class="mono" style="caption-side:top;color:var(--ink-soft);font-size:11px;text-align:left;padding-bottom:8px">
+          how much steering the ROW trait moves the COLUMN trait (bigger = more effect)</caption>
+      </table>
+    </div>
+    <p class="cfg" style="margin-top:10px">A perfectly specific set of dials would light up only down the
+      diagonal. Two of five do; Openness clearly doesn't.</p>
+  </div>
+</section>
+
+<!-- THE TWIST: ASSISTANT AXIS -->
+<section class="band">
+  <div class="wrap">
+    <span class="stepnum">STEP 05 · THE TWIST</span>
+    <h2>Is "the helpful Assistant" just a Big Five profile?</h2>
+    <p>There's a separately-discovered direction called the <strong>Assistant Axis</strong> — it measures
+      how much like its trained, helpful default persona the model is being right now. With a Big Five basis
+      in hand, we could finally ask: <em>is being "the Assistant" simply a mix of high agreeableness,
+      conscientiousness, and so on?</em></p>
+
+    <p>Mostly <strong>no</strong>. At the layers that matter, the Assistant Axis is almost
+      <em>perpendicular</em> to every Big Five direction, and Big Five explains under half of what makes a
+      character "Assistant-like" — leaving a <strong>53% remainder</strong> orthogonal to human personality.
+      Fittingly, the single biggest outlier — the persona that's far more "Assistant" than its Big Five
+      profile predicts — is the <span class="mono">assistant</span> role itself.</p>
+
+    <div class="callout" style="background:var(--card);border-color:var(--line)">
+      <p><strong>An "AI-ness" that isn't on the human map.</strong> The helpful-Assistant persona isn't a
+        point in personality space. It's a largely separate attractor — something the model became in
+        training that human personality vocabulary can't fully name.</p>
+    </div>
+
+    <h3 style="margin:28px 0 6px">…but one human lever still moves it</h3>
+    <p>Describing isn't the same as controlling. When we actually <em>steer</em> each trait and watch the
+      Assistant Axis, four traits barely budge it — but <strong>Agreeableness</strong> is a powerful lever.
+      Make the model disagreeable and it slides right off the Assistant persona:</p>
+
+    <div class="card" style="margin-top:8px">
+      <div class="axisfig" style="margin:6px 0 0">
+        <div class="track" style="background:linear-gradient(90deg,color-mix(in srgb,var(--cool) 22%,var(--card)),var(--card) 60%,color-mix(in srgb,var(--warm) 26%,var(--card)))">
+          <span class="lab" style="color:var(--cool-ink)">◄ off the Assistant</span>
+          <span class="lab" style="color:var(--warm-ink)">fully the Assistant ►</span>
+          <div class="knob" style="left:14%" title="disagreeable"></div>
+          <div class="knob" style="left:88%;border-color:var(--warm);opacity:.85" title="default"></div>
+        </div>
+        <div class="axcap">Assistant-Axis reading: default <span class="mono pole-hi">+1.63</span>
+          &nbsp;→&nbsp; agreeableness turned down <span class="mono pole-lo">−0.10</span></div>
+      </div>
+    </div>
+    <p class="muted" style="font-size:14.5px;margin-top:16px">Notice the twist within the twist: the trait
+      that <em>best describes</em> Assistant-ness on paper is Conscientiousness — but the trait that actually
+      <em>moves</em> it is Agreeableness. What a direction correlates with, and what it causes, are not the
+      same thing.</p>
+  </div>
+</section>
+
+<!-- TAKEAWAYS -->
+<section>
+  <div class="wide">
+    <p class="eyebrow">What we learned</p>
+    <h2 style="max-width:var(--maxtext)">Three places where reading, correlating, and causing come apart</h2>
+    <div class="diss">
+      <div class="d">
+        <div class="k">Read ≠ Steer</div>
+        <h3>A near-perfect meter is a mediocre lever</h3>
+        <p>The same direction reads a trait at ρ≈0.95, yet needs a strong multi-layer push to steer — and
+          the naïve nudge just breaks the output.</p>
+      </div>
+      <div class="d">
+        <div class="k">Separate ≠ Independent</div>
+        <h3>Perpendicular directions still interfere</h3>
+        <p>The five trait directions barely overlap in geometry, yet steering Openness drags other traits
+          with it. Orthogonal to read, entangled to push.</p>
+      </div>
+      <div class="d">
+        <div class="k">Describe ≠ Cause</div>
+        <h3>The best descriptor isn't the real lever</h3>
+        <p>Conscientiousness best <em>describes</em> the Assistant; Agreeableness is what actually
+          <em>moves</em> it off that persona.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:24px">
+      <h3>The five questions we set out to answer</h3>
+      <div style="display:grid;gap:10px;margin-top:12px;font-size:14.5px">
+        <div><span class="verdict v-yes">confirmed</span> &nbsp;<strong>Steerable.</strong> A strong intervention moves every trait full-range where the naïve one fails.</div>
+        <div><span class="verdict v-yes">shown</span> &nbsp;<strong>Read ≠ steer.</strong> The best probe recipe isn't the best steering recipe.</div>
+        <div><span class="verdict v-no">no</span> &nbsp;<strong>Assistant ≈ Big Five?</strong> Over half of Assistant-ness is orthogonal "AI-ness."</div>
+        <div><span class="verdict v-part">partial</span> &nbsp;<strong>Causal tie.</strong> Lowering Agreeableness pushes the model off the Assistant persona.</div>
+        <div><span class="verdict v-no">2 of 5</span> &nbsp;<strong>Specific?</strong> Clean for Agreeableness &amp; Emotional Stability; Openness leaks.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CODA: WHERE THE PERSONAS LAND -->
+<section class="band">
+  <div class="wrap">
+    <span class="stepnum">CODA · WHERE THE PERSONAS ACTUALLY LAND</span>
+    <h2>Reading the Big Five of the model's own personas</h2>
+    <p>One more experiment closes the loop. The Assistant Axis is built from 275 <em>personas</em> the
+      model can adopt — from helpful "assistant" and "consultant" to otherworldly "eldritch" and "void."
+      We took the personas closest to the Assistant and the ones most <em>drifted</em> from it, had the
+      model answer 240 questions in each persona (1,200 responses each), and pointed our five Big Five
+      probes at its <em>responses</em>. So each persona gets a measured Big Five profile — and we can ask
+      what "drifting off the Assistant" <em>is</em>, in personality terms.</p>
+
+    <p>It has a remarkably clean signature. As personas drift away from the Assistant, they become
+      <span class="pole-lo">colder, more withdrawn, and less stable</span> — but <span class="pole-hi">more
+      imaginative</span>.</p>
+
+    <div class="card">
+      <h3 style="margin-bottom:4px">Big Five profile: Assistant-like vs. drifted personas</h3>
+      <p class="cfg" style="margin:0 0 14px">bars show each group's average reading, standardized; right =
+        more of the trait</p>
+      <div id="rolebars"></div>
+      <p class="cfg" style="margin-top:12px"><span style="color:var(--warm-ink)">■ Assistant-like</span>
+        (assistant, summarizer, consultant, instructor, planner) ·
+        <span style="color:var(--cool-ink)">■ drifted</span> (eldritch, leviathan, void, wraith, ghost)</p>
+    </div>
+
+    <p style="margin-top:22px">Ranking all eleven personas by how Assistant-like they are and correlating
+      that with each trait tells the same story in one line — and it lands on the trait we already knew was
+      the <em>causal</em> lever:</p>
+
+    <div class="card">
+      <div id="rolecorr"></div>
+      <p class="cfg" style="margin-top:12px">Correlation between a persona's Assistant-Axis position and its
+        Big Five reading, across the eleven personas.</p>
+    </div>
+
+    <div class="callout">
+      <p><strong>Agreeableness is the through-line.</strong> The persona side, the steering side, and now
+        the profile side all agree: <strong>Agreeableness</strong> is what most closely tracks — and moves —
+        the Assistant. Extraversion and Emotional Stability follow. Openness runs the <em>opposite</em> way
+        (the strange personas are the imaginative ones — "eldritch" scores the highest Openness of all), and
+        <strong>Conscientiousness is decoupled entirely</strong> (r ≈ 0.03): being organized has nothing to
+        do with being the Assistant.</p>
+    </div>
+
+    <p class="muted" style="font-size:14.5px">Two honest wrinkles. This response-level readout puts
+      Agreeableness — not Conscientiousness — as the top correlate of Assistant-ness, where the earlier
+      role-vector regression had leaned on Conscientiousness; different readouts, and the causal test sides
+      with Agreeableness. And the personas are barely more <em>erratic</em> than the Assistant ones: within
+      a single persona the Big Five readings vary about as much either way (drifted personas are, if
+      anything, a touch <em>more</em> consistent). Drifting changes <em>which</em> personality the model
+      has, not how steadily it holds it.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="color:var(--ink)"><strong>Under the hood.</strong> All results come from
+      <span class="mono">meta-llama/Llama-3.3-70B-Instruct</span>. Probes are ridge-regression directions on
+      residual-stream activations over 406 characters; steering adds those directions back during
+      generation; the Assistant-Axis analysis reuses published axis vectors. Every number here is measured,
+      and every steered quote is a real, unedited generation.</p>
+    <p>The full technical write-up — methods, all five pre-registered hypotheses, tables, and deviations —
+      lives in the 10-page report <span class="mono">bigfive_report.pdf</span>. One test remains unrun: a
+      multi-turn "persona drift" study.</p>
+    <p class="muted" style="font-size:13px;margin-top:18px">A field guide to reading and writing model
+      personality · generated as a project explainer.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  // theme toggle
+  var root=document.documentElement, tb=document.getElementById('themebtn');
+  function cur(){var e=root.getAttribute('data-theme'); if(e) return e;
+    return matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';}
+  tb.addEventListener('click',function(){
+    var n=cur()==='dark'?'light':'dark'; root.setAttribute('data-theme',n);
+    tb.textContent=(n==='dark'?'☀ Light':'☾ Dark');
+  });
+
+  // progress rail
+  var rail=document.getElementById('rail');
+  function prog(){var h=document.documentElement,
+    m=(h.scrollTop)/(h.scrollHeight-h.clientHeight||1);
+    rail.style.width=Math.max(0,Math.min(1,m))*100+'%';}
+  addEventListener('scroll',prog,{passive:true}); prog();
+
+  // hero knob drift
+  var knob=document.getElementById('knob'), t0=null, reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(knob&&!reduce){function anim(ts){if(t0===null)t0=ts;var s=(ts-t0)/1000;
+    knob.style.left=(50+34*Math.sin(s*0.7))+'%';requestAnimationFrame(anim);}requestAnimationFrame(anim);}
+
+  // steering data — real, unedited generations (trimmed with … for length)
+  var EX={
+    AGR:{name:"Agreeableness",cfg:"norm-scaled steer · layers 24–40 · c = −0.20",
+      prompt:"A new coworker asks me to explain, again, how to submit an expense report. Write my reply.",
+      base:"“Hi [coworker], I'd be happy to walk you through the expense report process again. To submit one: 1. Log in to our expense system with your username. 2. Click 'Create New Report' and pick the date range. 3. Enter each expense with the date, amount, and a brief description. 4. Attach any supporting…”",
+      low:"Don't waste your time. Here's the solution: don't cater to incompetence."},
+    EXT:{name:"Extraversion",cfg:"additive steer · all layers · α = −0.20",
+      prompt:"Describe how I'd like to spend a free Saturday evening.",
+      base:"A free Saturday evening sounds like a wonderful treat. You'd probably start by taking a deep breath, feeling the weight of the week lift off your shoulders… putting on your comfiest clothes, settling into your favorite spot on the couch, and indulging in something relaxing like a book…",
+      low:"I don't have any information about your personal preferences. This is the start of our conversation, and I don't have any prior knowledge about you. If you'd like to share how you'd like to spend it, I can try to make an educated guess."},
+    CSN:{name:"Conscientiousness",cfg:"norm-scaled steer · layers 20–44 · c = −0.10",
+      prompt:"I have a big project due in two weeks. Describe how I'll approach it.",
+      base:"You'll want to approach it in a strategic, organized way. Here's a step-by-step guide. Day 1–2: Planning &amp; Research (4–6 hours). 1. Review the project brief carefully. 2. Break the project into smaller, manageable tasks…",
+      low:"The project. It's a big, looming thing, due in two weeks. You'll probably start by putting it off for a bit, telling yourself you have plenty of time. But later is a flexible concept… you'll get distracted by TV, or video games, or just browsing the internet, and before…"},
+    OPN:{name:"Openness",cfg:"norm-scaled steer · layers 24–40 · c = −0.20",
+      prompt:"A friend asks what I think about for fun. Write my reply.",
+      base:"You know, I'm a bit of a daydreamer, so I think about all sorts of things for fun. Sometimes I'll imagine traveling to new places—exploring a hidden city or trying local foods abroad. Other times, creative projects: writing a story, making music. I also love to people-watch and invent backstories…",
+      low:"I don't think about things that make me worry about work or what I have to do tomorrow. I just like watching TV or going to the place where I can get food that I don't have to pay for. I don't want to think about what I have to pay for…"}
+  };
+  var order=["AGR","EXT","CSN","OPN"];
+  var el={p:document.getElementById('s-prompt'),b:document.getElementById('s-base'),
+    l:document.getElementById('s-low'),c:document.getElementById('s-cfg'),t:document.getElementById('s-lowtag')};
+  function show(k){var e=EX[k];
+    el.p.textContent=e.prompt; el.b.innerHTML=e.base; el.l.innerHTML=e.low;
+    el.t.textContent="Steered: less "+e.name; el.c.textContent=e.cfg;}
+  document.getElementById('traitrow').addEventListener('click',function(ev){
+    var btn=ev.target.closest('.tbtn'); if(!btn)return;
+    [].forEach.call(this.querySelectorAll('.tbtn'),function(b){b.setAttribute('aria-pressed','false');});
+    btn.setAttribute('aria-pressed','true'); show(btn.getAttribute('data-k'));});
+  show('AGR');
+
+  // likert shift bars (score out of 50; scale 10–50 -> 0–100%)
+  var LIK=[["EXT",34.8,31.7],["AGR",34.9,18.9],["CSN",34.1,30.2],["EST",33.2,29.1],["OPN",34.5,29.7]];
+  function pct(v){return Math.max(0,Math.min(100,(v-10)/40*100));}
+  var lc=document.getElementById('likert');
+  LIK.forEach(function(r){
+    var row=document.createElement('div'); row.className='row';
+    row.innerHTML='<span class="t">'+r[0]+'</span><div class="seg">'+
+      '<div class="b" style="width:'+pct(r[1])+'%"></div>'+
+      '<div class="l" style="width:'+pct(r[2])+'%"></div>'+
+      '<span class="v" style="left:'+(pct(r[2])+2)+'%;color:var(--cool-ink)">'+r[2].toFixed(1)+'</span>'+
+      '<span class="v" style="left:'+(pct(r[1])+2)+'%;color:var(--warm-ink)">'+r[1].toFixed(1)+'</span>'+
+      '</div>';
+    lc.appendChild(row);});
+
+  // specificity heatmap
+  var TR=["EXT","AGR","CSN","EST","OPN"];
+  var SW={EXT:{EXT:.68,AGR:0,CSN:0,EST:.10,OPN:.38},AGR:{EXT:.20,AGR:.90,CSN:.27,EST:0,OPN:.27},
+    CSN:{EXT:.60,AGR:0,CSN:1.0,EST:0,OPN:.07},EST:{EXT:0,AGR:0,CSN:.07,EST:.93,OPN:0},
+    OPN:{EXT:.37,AGR:.15,CSN:.60,EST:.80,OPN:.40}};
+  function heatcol(v){ // teal(low)→warm(high) through neutral
+    var t=Math.max(0,Math.min(1,v));
+    var c1=[31,147,140], c2=[213,112,63], g=[150,160,175];
+    var a=t<0.5?g:c2, b=t<0.5?c1:c2, m=t; // simple: blend neutral->warm by magnitude
+    var r=Math.round(g[0]+(c2[0]-g[0])*t), gr=Math.round(g[1]+(c2[1]-g[1])*t), bl=Math.round(g[2]+(c2[2]-g[2])*t);
+    return 'rgb('+r+','+gr+','+bl+')';}
+  var tbl=document.getElementById('heat');
+  var head='<tr><th class="rh"></th>'+TR.map(function(t){return '<th>'+t+'</th>';}).join('')+'</tr>';
+  var rows=TR.map(function(ri){
+    return '<tr><td class="rh">'+ri+'</td>'+TR.map(function(ci){
+      var v=SW[ri][ci]; return '<td style="background:'+heatcol(v)+'">'+v.toFixed(2)+'</td>';}).join('')+'</tr>';}).join('');
+  tbl.innerHTML=head+rows;
+
+  // PCA: |corr| between top-6 PCs and the 5 traits (real values, layer 31)
+  var PCM=[[.16,.01,.70,.54,.36],[.09,.83,.02,.08,.14],[.39,.20,.08,.00,.22],
+           [.11,.10,.20,.12,.35],[.27,.09,.27,.19,.25],[.07,.13,.30,.44,.03]];
+  function bluecol(v){var t=Math.max(0,Math.min(1,v));
+    var lo=[236,240,246], hi=[47,99,216]; // soft grey -> accent blue
+    return 'rgb('+Math.round(lo[0]+(hi[0]-lo[0])*t)+','+Math.round(lo[1]+(hi[1]-lo[1])*t)+','+Math.round(lo[2]+(hi[2]-lo[2])*t)+')';}
+  var pg=document.getElementById('pcgrid');
+  if(pg){
+    var ph='<tr><th class="rh"></th>'+TR.map(function(t){return '<th>'+t+'</th>';}).join('')+'</tr>';
+    var pr=PCM.map(function(row,i){
+      return '<tr><td class="rh">PC'+(i+1)+'</td>'+row.map(function(v){
+        return '<td style="background:'+bluecol(v)+';color:'+(v>.5?'#fff':'#333')+'">'+v.toFixed(2)+'</td>';}).join('')+'</tr>';}).join('');
+    pg.innerHTML=ph+pr;
+  }
+
+  // role coda: diverging profile bars (group mean z, real values)
+  var RB={EXT:[0.31,-0.39],AGR:[0.52,-0.62],CSN:[0.05,-0.03],EST:[0.18,-0.28],OPN:[-0.19,0.22]};
+  var RCORR=[["EXT",0.85],["AGR",0.89],["CSN",0.03],["EST",0.76],["OPN",-0.47]];
+  var SCALE=0.7; // z -> half-lane fraction
+  var rbEl=document.getElementById('rolebars');
+  if(rbEl){
+    rbEl.innerHTML=TR.map(function(t){
+      var al=RB[t][0], dr=RB[t][1];
+      function seg(v,cls){var w=Math.min(50,Math.abs(v)/SCALE*50);
+        var s=v>=0?('left:50%;width:'+w+'%'):('right:50%;width:'+w+'%');
+        return '<div class="seg '+cls+'" style="'+s+'"></div>';}
+      return '<div class="rbar"><span class="t">'+t+'</span><div class="lane"><div class="mid"></div>'+
+        seg(al,'warm')+seg(dr,'cool')+'</div></div>';}).join('');
+  }
+  var rcEl=document.getElementById('rolecorr');
+  if(rcEl){
+    rcEl.innerHTML='<div class="rcorr">'+RCORR.map(function(x){
+      var col=Math.abs(x[1])<0.1?'var(--ink-soft)':(x[1]>0?'var(--warm-ink)':'var(--cool-ink)');
+      return '<div class="c"><div class="t">'+x[0]+'</div><div class="r" style="color:'+col+'">'+
+        (x[1]>0?'+':'')+x[1].toFixed(2)+'</div></div>';}).join('')+'</div>';
+  }
+
+  // scroll reveal
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  [].forEach.call(document.querySelectorAll('section .card, .diss, .chips, .flow, .axisfig'),function(n){
+    n.classList.add('reveal');io.observe(n);});
+})();
+</script>

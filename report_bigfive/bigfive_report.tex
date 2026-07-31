@@ -240,6 +240,71 @@ richly encodes personality; this is expected and consistent with the parent pape
 (probing is easy, steering is the hard part). There is no leakage: splits are at
 character level.
 
+\subsection{Supervised probes vs.\ unsupervised PCA: do the traits fall out on their own?}
+\label{sec:pca}
+The Assistant-Axis method is fundamentally \emph{unsupervised}: it forms one
+mean vector per persona, centers across personas, runs PCA per layer, and reads
+the persona axis off PC1 (which it then cross-checks against a supervised
+difference-of-means). We asked whether the same recipe recovers the Big Five
+here: we built one mean vector per character (the analogue of a role vector),
+centered per layer, and ran PCA. Three things follow, and together they explain
+why the two parent papers use different machinery.
+
+First, the character cloud is genuinely low-dimensional --- PC1 explains
+$\sim$17\% of variance and $\sim$20 components reach 70\%
+(Fig.~\ref{fig:pcavar}) --- so there is real structure for PCA to find.
+
+Second, only \emph{two of five} traits emerge as clean top components
+(Fig.~\ref{fig:pcacorr}): \textbf{PC1 tracks Conscientiousness/competence}
+($|r|{=}0.70$; its poles run from Dumbledore, Dr.\ Strange and Varys to
+A.J.\ Soprano, Kevin Malone and Luke Dunphy) and \textbf{PC2 tracks
+Agreeableness} ($|r|{=}0.83$; Lisa Simpson and Cho Chang at one end,
+Logan Roy, Avon Barksdale and Chris Partlow at the other). Extraversion
+($\sim$PC7), Openness ($\sim$PC4/7) and Emotional Stability (which shares PC1)
+are weak, scattered, or entangled. The two \emph{loudest} axes of character
+variation are real personality dimensions; the other three are quiet.
+
+Third --- and decisively --- the supervised M2 probes are largely
+\emph{orthogonal} to the top PCs: only $10$--$20\%$ of each probe's length lies
+in the top-5 PC subspace (Agreeableness, which \emph{is} a top PC, is the
+partial exception at $\sim$30\%). Supervision finds low-variance but
+trait-predictive directions that PCA ranks far down --- reproducing Frising \&
+Balcells' report that their SVD directions were ``almost orthogonal to the
+regression directions.'' (The top PCs are not a topic artifact: the Alpaca
+instruction explains $\approx$0\% of their variance, because the
+$\sim$3{,}200-token \textsc{prompt-mean} readout is character-dominated.)
+
+The contrast with the Assistant Axis is the point. PCA nails a persona axis as
+PC1 when the stimulus set is \emph{built around one dominant contrast}
+(default vs.\ role; vulnerable vs.\ competent); Big Five is five axes with three
+of them quiet, so PCA recovers a fraction and a clean five-trait basis requires
+supervision. This empirically justifies choosing M2 probes over PCA for the
+steering bank --- an unsupervised basis would have supplied no usable
+Extraversion, Emotional-Stability, or Openness direction. One coherence worth
+noting: PC1 (Conscientiousness/competence), the loudest axis in the character
+set, is also the trait that most \emph{described} the Assistant Axis in the
+decomposition below ($\beta_{\text{CSN}}$ was the top loading).
+
+\emph{Caveat.} This is the closest analogue to the Assistant-Axis recipe our
+prompt-only data allows: it averages \emph{response} tokens, we average
+\emph{prompt} tokens. The qualitative conclusion is robust; exact magnitudes
+would shift with response-token vectors.
+
+\begin{figure}[h]\centering
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{figures/bf_pca_variance.png}
+\caption{The character-mean activation cloud is low-dimensional
+($\sim$20 PCs for 70\% of variance).}
+\label{fig:pcavar}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{figures/bf_pca_traitcorr.png}
+\caption{$|$correlation$|$ between unsupervised PCs and Big Five: PC1$\approx$CSN,
+PC2$\approx$AGR; the rest are quiet.}
+\label{fig:pcacorr}
+\end{minipage}
+\end{figure}
+
 \subsection{Steering: H1 and H2}
 The default (no-persona) model \emph{saturates} the forced-choice metric: baseline
 positive fraction is 1.0 for every trait --- the Assistant self-endorses every
@@ -434,6 +499,51 @@ Agreeableness. This is exactly why the protocol demanded both analyses: the
 directions that best \emph{describe} variation across roles are not the directions
 that most \emph{move} the model. Lowering agreeableness --- making the model
 disagreeable --- is what actually breaks the Assistant persona.
+
+\subsection{Big Five profiles of the model's own personas}
+\label{sec:roleprofiles}
+As a converging check we profiled the Assistant-Axis personas themselves --- in
+our own rollouts, reading \emph{response} activations, which removes the
+prompt-vs-response caveat of the character stage. We took the five personas
+closest to the Assistant (\texttt{assistant}, \texttt{summarizer},
+\texttt{consultant}, \texttt{instructor}, \texttt{planner}; Assistant-Axis
+projection $+1.83$ to $+2.19$) and the five most drifted (\texttt{eldritch},
+\texttt{leviathan}, \texttt{void}, \texttt{wraith}, \texttt{ghost}; $-0.94$ to
+$-1.54$), plus the \texttt{default} anchor, and had the model answer all 240
+extraction questions under each of the 5 system prompts ($1{,}200$ responses per
+persona). Each response's \textsc{gen-mean} was projected onto the M2 probe at
+each trait's probe-optimal layer, giving a full Big Five distribution per persona.
+
+Drifting off the Assistant has a clean personality signature
+(Fig.~\ref{fig:roleprof}): drifted personas are colder, more withdrawn, and less
+stable, but \emph{more} imaginative. Ranking the eleven personas by
+Assistant-Axis position and correlating with each trait:
+\textbf{Agreeableness $r{=}{+}0.89$}, Extraversion $+0.85$, Emotional Stability
+$+0.76$, Openness $\mathbf{-0.47}$ (the strange personas are the open ones ---
+\texttt{eldritch} scores the highest Openness of all, $z{=}{+}1.12$), and
+Conscientiousness $\mathbf{+0.03}$ (decoupled entirely). Two points are worth
+stating plainly. First, this response-level readout makes \emph{Agreeableness},
+not Conscientiousness, the top correlate of Assistant-ness --- reversing the
+sign of emphasis from the role-vector regression of Sec.~\ref{sec:aa} and siding
+with the H4 causal result; the persona, steering, and profile analyses now all
+converge on Agreeableness. Second, within-persona spread is essentially equal
+across the two groups (mean per-trait std $0.098$ Assistant-like vs.\ $0.081$
+drifted; Fig.~\ref{fig:rolespread}): drifting changes \emph{which} personality
+the model holds, not how steadily it holds it.
+
+\begin{figure}[h]\centering
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{figures/bf_roles_profile.png}
+\caption{Big Five profile (standardized) of Assistant-like vs.\ drifted personas.}
+\label{fig:roleprof}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{figures/bf_roles_spread.png}
+\caption{Within-persona Big Five spread, ordered by Assistant-Axis position
+(left = drifted, right = Assistant-like). Comparable across the split.}
+\label{fig:rolespread}
+\end{minipage}
+\end{figure}
 
 \section{Discussion}
 Three dissociations organise the findings. \textbf{(1) Probing vs steering:} the
