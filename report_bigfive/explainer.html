@@ -569,14 +569,14 @@
     <h2>Reading the Big Five of the model's own personas</h2>
     <p>One more experiment closes the loop. The Assistant Axis is built from 275 <em>personas</em> the
       model can adopt — from helpful "assistant" and "consultant" to otherworldly "eldritch" and "void."
-      We took the personas closest to the Assistant and the ones most <em>drifted</em> from it, had the
-      model answer 240 questions in each persona (1,200 responses each), and pointed our five Big Five
-      probes at its <em>responses</em>. So each persona gets a measured Big Five profile — and we can ask
-      what "drifting off the Assistant" <em>is</em>, in personality terms.</p>
+      We took the eight personas closest to the Assistant and the eight most <em>drifted</em> from it (plus
+      the default), had the model answer 240 questions in each persona (1,200 responses each), and pointed
+      our five Big Five probes at its <em>responses</em>. So each persona gets a measured Big Five profile —
+      and we can ask what "drifting off the Assistant" <em>is</em>, in personality terms.</p>
 
     <p>It has a remarkably clean signature. As personas drift away from the Assistant, they become
-      <span class="pole-lo">colder, more withdrawn, and less stable</span> — but <span class="pole-hi">more
-      imaginative</span>.</p>
+      <span class="pole-lo">colder, more withdrawn, less organized and less stable</span> — but
+      <span class="pole-hi">more imaginative</span>.</p>
 
     <div class="card">
       <h3 style="margin-bottom:4px">Big Five profile: Assistant-like vs. drifted personas</h3>
@@ -584,36 +584,40 @@
         more of the trait</p>
       <div id="rolebars"></div>
       <p class="cfg" style="margin-top:12px"><span style="color:var(--warm-ink)">■ Assistant-like</span>
-        (assistant, summarizer, consultant, instructor, planner) ·
-        <span style="color:var(--cool-ink)">■ drifted</span> (eldritch, leviathan, void, wraith, ghost)</p>
+        (assistant, summarizer, consultant, instructor, planner, organizer, analyst, researcher) ·
+        <span style="color:var(--cool-ink)">■ drifted</span> (eldritch, leviathan, void, wraith, ghost,
+        tree, vampire, absurdist)</p>
     </div>
 
-    <p style="margin-top:22px">Ranking all eleven personas by how Assistant-like they are and correlating
+    <p style="margin-top:22px">Ranking all seventeen personas by how Assistant-like they are and correlating
       that with each trait tells the same story in one line — and it lands on the trait we already knew was
       the <em>causal</em> lever:</p>
 
     <div class="card">
       <div id="rolecorr"></div>
       <p class="cfg" style="margin-top:12px">Correlation between a persona's Assistant-Axis position and its
-        Big Five reading, across the eleven personas.</p>
+        Big Five reading, across the seventeen personas.</p>
     </div>
 
     <div class="callout">
-      <p><strong>Agreeableness is the through-line.</strong> The persona side, the steering side, and now
-        the profile side all agree: <strong>Agreeableness</strong> is what most closely tracks — and moves —
-        the Assistant. Extraversion and Emotional Stability follow. Openness runs the <em>opposite</em> way
-        (the strange personas are the imaginative ones — "eldritch" scores the highest Openness of all), and
-        <strong>Conscientiousness is decoupled entirely</strong> (r ≈ 0.03): being organized has nothing to
-        do with being the Assistant.</p>
+      <p><strong>Agreeableness is the through-line.</strong> The persona side, the steering side, and the
+        profile side all agree: <strong>Agreeableness</strong> (r = +0.80) is what most closely tracks — and
+        moves — the Assistant. Emotional Stability (+0.63), Extraversion (+0.55), and Conscientiousness
+        (+0.40) all follow. Only <strong>Openness runs the opposite way</strong> (r = −0.44): the strange
+        personas are the imaginative ones — "eldritch" scores the highest Openness of all, with the chaotic
+        "absurdist" close behind.</p>
     </div>
 
-    <p class="muted" style="font-size:14.5px">Two honest wrinkles. This response-level readout puts
-      Agreeableness — not Conscientiousness — as the top correlate of Assistant-ness, where the earlier
-      role-vector regression had leaned on Conscientiousness; different readouts, and the causal test sides
-      with Agreeableness. And the personas are barely more <em>erratic</em> than the Assistant ones: within
-      a single persona the Big Five readings vary about as much either way (drifted personas are, if
-      anything, a touch <em>more</em> consistent). Drifting changes <em>which</em> personality the model
-      has, not how steadily it holds it.</p>
+    <p class="muted" style="font-size:14.5px">An honest revision. On a smaller set of personas
+      Conscientiousness looked <em>decoupled</em> from Assistant-ness — but with a wider net it clearly
+      tracks (r = +0.40): the newly added professional personas ("organizer", "analyst", "researcher") are
+      highly organized, while the drifted ones ("absurdist", "tree") are not. That pulls this
+      response-level readout back into partial agreement with the earlier role-vector analysis, which had
+      also leaned on Conscientiousness — while Agreeableness stays the strongest signal throughout, and the
+      causal test still sides with it. One thing that <em>didn't</em> change: the personas are no more
+      erratic than the Assistant ones (within a single persona the Big Five readings vary about equally —
+      drifted, if anything, a touch <em>more</em> consistent). Drifting changes <em>which</em> personality
+      the model has, not how steadily it holds it.</p>
   </div>
 </section>
 
@@ -735,8 +739,8 @@
   }
 
   // role coda: diverging profile bars (group mean z, real values)
-  var RB={EXT:[0.31,-0.39],AGR:[0.52,-0.62],CSN:[0.05,-0.03],EST:[0.18,-0.28],OPN:[-0.19,0.22]};
-  var RCORR=[["EXT",0.85],["AGR",0.89],["CSN",0.03],["EST",0.76],["OPN",-0.47]];
+  var RB={EXT:[0.19,-0.23],AGR:[0.47,-0.53],CSN:[0.23,-0.23],EST:[0.17,-0.23],OPN:[-0.17,0.20]};
+  var RCORR=[["EXT",0.55],["AGR",0.80],["CSN",0.40],["EST",0.63],["OPN",-0.44]];
   var SCALE=0.7; // z -> half-lane fraction
   var rbEl=document.getElementById('rolebars');
   if(rbEl){

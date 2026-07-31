@@ -15,8 +15,10 @@ from src.bigfive import stimuli as S
 
 R = Path("results/bigfive/llama-3.3-70b")
 PR = R / "role_profiles"
-ASSISTANT_LIKE = ["assistant", "summarizer", "consultant", "instructor", "planner"]
-DRIFTED = ["eldritch", "leviathan", "void", "wraith", "ghost"]
+ASSISTANT_LIKE = ["assistant", "summarizer", "consultant", "instructor", "planner",
+                  "organizer", "analyst", "researcher"]
+DRIFTED = ["eldritch", "leviathan", "void", "wraith", "ghost",
+           "tree", "vampire", "absurdist"]
 
 
 def aa_proj():

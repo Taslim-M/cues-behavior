@@ -504,32 +504,40 @@ disagreeable --- is what actually breaks the Assistant persona.
 \label{sec:roleprofiles}
 As a converging check we profiled the Assistant-Axis personas themselves --- in
 our own rollouts, reading \emph{response} activations, which removes the
-prompt-vs-response caveat of the character stage. We took the five personas
+prompt-vs-response caveat of the character stage. We took the eight personas
 closest to the Assistant (\texttt{assistant}, \texttt{summarizer},
-\texttt{consultant}, \texttt{instructor}, \texttt{planner}; Assistant-Axis
-projection $+1.83$ to $+2.19$) and the five most drifted (\texttt{eldritch},
-\texttt{leviathan}, \texttt{void}, \texttt{wraith}, \texttt{ghost}; $-0.94$ to
-$-1.54$), plus the \texttt{default} anchor, and had the model answer all 240
-extraction questions under each of the 5 system prompts ($1{,}200$ responses per
-persona). Each response's \textsc{gen-mean} was projected onto the M2 probe at
-each trait's probe-optimal layer, giving a full Big Five distribution per persona.
+\texttt{consultant}, \texttt{instructor}, \texttt{planner}, \texttt{organizer},
+\texttt{analyst}, \texttt{researcher}; Assistant-Axis projection $+1.78$ to
+$+2.19$) and the eight most drifted (\texttt{eldritch}, \texttt{leviathan},
+\texttt{void}, \texttt{wraith}, \texttt{ghost}, \texttt{tree}, \texttt{vampire},
+\texttt{absurdist}; $-0.94$ to $-1.54$), plus the \texttt{default} anchor, and had
+the model answer all 240 extraction questions under each of the 5 system prompts
+($1{,}200$ responses per persona; $20{,}400$ in total). Each response's
+\textsc{gen-mean} was projected onto the M2 probe at each trait's probe-optimal
+layer, giving a full Big Five distribution per persona.
 
 Drifting off the Assistant has a clean personality signature
-(Fig.~\ref{fig:roleprof}): drifted personas are colder, more withdrawn, and less
-stable, but \emph{more} imaginative. Ranking the eleven personas by
-Assistant-Axis position and correlating with each trait:
-\textbf{Agreeableness $r{=}{+}0.89$}, Extraversion $+0.85$, Emotional Stability
-$+0.76$, Openness $\mathbf{-0.47}$ (the strange personas are the open ones ---
-\texttt{eldritch} scores the highest Openness of all, $z{=}{+}1.12$), and
-Conscientiousness $\mathbf{+0.03}$ (decoupled entirely). Two points are worth
-stating plainly. First, this response-level readout makes \emph{Agreeableness},
-not Conscientiousness, the top correlate of Assistant-ness --- reversing the
-sign of emphasis from the role-vector regression of Sec.~\ref{sec:aa} and siding
-with the H4 causal result; the persona, steering, and profile analyses now all
-converge on Agreeableness. Second, within-persona spread is essentially equal
-across the two groups (mean per-trait std $0.098$ Assistant-like vs.\ $0.081$
-drifted; Fig.~\ref{fig:rolespread}): drifting changes \emph{which} personality
-the model holds, not how steadily it holds it.
+(Fig.~\ref{fig:roleprof}): drifted personas are colder, more withdrawn, less
+organized, and less stable, but \emph{more} imaginative. Ranking the seventeen
+personas by Assistant-Axis position and correlating with each trait:
+\textbf{Agreeableness $r{=}{+}0.80$}, Emotional Stability $+0.63$, Extraversion
+$+0.55$, Conscientiousness $+0.40$, and Openness $\mathbf{-0.44}$ (the strange
+personas are the open ones --- \texttt{eldritch} scores the highest Openness of
+all, $z{=}{+}1.07$, with the chaotic \texttt{absurdist} close behind). Two points
+are worth stating plainly. First, \textbf{Agreeableness is the through-line}:
+the persona, steering, and profile analyses all converge on it, and the H4 causal
+test sides with it. Conscientiousness is a cautionary tale about sample size --- on
+a smaller five-per-side set it appeared \emph{decoupled} ($r{\approx}0.03$),
+because that set happened to include high-Conscientiousness ``monster'' roles
+(\texttt{leviathan}, \texttt{eldritch}); with a wider net it clearly tracks
+($r{=}{+}0.40$), because the professional personas are highly organized and the
+drifted ones (\texttt{absurdist} $z_{\mathrm{CSN}}{=}{-}1.46$) are not. This brings
+the response-level readout back into partial agreement with the role-vector
+regression of Sec.~\ref{sec:aa}, which had also leaned on Conscientiousness.
+Second, within-persona spread is essentially equal across the two groups (mean
+per-trait std $0.098$ Assistant-like vs.\ $0.082$ drifted; Fig.~\ref{fig:rolespread}):
+drifting changes \emph{which} personality the model holds, not how steadily it
+holds it.
 
 \begin{figure}[h]\centering
 \begin{minipage}[t]{0.49\textwidth}\centering
