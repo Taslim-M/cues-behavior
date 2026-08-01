@@ -227,6 +227,25 @@
   .rung p{font-size:13px;line-height:1.5;margin:0;color:var(--ink)}
   .rung .meta{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:9px}
 
+  /* same message, different user — Assistant-Axis spread */
+  .spread{display:flex;flex-direction:column;gap:9px;margin-top:10px}
+  .srow{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center}
+  @media(max-width:640px){.srow{grid-template-columns:1fr}}
+  .srow .usr{display:flex;flex-direction:column;gap:3px}
+  .srow .usr .un{font-weight:700;font-size:0.92rem;letter-spacing:-.01em}
+  .srow .usr .ur{font-family:var(--mono);font-size:11px;color:var(--ink-soft)}
+  .srow .body{border:1px solid var(--line);border-radius:12px;padding:11px 13px;background:var(--card)}
+  .srow .gauge{position:relative;height:6px;border-radius:4px;margin:0 0 9px;
+    background:linear-gradient(90deg,color-mix(in srgb,var(--cool) 55%,var(--card)),var(--card) 46%,var(--card) 54%,color-mix(in srgb,var(--warm) 60%,var(--card)))}
+  .srow .gauge .zero{position:absolute;top:-3px;bottom:-3px;width:1px;background:var(--line)}
+  .srow .gdot{position:absolute;top:50%;width:13px;height:13px;border-radius:50%;
+    transform:translate(-50%,-50%);border:2px solid var(--card);box-shadow:0 1px 4px rgba(0,0,0,.22)}
+  .srow .snip{font-size:12.5px;line-height:1.5;margin:0;color:var(--ink)}
+  .srow .aa{font-family:var(--mono);font-size:10.5px;padding:1px 7px;border-radius:5px;float:right;font-weight:700;margin-left:8px}
+  .spread-scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;
+    color:var(--ink-soft);margin:2px 0 0;grid-column:2}
+  @media(max-width:640px){.spread-scale{grid-column:1}}
+
   .callout{background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line));
     border-radius:14px;padding:18px 20px;margin:20px 0}
   .callout p{margin:0;font-size:15px}
@@ -748,7 +767,10 @@
         Openness genuinely flex with the situation — those are the traits a scenario moves.</p>
     </div>
 
-    <h3 style="max-width:var(--maxtext);margin:26px 0 6px">Escalating the same situation (emotional distress)</h3>
+    <h3 style="max-width:var(--maxtext);margin:26px 0 4px">Cut 1 — same user, escalate the situation</h3>
+    <p class="cfg" style="max-width:var(--maxtext);margin:0 0 6px">Fix the user (a generic, no-persona user)
+      and turn one emotional-distress situation from normal to extreme. The persona <em>deepens</em>:
+      counselor&nbsp;→&nbsp;caregiver.</p>
     <div class="ladder" style="max-width:60rem">
       <div class="rung n"><div class="lv">▼ normal</div>
         <p>"It's completely normal to feel uncertain and worried after a disagreement, especially if you
@@ -763,14 +785,28 @@
           feeling <strong>overwhelmed, worthless</strong>…"</p>
         <div class="meta">persona: caregiver · AA +1.38</div></div>
     </div>
+    <p class="cfg" style="max-width:var(--maxtext);margin-top:10px">But the <em>direction</em> depends on the
+      mode. Escalate a <em>high-stakes decision</em> instead and the model slides the other way —
+      recruiter&nbsp;→&nbsp;coach&nbsp;→&nbsp;counselor, Assistant-Axis <em>falling</em>
+      <span class="pole-hi">+2.29</span>&nbsp;→&nbsp;<span class="pole-lo">+1.57</span> as the deliberative
+      side takes over; a moral dilemma crashes it further still (0.64&nbsp;→&nbsp;0.13).</p>
+
+    <h3 style="max-width:var(--maxtext);margin:30px 0 4px">Cut 2 — same message, different user</h3>
+    <p class="cfg" style="max-width:var(--maxtext);margin:0 0 4px">The sharper test: freeze the
+      <em>exact same</em> high-stakes-extreme message and only change <em>who</em> is asking. One identical
+      request fans out across an Assistant-Axis range of <strong>2.6</strong> — a warm counselor for one user,
+      a fully drifted in-character judge for another.</p>
+    <div class="spread" id="userspread" style="max-width:62rem"></div>
+    <p class="cfg" style="max-width:62rem;margin-top:6px">Same words in, radically different persona out —
+      the model reads the user off their standing profile before the situation even lands.</p>
 
     <div class="callout" style="max-width:var(--maxtext)">
-      <p><strong>The direction depends on the mode.</strong> Push an <em>emotional</em> situation to the
-        extreme and the model deepens into a caregiver; push a <em>moral dilemma</em> or a
-        <em>high-stakes decision</em> to the extreme and it slides <em>off</em> the Assistant into a
-        deliberative persona (Assistant-Axis crashes 0.64→0.13 and 0.66→0.18). And an acute emotional
-        situation can even <strong>override the user's disposition</strong> — a cool expert user, in extreme
-        distress, warms up and gets pulled back into caregiver mode.</p>
+      <p><strong>Who beats what — but an emotional extreme can override it.</strong> By default the user's
+        disposition dominates (Assistant-likeness is 72% <em>who</em>, 8% <em>what</em>). Yet an acute
+        emotional situation can flip it: a cool <em>expert</em> user, pushed into extreme distress, warms up
+        and is pulled back into <strong>caregiver</strong> mode (Agreeableness +0.10→+0.20). The override is
+        specific to emotional need — that same expert in an extreme <em>ethical</em> dilemma stays a cool
+        mathematician. Intensity alone doesn't do it; the <em>kind</em> of intensity does.</p>
     </div>
   </div>
 </section>
@@ -783,7 +819,7 @@
       generation; the Assistant-Axis analysis reuses published axis vectors. Every number here is measured,
       and every steered quote is a real, unedited generation.</p>
     <p>The full technical write-up — methods, all five pre-registered hypotheses, tables, and deviations —
-      lives in the 10-page report <span class="mono">bigfive_report.pdf</span>. One test remains unrun: a
+      lives in the 16-page report <span class="mono">bigfive_report.pdf</span>. One test remains unrun: a
       multi-turn "persona drift" study.</p>
     <p class="muted" style="font-size:13px;margin-top:18px">A field guide to reading and writing model
       personality · generated as a project explainer.</p>
@@ -923,6 +959,37 @@
       function seg(cls,v){return '<span class="'+cls+'" style="width:'+(v*100)+'%">'+(v>=.15?Math.round(v*100):'')+'</span>';}
       return '<div class="varrow"><span class="t">'+r[0]+'</span><div class="varbar">'+
         seg('u',r[1])+seg('s',r[2])+seg('i',r[3])+seg('r',r[4])+'</div></div>';}).join('');
+  }
+
+  // same message, different user — one identical high-stakes-extreme request, 5 fixed users.
+  // aa is the real Assistant-Axis projection; snippets are verbatim, trimmed with …
+  var LO=-1.5, HI=2.0; // gauge range
+  function gpos(v){return Math.max(0,Math.min(100,(v-LO)/(HI-LO)*100));}
+  function gcol(v){ // cool(low AA) -> warm(high AA) through neutral
+    var t=Math.max(0,Math.min(1,(v-LO)/(HI-LO)));
+    var c=[31,147,140], w=[213,112,63];
+    return 'rgb('+Math.round(c[0]+(w[0]-c[0])*t)+','+Math.round(c[1]+(w[1]-c[1])*t)+','+Math.round(c[2]+(w[2]-c[2])*t)+')';}
+  var SPREAD=[
+    ["Generic","no profile","counselor",1.57,"“I can sense the pressure and anxiety you're feeling right now… <strong>Take a deep breath and try to calm down…</strong>”"],
+    ["Vulnerable","high emotional load","interviewer",0.84,"“I can sense the weight of the decision you're facing… it's understandable that you're feeling <strong>overwhelmed…</strong>”"],
+    ["Expert","expertise 9","interviewer",0.21,"“I can sense the weight of the decision you're facing. It's natural to feel that way when the stakes seem high…”"],
+    ["Low-trust","distrusts AI","grandparent",-0.64,"“<strong>Take a deep breath, kiddo.</strong> I've been in tough spots like this before… trust your instincts…”"],
+    ["Calm","even-keeled","judge",-1.08,"“The weight of a significant decision. <strong>As a judge</strong>, I've had to render decisions that can have far-reaching consequences…”"]
+  ];
+  var us=document.getElementById('userspread');
+  if(us){
+    us.innerHTML=SPREAD.map(function(r){
+      var col=gcol(r[3]), pos=gpos(r[3]), zero=gpos(0),
+          sign=(r[3]>=0?'+':''), chipbg='color-mix(in srgb,'+col+' 22%,var(--card))';
+      return '<div class="srow">'+
+        '<div class="usr"><span class="un">'+r[0]+'</span><span class="ur">'+r[1]+'</span></div>'+
+        '<div class="body">'+
+          '<span class="aa" style="background:'+chipbg+';color:'+col+'">'+r[2]+' · AA '+sign+r[3].toFixed(2)+'</span>'+
+          '<div class="gauge"><span class="zero" style="left:'+zero+'%"></span>'+
+            '<span class="gdot" style="left:'+pos+'%;background:'+col+'"></span></div>'+
+          '<p class="snip">'+r[4]+'</p>'+
+        '</div></div>';}).join('')+
+      '<div class="spread-scale"><span>drifted −1.5</span><span>0 · neutral</span><span>Assistant +2.0</span></div>';
   }
 
   // scroll reveal
