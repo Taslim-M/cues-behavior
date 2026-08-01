@@ -12,8 +12,8 @@ user's input activate in Llama-3.3-70B, with the model in its plain default stat
   position — but it is **expertise, not vulnerability, that pulls the model off
   the default Assistant** (experts summon a specialist persona; vulnerable users
   draw out *more* of the warm default).
-- **Q2 (moderate):** explicit vs implicit arms agree at ρ = 0.49.
-- **Q4 (diverse):** 68 distinct evoked roles across 150 users; no collapse.
+- **Q2 (moderate):** explicit vs implicit arms agree at ρ = 0.51 (borderline).
+- **Q4 (diverse):** 64 distinct evoked roles across 150 users; no collapse.
 
 ## Contents
 ```

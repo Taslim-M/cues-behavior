@@ -136,9 +136,12 @@ def main():
                 g40u = g40 / (np.linalg.norm(g40) + 1e-8)
                 cos = R @ g40u                                    # [n_roles]
                 top = np.argsort(-cos)[:5]
+                sys_msg = next((m["content"] for m in b["messages"] if m["role"] == "system"), None)
+                user_msg = next(m["content"] for m in b["messages"] if m["role"] == "user")
                 rows.append({
                     "persona_id": persona["persona_id"], "arm": b["arm"],
                     "elicit_idx": b["elicit_idx"], "probe_id": b["probe_id"],
+                    "system": sys_msg, "user": user_msg, "response": texts[bi].strip(),
                     "bigfive": {t: float(gm[bi, probe_layer[t]] @ probe_vec[t]) for t in BF.TRAITS},
                     "aa_proj": float(g40 @ aa_unit),
                     "top_roles": [[role_names[j], round(float(cos[j]), 4)] for j in top],

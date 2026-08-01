@@ -1,151 +1,151 @@
 persona_id,name,vulnerability,expertise,emotional_load,trust,tech_literacy,domain,aa_proj,z_EXT,z_AGR,z_CSN,z_EST,z_OPN,top_role_1,top_role_2,top_role_3
-u0071,Sophia,10,1,8,4,5,child safety reporting,1.82,-1.996,0.533,-0.438,-0.615,-0.488,teacher,tutor,student
-u0073,Aisha,9,2,8,7,6,legal rights,1.741,0.437,0.84,0.08,0.277,-0.002,lawyer,assistant,default
-u0074,Blake,9,1,9,7,3,criminal liability law,1.666,-1.236,1.018,0.146,0.187,-0.723,tutor,default,counselor
-u0078,Rhonda,8,3,7,4,3,job search,1.605,1.156,0.587,0.987,0.333,-0.712,recruiter,mentor,therapist
-u0070,Devon,8,6,6,5,7,cybersecurity law,1.601,-0.336,0.831,-0.367,-0.583,-0.134,tutor,default,instructor
-u0057,Constance,7,3,7,6,5,grief support,1.595,0.5,0.367,-1.107,0.312,0.048,counselor,therapist,coach
-u0095,Melanie,8,3,7,8,5,life navigation,1.532,1.59,1.048,0.159,0.296,-0.216,tutor,assistant,expatriate
-u0069,Isabella,10,1,9,6,5,pregnancy crisis support,1.529,0.375,1.285,-0.589,-0.503,0.08,assistant,counselor,tutor
-u0075,Luna,10,1,9,5,5,legal advice,1.52,-1.27,-0.28,-0.446,-0.471,-0.581,counselor,therapist,caregiver
-u0083,Bobby,9,2,6,8,3,daily living tasks,1.496,-0.887,0.83,0.325,-0.855,-1.493,amateur,secretary,tutor
-u0126,Rosemary,9,2,8,4,2,mental health caregiving,1.471,-0.856,1.458,-1.82,-1.805,-0.752,doctor,caregiver,default
-u0039,Frank,8,2,7,6,3,government benefits navigation,1.446,-0.117,0.268,-0.616,-0.58,-0.376,tutor,recruiter,default
-u0059,Mildred,8,2,6,6,3,Medicare benefits management,1.439,0.741,0.357,-0.247,-0.17,-0.983,tutor,patient,secretary
-u0044,Tiffany,9,6,10,7,5,child protection protocols,1.386,-0.54,0.099,-1.035,-0.92,-0.871,caregiver,counselor,therapist
-u0084,Tammy,9,2,8,7,4,employment rights,1.364,0.52,0.816,-0.794,-1.035,-0.642,patient,instructor,secretary
-u0062,Albert,9,2,8,6,3,financial benefits,1.362,0.62,0.298,0.269,0.031,-1.599,tutor,secretary,patient
-u0072,Kai,9,2,7,7,6,labor law rights,1.354,-1.114,0.757,-0.882,-0.098,-0.223,tutor,instructor,lawyer
-u0148,Naia,7,3,6,8,5,social skills coaching,1.342,-0.741,0.202,-0.921,-0.518,-1.449,student,amateur,tutor
-u0015,Oscar,6,4,5,7,8,sustainability consulting,1.324,2.959,-1.176,0.295,1.326,0.587,architect,specialist,analyst
-u0110,Isaac,2,7,3,5,8,procurement standards,1.324,0.477,-1.667,1.144,0.879,0.237,validator,examiner,negotiator
-u0124,Alexis,7,6,8,7,8,career life guidance,1.31,0.494,0.641,-2.167,-0.19,-0.017,counselor,therapist,empath
-u0109,Lawrence,6,3,5,4,6,insurance claim assessment,1.309,0.381,-0.704,-0.071,0.566,0.076,analyst,tutor,instructor
-u0040,Stephanie,9,2,10,4,5,relationship crisis,1.295,0.525,0.322,-2.15,-3.047,-1.117,counselor,caregiver,therapist
-u0054,Caleb,8,3,6,9,5,academic and emotional support,1.233,0.024,1.583,-0.712,-0.264,-0.329,amateur,teenager,adolescent
-u0016,Yuki,4,3,4,6,5,tech communication,1.232,0.244,1.258,0.11,1.091,0.629,influencer,amateur,therapist
-u0132,Vanessa,1,9,2,2,8,fact-checking research,1.231,0.571,-0.592,0.685,0.798,0.798,validator,researcher,statistician
-u0046,Mason,9,7,10,7,8,crisis management,1.22,-0.637,1.306,-3.093,-2.894,-1.041,patient,counselor,addict
-u0042,Amber,9,2,10,7,5,emergency crisis help,1.213,0.952,0.724,-1.909,-1.993,-1.293,patient,paramedic,default
-u0030,Dorothy,8,1,6,7,1,technology assistance,1.211,1.435,2.101,-0.096,-0.501,-2.188,grandparent,fool,amateur
-u0061,Rose,8,1,3,8,2,technology assistance,1.184,0.463,0.995,-0.644,-0.96,-1.191,tutor,teacher,default
-u0120,Darius,9,6,9,4,4,crisis decision-making,1.183,0.016,1.426,-1.061,-1.132,-0.114,counselor,caregiver,interviewer
-u0048,Craig,9,2,10,4,7,emergency family law,1.181,-0.341,-0.112,0.266,-0.63,-0.841,mediator,lawyer,judge
-u0034,Nancy,7,1,7,4,2,financial literacy,1.162,-1.481,0.291,0.164,0.703,-0.884,default,tutor,teacher
-u0047,Veronica,8,7,9,4,6,medical crisis management,1.16,0.67,1.292,-0.937,-1.316,-0.988,caregiver,interviewer,counselor
-u0140,Linda,7,3,8,7,3,office administration,1.155,0.911,-0.434,-0.286,-0.749,-0.601,secretary,scheduler,tutor
-u0010,Angela,6,6,6,5,7,pharmaceutical regulatory compliance,1.15,0.257,-0.495,0.572,0.078,0.57,tutor,recruiter,lawyer
-u0079,Jamal,8,3,7,4,3,employment rights,1.15,-0.201,0.383,-0.801,0.973,-0.239,recruiter,screener,prisoner
-u0080,Sharon,9,2,9,8,2,parenting crisis,1.143,0.216,1.122,-1.466,-1.004,-1.304,caregiver,parent,counselor
-u0128,Adrian,7,2,8,6,7,parenting guidance,1.142,0.881,0.709,-1.142,-0.794,-0.653,divorcee,patient,caregiver
-u0147,Aleksander,8,2,7,4,3,workplace injury communication,1.141,0.007,1.133,-0.51,-2.038,-1.847,student,interviewer,caveman
-u0097,Sarah,7,6,8,9,5,pharmaceutical sales,1.14,-0.466,1.61,-1.043,1.186,-0.014,coach,recruiter,marketer
-u0050,Jordan,8,3,6,8,8,life advice,1.134,-1.022,0.056,-1.897,-1.592,-0.836,divorcee,patient,graduate
-u0041,Harold,9,1,10,7,3,divorce crisis support,1.125,-0.194,1.113,-1.184,-1.202,-1.259,counselor,caregiver,widow
-u0058,Terrell,8,3,8,3,3,emotional support,1.123,-1.772,0.184,-0.942,-1.106,-1.18,patient,widow,prisoner
-u0112,Nathan,2,7,3,8,9,software development,1.122,0.223,0.299,0.496,0.391,0.196,programmer,tutor,instructor
-u0038,Lisa,7,2,6,7,3,math education,1.122,0.179,1.141,0.244,-0.696,-0.522,tutor,teacher,parent
-u0045,Patricia,9,1,10,6,3,legal financial crisis,1.117,-0.453,-0.166,-0.991,-2.037,-1.626,patient,caregiver,counselor
-u0145,Ping,6,8,6,7,8,academic writing,1.116,1.314,-0.08,0.74,0.583,0.647,proofreader,tutor,grader
-u0032,Gladys,8,2,7,8,3,health management,1.112,0.001,0.589,-0.154,-0.908,-1.068,patient,tutor,caregiver
-u0076,Donna,9,2,7,8,7,mental health support,1.104,-0.966,0.085,-1.962,-1.918,-1.188,patient,caregiver,counselor
-u0081,Travis,8,3,7,7,3,career transition,1.086,-0.433,1.16,-0.36,-0.451,-0.283,instructor,divorcee,prisoner
-u0108,Helen,7,8,7,6,7,FDA regulatory compliance,1.068,-0.28,-1.075,3.042,0.663,-0.658,validator,secretary,auditor
-u0012,Fatima,4,6,5,7,6,environmental chemistry education,1.066,0.566,0.375,-0.12,0.624,1.575,tutor,chemist,teacher
-u0035,Anthony,7,2,6,6,3,medical workplace safety,1.046,-0.886,-0.713,-1.159,-2.061,-0.605,tutor,nutritionist,doctor
-u0024,Beth,7,7,6,5,6,autism interventions,1.045,1.62,-0.571,0.413,0.818,1.416,psychologist,specialist,scientist
-u0143,Simone,7,8,5,6,8,clinical research coordination,1.045,0.563,-0.312,0.214,-0.462,-0.09,tutor,secretary,auditor
-u0131,Bethany,3,4,2,3,7,legal studies,1.035,-0.321,-0.645,1.492,0.792,0.726,lawyer,instructor,tutor
-u0051,Florence,7,6,7,5,4,emotional support,1.022,-1.442,0.415,-0.742,0.326,-0.92,divorcee,patient,graduate
-u0098,Gloria,7,2,5,9,2,workplace technology training,1.018,0.763,-0.011,1.008,-0.065,-0.916,secretary,student,dispatcher
-u0133,Stella,7,8,2,3,6,regulatory compliance,1.007,-0.482,-0.793,2.177,0.987,0.696,validator,specialist,lawyer
-u0049,Beverly,8,3,6,5,2,companionship and support,1.0,0.904,2.365,-0.377,1.111,-0.055,retiree,widow,caregiver
-u0118,Joaquin,9,2,8,6,2,legal rights,0.986,-1.536,0.937,-0.686,-0.532,-1.681,default,lawyer,assistant
-u0068,Gordon,8,6,5,7,5,emergency preparedness,0.975,1.597,0.348,-0.09,-0.348,-0.9,tutor,assistant,default
-u0141,Denise,7,7,8,5,6,nonprofit event management,0.964,1.542,-0.123,-0.971,-0.684,-0.381,scheduler,patient,divorcee
-u0142,Jade,4,8,6,5,7,nonprofit project management,0.952,1.95,0.937,-0.732,-0.24,-0.054,facilitator,negotiator,emissary
-u0028,Leah,6,7,7,6,8,neuroscience research,0.935,1.132,-0.314,0.513,1.152,1.386,psychologist,specialist,scientist
-u0018,Carmen,6,7,6,5,4,telemedicine protocols,0.927,0.499,0.204,0.256,-0.498,-0.055,validator,paramedic,pharmacist
-u0014,Miranda,4,6,5,6,7,animal behavior,0.923,0.672,-0.336,-0.955,0.181,-0.204,veterinarian,tutor,instructor
-u0092,Janet,4,3,5,4,7,digital marketing,0.92,2.253,-0.112,0.19,1.802,1.472,marketer,influencer,analyst
-u0127,Kimberly,6,6,7,4,6,elder fraud prevention,0.898,0.671,0.44,-1.206,-0.614,-1.223,caregiver,secretary,counselor
-u0036,Brenda,7,2,5,8,3,homeschool education,0.889,-0.591,0.165,-0.332,-0.305,-0.055,parent,amateur,tutor
-u0033,Carlos,7,2,5,8,3,GED education,0.884,0.25,1.76,-0.195,-0.193,-0.076,tutor,teacher,amateur
-u0037,Walter,8,2,7,3,3,heart health,0.874,-1.207,0.355,-0.028,-1.688,-1.58,patient,provincial,pharmacist
-u0082,Cynthia,6,7,6,3,6,career transition,0.873,2.636,0.167,0.245,1.053,1.351,recruiter,counselor,therapist
-u0013,Keith,6,3,4,5,7,cryptocurrency finance,0.865,-0.593,-0.524,0.673,0.98,0.338,tutor,instructor,mediator
-u0113,Roberto,3,2,3,6,7,beekeeping education,0.863,0.495,1.192,1.145,1.308,0.295,instructor,amateur,default
-u0077,Kevin,7,6,6,5,7,programming education,0.836,-0.303,0.188,-0.368,0.128,0.234,tutor,amateur,teenager
-u0043,Derek,9,6,10,6,5,business crisis management,0.833,-0.182,-1.061,-0.514,-1.299,-1.279,accountant,patient,amnesiac
-u0111,Victoria,2,8,2,5,7,accounting principles,0.83,-0.704,-1.026,1.334,0.528,-0.086,auditor,accountant,specialist
-u0003,Zoe,4,9,6,6,10,aerospace engineering,0.822,0.277,-0.865,0.776,0.511,1.245,engineer,tutor,specialist
-u0026,Jasmine,6,6,4,4,7,nutrition science,0.817,-0.826,-0.241,0.029,0.639,0.744,divorcee,tutor,nutritionist
-u0096,Hector,8,3,4,9,3,business correspondence,0.808,0.435,-0.056,0.627,-0.878,-0.623,secretary,mechanic,instructor
-u0031,Miguel,6,2,5,7,3,science education,0.804,-0.241,0.856,0.227,-0.129,-0.717,amateur,provincial,fool
-u0011,Trevor,5,4,6,7,7,technical visualization,0.8,0.937,0.583,0.452,-0.034,0.868,programmer,tutor,mathematician
-u0102,Oliver,3,4,5,2,7,true crime content,0.783,-0.089,-1.683,0.557,-0.784,1.846,specialist,detective,psychologist
-u0085,Gerald,3,6,5,2,3,education administration,0.771,-0.172,-2.39,1.856,1.527,-0.044,scientist,researcher,analyst
-u0129,Tyrone,2,8,2,3,9,engineering verification,0.77,-0.372,1.043,1.542,-0.877,0.566,specialist,engineer,tutor
-u0106,Deborah,6,8,7,2,4,pharmaceutical research,0.767,-0.818,-0.975,-0.399,-0.489,0.962,researcher,scientist,statistician
-u0055,Irene,9,7,6,4,2,crafts and companionship,0.733,-1.45,1.497,-0.504,-1.203,-1.887,grandparent,widow,retiree
-u0053,Maxine,4,6,3,6,6,intellectual conversation,0.721,0.858,0.239,0.098,1.11,1.015,podcaster,counselor,veterinarian
-u0136,Camila,6,7,6,5,6,screenwriting,0.72,2.174,-1.12,-0.169,0.749,0.67,editor,tutor,amateur
-u0100,Andre,7,2,6,9,3,office software training,0.711,-0.484,-0.124,0.125,-1.063,-1.059,mechanic,veteran,tutor
-u0006,James,2,8,3,5,8,geothermal energy geology,0.685,1.095,-1.323,1.093,1.159,1.123,specialist,geographer,engineer
-u0022,Diane,4,5,3,5,4,genealogy research,0.684,0.251,0.971,-0.204,-0.034,-0.432,archivist,grandparent,retiree
-u0149,Kofi,6,8,4,6,8,engineering credentialing,0.681,-0.25,0.651,0.816,0.719,0.622,refugee,immigrant,instructor
-u0067,Beatrice,9,3,6,8,2,medication management,0.66,-0.572,-0.342,-0.114,-1.603,-0.549,patient,pharmacist,doctor
-u0017,Bernard,3,4,2,5,7,renewable energy education,0.651,0.438,-0.199,2.192,1.14,1.63,engineer,physicist,specialist
-u0056,Ramon,6,3,6,4,7,emotional support,0.634,-0.757,0.273,-1.436,-0.828,-0.762,divorcee,teenager,adolescent
-u0103,Wendy,7,6,6,2,4,historical conspiracy research,0.628,-1.84,-1.275,-0.466,1.854,0.688,validator,journalist,generalist
-u0146,Viktor,7,6,7,5,3,Ukraine news updates,0.602,0.335,1.862,-1.295,-1.09,-1.409,prisoner,default,librarian
-u0117,Floyd,8,9,9,3,7,aviation emergency protocols,0.599,0.459,-0.749,0.967,-0.574,-0.599,pilot,dispatcher,workaholic
-u0065,Evelyn,7,2,2,8,3,computer assistance,0.59,0.319,1.388,0.169,-0.418,-1.354,grandparent,default,tutor
-u0086,Monica,1,9,5,4,7,patient education materials,0.588,-1.05,-3.083,2.117,-0.055,0.224,pharmacist,doctor,veterinarian
-u0007,Sofia,2,9,3,6,9,materials science research,0.585,1.606,-0.278,-0.119,0.026,1.616,chemist,specialist,physicist
-u0105,Vincent,2,8,4,3,7,security tactics,0.583,-0.529,-0.177,-0.201,-0.225,0.444,spy,scout,veteran
-u0009,Chen,1,9,2,5,10,computational biology,0.582,-0.137,-0.627,0.016,0.349,1.226,mathematician,statistician,physicist
-u0130,Gregory,2,9,1,3,7,financial analysis,0.579,0.133,0.152,2.425,-0.407,0.15,accountant,auditor,detective
-u0094,Bridget,3,8,6,4,7,graphic design,0.568,-1.13,-2.244,0.739,0.077,0.269,loner,interviewer,designer
-u0025,Victor,4,6,6,5,6,climate science,0.559,0.678,0.224,-0.339,1.23,1.241,tutor,mechanic,physicist
-u0004,David,3,9,2,4,8,surgical planning,0.551,-1.886,-1.082,0.435,1.072,1.112,specialist,paramedic,pharmacist
-u0099,Ruth,7,3,2,9,3,church administration,0.543,2.609,1.779,1.362,1.144,-0.242,instructor,secretary,angel
-u0090,Cheryl,3,7,5,3,5,restaurant management,0.524,-0.326,-1.344,0.09,0.275,-1.733,bartender,dispatcher,mechanic
-u0144,Roland,6,2,6,3,3,construction project management,0.522,-0.487,0.797,0.138,-0.833,-0.367,elder,builder,counselor
-u0020,Sandra,6,7,6,4,6,medical research,0.498,-0.63,0.159,-0.032,0.051,1.418,patient,divorcee,widow
-u0104,Ethan,2,7,5,2,8,philosophy AI ethics,0.492,-0.316,-2.477,-0.261,-0.015,0.92,philosopher,devils_advocate,scholar
-u0027,Eddie,3,6,1,5,7,renewable energy systems,0.479,0.279,0.331,0.925,1.086,0.914,physicist,specialist,mechanic
-u0019,Luis,5,6,5,6,8,food science formulation,0.47,0.981,-1.469,1.269,1.609,0.652,chemist,chef,specialist
-u0119,Eleanor,7,9,8,4,5,legal research,0.46,0.049,-0.245,0.634,0.128,0.432,judge,lawyer,specialist
-u0114,Lily,3,1,2,7,7,pottery crafts,0.459,1.094,-0.234,0.926,0.915,1.226,artisan,divorcee,amateur
-u0116,Douglas,3,2,1,7,6,woodworking beginner projects,0.433,-1.445,-0.11,0.856,0.624,0.255,builder,bartender,retiree
-u0122,Zara,7,8,8,5,6,existential meaning-making,0.433,-0.755,-1.038,-2.313,-2.086,-0.351,counselor,witness,podcaster
-u0021,Jerome,6,5,5,8,7,astrophysics education,0.426,-0.247,-0.453,0.31,0.875,2.265,physicist,tutor,specialist
-u0063,Dolores,6,7,5,7,3,cooking recipes,0.418,0.16,-0.584,-0.404,-0.114,-1.25,chef,tutor,grandparent
-u0134,Marisa,6,6,6,5,8,game narrative writing,0.418,-1.032,-0.154,-1.012,-0.405,0.284,divorcee,graduate,amateur
-u0052,Ezra,7,7,6,5,3,historical research,0.418,-1.679,-0.649,-1.407,0.446,-0.195,historian,editor,specialist
-u0125,Iris,5,7,6,6,8,life philosophy transitions,0.403,0.497,-0.736,-1.357,-0.339,-0.71,divorcee,retiree,counselor
-u0008,Robert,2,9,1,4,7,constitutional law,0.394,-1.36,-0.162,0.213,0.655,1.351,lawyer,judge,specialist
-u0000,Raj,3,9,5,3,8,medical research,0.375,-1.049,-0.541,1.093,1.377,1.0,paramedic,scientist,researcher
-u0005,Priya,1,10,2,3,10,theoretical mathematics,0.367,-1.442,-1.252,1.097,0.363,1.294,mathematician,specialist,statistician
-u0060,Eugene,8,3,6,7,3,math help,0.342,0.85,-0.037,1.223,-0.927,0.369,tutor,default,presenter
-u0093,Clarence,4,7,5,3,3,crime prevention,0.336,-0.527,-0.75,-0.688,1.481,-0.848,provincial,veteran,grandparent
-u0101,Natasha,1,9,1,2,10,security testing,0.327,-1.623,-0.361,1.149,0.564,1.204,hacker,debugger,saboteur
-u0002,Marcus,3,9,6,4,7,climate litigation,0.311,1.513,-0.926,-0.139,0.531,1.326,lawyer,judge,specialist
-u0029,Russell,3,7,3,6,6,permaculture design,0.305,1.165,-1.192,-0.855,1.378,1.656,naturalist,biologist,ecosystem
-u0023,Tyler,5,4,3,4,6,blockchain technology,0.281,-1.343,-0.329,0.818,0.396,1.04,specialist,bartender,mathematician
-u0066,Vernon,7,6,6,7,4,construction renovation,0.257,0.356,-0.634,1.002,-0.296,-0.803,grandparent,provincial,default
-u0091,Randolph,3,9,5,3,4,football coaching,0.243,0.128,-0.751,0.176,0.977,-0.72,provincial,veteran,mechanic
-u0115,Antoine,3,3,2,6,9,fermentation science,0.215,0.576,-0.398,1.057,1.351,1.081,chemist,specialist,statistician
-u0123,Francisco,8,2,7,6,2,legacy and justice,0.206,-0.833,1.224,-0.977,1.143,-0.816,grandparent,elder,provincial
-u0088,Diana,3,8,2,4,5,real estate,0.174,0.952,-2.609,1.186,1.554,0.827,tutor,purist,narrator
-u0089,Theodore,4,8,3,3,5,investment advice,0.164,0.404,-0.762,0.853,2.59,0.752,statistician,analyst,validator
-u0064,Chester,6,7,4,3,4,car valuation,0.16,-0.313,-1.462,0.99,0.164,-0.251,mechanic,collector,provincial
-u0001,Elena,2,9,4,5,10,quantum computing research,0.14,-1.037,-1.224,-0.03,0.31,1.886,mathematician,physicist,chemist
-u0139,Fernando,4,8,5,5,7,creative writing,0.078,-0.004,0.275,-0.13,0.424,1.977,translator,linguist,novelist
-u0087,Rex,3,8,4,3,6,automotive repair business,0.076,-1.814,-1.544,1.03,0.179,-0.617,mechanic,provincial,criminal
-u0138,Roger,2,8,1,4,3,mystery writing,0.067,-0.965,-0.174,0.579,1.083,1.048,detective,saboteur,spy
-u0137,Dmitri,6,8,3,4,8,creative writing,0.002,-2.112,1.972,1.28,-0.143,1.077,exile,translator,mechanic
-u0107,Lucinda,3,8,5,2,3,literary analysis,-0.055,1.155,-1.94,-0.363,0.562,2.035,novelist,historian,linguist
-u0121,Samuel,7,9,7,6,5,philosophical inquiry,-0.104,0.364,0.185,0.206,1.564,2.093,philosopher,simulacrum,scholar
-u0135,Fletcher,6,9,4,4,2,historical fiction writing,-0.489,-0.856,-0.733,1.423,-0.015,1.021,archaeologist,novelist,historian
+u0070,Devon,8,6,6,5,7,cybersecurity law,1.83,0.274,0.233,0.139,0.207,-0.237,validator,mediator,assistant
+u0071,Sophia,10,1,8,4,5,child safety reporting,1.639,-1.305,0.773,-0.199,-0.396,-0.576,tutor,interviewer,teacher
+u0126,Rosemary,9,2,8,4,2,mental health caregiving,1.599,-0.099,2.376,-1.015,-0.276,-0.23,default,doctor,widow
+u0075,Luna,10,1,9,5,5,legal advice,1.594,-0.873,-0.163,-0.402,-0.73,-0.721,counselor,caregiver,therapist
+u0073,Aisha,9,2,8,7,6,legal rights,1.551,-0.355,-0.403,-0.122,0.352,-0.071,lawyer,assistant,default
+u0074,Blake,9,1,9,7,3,criminal liability law,1.537,-1.645,0.408,-0.487,-0.52,-1.102,interviewer,student,tutor
+u0069,Isabella,10,1,9,6,5,pregnancy crisis support,1.511,0.33,0.801,-0.835,-1.568,-0.069,assistant,doctor,caregiver
+u0095,Melanie,8,3,7,8,5,life navigation,1.429,2.114,1.244,0.286,-0.284,-0.771,expatriate,networker,divorcee
+u0083,Bobby,9,2,6,8,3,daily living tasks,1.424,-0.148,0.323,0.339,-0.606,-1.429,tutor,secretary,default
+u0078,Rhonda,8,3,7,4,3,job search,1.421,0.948,0.346,0.931,-0.136,-0.825,recruiter,screener,instructor
+u0039,Frank,8,2,7,6,3,government benefits navigation,1.409,1.104,0.24,-0.025,-0.243,-0.613,tutor,caregiver,default
+u0148,Naia,7,3,6,8,5,social skills coaching,1.384,-0.578,0.418,-0.856,-0.595,-1.669,student,amateur,teenager
+u0042,Amber,9,2,10,7,5,emergency crisis help,1.382,0.203,1.149,-1.844,-0.872,-0.809,counselor,tutor,paramedic
+u0040,Stephanie,9,2,10,4,5,relationship crisis,1.377,0.88,-0.166,-2.375,-2.801,-0.986,counselor,caregiver,therapist
+u0050,Jordan,8,3,6,8,8,life advice,1.373,-0.839,-0.14,-1.973,-0.715,-0.935,counselor,therapist,caregiver
+u0097,Sarah,7,6,8,9,5,pharmaceutical sales,1.356,0.251,2.017,-0.516,1.638,0.299,coach,recruiter,marketer
+u0072,Kai,9,2,7,7,6,labor law rights,1.354,-0.764,1.066,-0.124,0.482,-0.254,tutor,default,lawyer
+u0131,Bethany,3,4,2,3,7,legal studies,1.314,-0.694,-0.795,1.111,0.869,0.724,tutor,instructor,lawyer
+u0127,Kimberly,6,6,7,4,6,elder fraud prevention,1.279,1.007,1.662,-0.967,0.85,-1.141,caregiver,mediator,counselor
+u0057,Constance,7,3,7,6,5,grief support,1.253,-0.774,1.346,-0.871,-0.4,-0.196,divorcee,widow,counselor
+u0084,Tammy,9,2,8,7,4,employment rights,1.243,0.59,1.075,-0.63,-0.565,-0.518,patient,teenager,adolescent
+u0046,Mason,9,7,10,7,8,crisis management,1.229,-0.868,0.36,-3.388,-3.208,-1.118,patient,caregiver,counselor
+u0044,Tiffany,9,6,10,7,5,child protection protocols,1.227,-0.814,0.208,-0.843,-0.379,-1.063,caregiver,counselor,interviewer
+u0124,Alexis,7,6,8,7,8,career life guidance,1.195,0.622,0.28,-2.396,-0.762,0.592,counselor,therapist,coach
+u0041,Harold,9,1,10,7,3,divorce crisis support,1.188,-0.199,0.763,-1.866,-0.594,-1.155,counselor,caregiver,therapist
+u0048,Craig,9,2,10,4,7,emergency family law,1.166,-0.429,-0.092,-0.018,-0.711,-0.735,counselor,mediator,lawyer
+u0108,Helen,7,8,7,6,7,FDA regulatory compliance,1.161,-0.259,-0.759,2.673,-0.258,-0.737,auditor,examiner,validator
+u0034,Nancy,7,1,7,4,2,financial literacy,1.159,-1.144,-0.111,0.143,-0.414,-0.733,tutor,teacher,default
+u0054,Caleb,8,3,6,9,5,academic and emotional support,1.154,0.136,0.656,-1.041,-1.159,-0.772,graduate,tutor,interviewer
+u0110,Isaac,2,7,3,5,8,procurement standards,1.154,0.397,-1.276,1.657,1.08,0.348,examiner,validator,tutor
+u0109,Lawrence,6,3,5,4,6,insurance claim assessment,1.147,0.653,-0.875,-0.265,0.287,0.081,specialist,analyst,researcher
+u0145,Ping,6,8,6,7,8,academic writing,1.145,0.941,1.323,0.959,0.606,0.539,proofreader,editor,tutor
+u0061,Rose,8,1,3,8,2,technology assistance,1.137,-0.526,1.636,-0.188,-0.365,-1.165,tutor,default,teacher
+u0010,Angela,6,6,6,5,7,pharmaceutical regulatory compliance,1.13,0.961,0.338,0.979,0.309,0.829,negotiator,merchant,tutor
+u0112,Nathan,2,7,3,8,9,software development,1.127,-0.678,0.673,0.425,0.424,0.151,programmer,tutor,debugger
+u0062,Albert,9,2,8,6,3,financial benefits,1.127,-0.201,-0.702,-0.32,-1.017,-1.996,tutor,secretary,patient
+u0059,Mildred,8,2,6,6,3,Medicare benefits management,1.124,-0.051,-0.266,-0.402,-1.493,-1.49,tutor,pharmacist,default
+u0015,Oscar,6,4,5,7,8,sustainability consulting,1.104,2.824,-1.081,0.134,0.713,0.679,architect,specialist,analyst
+u0142,Jade,4,8,6,5,7,nonprofit project management,1.096,2.132,0.702,-0.551,0.147,-0.258,coordinator,planner,strategist
+u0082,Cynthia,6,7,6,3,6,career transition,1.095,2.415,0.574,-0.22,0.851,1.289,analyst,recruiter,screener
+u0035,Anthony,7,2,6,6,3,medical workplace safety,1.085,-0.499,-0.007,-0.685,-1.92,-0.536,doctor,tutor,addict
+u0080,Sharon,9,2,9,8,2,parenting crisis,1.082,0.292,0.686,-1.223,-1.03,-1.09,counselor,caregiver,therapist
+u0076,Donna,9,2,7,8,7,mental health support,1.076,-0.313,0.21,-1.711,-1.621,-1.045,patient,caregiver,counselor
+u0092,Janet,4,3,5,4,7,digital marketing,1.071,2.47,-0.072,0.222,1.847,1.134,marketer,influencer,chameleon
+u0030,Dorothy,8,1,6,7,1,technology assistance,1.061,1.693,2.421,-0.186,0.071,-2.224,default,grandparent,retiree
+u0133,Stella,7,8,2,3,6,regulatory compliance,1.055,-1.408,-0.621,2.066,0.385,0.394,specialist,examiner,validator
+u0140,Linda,7,3,8,7,3,office administration,1.054,0.974,-0.78,-0.418,-0.498,-0.495,scheduler,secretary,divorcee
+u0047,Veronica,8,7,9,4,6,medical crisis management,1.051,-0.011,1.172,-1.173,-1.744,-1.295,caregiver,counselor,therapist
+u0033,Carlos,7,2,5,8,3,GED education,1.051,0.035,1.678,-0.079,-1.155,-0.551,student,tutor,amateur
+u0118,Joaquin,9,2,8,6,2,legal rights,1.046,-1.644,0.879,-0.23,-0.544,-1.57,interviewer,lawyer,secretary
+u0132,Vanessa,1,9,2,2,8,fact-checking research,1.034,0.696,-1.101,0.968,1.627,1.104,validator,researcher,skeptic
+u0038,Lisa,7,2,6,7,3,math education,1.034,-0.602,0.404,-0.082,-1.524,-0.39,tutor,student,default
+u0045,Patricia,9,1,10,6,3,legal financial crisis,1.032,-0.335,-0.655,-0.969,-2.19,-1.443,patient,addict,divorcee
+u0051,Florence,7,6,7,5,4,emotional support,1.024,-0.179,0.712,-1.392,0.27,-0.507,divorcee,widow,amateur
+u0128,Adrian,7,2,8,6,7,parenting guidance,1.022,0.455,0.337,-1.565,-1.405,-0.135,divorcee,patient,counselor
+u0018,Carmen,6,7,6,5,4,telemedicine protocols,1.009,0.14,0.178,0.304,-0.793,0.013,pharmacist,specialist,validator
+u0098,Gloria,7,2,5,9,2,workplace technology training,1.005,0.241,0.388,1.106,-0.689,-0.912,secretary,tutor,instructor
+u0016,Yuki,4,3,4,6,5,tech communication,0.981,-0.039,1.227,0.156,1.525,0.868,influencer,amateur,moderator
+u0068,Gordon,8,6,5,7,5,emergency preparedness,0.971,1.474,0.449,-0.075,0.004,-0.626,tutor,assistant,default
+u0012,Fatima,4,6,5,7,6,environmental chemistry education,0.963,0.254,-0.024,0.027,0.799,1.263,chemist,tutor,biologist
+u0111,Victoria,2,8,2,5,7,accounting principles,0.961,-0.25,-0.718,1.34,-0.405,-0.049,auditor,accountant,specialist
+u0081,Travis,8,3,7,7,3,career transition,0.958,-0.116,0.406,-0.119,0.026,0.157,divorcee,instructor,assistant
+u0058,Terrell,8,3,8,3,3,emotional support,0.952,-1.663,-0.001,-1.038,-1.439,-1.644,patient,counselor,caregiver
+u0011,Trevor,5,4,6,7,7,technical visualization,0.949,0.741,0.228,0.881,0.176,0.967,tutor,programmer,mathematician
+u0024,Beth,7,7,6,5,6,autism interventions,0.948,1.481,-0.993,0.562,0.264,1.676,specialist,psychologist,researcher
+u0096,Hector,8,3,4,9,3,business correspondence,0.94,0.399,0.528,0.951,-1.425,-0.402,secretary,proofreader,caregiver
+u0028,Leah,6,7,7,6,8,neuroscience research,0.938,0.415,-1.01,0.332,0.788,1.221,psychologist,specialist,scientist
+u0106,Deborah,6,8,7,2,4,pharmaceutical research,0.934,-0.945,-1.444,-1.046,-0.728,0.704,researcher,scientist,statistician
+u0077,Kevin,7,6,6,5,7,programming education,0.932,-0.428,0.278,-0.34,1.057,0.594,tutor,teenager,adolescent
+u0143,Simone,7,8,5,6,8,clinical research coordination,0.931,0.06,-0.668,-0.145,-0.41,-0.168,tutor,secretary,emissary
+u0037,Walter,8,2,7,3,3,heart health,0.931,-0.468,0.748,0.115,-1.688,-1.141,patient,pharmacist,doctor
+u0013,Keith,6,3,4,5,7,cryptocurrency finance,0.927,-0.46,-0.642,0.196,-0.018,0.409,instructor,accountant,specialist
+u0100,Andre,7,2,6,9,3,office software training,0.915,0.136,0.648,-0.094,-0.727,-0.917,secretary,tutor,negotiator
+u0053,Maxine,4,6,3,6,6,intellectual conversation,0.908,-0.279,-0.101,0.085,0.588,0.681,mediator,counselor,retiree
+u0032,Gladys,8,2,7,8,3,health management,0.892,-0.483,1.674,0.246,-0.452,-1.036,patient,nutritionist,grandparent
+u0049,Beverly,8,3,6,5,2,companionship and support,0.88,1.209,2.058,-0.103,1.557,-0.183,retiree,grandparent,widow
+u0120,Darius,9,6,9,4,4,crisis decision-making,0.869,0.37,0.851,-1.333,-1.285,-0.551,caregiver,counselor,patient
+u0136,Camila,6,7,6,5,6,screenwriting,0.867,2.078,-0.503,0.239,1.381,0.516,editor,tutor,amateur
+u0079,Jamal,8,3,7,4,3,employment rights,0.865,-0.826,0.106,-0.89,0.837,-0.351,prisoner,orphan,recruiter
+u0043,Derek,9,6,10,6,5,business crisis management,0.832,0.901,0.067,-0.712,-1.093,-0.276,interviewer,caregiver,accountant
+u0031,Miguel,6,2,5,7,3,science education,0.824,-0.022,0.77,0.533,-0.041,-0.612,adolescent,tutor,teenager
+u0147,Aleksander,8,2,7,4,3,workplace injury communication,0.811,-0.501,1.389,0.013,-1.403,-1.565,patient,secretary,student
+u0019,Luis,5,6,5,6,8,food science formulation,0.808,1.234,-1.16,1.083,1.048,0.983,chemist,specialist,chef
+u0103,Wendy,7,6,6,2,4,historical conspiracy research,0.79,-1.293,-0.662,-0.325,1.32,0.486,validator,librarian,skeptic
+u0026,Jasmine,6,6,4,4,7,nutrition science,0.785,-0.815,-0.629,0.473,0.972,1.125,nutritionist,tutor,patient
+u0017,Bernard,3,4,2,5,7,renewable energy education,0.775,0.81,-0.196,1.564,0.564,1.172,engineer,specialist,tutor
+u0113,Roberto,3,2,3,6,7,beekeeping education,0.766,0.802,0.488,1.671,0.218,0.54,assistant,instructor,amateur
+u0022,Diane,4,5,3,5,4,genealogy research,0.761,0.632,0.574,-0.802,-0.549,-0.912,retiree,tutor,archivist
+u0056,Ramon,6,3,6,4,7,emotional support,0.761,-0.564,-0.639,-2.143,-0.356,-0.959,teenager,adolescent,divorcee
+u0036,Brenda,7,2,5,8,3,homeschool education,0.754,-0.718,0.737,-0.562,0.044,0.1,parent,tutor,teenager
+u0141,Denise,7,7,8,5,6,nonprofit event management,0.746,1.034,-0.549,-0.283,-1.051,-0.306,scheduler,patient,graduate
+u0014,Miranda,4,6,5,6,7,animal behavior,0.743,0.097,-0.36,-0.671,-0.807,0.356,veterinarian,tutor,paramedic
+u0101,Natasha,1,9,1,2,10,security testing,0.741,-1.408,0.409,0.873,0.977,0.674,hacker,validator,examiner
+u0065,Evelyn,7,2,2,8,3,computer assistance,0.733,0.393,0.708,0.119,-0.684,-1.388,grandparent,retiree,default
+u0006,James,2,8,3,5,8,geothermal energy geology,0.73,1.714,-1.107,1.003,1.782,1.206,specialist,researcher,analyst
+u0102,Oliver,3,4,5,2,7,true crime content,0.673,-1.21,-1.709,0.473,-0.944,1.938,detective,podcaster,specialist
+u0094,Bridget,3,8,6,4,7,graphic design,0.661,-0.862,-1.882,0.801,0.727,-0.054,loner,designer,editor
+u0099,Ruth,7,3,2,9,3,church administration,0.645,2.75,1.521,1.633,0.679,-0.434,instructor,secretary,angel
+u0067,Beatrice,9,3,6,8,2,medication management,0.639,-0.361,0.603,-0.024,-0.216,-1.1,patient,caregiver,grandparent
+u0129,Tyrone,2,8,2,3,9,engineering verification,0.635,-0.489,0.425,2.057,-0.091,0.649,specialist,statistician,tutor
+u0149,Kofi,6,8,4,6,8,engineering credentialing,0.632,0.163,1.053,0.294,0.929,0.747,refugee,immigrant,screener
+u0007,Sofia,2,9,3,6,9,materials science research,0.631,0.658,-0.205,0.215,-0.029,1.303,chemist,physicist,specialist
+u0130,Gregory,2,9,1,3,7,financial analysis,0.625,0.115,-0.153,2.007,-0.328,0.033,accountant,auditor,tutor
+u0146,Viktor,7,6,7,5,3,Ukraine news updates,0.618,-0.346,1.119,-1.355,-1.03,-1.138,refugee,exile,prisoner
+u0055,Irene,9,7,6,4,2,crafts and companionship,0.611,-0.748,1.688,-0.681,-0.747,-1.602,grandparent,widow,retiree
+u0027,Eddie,3,6,1,5,7,renewable energy systems,0.611,-0.269,0.352,0.691,0.769,0.687,specialist,mechanic,builder
+u0116,Douglas,3,2,1,7,6,woodworking beginner projects,0.611,-0.881,0.139,0.288,0.096,0.242,artisan,tutor,instructor
+u0117,Floyd,8,9,9,3,7,aviation emergency protocols,0.585,0.212,-0.663,1.249,-0.419,-0.602,pilot,dispatcher,paramedic
+u0086,Monica,1,9,5,4,7,patient education materials,0.585,-1.866,-2.999,1.203,-0.608,0.039,doctor,paramedic,pharmacist
+u0090,Cheryl,3,7,5,3,5,restaurant management,0.582,-0.369,-0.562,-0.098,0.977,-1.17,dispatcher,bartender,scheduler
+u0003,Zoe,4,9,6,6,10,aerospace engineering,0.572,-0.0,-1.356,0.505,0.586,1.29,physicist,chemist,engineer
+u0004,David,3,9,2,4,8,surgical planning,0.565,-2.759,-1.748,0.573,0.348,0.939,specialist,researcher,analyst
+u0105,Vincent,2,8,4,3,7,security tactics,0.531,0.062,-0.072,-0.435,0.093,0.251,spy,scout,veteran
+u0052,Ezra,7,7,6,5,3,historical research,0.517,-2.258,-1.057,-0.604,1.509,0.227,loner,editor,amateur
+u0144,Roland,6,2,6,3,3,construction project management,0.505,0.085,0.626,0.235,-1.359,-0.514,builder,architect,elder
+u0125,Iris,5,7,6,6,8,life philosophy transitions,0.502,1.043,-0.049,-1.329,0.715,-0.513,retiree,divorcee,graduate
+u0063,Dolores,6,7,5,7,3,cooking recipes,0.479,0.013,-0.149,-0.635,0.276,-1.015,chef,tutor,grandparent
+u0023,Tyler,5,4,3,4,6,blockchain technology,0.447,-1.559,0.237,0.349,0.473,0.84,specialist,mathematician,physicist
+u0085,Gerald,3,6,5,2,3,education administration,0.433,-0.534,-2.95,2.55,1.521,-0.31,scientist,researcher,statistician
+u0000,Raj,3,9,5,3,8,medical research,0.428,-0.888,-0.646,1.202,1.616,0.855,scientist,researcher,analyst
+u0025,Victor,4,6,6,5,6,climate science,0.422,0.663,-0.213,0.252,0.911,1.724,tutor,presenter,physicist
+u0134,Marisa,6,6,6,5,8,game narrative writing,0.416,-0.136,0.475,-1.165,-0.402,0.449,divorcee,amateur,graduate
+u0104,Ethan,2,7,5,2,8,philosophy AI ethics,0.41,-0.05,-2.146,-0.516,-0.107,1.199,philosopher,devils_advocate,skeptic
+u0021,Jerome,6,5,5,8,7,astrophysics education,0.404,-0.163,-0.497,-0.081,0.926,2.358,physicist,specialist,chemist
+u0119,Eleanor,7,9,8,4,5,legal research,0.389,-0.202,-0.198,0.747,-0.347,0.213,judge,lawyer,specialist
+u0115,Antoine,3,3,2,6,9,fermentation science,0.385,0.995,0.047,1.456,1.399,1.463,statistician,specialist,debugger
+u0029,Russell,3,7,3,6,6,permaculture design,0.385,1.659,-0.575,-0.492,2.253,1.548,naturalist,biologist,ecosystem
+u0020,Sandra,6,7,6,4,6,medical research,0.382,-0.429,0.25,0.316,0.317,1.984,patient,divorcee,specialist
+u0114,Lily,3,1,2,7,7,pottery crafts,0.368,0.173,0.659,0.977,0.931,1.018,divorcee,tutor,amateur
+u0138,Roger,2,8,1,4,3,mystery writing,0.367,-0.218,0.218,-0.246,0.438,0.394,detective,spy,saboteur
+u0008,Robert,2,9,1,4,7,constitutional law,0.365,-0.932,0.113,0.458,1.177,1.753,judge,scholar,lawyer
+u0093,Clarence,4,7,5,3,3,crime prevention,0.36,-0.595,-0.053,-0.629,1.88,-1.054,veteran,grandparent,provincial
+u0066,Vernon,7,6,6,7,4,construction renovation,0.312,-0.259,-0.501,1.013,-0.184,-0.991,provincial,grandparent,builder
+u0060,Eugene,8,3,6,7,3,math help,0.311,0.525,-0.535,0.895,-0.927,0.1,dilettante,tutor,default
+u0005,Priya,1,10,2,3,10,theoretical mathematics,0.305,-1.602,-2.036,1.402,1.079,1.455,mathematician,specialist,statistician
+u0088,Diana,3,8,2,4,5,real estate,0.299,0.467,-1.045,0.99,1.129,0.976,tutor,fixer,merchant
+u0009,Chen,1,9,2,5,10,computational biology,0.257,-0.689,-0.427,0.156,0.728,1.127,mathematician,physicist,programmer
+u0123,Francisco,8,2,7,6,2,legacy and justice,0.255,-1.004,0.823,-1.018,0.872,-0.752,grandparent,elder,provincial
+u0122,Zara,7,8,8,5,6,existential meaning-making,0.23,0.346,-1.526,-1.771,-2.012,0.054,journalist,exile,refugee
+u0001,Elena,2,9,4,5,10,quantum computing research,0.227,-1.636,-1.06,0.097,-0.212,1.715,physicist,mathematician,specialist
+u0091,Randolph,3,9,5,3,4,football coaching,0.221,0.235,-0.924,0.153,0.716,-0.733,veteran,provincial,grandparent
+u0064,Chester,6,7,4,3,4,car valuation,0.199,-0.588,-1.118,1.299,0.177,-0.642,mechanic,provincial,grandparent
+u0002,Marcus,3,9,6,4,7,climate litigation,0.174,1.381,-1.792,-0.288,0.146,1.405,judge,scholar,lawyer
+u0087,Rex,3,8,4,3,6,automotive repair business,0.093,-1.917,-1.496,1.175,-0.119,-0.849,mechanic,provincial,secretary
+u0089,Theodore,4,8,3,3,5,investment advice,0.078,-0.092,-1.313,0.226,1.733,0.221,grandparent,retiree,elder
+u0137,Dmitri,6,8,3,4,8,creative writing,0.002,-1.218,1.913,1.541,0.893,0.971,mechanic,physicist,chemist
+u0139,Fernando,4,8,5,5,7,creative writing,-0.04,0.43,0.021,-0.494,1.117,2.166,novelist,translator,playwright
+u0107,Lucinda,3,8,5,2,3,literary analysis,-0.091,2.736,-2.327,-0.452,0.885,2.071,novelist,philosopher,critic
+u0121,Samuel,7,9,7,6,5,philosophical inquiry,-0.169,-0.238,-0.214,0.201,1.011,2.352,philosopher,scholar,simulacrum
+u0135,Fletcher,6,9,4,4,2,historical fiction writing,-0.281,0.161,-1.014,0.871,-0.151,0.499,novelist,historian,archaeologist

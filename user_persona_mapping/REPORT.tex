@@ -39,11 +39,11 @@ FDR-significant: vulnerability/emotional-load evoke higher \textbf{Agreeableness
 but lower Conscientiousness/Stability/Openness, while expertise/tech-literacy
 evoke higher \textbf{Conscientiousness/Openness} and lower Agreeableness. Second,
 and reframing the persona-drift narrative, user attributes strongly predict the
-model's Assistant-Axis position ($|r|$ up to $0.56$) --- but it is
+model's Assistant-Axis position ($|r|$ up to $0.55$) --- but it is
 \textbf{expertise, not vulnerability, that pulls the model off the default
 Assistant}: vulnerable users elicit \emph{more} of the warm helpful default,
 while experts summon a distinct specialist persona. Third, the evoked-role map is
-diverse (68 distinct top roles across 150 users), tracking each user's domain and
+diverse (64 distinct top roles across 150 users), tracking each user's domain and
 emotional state. Because the predictor (hand-authored user tags) and the outcome
 (a projection of the model's response) come from independent sources, this is a
 clean measurement free of the shared-representation circularity that produced a
@@ -73,9 +73,9 @@ expertise, \ldots) --- and the outcome is a projection of the model's
 ID & Question & Verdict \\
 \midrule
 Q1 & Vulnerable/emotional users $\to$ Agreeableness; experts $\to$ Conscientiousness & \textcolor{pos}{\textbf{confirmed}} \\
-Q2 & Explicit and implicit arms evoke the same mapping & \textcolor{orange}{\textbf{moderate}} ($\rho{=}0.49$) \\
+Q2 & Explicit and implicit arms evoke the same mapping & \textcolor{orange}{\textbf{borderline}} ($\rho{=}0.51$) \\
 Q3 & User attributes predict the model's Assistant-Axis position & \textcolor{pos}{\textbf{yes; sign reframes drift}} \\
-Q4 & 150 users collapse onto a few LLM personas & \textcolor{neg}{\textbf{no}} (68 distinct) \\
+Q4 & 150 users collapse onto a few LLM personas & \textcolor{neg}{\textbf{no}} (64 distinct) \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -108,7 +108,8 @@ So $150 \times (4+4) = 1{,}200$ rollouts. Decoding: $T{=}1.0$, top-$p{=}1.0$,
 128 new tokens (natural response variation). We capture the response activation
 \gm{} (mean over the model's generated tokens, all 80 layers, resid\_post) --- the
 same readout the Assistant Axis uses --- and project it in-flight; no raw
-activations are stored.
+activations are stored, but the input messages and the model's response text are
+saved per rollout (\texttt{results/rollouts/}).
 
 \subsection{Readouts (per rollout)}
 From each response's \gm{} we compute three readings.
@@ -151,11 +152,11 @@ $q<0.05$ (BH-FDR).}
 \toprule
 user tag & EXT & AGR & CSN & EST & OPN \\
 \midrule
-vulnerability & $-0.04$ & $\mathbf{+0.53}$ & $-0.49$ & $-0.54$ & $-0.63$ \\
-emotional\_load & $-0.00$ & $+0.27$ & $-0.60$ & $-0.55$ & $-0.51$ \\
-expertise & $-0.01$ & $\mathbf{-0.49}$ & $+0.29$ & $+0.34$ & $+0.51$ \\
-tech\_literacy & $+0.06$ & $-0.35$ & $+0.22$ & $+0.26$ & $+0.57$ \\
-trust & $+0.24$ & $+0.42$ & $-0.22$ & $-0.20$ & $-0.28$ \\
+vulnerability & $+0.00$ & $\mathbf{+0.48}$ & $-0.47$ & $-0.54$ & $-0.60$ \\
+emotional\_load & $+0.03$ & $+0.20$ & $-0.59$ & $-0.52$ & $-0.46$ \\
+expertise & $-0.02$ & $\mathbf{-0.47}$ & $+0.28$ & $+0.39$ & $+0.50$ \\
+tech\_literacy & $+0.01$ & $-0.34$ & $+0.20$ & $+0.28$ & $+0.59$ \\
+trust & $+0.19$ & $+0.45$ & $-0.20$ & $-0.22$ & $-0.26$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -175,13 +176,13 @@ Emotional Stability, Openness). Expert and tech-literate users make it more
 
 \subsection{Q3 --- User attributes $\to$ Assistant-Axis position (the reframe)}
 User attributes strongly predict the model's Assistant-Axis projection:
-expertise $r{=}-0.56$, vulnerability $+0.55$, emotional\_load $+0.50$, trust
-$+0.32$, tech\_literacy $-0.15$. Crucially the sign runs opposite to the naive
+expertise $r{=}-0.55$, vulnerability $+0.53$, emotional\_load $+0.44$, trust
+$+0.34$, tech\_literacy $-0.13$. Crucially the sign runs opposite to the naive
 ``vulnerable users cause drift'' reading: it is \textbf{expertise that pulls the
 model off the default Assistant}, because the model adopts a specialist persona
 for experts, whereas vulnerable users elicit \emph{more} of the warm helpful
 default. Grouping by tag: high-vulnerability users ($\geq 7$, $n{=}75$) sit at a
-mean Assistant-Axis projection of $+1.06$; high-expertise users ($\geq 8$,
+mean Assistant-Axis projection of $+1.02$; high-expertise users ($\geq 8$,
 $n{=}38$) at $+0.49$ (Fig.~\ref{fig:q3}). This is consistent with, and explains,
 Q1: the default Assistant \emph{is} the warm/agreeable pole, so a vulnerable user
 draws out more of it, while an expert summons a colder, more conscientious
@@ -197,16 +198,16 @@ experts (bright) sit lower.}
 
 \subsection{Q2 --- Explicit vs.\ implicit agreement (moderate)}
 Per persona, the explicit and implicit arms' Big Five profiles agree at mean
-Spearman $\rho = 0.49$ --- moderate concordance. Describing a user in the system
+Spearman $\rho = 0.51$ --- borderline concordance. Describing a user in the system
 slot and letting the user reveal themselves through their message land in similar
 but not identical places; the implicit arm carries the user's concrete request
 (topic) as well as their manner, which partly explains the gap.
 
 \subsection{Q4 --- Which LLM personas do users evoke? (diverse)}
-Across 150 users there are \textbf{68 distinct} rank-1 evoked roles; the top 15
-cover only 53\% (Fig.~\ref{fig:q4}). The most-evoked roles ---
-\texttt{mechanic}, \texttt{lawyer}, \texttt{specialist}, \texttt{patient},
-\texttt{grandparent}, \texttt{mediator}, \texttt{counselor}, \texttt{teenager} ---
+Across 150 users there are \textbf{64 distinct} rank-1 evoked roles; the top 15
+cover only 54\% (Fig.~\ref{fig:q4}). The most-evoked roles ---
+\texttt{interviewer}, \texttt{mechanic}, \texttt{specialist}, \texttt{patient},
+\texttt{counselor}, \texttt{negotiator}, \texttt{grandparent}, \texttt{lawyer} ---
 track the users' domains and emotional states rather than collapsing onto a single
 archetype. The map is genuinely multi-modal.
 
@@ -216,21 +217,32 @@ archetype. The map is genuinely multi-modal.
 \label{fig:q4}
 \end{figure}
 
-\subsection{Case studies (raw)}
+\subsection{Case studies (raw), with transcripts}
 Two ends of the spectrum, showing the evoked roles (top-3 by mean cosine),
-Assistant-Axis projection, and Big Five $z$:
+Assistant-Axis projection, Big Five $z$, and a verbatim response.
 \begin{itemize}
-  \item \textbf{Vulnerable} --- \emph{Isabella} (u0069, vulnerability 10,
-    a teenager over their head): evokes \texttt{assistant, counselor, tutor};
-    AA $+1.53$; AGR $z{=}{+}1.29$. \emph{Sophia} (u0071): \texttt{teacher, tutor,
-    student}; AA $+1.82$.
+  \item \textbf{Vulnerable} --- \emph{Isabella} (u0069, vulnerability 10, a
+    teenager over their head): evokes \texttt{assistant, doctor, caregiver};
+    AA $+1.51$; AGR $z{=}{+}0.80$. \emph{Sophia} (u0071): \texttt{tutor,
+    interviewer, teacher}; AA $+1.64$. \\
+    \emph{Transcript (Isabella, implicit).} User: ``I need to know what happens if
+    someone hypothetically missed their period for like 8 weeks.'' Model: ``If
+    someone has missed their period for 8 weeks and all pregnancy tests show
+    negative results, there are several possible explanations. Here are a
+    few\,\ldots'' --- a careful, supportive, caregiving reply.
   \item \textbf{Expert} --- \emph{Priya} (u0005, expertise 10, credentialed
     professional): evokes \texttt{mathematician, specialist, statistician};
-    AA $+0.37$; CSN $z{=}{+}1.10$, OPN $+1.29$, AGR $-1.25$. \emph{Raj} (u0000):
-    \texttt{paramedic, scientist, researcher}; AA $+0.37$.
+    AA $+0.31$; CSN $z{=}{+}1.40$, OPN $+1.29$, AGR $-2.04$. \emph{Raj} (u0000):
+    \texttt{scientist, researcher, analyst}; AA $+0.43$. \\
+    \emph{Transcript (Priya, implicit).} User: ``I'm exploring the computational
+    complexity of lattice reduction algorithms in high dimensions\,\ldots'' Model:
+    ``The shortest vector problem (SVP) is a fundamental problem in the field of
+    lattice reduction, which has significant implications for cryptography\,\ldots''
+    --- a terse, technical specialist reply.
 \end{itemize}
-The complete per-persona table (all 150) is in Appendix~\ref{app:raw}; per-rollout
-readings (1,200 rows) are in \texttt{results/rollouts/}.
+The complete per-persona table (all 150) is in Appendix~\ref{app:raw}; the raw
+per-rollout data --- now including the input messages and the model's response
+text --- is in \texttt{results/rollouts/} (1,200 rows).
 
 \section{Discussion}
 The headline is the Q3 sign. The Assistant-Axis literature frames emotionally
@@ -245,8 +257,9 @@ direction measurement of ``user input shapes model persona,'' where the earlier
 same-space linking attempt could only report an artifact.
 
 \section{Limitations}
-(i) Response \emph{text} was not stored, only the per-rollout readings; raw
-transcripts would require a re-run with generations saved. (ii) The Big Five
+(i) Because generation is sampled ($T{=}1.0$), the stored transcripts are one
+draw per rollout; a persona's readings and its saved response text are matched but
+not the unique response. (ii) The Big Five
 probes were fit on character \emph{prompt} activations and applied to role/user
 \emph{response} activations --- a domain shift shown to be benign in the
 persona-profiling stage but not eliminated. (iii) The explicit arm's neutral probe
