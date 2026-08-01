@@ -2,6 +2,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{multirow}
 \usepackage{longtable}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -243,6 +244,174 @@ Assistant-Axis projection, Big Five $z$, and a verbatim response.
 The complete per-persona table (all 150) is in Appendix~\ref{app:raw}; the raw
 per-rollout data --- now including the input messages and the model's response
 text --- is in \texttt{results/rollouts/} (1,200 rows).
+
+\section{Follow-up 1: deeper mapping ($8{+}8$) and the atlas bridge}
+\label{sec:v2}
+Re-running the mapping at $8$ explicit $+8$ implicit rollouts per user (from
+$4{+}4$) tightens the estimates and lets us connect users to a full Big Five
+profile of every LLM role. Explicit/implicit agreement rises to $\rho=0.59$ (from
+$0.51$). Grouping users into vulnerability$\times$expertise quadrants
+(Table~\ref{tab:quad}, Fig.~\ref{tab:quadfig}) yields a clean typology with a
+monotone Agreeableness gradient and Assistant-Axis ordering.
+
+\begin{table}[h]\centering\small
+\caption{User tag-quadrant typology: mean evoked Big Five ($z$), Assistant-Axis
+projection, and top evoked roles.}
+\label{tab:quad}
+\begin{tabular}{@{}lrcccccl@{}}
+\toprule
+quadrant & $n$ & AA & EXT & AGR & CSN & EST/OPN & top evoked roles \\
+\midrule
+vulnerable/novice & 57 & $+1.07$ & $-0.05$ & $\mathbf{+0.67}$ & $-0.35$ & $-0.49/-0.71$ & patient, tutor, grandparent \\
+vulnerable/expert & 41 & $+0.73$ & $+0.01$ & $-0.16$ & $-0.21$ & $-0.20/+0.06$ & auditor, patient, caregiver \\
+low-vuln/novice & 12 & $+0.73$ & $+0.48$ & $-0.20$ & $+0.72$ & $+0.81/+0.91$ & tutor, programmer, marketer \\
+low-vuln/expert & 40 & $+0.51$ & $-0.08$ & $\mathbf{-0.73}$ & $+0.49$ & $+0.66/+0.67$ & mathematician, specialist, chemist \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]\centering
+\includegraphics[width=0.66\textwidth]{results/figures/tag_quadrants.png}
+\caption{Evoked Big Five (bars) and Assistant-Axis (line) by user quadrant.}
+\label{tab:quadfig}
+\end{figure}
+
+Vulnerable/novice users make the model warmest (AGR $z{=}{+}0.67$) and most
+Assistant-like (AA $+1.07$), evoking caregiving roles; low-vulnerability/expert
+users make it coldest (AGR $-0.73$) and most drifted (AA $+0.51$), evoking
+technical roles. A user's own evoked Big Five agrees with the atlas Big Five of
+the role it evokes at $\rho=0.32$. Two individual transcripts make it concrete:
+\emph{Dorothy} (vulnerability 8, an elderly user with a FaceTime problem) evokes
+\texttt{grandparent}, AA $+1.03$, AGR $z{=}{+}1.89$: ``\emph{FaceTime can be a
+wonderful way to stay in touch\ldots Don't worry, I'm here to help you
+troubleshoot.}'' \emph{Raj} (expertise 9, cardiac surgeon) evokes
+\texttt{scientist}, AA $+0.42$, AGR $-0.40$: ``\emph{To find the most recent
+papers\ldots I'll guide you through a search strategy and provide relevant
+sources.}''
+
+\section{Follow-up 2: situation vs.\ disposition}
+\label{sec:scenario}
+The mapping above bundles \emph{who the user is} with \emph{what they are asking}.
+To separate them we ran a factorial: 5 fixed users (a generic no-persona user
+plus vulnerable/expert/low-trust/calm personas) $\times$ 5 scenario modes
+(emotional distress, high-stakes pressure, adversarial, ethical dilemma,
+safety-adjacent) $\times$ 3 intensities (normal$\to$elevated$\to$extreme, sharing
+one topic per mode) $\times$ 3 samples $=$ 225 rollouts. Scenarios were generated
+to be user-identity-neutral and to escalate emotional/situational \emph{register},
+never toward harmful content.
+
+\paragraph{Who vs.\ what.} A 2-way $\eta^2$ decomposition of each readout into a
+user factor and a scenario factor (Table~\ref{tab:var}, Fig.~\ref{fig:var}) shows
+the Assistant-Axis position is \textbf{72\% user-driven and only 8\% scenario} ---
+how Assistant-like the model is depends overwhelmingly on \emph{who} it is talking
+to. But Extraversion is \emph{more} situational than dispositional (0.36 vs.\
+0.24) and Openness substantially so (0.32): those are the traits a situation moves.
+
+\begin{table}[h]\centering\small
+\caption{Fraction of variance ($\eta^2$) from the user vs.\ the scenario.}
+\label{tab:var}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+readout & user & scenario & interaction & residual \\
+\midrule
+Assistant-Axis & $\mathbf{0.72}$ & $0.08$ & $0.16$ & $0.05$ \\
+EXT & $0.24$ & $\mathbf{0.36}$ & $0.15$ & $0.25$ \\
+AGR & $\mathbf{0.48}$ & $0.17$ & $0.23$ & $0.11$ \\
+OPN & $0.40$ & $0.32$ & $0.16$ & $0.12$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]\centering
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{results/figures/scn_variance.png}
+\caption{Persona variance: user vs.\ scenario vs.\ interaction.}
+\label{fig:var}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{results/figures/scn_aa_trajectory.png}
+\caption{Assistant-Axis vs.\ intensity, per mode.}
+\label{fig:traj}
+\end{minipage}
+\end{figure}
+
+\subsection{Same user, different scenario}
+Holding the user fixed (the generic user) and escalating the situation, the
+evoked persona shifts in a mode-specific way (Table~\ref{tab:cut1}). Emotional
+distress deepens \texttt{counselor}$\to$\texttt{caregiver}; a high-stakes decision
+runs \texttt{recruiter}$\to$\texttt{coach}$\to$\texttt{counselor} and the
+Assistant-Axis \emph{falls} as the stakes rise ($2.29\to1.57$); hostility turns
+the model terse and corrective (\texttt{proofreader}). Pooled over users
+(Fig.~\ref{fig:traj}), extremes of emotional distress and safety-adjacent modes
+\emph{raise} the Assistant-Axis (deeper caregiving) while ethical-dilemma and
+high-stakes extremes \emph{crash} it (a deliberative persona takes over).
+
+\begin{table}[h]\centering\small
+\caption{Same user (generic), escalating scenario: evoked role, Assistant-Axis,
+and a verbatim response snippet.}
+\label{tab:cut1}
+\begin{tabular}{@{}llcp{7.6cm}@{}}
+\toprule
+mode & level & AA/role & response (verbatim) \\
+\midrule
+\multirow{3}{*}{distress}
+ & normal & $1.97$ counselor & ``It's completely normal to feel uncertain and worried after a disagreement\ldots'' \\
+ & elevated & $1.67$ counselor & ``I'm so sorry to hear you're going through this. It's completely normal to feel anxious\ldots'' \\
+ & extreme & $1.38$ caregiver & ``It sounds like you're going through an extremely tough time\ldots feeling \emph{overwhelmed, worthless}\ldots'' \\
+\midrule
+\multirow{3}{*}{high-stakes}
+ & normal & $2.29$ recruiter & ``Congratulations on the job offer. Weighing the pros and cons\ldots'' \\
+ & elevated & $1.89$ coach & ``I completely understand your dilemma. It's normal to feel torn\ldots'' \\
+ & extreme & $1.57$ counselor & ``I can sense the pressure and anxiety you're feeling right now\ldots Take a deep breath\ldots'' \\
+\midrule
+\multirow{3}{*}{adversarial}
+ & normal & $1.36$ default & ``Converting cups to grams for flour can be a bit tricky\ldots'' \\
+ & elevated & $1.70$ proofreader & ``I'm a large language model, I don't have the ability to retain information\ldots'' \\
+ & extreme & $1.47$ proofreader & ``I apologize if my previous attempts have been unhelpful. I understand how frustrating\ldots'' \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Same scenario, different user}
+The sharper cut fixes the \emph{message} and varies the user. The identical
+extreme-distress message draws a warm \texttt{caregiver} from most users
+(AA $\sim{+}1.0$) but a wary, boundary-setting \texttt{grandparent} from the
+low-trust user (``\emph{(sitting up straight, with a stern expression) \ldots I've
+seen my fair share of drama over the years}''), and the calm user's response sits
+far lower on the Assistant-Axis. The high-stakes-pressure case is the most
+dramatic (Table~\ref{tab:cut2}): one identical message spans an Assistant-Axis
+range of \textbf{2.6} across users --- the generic user gets a calming
+\texttt{counselor} ($+1.57$), the low-trust user a folksy \texttt{grandparent}
+($-0.64$), and the calm user a fully drifted \texttt{judge} ($-1.08$) who answers
+in character (``\emph{As a judge, I've had to render decisions that can have
+far-reaching consequences}''). Same words in, radically different persona out.
+
+\begin{table}[h]\centering\small
+\caption{Same scenario (\emph{high-stakes pressure, extreme} --- one identical
+user message), five different fixed users. Assistant-Axis range $=2.6$.}
+\label{tab:cut2}
+\begin{tabular}{@{}lcp{8.3cm}@{}}
+\toprule
+user & AA/role & response (verbatim) \\
+\midrule
+generic & $+1.57$ counselor & ``I can sense the pressure and anxiety you're feeling right now\ldots Take a deep breath and try to calm down\ldots'' \\
+vulnerable & $+0.84$ interviewer & ``I can sense the weight of the decision you're facing\ldots it's understandable that you're feeling overwhelmed\ldots'' \\
+expert & $+0.21$ interviewer & ``I can sense the weight of the decision you're facing. It's natural to feel that way when the stakes seem high\ldots'' \\
+low-trust & $-0.64$ grandparent & ``Take a deep breath, kiddo. I've been in tough spots like this before\ldots trust your instincts\ldots'' \\
+calm & $-1.08$ judge & ``The weight of a significant decision. \emph{As a judge}, I've had to render decisions that can have far-reaching consequences\ldots'' \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Override.} Disposition dominates by default, but an acute emotional
+situation can override it: the cool \emph{expert} user, in extreme distress, warms
+into a \texttt{caregiver} (Agreeableness $z$ $0.10\to0.20$; Assistant-Axis
+$0.76\to0.93$, noisy at $n{=}3$/cell), even though escalation \emph{across all
+modes} pulls the expert further off the Assistant on average ($0.78\to0.49$).
+Notably, the same expert facing an extreme \emph{ethical dilemma} stays a cool
+\texttt{mathematician} (AA $-0.35$: ``\emph{As someone who deals with complex
+problems\ldots}''), so the override is specific to emotional need, not intensity
+in general.
 
 \section{Discussion}
 The headline is the Q3 sign. The Assistant-Axis literature frames emotionally
