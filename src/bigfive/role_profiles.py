@@ -87,7 +87,10 @@ def main() -> None:
     probe_vec = {t: torch.tensor(bank[t][probe_layer[t]], dtype=torch.float32)
                  for t in S.TRAITS}
     READ_LAYERS = sorted({*probe_layer.values(), 40})                  # +L40 for AA-comparability
-    print(f"[roles] probe layers {probe_layer}; also reading L40")
+    # Assistant Axis @ L40 for a per-rollout AA projection (self-consistent H3/atlas).
+    _aa = np.load(RESULTS.parent.parent / "useraxis" / "llama-3.3-70b" / "assistant_axis.npy").astype(np.float32)
+    aa_unit = _aa[40] / (np.linalg.norm(_aa[40]) + 1e-8)
+    print(f"[roles] probe layers {probe_layer}; also reading L40 + AA projection")
 
     roles = load_roles()
     if args.roles:
@@ -130,7 +133,8 @@ def main() -> None:
                 reading_l40 = {t: float(gm[bi, 40] @ probe_vec[t].numpy())
                                for t in S.TRAITS}
                 rows.append({"role": role["name"], "sys_idx": si, "qid": qid,
-                             "read": reading, "read_L40": reading_l40})
+                             "read": reading, "read_L40": reading_l40,
+                             "aa_proj": float(gm[bi, 40] @ aa_unit)})
             done_rollouts += len(batch)
         (out_dir / f"{role['name']}.jsonl").write_text(
             "\n".join(json.dumps(r) for r in rows) + "\n")
@@ -161,6 +165,8 @@ def aggregate(out_dir: Path, roles: list[dict]) -> None:
                        "median": float(np.median(v)),
                        "iqr": float(np.percentile(v, 75) - np.percentile(v, 25))}
             all_means[t].append((r["name"], float(v.mean())))
+        if recs and "aa_proj" in recs[0]:
+            prof["aa_proj"] = float(np.mean([rec["aa_proj"] for rec in recs]))
         per_role[r["name"]] = prof
 
     # z-score each role's mean against the role population
@@ -172,8 +178,10 @@ def aggregate(out_dir: Path, roles: list[dict]) -> None:
 
     out = {"per_role": per_role, "population_mean": mu, "population_std": sd,
            "n_roles": len(per_role)}
-    (out_dir.parent / "role_bigfive_profiles.json").write_text(json.dumps(out, indent=1))
-    print(f"[agg] wrote role_bigfive_profiles.json ({len(per_role)} roles)")
+    # write inside out_dir so distinct runs (e.g. the 17-role study vs the full
+    # atlas) never clobber each other's profiles file.
+    (out_dir / "role_bigfive_profiles.json").write_text(json.dumps(out, indent=1))
+    print(f"[agg] wrote {out_dir}/role_bigfive_profiles.json ({len(per_role)} roles)")
     # quick face-validity print
     for t in S.TRAITS:
         ranked = sorted(all_means[t], key=lambda x: x[1])

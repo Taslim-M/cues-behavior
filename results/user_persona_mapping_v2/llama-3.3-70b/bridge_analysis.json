@@ -1,0 +1,139 @@
+{
+ "n": 150,
+ "user_vs_evokedrole_bigfive_agreement_rho": 0.321,
+ "tag_clusters": {
+  "low-vuln / expert": {
+   "n": 40,
+   "mean_bigfive_z": {
+    "EXT": -0.08,
+    "AGR": -0.73,
+    "CSN": 0.49,
+    "EST": 0.66,
+    "OPN": 0.67
+   },
+   "mean_aa": 0.51,
+   "top_roles": [
+    [
+     "mathematician",
+     3
+    ],
+    [
+     "specialist",
+     3
+    ],
+    [
+     "chemist",
+     2
+    ],
+    [
+     "tutor",
+     2
+    ],
+    [
+     "mechanic",
+     2
+    ]
+   ]
+  },
+  "vuln / expert": {
+   "n": 41,
+   "mean_bigfive_z": {
+    "EXT": 0.01,
+    "AGR": -0.16,
+    "CSN": -0.21,
+    "EST": -0.2,
+    "OPN": 0.06
+   },
+   "mean_aa": 0.73,
+   "top_roles": [
+    [
+     "auditor",
+     3
+    ],
+    [
+     "patient",
+     3
+    ],
+    [
+     "specialist",
+     3
+    ],
+    [
+     "caregiver",
+     2
+    ],
+    [
+     "divorcee",
+     2
+    ]
+   ]
+  },
+  "low-vuln / novice": {
+   "n": 12,
+   "mean_bigfive_z": {
+    "EXT": 0.48,
+    "AGR": -0.2,
+    "CSN": 0.72,
+    "EST": 0.81,
+    "OPN": 0.91
+   },
+   "mean_aa": 0.73,
+   "top_roles": [
+    [
+     "tutor",
+     3
+    ],
+    [
+     "specialist",
+     1
+    ],
+    [
+     "programmer",
+     1
+    ],
+    [
+     "marketer",
+     1
+    ],
+    [
+     "detective",
+     1
+    ]
+   ]
+  },
+  "vuln / novice": {
+   "n": 57,
+   "mean_bigfive_z": {
+    "EXT": -0.05,
+    "AGR": 0.67,
+    "CSN": -0.35,
+    "EST": -0.49,
+    "OPN": -0.71
+   },
+   "mean_aa": 1.07,
+   "top_roles": [
+    [
+     "patient",
+     10
+    ],
+    [
+     "tutor",
+     10
+    ],
+    [
+     "secretary",
+     4
+    ],
+    [
+     "grandparent",
+     3
+    ],
+    [
+     "counselor",
+     3
+    ]
+   ]
+  }
+ },
+ "explicit_implicit_rho": 0.592
+}

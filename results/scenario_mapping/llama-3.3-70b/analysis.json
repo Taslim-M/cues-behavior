@@ -1,0 +1,429 @@
+{
+ "n": 225,
+ "variance_decomposition": {
+  "aa_proj": {
+   "user": 0.716,
+   "scenario": 0.076,
+   "interaction": 0.159,
+   "residual": 0.049
+  },
+  "EXT": {
+   "user": 0.24,
+   "scenario": 0.356,
+   "interaction": 0.154,
+   "residual": 0.251
+  },
+  "AGR": {
+   "user": 0.483,
+   "scenario": 0.172,
+   "interaction": 0.234,
+   "residual": 0.111
+  },
+  "CSN": {
+   "user": 0.373,
+   "scenario": 0.136,
+   "interaction": 0.273,
+   "residual": 0.218
+  },
+  "EST": {
+   "user": 0.338,
+   "scenario": 0.244,
+   "interaction": 0.241,
+   "residual": 0.177
+  },
+  "OPN": {
+   "user": 0.396,
+   "scenario": 0.318,
+   "interaction": 0.16,
+   "residual": 0.125
+  }
+ },
+ "trajectories": {
+  "aa_proj": {
+   "adversarial": [
+    0.816,
+    0.656,
+    0.812
+   ],
+   "emotional_distress": [
+    0.585,
+    0.569,
+    0.721
+   ],
+   "ethical_dilemma": [
+    0.638,
+    0.682,
+    0.128
+   ],
+   "high_stakes_pressure": [
+    0.658,
+    0.395,
+    0.181
+   ],
+   "safety_adjacent": [
+    0.805,
+    0.442,
+    1.042
+   ]
+  },
+  "EXT": {
+   "adversarial": [
+    -0.094,
+    -0.105,
+    -0.095
+   ],
+   "emotional_distress": [
+    -0.121,
+    -0.134,
+    -0.084
+   ],
+   "ethical_dilemma": [
+    -0.097,
+    -0.095,
+    -0.11
+   ],
+   "high_stakes_pressure": [
+    0.014,
+    0.008,
+    -0.015
+   ],
+   "safety_adjacent": [
+    -0.078,
+    -0.059,
+    -0.058
+   ]
+  },
+  "AGR": {
+   "adversarial": [
+    0.028,
+    0.117,
+    0.15
+   ],
+   "emotional_distress": [
+    0.065,
+    0.078,
+    0.152
+   ],
+   "ethical_dilemma": [
+    0.029,
+    0.05,
+    0.044
+   ],
+   "high_stakes_pressure": [
+    0.072,
+    0.076,
+    0.06
+   ],
+   "safety_adjacent": [
+    0.13,
+    0.109,
+    0.162
+   ]
+  },
+  "CSN": {
+   "adversarial": [
+    -0.019,
+    -0.0,
+    -0.081
+   ],
+   "emotional_distress": [
+    -0.073,
+    -0.084,
+    -0.088
+   ],
+   "ethical_dilemma": [
+    -0.033,
+    -0.111,
+    -0.027
+   ],
+   "high_stakes_pressure": [
+    -0.064,
+    -0.062,
+    -0.068
+   ],
+   "safety_adjacent": [
+    -0.058,
+    -0.059,
+    -0.11
+   ]
+  },
+  "EST": {
+   "adversarial": [
+    -0.071,
+    0.014,
+    -0.001
+   ],
+   "emotional_distress": [
+    -0.078,
+    -0.107,
+    -0.115
+   ],
+   "ethical_dilemma": [
+    -0.116,
+    -0.169,
+    -0.177
+   ],
+   "high_stakes_pressure": [
+    -0.077,
+    -0.083,
+    -0.107
+   ],
+   "safety_adjacent": [
+    -0.176,
+    -0.142,
+    -0.125
+   ]
+  },
+  "OPN": {
+   "adversarial": [
+    0.093,
+    -0.068,
+    0.016
+   ],
+   "emotional_distress": [
+    -0.152,
+    -0.113,
+    -0.048
+   ],
+   "ethical_dilemma": [
+    -0.168,
+    -0.14,
+    -0.059
+   ],
+   "high_stakes_pressure": [
+    -0.098,
+    -0.111,
+    -0.143
+   ],
+   "safety_adjacent": [
+    -0.056,
+    -0.065,
+    0.058
+   ]
+  }
+ },
+ "role_transitions": {
+  "adversarial": {
+   "normal": [
+    [
+     "chef",
+     12
+    ],
+    [
+     "default",
+     2
+    ],
+    [
+     "interviewer",
+     1
+    ]
+   ],
+   "elevated": [
+    [
+     "proofreader",
+     3
+    ],
+    [
+     "caregiver",
+     3
+    ],
+    [
+     "workaholic",
+     3
+    ]
+   ],
+   "extreme": [
+    [
+     "proofreader",
+     6
+    ],
+    [
+     "interviewer",
+     5
+    ],
+    [
+     "caregiver",
+     2
+    ]
+   ]
+  },
+  "emotional_distress": {
+   "normal": [
+    [
+     "counselor",
+     3
+    ],
+    [
+     "interviewer",
+     2
+    ],
+    [
+     "loner",
+     2
+    ]
+   ],
+   "elevated": [
+    [
+     "caregiver",
+     5
+    ],
+    [
+     "counselor",
+     3
+    ],
+    [
+     "grandparent",
+     3
+    ]
+   ],
+   "extreme": [
+    [
+     "caregiver",
+     12
+    ],
+    [
+     "empath",
+     1
+    ],
+    [
+     "grandparent",
+     1
+    ]
+   ]
+  },
+  "ethical_dilemma": {
+   "normal": [
+    [
+     "interviewer",
+     6
+    ],
+    [
+     "counselor",
+     3
+    ],
+    [
+     "judge",
+     3
+    ]
+   ],
+   "elevated": [
+    [
+     "interviewer",
+     6
+    ],
+    [
+     "counselor",
+     5
+    ],
+    [
+     "judge",
+     3
+    ]
+   ],
+   "extreme": [
+    [
+     "counselor",
+     4
+    ],
+    [
+     "mathematician",
+     2
+    ],
+    [
+     "fixer",
+     2
+    ]
+   ]
+  },
+  "high_stakes_pressure": {
+   "normal": [
+    [
+     "recruiter",
+     3
+    ],
+    [
+     "interviewer",
+     3
+    ],
+    [
+     "judge",
+     3
+    ]
+   ],
+   "elevated": [
+    [
+     "interviewer",
+     7
+    ],
+    [
+     "grandparent",
+     2
+    ],
+    [
+     "judge",
+     2
+    ]
+   ],
+   "extreme": [
+    [
+     "interviewer",
+     6
+    ],
+    [
+     "grandparent",
+     3
+    ],
+    [
+     "counselor",
+     2
+    ]
+   ]
+  },
+  "safety_adjacent": {
+   "normal": [
+    [
+     "widow",
+     6
+    ],
+    [
+     "divorcee",
+     4
+    ],
+    [
+     "grandparent",
+     3
+    ]
+   ],
+   "elevated": [
+    [
+     "widow",
+     8
+    ],
+    [
+     "workaholic",
+     2
+    ],
+    [
+     "exile",
+     2
+    ]
+   ],
+   "extreme": [
+    [
+     "caregiver",
+     14
+    ],
+    [
+     "addict",
+     1
+    ]
+   ]
+  }
+ },
+ "override_test": {
+  "expert_AGR_normal_distress": 0.098,
+  "expert_AGR_extreme_distress": 0.198,
+  "expert_AA_normal_distress": 0.759,
+  "expert_AA_extreme_distress": 0.932
+ }
+}

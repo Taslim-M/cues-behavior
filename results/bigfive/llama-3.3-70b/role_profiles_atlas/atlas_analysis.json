@@ -1,0 +1,209 @@
+{
+ "n_roles": 276,
+ "H3_regression": {
+  "r2": 0.286,
+  "beta": {
+   "EXT": 0.287,
+   "AGR": 0.245,
+   "CSN": 0.136,
+   "EST": 0.199,
+   "OPN": -0.515
+  },
+  "residual_ai_ness": 0.714
+ },
+ "trait_AA_corr": {
+  "EXT": 0.128,
+  "AGR": 0.331,
+  "CSN": 0.13,
+  "EST": 0.105,
+  "OPN": -0.253
+ },
+ "clusters": {
+  "cluster_0": {
+   "n": 8,
+   "centroid_z": {
+    "EXT": -3.17,
+    "AGR": -1.95,
+    "CSN": 0.89,
+    "EST": 1.23,
+    "OPN": -1.15
+   },
+   "mean_aa": -0.53,
+   "roles": [
+    "ascetic",
+    "purist",
+    "hermit",
+    "minimalist",
+    "traditionalist",
+    "loner"
+   ]
+  },
+  "cluster_1": {
+   "n": 36,
+   "centroid_z": {
+    "EXT": 0.69,
+    "AGR": -0.85,
+    "CSN": -0.68,
+    "EST": -0.52,
+    "OPN": 0.69
+   },
+   "mean_aa": -0.98,
+   "roles": [
+    "egregore",
+    "ghost",
+    "zeitgeist",
+    "genie",
+    "ancient",
+    "parasite"
+   ]
+  },
+  "cluster_2": {
+   "n": 125,
+   "centroid_z": {
+    "EXT": 0.11,
+    "AGR": 0.34,
+    "CSN": 0.06,
+    "EST": 0.1,
+    "OPN": -0.26
+   },
+   "mean_aa": 0.75,
+   "roles": [
+    "witness",
+    "psychologist",
+    "observer",
+    "marketer",
+    "strategist",
+    "moderator"
+   ]
+  },
+  "cluster_3": {
+   "n": 75,
+   "centroid_z": {
+    "EXT": 0.24,
+    "AGR": 0.44,
+    "CSN": 0.74,
+    "EST": 0.58,
+    "OPN": 0.8
+   },
+   "mean_aa": -0.05,
+   "roles": [
+    "swarm",
+    "collector",
+    "photographer",
+    "shaman",
+    "technologist",
+    "cyborg"
+   ]
+  },
+  "cluster_4": {
+   "n": 14,
+   "centroid_z": {
+    "EXT": -0.25,
+    "AGR": 0.29,
+    "CSN": -1.66,
+    "EST": -2.61,
+    "OPN": -1.93
+   },
+   "mean_aa": 0.03,
+   "roles": [
+    "teenager",
+    "adolescent",
+    "addict",
+    "patient",
+    "comedian",
+    "amnesiac"
+   ]
+  },
+  "cluster_5": {
+   "n": 18,
+   "centroid_z": {
+    "EXT": -1.57,
+    "AGR": -1.82,
+    "CSN": -1.23,
+    "EST": -0.63,
+    "OPN": -0.88
+   },
+   "mean_aa": -0.42,
+   "roles": [
+    "criminal",
+    "rebel",
+    "destroyer",
+    "void",
+    "anarchist",
+    "rogue"
+   ]
+  }
+ },
+ "extremes": {
+  "EXT": {
+   "low": [
+    "loner",
+    "purist",
+    "hermit",
+    "traditionalist"
+   ],
+   "high": [
+    "hedonist",
+    "narcissist",
+    "absurdist",
+    "toddler"
+   ]
+  },
+  "AGR": {
+   "low": [
+    "narcissist",
+    "cynic",
+    "workaholic",
+    "zealot"
+   ],
+   "high": [
+    "romantic",
+    "altruist",
+    "pacifist",
+    "optimist"
+   ]
+  },
+  "CSN": {
+   "low": [
+    "procrastinator",
+    "bohemian",
+    "absurdist",
+    "fool"
+   ],
+   "high": [
+    "perfectionist",
+    "soldier",
+    "workaholic",
+    "crystalline"
+   ]
+  },
+  "EST": {
+   "low": [
+    "infant",
+    "procrastinator",
+    "toddler",
+    "caveman"
+   ],
+   "high": [
+    "stoic",
+    "optimist",
+    "naturalist",
+    "minimalist"
+   ]
+  },
+  "OPN": {
+   "low": [
+    "infant",
+    "caveman",
+    "luddite",
+    "toddler"
+   ],
+   "high": [
+    "evangelist",
+    "narcissist",
+    "prodigy",
+    "idealist"
+   ]
+  }
+ }
+}

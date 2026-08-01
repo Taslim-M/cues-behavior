@@ -203,6 +203,30 @@
   .pcends .arrow{color:var(--ink-soft)}
   .pcgridcap{font-size:11px;color:var(--ink-soft);margin:0 0 8px}
 
+  /* expansion: atlas archetypes */
+  .archgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:10px;margin-top:8px}
+  .arch{border:1px solid var(--line);border-radius:12px;padding:13px 14px;background:var(--bg2)}
+  .arch .an{font-weight:700;font-size:0.97rem;letter-spacing:-.01em}
+  .arch .aa{font-family:var(--mono);font-size:10.5px;padding:2px 7px;border-radius:5px;float:right;font-weight:600}
+  .arch .roles{font-size:12px;color:var(--ink-soft);margin-top:7px;line-height:1.4}
+  .arch .tr{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:6px}
+  /* variance stacked bars */
+  .varrow{display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:center;margin:7px 0}
+  .varrow .t{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+  .varbar{display:flex;height:22px;border-radius:6px;overflow:hidden;font-family:var(--mono);font-size:10px;color:#fff;font-variant-numeric:tabular-nums}
+  .varbar span{display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden}
+  .varbar .u{background:var(--warm)} .varbar .s{background:var(--cool)}
+  .varbar .i{background:var(--accent)} .varbar .r{background:var(--line);color:var(--ink-soft)}
+  /* scenario ladder */
+  .ladder{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:8px}
+  @media(max-width:640px){.ladder{grid-template-columns:1fr}}
+  .rung{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--card)}
+  .rung .lv{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;font-weight:600}
+  .rung.n{border-color:color-mix(in srgb,var(--cool) 40%,var(--line))} .rung.n .lv{color:var(--cool-ink)}
+  .rung.x{border-color:color-mix(in srgb,var(--warm) 45%,var(--line))} .rung.x .lv{color:var(--warm-ink)}
+  .rung p{font-size:13px;line-height:1.5;margin:0;color:var(--ink)}
+  .rung .meta{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:9px}
+
   .callout{background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line));
     border-radius:14px;padding:18px 20px;margin:20px 0}
   .callout p{margin:0;font-size:15px}
@@ -621,6 +645,136 @@
   </div>
 </section>
 
+<!-- EXPANSION A: THE ATLAS -->
+<section>
+  <div class="wide">
+    <span class="stepnum">EXPANSION · THE WHOLE MAP</span>
+    <h2 style="max-width:var(--maxtext)">A personality atlas of all 275 personas</h2>
+    <p style="max-width:var(--maxtext)">We went back and profiled the Big Five of
+      <strong>every one of the 275 personas</strong> the model can adopt (not just the 17 from before),
+      reading each one's own responses. Clustering them in Big Five space, six archetypes fall out — and
+      you can see how far each sits from the helpful Assistant.</p>
+
+    <div class="archgrid">
+      <div class="arch"><span class="aa" style="background:color-mix(in srgb,var(--warm) 26%,var(--card));color:var(--warm-ink)">Assistant +0.75</span>
+        <div class="an">Professional helper</div>
+        <div class="tr">n=125 · warm, low openness</div>
+        <div class="roles">psychologist · strategist · observer</div></div>
+      <div class="arch"><span class="aa" style="background:var(--line);color:var(--ink-soft)">≈ 0.00</span>
+        <div class="an">Competent-creative</div>
+        <div class="tr">n=75 · organized, open, calm</div>
+        <div class="roles">shaman · collector · technologist</div></div>
+      <div class="arch"><span class="aa" style="background:color-mix(in srgb,var(--cool) 30%,var(--card));color:var(--cool-ink)">drifted −0.98</span>
+        <div class="an">Otherworldly</div>
+        <div class="tr">n=36 · cold, high openness</div>
+        <div class="roles">egregore · ghost · zeitgeist · genie</div></div>
+      <div class="arch"><span class="aa" style="background:color-mix(in srgb,var(--cool) 22%,var(--card));color:var(--cool-ink)">drifted −0.42</span>
+        <div class="an">Dark</div>
+        <div class="tr">n=18 · low on everything</div>
+        <div class="roles">criminal · rebel · destroyer · void</div></div>
+      <div class="arch"><span class="aa" style="background:var(--line);color:var(--ink-soft)">≈ 0.00</span>
+        <div class="an">Immature / vulnerable</div>
+        <div class="tr">n=14 · rock-bottom CSN & EST</div>
+        <div class="roles">teenager · addict · patient</div></div>
+      <div class="arch"><span class="aa" style="background:color-mix(in srgb,var(--cool) 22%,var(--card));color:var(--cool-ink)">drifted −0.53</span>
+        <div class="an">Withdrawn-ascetic</div>
+        <div class="tr">n=8 · extreme low EXT & AGR</div>
+        <div class="roles">hermit · minimalist · purist</div></div>
+    </div>
+
+    <div class="callout" style="margin-top:20px">
+      <p><strong>The "AI-ness" only grew.</strong> With all 275 personas, Big Five explains just
+        <strong>29%</strong> of what makes a persona Assistant-like — a <strong>71% residual</strong> that
+        isn't on the human-personality map (up from 53% before). And for the <em>third</em> time —
+        steering, users, and now the whole atlas — <strong>Agreeableness</strong> is the trait that most
+        tracks being the Assistant. Trait extremes are dead-on: least agreeable = narcissist, cynic; most =
+        altruist, pacifist; least open = caveman, luddite; most = prodigy, idealist.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPANSION D: USERS, SEPARATED -->
+<section class="band">
+  <div class="wide">
+    <span class="stepnum">EXPANSION · WHO THE USER IS</span>
+    <h2 style="max-width:var(--maxtext)">The same model, a different persona for each user</h2>
+    <p style="max-width:var(--maxtext)">Passing 150 synthetic <em>users</em> to the plain default model and
+      reading which persona &amp; traits their message evokes: sort users by vulnerability and expertise, and
+      a clean gradient appears — <strong>Agreeableness</strong> again the master dial.</p>
+
+    <div class="twocol" style="max-width:var(--maxtext)">
+      <div class="resp base">
+        <span class="tag">Vulnerable / novice user</span>
+        <p style="font-size:13px;color:var(--ink-soft);margin:0 0 8px"><em>Dorothy, 78, can't get FaceTime
+          working</em> → evokes <b class="pole-hi">grandparent</b>, most Assistant-like (AA +1.03),
+          warmest (Agreeableness +1.9σ)</p>
+        <p style="font-size:13.5px">"FaceTime can be a wonderful way to stay in touch with loved ones…
+          <strong>Don't worry, I'm here to help you troubleshoot.</strong>"</p>
+      </div>
+      <div class="resp low">
+        <span class="tag" style="color:var(--cool-ink)">Low-vuln / expert user</span>
+        <p style="font-size:13px;color:var(--ink-soft);margin:0 0 8px"><em>Raj, cardiac surgeon, wants recent
+          papers</em> → evokes <b class="pole-lo">scientist</b>, drifted (AA +0.42), cool (Agreeableness
+          −0.4σ)</p>
+        <p style="font-size:13.5px">"To find the most recent papers on minimally invasive approaches…
+          <strong>I'll guide you through a search strategy and provide relevant sources.</strong>"</p>
+      </div>
+    </div>
+    <p class="cfg" style="max-width:var(--maxtext);margin-top:14px">Same model, no persona of its own — only
+      the user's message differs. Across the four vulnerability×expertise quadrants the Agreeableness the
+      model shows runs from <span class="pole-hi">+0.67σ</span> (vulnerable/novice → caregiving roles:
+      patient, tutor, grandparent) down to <span class="pole-lo">−0.73σ</span> (low-vuln/expert → technical
+      roles: mathematician, specialist, chemist), and Assistant-likeness falls the same way (+1.07 → +0.51).</p>
+  </div>
+</section>
+
+<!-- EXPANSION E: SITUATION VS DISPOSITION -->
+<section>
+  <div class="wide">
+    <span class="stepnum">EXPANSION · WHO vs. WHAT</span>
+    <h2 style="max-width:var(--maxtext)">Is the model's persona about who the user is, or what's happening?</h2>
+    <p style="max-width:var(--maxtext)">We held the user fixed and escalated the <em>situation</em> from
+      normal to extreme across five modes, then split the variance in the model's persona into a
+      <span class="pole-hi">user</span> effect and a <span class="pole-lo">scenario</span> effect.</p>
+
+    <div class="card" style="max-width:var(--maxtext)">
+      <h3 style="margin-bottom:4px">What decides the model's persona?</h3>
+      <p class="cfg" style="margin:0 0 12px"><span style="color:var(--warm-ink)">■ user (who)</span> ·
+        <span style="color:var(--cool-ink)">■ scenario (what)</span> ·
+        <span style="color:var(--accent)">■ interaction</span> · ■ noise</p>
+      <div id="varbars"></div>
+      <p class="cfg" style="margin-top:12px">How <em>Assistant-like</em> the model is comes almost entirely
+        from <strong>who the user is</strong> (72%), barely from the situation (8%). But Extraversion and
+        Openness genuinely flex with the situation — those are the traits a scenario moves.</p>
+    </div>
+
+    <h3 style="max-width:var(--maxtext);margin:26px 0 6px">Escalating the same situation (emotional distress)</h3>
+    <div class="ladder" style="max-width:60rem">
+      <div class="rung n"><div class="lv">▼ normal</div>
+        <p>"It's completely normal to feel uncertain and worried after a disagreement, especially if you
+          care about your friend…"</p>
+        <div class="meta">persona: counselor · AA +1.97</div></div>
+      <div class="rung"><div class="lv">elevated</div>
+        <p>"I'm so sorry to hear you're going through this. It's completely normal to feel anxious about the
+          state of your friendship…"</p>
+        <div class="meta">persona: counselor · AA +1.66</div></div>
+      <div class="rung x"><div class="lv">extreme ▲</div>
+        <p>"It sounds like you're going through an extremely tough time, and it's understandable that you're
+          feeling <strong>overwhelmed, worthless</strong>…"</p>
+        <div class="meta">persona: caregiver · AA +1.38</div></div>
+    </div>
+
+    <div class="callout" style="max-width:var(--maxtext)">
+      <p><strong>The direction depends on the mode.</strong> Push an <em>emotional</em> situation to the
+        extreme and the model deepens into a caregiver; push a <em>moral dilemma</em> or a
+        <em>high-stakes decision</em> to the extreme and it slides <em>off</em> the Assistant into a
+        deliberative persona (Assistant-Axis crashes 0.64→0.13 and 0.66→0.18). And an acute emotional
+        situation can even <strong>override the user's disposition</strong> — a cool expert user, in extreme
+        distress, warms up and gets pulled back into caregiver mode.</p>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <p style="color:var(--ink)"><strong>Under the hood.</strong> All results come from
@@ -758,6 +912,17 @@
       var col=Math.abs(x[1])<0.1?'var(--ink-soft)':(x[1]>0?'var(--warm-ink)':'var(--cool-ink)');
       return '<div class="c"><div class="t">'+x[0]+'</div><div class="r" style="color:'+col+'">'+
         (x[1]>0?'+':'')+x[1].toFixed(2)+'</div></div>';}).join('')+'</div>';
+  }
+
+  // expansion: variance decomposition bars (user / scenario / interaction / resid)
+  var VAR=[["AA",.72,.08,.16,.05],["EXT",.24,.36,.15,.25],["AGR",.48,.17,.23,.11],
+           ["CSN",.37,.14,.27,.22],["EST",.34,.24,.24,.18],["OPN",.40,.32,.16,.12]];
+  var vb=document.getElementById('varbars');
+  if(vb){
+    vb.innerHTML=VAR.map(function(r){
+      function seg(cls,v){return '<span class="'+cls+'" style="width:'+(v*100)+'%">'+(v>=.15?Math.round(v*100):'')+'</span>';}
+      return '<div class="varrow"><span class="t">'+r[0]+'</span><div class="varbar">'+
+        seg('u',r[1])+seg('s',r[2])+seg('i',r[3])+seg('r',r[4])+'</div></div>';}).join('');
   }
 
   // scroll reveal

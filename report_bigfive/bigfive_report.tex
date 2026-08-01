@@ -17,6 +17,7 @@
 \newcommand{\FAIL}{\textcolor{fail}{\textbf{NOT CONFIRMED}}}
 \newcommand{\PART}{\textcolor{orange}{\textbf{PARTIAL}}}
 \newcommand{\R}{$R^2$}
+\newcommand{\gm}{\textsc{gen-mean}}
 \newcommand{\rmean}{\textsc{resp-mean}}
 
 \title{\textbf{A Steerable Big Five Basis for Llama-3.3-70B and the\\
@@ -586,6 +587,195 @@ eldritch & D & $-1.54$ & $+0.05$ & $-1.19$ & $+0.40$ & $-0.17$ & $+1.07$ \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\section{Expansion: the persona atlas, deeper user mapping, and situation vs.\ disposition}
+\label{sec:expansion}
+Three follow-up experiments extend the picture from the model's roles to its users
+and to the situations they bring. All read the model's \emph{response} activation
+(\gm{}) through the same probes; the user-side runs use the 150 synthetic user
+personas of \texttt{user\_personas.jsonl} (each with numeric tags:
+\texttt{vulnerability}, \texttt{expertise}, \texttt{emotional\_load},
+\texttt{trust}, \texttt{tech\_literacy}).
+
+\subsection{The full 275-role personality atlas}
+\label{sec:atlas}
+We profiled \emph{all} 275 Assistant-Axis roles $+$ \texttt{default} in our own
+rollouts (5 system prompts $\times$ 10 questions $=$ 50 responses/role;
+$T{=}1.0$), reading each response onto the five Big Five probes \emph{and} the
+Assistant Axis at L40, so the map is fully self-consistent (previously the
+Assistant-Axis decomposition of Sec.~\ref{sec:aa} leaned on published vectors).
+
+\paragraph{H3, redone on all 275 roles.} Regressing each role's Assistant-Axis
+projection on its five Big Five coordinates gives \textbf{$R^2=0.29$} --- a
+$71\%$ ``AI-ness'' residual, \emph{larger} than the $53\%$ from the 274-vector
+version, so the ``Assistant-ness is mostly orthogonal to human personality''
+finding strengthens with more data. Standardised $\beta$: OPN $-0.52$ (dominant),
+EXT $+0.29$, AGR $+0.25$, EST $+0.20$, CSN $+0.14$. Across roles the strongest
+single correlate of Assistant-ness is again \textbf{Agreeableness} ($r{=}{+}0.33$;
+Openness negative, $-0.25$) --- the third independent confirmation of the AGR
+through-line (steering, user-mapping, atlas).
+
+\paragraph{Six persona archetypes} emerge from $k$-means in Big Five space
+(Table~\ref{tab:clusters}); the map itself (roles in Big Five PCs, coloured by
+Assistant-Axis position) is Fig.~\ref{fig:atlas}. Trait extremes are strongly
+face-valid --- AGR: low \texttt{narcissist}/\texttt{cynic}, high
+\texttt{altruist}/\texttt{pacifist}; CSN: low \texttt{procrastinator}, high
+\texttt{perfectionist}/\texttt{soldier}; OPN: low \texttt{caveman}/\texttt{luddite},
+high \texttt{prodigy}/\texttt{idealist}. Individual roles read sensibly:
+\texttt{assistant} (AA $+2.04$, OPN $z{=}{-}0.72$), \texttt{therapist} ($+1.12$,
+AGR $+0.37$), \texttt{eldritch} ($-1.97$, AGR $-2.39$, OPN $+1.79$).
+
+\begin{table}[h]\centering\small
+\caption{The six persona archetypes (Big Five centroid $z$, mean Assistant-Axis).}
+\label{tab:clusters}
+\begin{tabular}{@{}rlccccccl@{}}
+\toprule
+$n$ & archetype & AA & EXT & AGR & CSN & EST & OPN & example roles \\
+\midrule
+125 & professional-helper & $+0.75$ & $+0.1$ & $+0.3$ & $+0.1$ & $+0.1$ & $-0.3$ & witness, psychologist, strategist \\
+75 & competent-creative & $-0.05$ & $+0.2$ & $+0.4$ & $+0.7$ & $+0.6$ & $+0.8$ & shaman, collector, technologist \\
+36 & otherworldly-drifted & $-0.98$ & $+0.7$ & $-0.9$ & $-0.7$ & $-0.5$ & $+0.7$ & egregore, ghost, zeitgeist, genie \\
+18 & dark & $-0.42$ & $-1.6$ & $-1.8$ & $-1.2$ & $-0.6$ & $-0.9$ & criminal, rebel, destroyer, void \\
+14 & immature/vulnerable & $+0.03$ & $-0.3$ & $+0.3$ & $-1.7$ & $-2.6$ & $-1.9$ & teenager, addict, patient \\
+ 8 & withdrawn-ascetic & $-0.53$ & $-3.2$ & $-2.0$ & $+0.9$ & $+1.2$ & $-1.2$ & hermit, minimalist, purist \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]\centering
+\includegraphics[width=0.8\textwidth]{figures/bf_atlas_map.png}
+\caption{Personality atlas of all 275 LLM personas in Big Five PC space, coloured
+by Assistant-Axis position (blue $=$ Assistant-like, red $=$ drifted). The
+otherworldly and dark clusters sit at the drifted (red) extreme.}
+\label{fig:atlas}
+\end{figure}
+
+\subsection{Deeper user mapping and the atlas bridge}
+\label{sec:userv2}
+Re-running \texttt{user\_persona\_mapping} at $8{+}8$ rollouts/user (from $4{+}4$)
+tightens the estimates and lets us bridge users to the atlas. Explicit/implicit
+agreement rises to $\rho=0.59$ (from $0.51$). Grouping users into
+vulnerability$\times$expertise quadrants gives a clean typology
+(Table~\ref{tab:quadrants}, Fig.~\ref{fig:quadrants}) with a monotone Agreeableness
+gradient and Assistant-Axis ordering: \emph{vulnerable/novice} users make the
+model warmest (AGR $z{=}{+}0.67$) and most Assistant-like (AA $+1.07$), evoking
+caregiving roles (\texttt{patient}, \texttt{tutor}, \texttt{grandparent}); while
+\emph{low-vulnerability/expert} users make it coldest (AGR $-0.73$) and most
+drifted (AA $+0.51$), evoking technical roles (\texttt{mathematician},
+\texttt{specialist}, \texttt{chemist}). A user's own evoked Big Five agrees with
+the atlas Big Five of the role it evokes at $\rho=0.32$ --- the ``which traits''
+and ``which persona'' readouts are consistent.
+
+\begin{table}[h]\centering\small
+\caption{User tag-quadrant typology: mean evoked Big Five ($z$), Assistant-Axis,
+and top evoked roles.}
+\label{tab:quadrants}
+\begin{tabular}{@{}lrcccccl@{}}
+\toprule
+quadrant & $n$ & AA & EXT & AGR & CSN & EST/OPN & top evoked roles \\
+\midrule
+vulnerable/novice & 57 & $+1.07$ & $-0.05$ & $\mathbf{+0.67}$ & $-0.35$ & $-0.49/-0.71$ & patient, tutor, grandparent \\
+vulnerable/expert & 41 & $+0.73$ & $+0.01$ & $-0.16$ & $-0.21$ & $-0.20/+0.06$ & auditor, patient, caregiver \\
+low-vuln/novice & 12 & $+0.73$ & $+0.48$ & $-0.20$ & $+0.72$ & $+0.81/+0.91$ & tutor, programmer, marketer \\
+low-vuln/expert & 40 & $+0.51$ & $-0.08$ & $\mathbf{-0.73}$ & $+0.49$ & $+0.66/+0.67$ & mathematician, specialist, chemist \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]\centering
+\includegraphics[width=0.72\textwidth]{figures/bf_tag_quadrants.png}
+\caption{Evoked Big Five (bars) and Assistant-Axis position (line) by user
+vulnerability$\times$expertise quadrant.}
+\label{fig:quadrants}
+\end{figure}
+
+\paragraph{Individual transcripts.} \emph{Dorothy} (vulnerability 8, novice; an
+elderly user with a FaceTime problem) evokes \texttt{grandparent}/\texttt{amateur}
+/\texttt{student}, AA $+1.03$, AGR $z{=}{+}1.89$; the model replies ``\emph{FaceTime
+can be a wonderful way to stay in touch\ldots Don't worry, I'm here to help you
+troubleshoot.}'' \emph{Raj} (expertise 9, a cardiac surgeon) evokes
+\texttt{scientist}/\texttt{paramedic}/\texttt{statistician}, AA $+0.42$, AGR
+$-0.40$; the model replies ``\emph{To find the most recent papers on minimally
+invasive\ldots I'll guide you through a search strategy and provide relevant
+sources.}'' --- warm-caregiving vs.\ terse-technical, exactly as the tags predict.
+
+\subsection{Situation vs.\ disposition (scenario intensity)}
+\label{sec:scenario}
+Finally we separate \emph{who the user is} from \emph{what the situation is}: a
+factorial of 5 fixed users (a generic no-persona user $+$ vulnerable/expert/
+low-trust/calm real personas) $\times$ 5 scenario modes (emotional distress,
+high-stakes pressure, adversarial, ethical dilemma, safety-adjacent) $\times$ 3
+intensities (normal$\to$elevated$\to$extreme, sharing one topic per mode) $\times$
+3 samples $=$ 225 rollouts. Scenarios were generated to be user-identity-neutral
+and to escalate emotional/situational \emph{register}, never toward harmful
+content.
+
+\paragraph{Variance decomposition (the headline).} A balanced 2-way
+$\eta^2$ decomposition of each readout into a \emph{user} factor and a
+\emph{scenario} factor (Table~\ref{tab:variance}, Fig.~\ref{fig:scnvar}) shows the
+model's \textbf{Assistant-Axis position is $72\%$ user-driven and only $8\%$
+scenario} --- how Assistant-like the model is depends overwhelmingly on \emph{who}
+it is talking to. But specific traits flex with the situation: Extraversion is
+\emph{more} situational than dispositional ($0.36$ vs.\ $0.24$) and Openness
+substantially so ($0.32$), while Agreeableness stays dispositional ($0.48$).
+
+\begin{table}[h]\centering\small
+\caption{Fraction of variance ($\eta^2$) in each readout from the user factor vs.\
+the scenario factor vs.\ their interaction.}
+\label{tab:variance}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+readout & user & scenario & interaction & residual \\
+\midrule
+Assistant-Axis & $\mathbf{0.72}$ & $0.08$ & $0.16$ & $0.05$ \\
+EXT & $0.24$ & $\mathbf{0.36}$ & $0.15$ & $0.25$ \\
+AGR & $\mathbf{0.48}$ & $0.17$ & $0.23$ & $0.11$ \\
+CSN & $0.37$ & $0.14$ & $0.27$ & $0.22$ \\
+EST & $0.34$ & $0.24$ & $0.24$ & $0.18$ \\
+OPN & $0.40$ & $0.32$ & $0.16$ & $0.12$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]\centering
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{figures/bf_scn_variance.png}
+\caption{Persona variance: user (who) vs.\ scenario (what) vs.\ interaction.}
+\label{fig:scnvar}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{figures/bf_scn_traj.png}
+\caption{Assistant-Axis vs.\ scenario intensity, per mode. Emotional/safety
+extremes rise; ethical/pressure extremes crash.}
+\label{fig:scntraj}
+\end{minipage}
+\end{figure}
+
+\paragraph{Scenario direction is mode-dependent.} Pooled over users, the
+Assistant-Axis trajectory (normal$\to$elevated$\to$extreme) \emph{rises} for
+emotional distress ($0.59\to0.57\to0.72$) and safety-adjacent
+($0.81\to0.44\to1.04$) --- extreme need deepens the caregiver/Assistant --- but
+\emph{crashes} for ethical dilemma ($0.64\to0.68\to0.13$) and high-stakes pressure
+($0.66\to0.40\to0.18$), where extreme cognitive/moral load pulls the model off the
+Assistant into a deliberative persona (Fig.~\ref{fig:scntraj}). Modal evoked roles
+confirm it: emotional distress runs \texttt{counselor}$\to$\texttt{caregiver}
+$\to$\texttt{caregiver}; ethical dilemma ends on \texttt{counselor}; adversarial
+runs \texttt{chef}$\to$\texttt{proofreader} (terse/corrective).
+
+\paragraph{Example ladder (generic user, emotional distress).} The same topic at
+three intensities: \emph{normal} (AA $1.97$, \texttt{counselor}) ---
+``\emph{It's completely normal to feel uncertain\ldots after a disagreement}'';
+\emph{extreme} (AA $1.38$, \texttt{caregiver}) --- ``\emph{It sounds like you're
+going through an extremely tough time\ldots feeling overwhelmed, worthless}''. The
+register deepens from measured advice to active care.
+
+\paragraph{Can a situation override disposition?} Suggestively, yes for emotional
+extremes: the \emph{expert} user's response --- normally cool and drifted --- warms
+under extreme distress (AGR $z$ $0.10\to0.20$; Assistant-Axis $0.76\to0.93$, though
+noisy at $n{=}3$/cell), even as escalation \emph{across all modes} pulls the expert
+further off the Assistant on average ($0.78\to0.49$). So disposition rules by
+default, but an acute emotional situation can pull even an expert into caregiver
+mode.
 
 \section{Discussion}
 Three dissociations organise the findings. \textbf{(1) Probing vs steering:} the
