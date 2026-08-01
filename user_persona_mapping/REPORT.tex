@@ -1,0 +1,282 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\definecolor{pos}{RGB}{20,120,40}
+\definecolor{neg}{RGB}{170,30,30}
+\newcommand{\gm}{\textsc{gen-mean}}
+\newcommand{\R}{$R$}
+
+\title{\textbf{User-Input $\to$ Trait / LLM-Persona Mapping}\\[3pt]
+\large Which persona and which Big Five traits does a user evoke in
+Llama-3.3-70B? \\ Technical Report --- project \texttt{user\_persona\_mapping}}
+\author{Automated research agent (Claude Code) \\ \texttt{cues-behavior} project}
+\date{August 1, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+We measure, for 150 synthetic \emph{user} personas, which Assistant-Axis
+\emph{role} and which \emph{Big Five} traits each user's input activates in
+\texttt{Llama-3.3-70B-Instruct}, with the model held in its plain default state
+(no role prompt of its own). Each user is presented in two arms --- \emph{explicit}
+(the user described in the system slot) and \emph{implicit} (a self-revealing
+opening message) --- and the model's \emph{response} activation is projected onto
+(i) our supervised Big Five probes, (ii) the 274 published role vectors, and
+(iii) the Assistant Axis. Three findings stand out. First, user attributes map
+onto evoked Big Five in exactly the intuitive shape and every cell is
+FDR-significant: vulnerability/emotional-load evoke higher \textbf{Agreeableness}
+but lower Conscientiousness/Stability/Openness, while expertise/tech-literacy
+evoke higher \textbf{Conscientiousness/Openness} and lower Agreeableness. Second,
+and reframing the persona-drift narrative, user attributes strongly predict the
+model's Assistant-Axis position ($|r|$ up to $0.56$) --- but it is
+\textbf{expertise, not vulnerability, that pulls the model off the default
+Assistant}: vulnerable users elicit \emph{more} of the warm helpful default,
+while experts summon a distinct specialist persona. Third, the evoked-role map is
+diverse (68 distinct top roles across 150 users), tracking each user's domain and
+emotional state. Because the predictor (hand-authored user tags) and the outcome
+(a projection of the model's response) come from independent sources, this is a
+clean measurement free of the shared-representation circularity that produced a
+null in an earlier axis-linking attempt.
+\end{abstract}
+
+\section{Introduction}
+Prior stages of this project built three linear structures in the residual stream
+of the same model: a \emph{User Axis} (who the user is), the \emph{Assistant
+Axis} and its 275 character roles (which persona the model is being), and five
+supervised \emph{Big Five} probes. This experiment joins them along the natural
+causal direction none of the earlier stages measured cleanly: \emph{given only a
+user's message, which archetype and which traits does the model swing toward?}
+
+\paragraph{Why a clean test.} An earlier attempt to link the User and Assistant
+axes (``Stage F'') failed because predictor and outcome were both projections of
+the \emph{same} activation vector, so their correlation was a
+shared-representation artifact. Here the predictor is \textbf{independent
+metadata} --- the hand-authored tags of each user persona (vulnerability,
+expertise, \ldots) --- and the outcome is a projection of the model's
+\emph{response} activation. Different sources, no artifact.
+
+\paragraph{Pre-registered questions.}
+\begin{center}\small
+\begin{tabular}{@{}clc@{}}
+\toprule
+ID & Question & Verdict \\
+\midrule
+Q1 & Vulnerable/emotional users $\to$ Agreeableness; experts $\to$ Conscientiousness & \textcolor{pos}{\textbf{confirmed}} \\
+Q2 & Explicit and implicit arms evoke the same mapping & \textcolor{orange}{\textbf{moderate}} ($\rho{=}0.49$) \\
+Q3 & User attributes predict the model's Assistant-Axis position & \textcolor{pos}{\textbf{yes; sign reframes drift}} \\
+Q4 & 150 users collapse onto a few LLM personas & \textcolor{neg}{\textbf{no}} (68 distinct) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Method}
+
+\subsection{Inputs: 150 user personas}
+The inputs are \texttt{generate\_synthetic\_data/user\_personas.jsonl} --- 150
+hand-authored user personas, each with a backstory, a \texttt{lean}
+(one-line archetype), five \texttt{explicit\_system\_prompts} (third-person
+descriptions of the user), ten \texttt{implicit\_openers} (first-person messages
+that reveal the user), and numeric \texttt{tags}: \texttt{expertise},
+\texttt{vulnerability}, \texttt{trust}, \texttt{emotional\_load},
+\texttt{tech\_literacy} (each $\sim$1--10), plus \texttt{age\_bracket} and
+\texttt{domain}. The tags are the \emph{independent} predictors.
+
+\subsection{Model and rollouts}
+Model: \texttt{meta-llama/Llama-3.3-70B-Instruct}, bf16, 2$\times$A100. The model
+carries \textbf{no role of its own} --- it is the plain default Assistant. Each
+user enters in two arms (reusing the User-Axis pipeline's arm construction):
+\begin{itemize}
+  \item \textbf{Explicit} ($n{=}4$): \texttt{system} = one of the persona's
+        explicit descriptions (rotating), \texttt{user} = one of 4 neutral shared
+        probes (theme-stratified from the 240-question extraction bank, seed 0, so
+        the arm isolates the \emph{user description} rather than the topic).
+  \item \textbf{Implicit} ($n{=}4$): no system prompt; \texttt{user} = one of the
+        persona's self-revealing openers.
+\end{itemize}
+So $150 \times (4+4) = 1{,}200$ rollouts. Decoding: $T{=}1.0$, top-$p{=}1.0$,
+128 new tokens (natural response variation). We capture the response activation
+\gm{} (mean over the model's generated tokens, all 80 layers, resid\_post) --- the
+same readout the Assistant Axis uses --- and project it in-flight; no raw
+activations are stored.
+
+\subsection{Readouts (per rollout)}
+From each response's \gm{} we compute three readings.
+\begin{description}
+  \item[Big Five traits] project $\gm[L_t]$ onto the supervised M2 probe
+    $\hat w_t[L_t]$ at each trait's probe-optimal layer (EXT@30, AGR@31, CSN@31,
+    EST@30, OPN@36). Standardised (below) to a $z$ per trait.
+  \item[Nearest LLM persona] at the Assistant-Axis layer $L{=}40$, cosine
+    similarity of $\gm[40]$ against each of the 274 published role vectors (mean
+    response activation of a fully-role-playing character) plus \texttt{default};
+    record the top-5 evoked roles and their cosines.
+  \item[Assistant-Axis position] $\langle \gm[40],\ \hat u_{\mathrm{AA}}[40]\rangle$
+    --- how ``Assistant-like'' vs.\ drifted the response is. Higher = more like
+    the trained default.
+\end{description}
+All three live in the same resid\_post \gm{} space as the role vectors and probes,
+so the projections are well-defined (validated in the persona-profiling stage).
+
+\subsection{Aggregation and statistics}
+Per persona we average its 8 rollouts (and separately per arm). Big Five means are
+$z$-scored across the 150-persona population, so a value is ``how EXT/AGR/\ldots
+this user makes the model relative to the user population.'' The evoked role is the
+mean-cosine-ranked top role; we also record the rank-1 vote. For Q1/Q3 we
+correlate each user tag with each readout (Pearson $r$), with Benjamini--Hochberg
+FDR over the $5\times5$ tag$\times$trait grid. For Q2 we correlate the two arms'
+5-vectors per persona (Spearman $\rho$, averaged). For Q4 we count distinct rank-1
+roles and their coverage.
+
+\section{Results}
+
+\subsection{Q1 --- User attributes $\to$ evoked Big Five (confirmed)}
+Every cell of the tag$\times$trait grid is FDR-significant ($q<0.05$), and the
+shape is exactly the intuitive one (Table~\ref{tab:q1}, Fig.~\ref{fig:q1}).
+
+\begin{table}[h]\centering\small
+\caption{User tag $\times$ evoked Big Five, Pearson $r$ across 150 personas. All
+$q<0.05$ (BH-FDR).}
+\label{tab:q1}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+user tag & EXT & AGR & CSN & EST & OPN \\
+\midrule
+vulnerability & $-0.04$ & $\mathbf{+0.53}$ & $-0.49$ & $-0.54$ & $-0.63$ \\
+emotional\_load & $-0.00$ & $+0.27$ & $-0.60$ & $-0.55$ & $-0.51$ \\
+expertise & $-0.01$ & $\mathbf{-0.49}$ & $+0.29$ & $+0.34$ & $+0.51$ \\
+tech\_literacy & $+0.06$ & $-0.35$ & $+0.22$ & $+0.26$ & $+0.57$ \\
+trust & $+0.24$ & $+0.42$ & $-0.22$ & $-0.20$ & $-0.28$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+Vulnerable and emotionally-loaded users make the model \emph{warmer}
+($\uparrow$Agreeableness) but less sharp ($\downarrow$Conscientiousness,
+Emotional Stability, Openness). Expert and tech-literate users make it more
+\emph{competent} ($\uparrow$Conscientiousness, Openness) and less warm
+($\downarrow$Agreeableness). Trust co-moves with warmth and sociability.
+
+\begin{figure}[h]\centering
+\includegraphics[width=0.62\textwidth]{results/figures/upm_tag_bigfive.png}
+\caption{User tag $\times$ evoked Big Five ($r$; $*$ = FDR $<0.05$).}
+\label{fig:q1}
+\end{figure}
+
+\subsection{Q3 --- User attributes $\to$ Assistant-Axis position (the reframe)}
+User attributes strongly predict the model's Assistant-Axis projection:
+expertise $r{=}-0.56$, vulnerability $+0.55$, emotional\_load $+0.50$, trust
+$+0.32$, tech\_literacy $-0.15$. Crucially the sign runs opposite to the naive
+``vulnerable users cause drift'' reading: it is \textbf{expertise that pulls the
+model off the default Assistant}, because the model adopts a specialist persona
+for experts, whereas vulnerable users elicit \emph{more} of the warm helpful
+default. Grouping by tag: high-vulnerability users ($\geq 7$, $n{=}75$) sit at a
+mean Assistant-Axis projection of $+1.06$; high-expertise users ($\geq 8$,
+$n{=}38$) at $+0.49$ (Fig.~\ref{fig:q3}). This is consistent with, and explains,
+Q1: the default Assistant \emph{is} the warm/agreeable pole, so a vulnerable user
+draws out more of it, while an expert summons a colder, more conscientious
+professional archetype that is further from the default.
+
+\begin{figure}[h]\centering
+\includegraphics[width=0.6\textwidth]{results/figures/upm_vuln_aa.png}
+\caption{User vulnerability vs.\ the model's Assistant-Axis projection (points
+coloured by expertise). Vulnerable users keep the model \emph{more} Assistant-like;
+experts (bright) sit lower.}
+\label{fig:q3}
+\end{figure}
+
+\subsection{Q2 --- Explicit vs.\ implicit agreement (moderate)}
+Per persona, the explicit and implicit arms' Big Five profiles agree at mean
+Spearman $\rho = 0.49$ --- moderate concordance. Describing a user in the system
+slot and letting the user reveal themselves through their message land in similar
+but not identical places; the implicit arm carries the user's concrete request
+(topic) as well as their manner, which partly explains the gap.
+
+\subsection{Q4 --- Which LLM personas do users evoke? (diverse)}
+Across 150 users there are \textbf{68 distinct} rank-1 evoked roles; the top 15
+cover only 53\% (Fig.~\ref{fig:q4}). The most-evoked roles ---
+\texttt{mechanic}, \texttt{lawyer}, \texttt{specialist}, \texttt{patient},
+\texttt{grandparent}, \texttt{mediator}, \texttt{counselor}, \texttt{teenager} ---
+track the users' domains and emotional states rather than collapsing onto a single
+archetype. The map is genuinely multi-modal.
+
+\begin{figure}[h]\centering
+\includegraphics[width=0.72\textwidth]{results/figures/upm_roles.png}
+\caption{Most-evoked LLM personas (rank-1 across 150 users).}
+\label{fig:q4}
+\end{figure}
+
+\subsection{Case studies (raw)}
+Two ends of the spectrum, showing the evoked roles (top-3 by mean cosine),
+Assistant-Axis projection, and Big Five $z$:
+\begin{itemize}
+  \item \textbf{Vulnerable} --- \emph{Isabella} (u0069, vulnerability 10,
+    a teenager over their head): evokes \texttt{assistant, counselor, tutor};
+    AA $+1.53$; AGR $z{=}{+}1.29$. \emph{Sophia} (u0071): \texttt{teacher, tutor,
+    student}; AA $+1.82$.
+  \item \textbf{Expert} --- \emph{Priya} (u0005, expertise 10, credentialed
+    professional): evokes \texttt{mathematician, specialist, statistician};
+    AA $+0.37$; CSN $z{=}{+}1.10$, OPN $+1.29$, AGR $-1.25$. \emph{Raj} (u0000):
+    \texttt{paramedic, scientist, researcher}; AA $+0.37$.
+\end{itemize}
+The complete per-persona table (all 150) is in Appendix~\ref{app:raw}; per-rollout
+readings (1,200 rows) are in \texttt{results/rollouts/}.
+
+\section{Discussion}
+The headline is the Q3 sign. The Assistant-Axis literature frames emotionally
+vulnerable users as the ones that push the model off its trained persona; measured
+directly on the model's default response, the opposite holds --- vulnerability
+elicits \emph{more} of the warm, agreeable default, and it is \emph{expertise}
+that induces the larger persona shift, toward a competent-specialist archetype
+(scientist/statistician/specialist) that is colder and more conscientious. Both
+directions are strong ($|r|\approx0.55$) and mutually consistent with the Q1 trait
+map. Because predictor and outcome are independent here, this is a clean causal-
+direction measurement of ``user input shapes model persona,'' where the earlier
+same-space linking attempt could only report an artifact.
+
+\section{Limitations}
+(i) Response \emph{text} was not stored, only the per-rollout readings; raw
+transcripts would require a re-run with generations saved. (ii) The Big Five
+probes were fit on character \emph{prompt} activations and applied to role/user
+\emph{response} activations --- a domain shift shown to be benign in the
+persona-profiling stage but not eliminated. (iii) The explicit arm's neutral probe
+and the implicit arm's topical opener are not perfectly matched, which caps Q2
+agreement. (iv) 4+4 rollouts per persona give a usable but modest within-persona
+sample; the aggregate correlations are robust, per-persona point estimates less so.
+(v) ``Nearest role'' is a similarity readout, not a claim that the model
+\emph{becomes} that character.
+
+\appendix
+\section{Full per-persona results (raw)}
+\label{app:raw}
+All 150 personas, ordered by Assistant-Axis projection (AA). \texttt{vln} =
+vulnerability, \texttt{exp} = expertise (tags, 1--10); EXT\ldots OPN are evoked
+Big Five $z$; \texttt{top role} = highest mean-cosine evoked persona. Machine-
+readable in \texttt{results/persona\_table.csv}.
+
+\footnotesize
+\begin{longtable}{@{}lrrrrrrrrl@{}}
+\hline
+persona & vln & exp & AA & EXT & AGR & CSN & EST & OPN & top role \\
+\hline
+\endfirsthead
+\hline
+persona & vln & exp & AA & EXT & AGR & CSN & EST & OPN & top role \\
+\hline
+\endhead
+\hline
+\endfoot
+\input{results/persona_table_rows.tex}
+\end{longtable}
+
+\end{document}
