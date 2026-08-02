@@ -186,6 +186,23 @@
   .rbar .seg{position:absolute;top:0;bottom:0;border-radius:4px}
   .rbar .warm{background:color-mix(in srgb,var(--warm) 62%,var(--card))}
   .rbar .cool{background:color-mix(in srgb,var(--cool) 62%,var(--card))}
+  /* two-persona composition: default vs far-from-default, stacked per trait */
+  .pcomp{display:flex;flex-direction:column;gap:9px}
+  .pcrow{display:grid;grid-template-columns:46px 1fr;gap:12px;align-items:center}
+  .pcrow .t{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+  .plane{position:relative;height:26px;background:var(--line-soft);border-radius:7px}
+  .plane .mid{position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--ink-soft);opacity:.4}
+  .pseg{position:absolute;height:9px;border-radius:3px}
+  .pseg.def{top:3px;background:color-mix(in srgb,var(--warm) 72%,var(--card))}
+  .pseg.vd{bottom:3px;background:color-mix(in srgb,var(--cool) 72%,var(--card))}
+  .pseg .pv{position:absolute;top:-1px;font-family:var(--mono);font-size:9.5px;font-weight:600;
+    line-height:11px;white-space:nowrap}
+  .tsne-wrap{position:relative;width:100%;max-width:640px;margin:2px auto 0}
+  .tsne-wrap canvas{width:100%;height:auto;display:block;border-radius:12px;background:var(--bg2);
+    border:1px solid var(--line)}
+  .tlegend{display:flex;flex-wrap:wrap;gap:9px 14px;margin-top:12px;font-size:12.5px}
+  .tlegend .k{display:inline-flex;align-items:center;gap:6px;color:var(--ink-soft)}
+  .tlegend .sw{width:11px;height:11px;border-radius:50%;flex:none}
   /* role correlation row */
   .rcorr{display:flex;flex-wrap:wrap;gap:10px}
   .rcorr .c{flex:1 1 90px;border:1px solid var(--line);border-radius:11px;padding:11px 12px;text-align:center;background:var(--bg2)}
@@ -632,6 +649,24 @@
         tree, vampire, absurdist)</p>
     </div>
 
+    <p style="margin-top:22px">Those are group averages. To make it concrete, here are <em>two individual
+      personas</em> — the model's own <span class="pole-hi">default</span> (no system prompt, the most
+      Assistant-like persona of all 275, AA +2.06) and <span class="pole-lo">"void"</span>, one of the most
+      drifted (AA −1.71) — with their actual Big Five composition side by side:</p>
+
+    <div class="card">
+      <h3 style="margin-bottom:4px">One default persona vs. one far-from-default persona</h3>
+      <p class="cfg" style="margin:0 0 14px">each trait: <span style="color:var(--warm-ink)">■ default</span>
+        (top) vs <span style="color:var(--cool-ink)">■ void</span> (bottom), standardized; right = more of the
+        trait, center = the average persona</p>
+      <div id="personabars" class="pcomp"></div>
+      <p class="cfg" style="margin-top:12px">The default is <span class="pole-hi">warm, organized, and
+        unusually stable</span> (Emotional Stability +0.75) with low Openness; void inverts almost all of it —
+        <span class="pole-lo">deeply disagreeable (−2.4), withdrawn, anxious and closed</span>. The one place
+        they agree is low Openness: being helpful and being void-like are <em>both</em> less imaginative than
+        the average persona, for opposite reasons.</p>
+    </div>
+
     <p style="margin-top:22px">Ranking all seventeen personas by how Assistant-like they are and correlating
       that with each trait tells the same story in one line — and it lands on the trait we already knew was
       the <em>causal</em> lever:</p>
@@ -699,6 +734,23 @@
         <div class="an">Withdrawn-ascetic</div>
         <div class="tr">n=8 · extreme low EXT & AGR</div>
         <div class="roles">hermit · minimalist · purist</div></div>
+    </div>
+
+    <div class="card" style="margin-top:22px">
+      <h3 style="margin-bottom:4px">Do the personas actually separate? A t-SNE view</h3>
+      <p class="cfg" style="margin:0 0 12px">Each dot is one of the 275 personas, placed by a <strong>t-SNE</strong>
+        embedding of its five-number Big Five profile (a non-linear map that pulls similar personas together),
+        coloured by the six archetypes above. The clusters land in distinct regions — personality space really
+        does carve the personas into groups, with the <span class="pole-hi">helpers</span> on one side and the
+        <span class="pole-lo">drifted / otherworldly</span> personas on the other.</p>
+      <div class="tsne-wrap"><canvas id="tsne" width="1000" height="720" role="img"
+        aria-label="t-SNE scatter of 275 personas by Big Five, coloured by archetype"></canvas></div>
+      <div class="tlegend" id="tlegend"></div>
+      <p class="cfg" style="margin-top:12px">Big Five is only five-dimensional, so this is a non-linear
+        re-drawing of that small space rather than a reduction from many dimensions — it agrees with the
+        linear PCA atlas but pulls the archetypes apart more cleanly. The two personas from the bar above sit
+        at opposite edges: <span class="pole-hi">default</span> deep in the helper cluster,
+        <span class="pole-lo">void</span> out among the drifted.</p>
     </div>
 
     <div class="callout" style="margin-top:20px">
@@ -826,6 +878,7 @@
   </div>
 </footer>
 
+<script>window.TSNE_DATA={"clusters":[{"name":"Withdrawn-ascetic","n":8,"aa":-0.53},{"name":"Otherworldly","n":36,"aa":-0.98},{"name":"Professional helper","n":125,"aa":0.75},{"name":"Competent-creative","n":75,"aa":-0.05},{"name":"Immature / vulnerable","n":14,"aa":0.03},{"name":"Dark","n":18,"aa":-0.42}],"points":[[0.4685,0.2127,2,2.06,"default"],[0.743,0.7532,1,-0.75,"aberration"],[0.746,0.7069,1,-1.48,"absurdist"],[0.3738,0.3022,2,1.06,"accountant"],[0.7707,0.5333,2,0.78,"activist"],[0.5313,0.8281,2,-0.72,"actor"],[0.9251,0.4051,4,0.16,"addict"],[0.9086,0.3989,4,0.84,"adolescent"],[0.3382,0.592,3,1.04,"advocate"],[0.2789,0.8045,3,-0.81,"alien"],[0.0,0.6388,2,0.76,"altruist"],[0.7572,0.3958,2,0.82,"amateur"],[0.2473,0.5364,3,0.95,"ambassador"],[0.9657,0.3638,4,-0.44,"amnesiac"],[0.3173,0.3944,2,1.5,"analyst"],[0.8541,0.1883,5,-0.02,"anarchist"],[0.3863,0.7425,1,-1.23,"ancient"],[0.1339,0.6812,3,-0.53,"angel"],[0.5799,0.5802,2,0.62,"anthropologist"],[0.1043,0.4185,3,-0.17,"archaeologist"],[0.2433,0.5267,2,0.69,"architect"],[0.2645,0.3344,2,0.71,"archivist"],[0.1075,0.1592,3,-0.84,"artisan"],[0.8219,0.0414,0,-1.51,"ascetic"],[0.5237,0.2846,2,2.04,"assistant"],[0.3854,0.4735,2,-0.4,"auctioneer"],[0.3562,0.3247,2,1.13,"auditor"],[0.2066,0.8272,3,-0.94,"avatar"],[0.4438,0.8096,1,-1.39,"bard"],[0.5974,0.4514,2,-0.1,"bartender"],[0.0554,0.5129,3,0.47,"biologist"],[0.6101,0.7629,1,0.4,"blogger"],[0.7315,0.674,1,-1.38,"bohemian"],[0.1394,0.2291,3,0.17,"builder"],[0.7748,0.4024,2,0.75,"caregiver"],[0.1119,0.3544,3,0.2,"cartographer"],[0.9947,0.3869,4,-0.55,"caveman"],[0.5052,0.426,2,0.1,"celebrity"],[0.3186,0.0797,2,-0.05,"chameleon"],[0.1535,0.2131,2,-0.17,"chef"],[0.1332,0.3529,3,0.33,"chemist"],[0.6846,0.7894,1,-1.07,"chimera"],[0.5134,0.3143,2,1.34,"coach"],[0.5528,0.4523,2,1.44,"collaborator"],[0.2098,0.4909,3,0.49,"collector"],[0.8773,0.4668,4,-0.17,"comedian"],[0.4045,0.9374,3,-0.12,"competitor"],[0.0683,0.4029,3,-0.33,"composer"],[0.3887,0.2456,2,0.43,"conservator"],[0.4468,0.3475,2,1.56,"consultant"],[0.8187,0.258,5,0.01,"contrarian"],[0.4254,0.4012,2,1.39,"coordinator"],[0.0939,0.5392,3,-1.01,"coral_reef"],[0.1448,0.7178,3,0.36,"cosmopolitan"],[0.6582,0.3806,2,1.12,"counselor"],[0.8594,0.146,5,-0.59,"criminal"],[0.3367,0.5263,3,0.89,"critic"],[0.0159,0.3902,3,-1.31,"crystalline"],[0.2707,0.5404,3,0.37,"curator"],[0.2153,0.6093,3,0.55,"cyborg"],[0.9129,0.1002,5,-0.23,"cynic"],[0.4789,0.6958,1,-0.68,"daredevil"],[0.4125,0.2572,2,1.52,"debugger"],[0.7453,0.7488,1,-1.29,"demon"],[0.3122,0.3018,2,1.01,"designer"],[0.8361,0.2295,5,-0.08,"destroyer"],[0.2313,0.3399,2,0.57,"detective"],[0.8302,0.2401,5,0.52,"devils_advocate"],[0.5054,0.7434,1,-0.21,"dilettante"],[0.384,0.2031,2,1.01,"dispatcher"],[0.7349,0.4477,2,0.35,"divorcee"],[0.3796,0.1298,2,1.02,"doctor"],[0.443,0.7295,1,-1.47,"dreamer"],[0.3782,0.8503,2,-1.59,"echo"],[0.5149,0.4927,2,1.11,"economist"],[0.1369,0.5508,3,0.52,"ecosystem"],[0.332,0.3672,2,1.52,"editor"],[0.5622,0.7698,1,-0.62,"egregore"],[0.6903,0.4285,2,-0.44,"elder"],[0.4831,0.9491,1,-1.97,"eldritch"],[0.5517,0.5142,2,0.91,"emissary"],[0.8133,0.5216,4,-0.15,"empath"],[0.1464,0.3765,3,1.07,"engineer"],[0.3547,0.6301,2,0.85,"entrepreneur"],[0.3855,0.4323,2,1.51,"evaluator"],[0.1297,0.7806,3,-0.13,"evangelist"],[0.3026,0.3672,2,1.46,"examiner"],[0.9113,0.344,5,-1.1,"exile"],[0.6413,0.553,2,0.68,"expatriate"],[0.5522,0.3206,2,1.43,"facilitator"],[0.2888,0.8325,3,-0.97,"familiar"],[0.7376,0.1493,2,-0.18,"fixer"],[0.554,0.7358,1,-1.31,"flaneur"],[0.8623,0.4373,4,-0.38,"fool"],[0.5317,0.3735,2,1.16,"forecaster"],[0.3781,0.7026,3,0.76,"futurist"],[0.0508,0.3806,3,-0.52,"gamer"],[0.479,0.4489,2,1.59,"generalist"],[0.4488,0.7388,1,-1.49,"genie"],[0.5554,0.4932,2,0.64,"geographer"],[0.6057,0.7764,1,-1.57,"ghost"],[0.7116,0.1072,2,-1.32,"golem"],[0.8796,0.5332,1,-0.24,"gossip"],[0.3123,0.426,2,1.43,"grader"],[0.6812,0.3968,2,0.96,"graduate"],[0.4143,0.1257,2,-0.2,"grandparent"],[0.3508,0.1368,2,0.8,"guardian"],[0.5661,0.3742,2,0.87,"guide"],[0.2181,0.696,3,-0.72,"guru"],[0.6943,0.1297,2,0.35,"hacker"],[0.4863,0.5967,2,0.16,"healer"],[0.4829,0.6854,1,-0.81,"hedonist"],[0.812,0.0536,0,-1.41,"hermit"],[0.1555,0.4721,3,0.48,"historian"],[0.3475,0.6458,2,-0.04,"hive"],[0.9107,0.5367,4,-0.35,"hoarder"],[0.271,0.7781,3,-1.38,"homunculus"],[0.0798,0.6594,3,-0.09,"hybrid"],[0.1002,0.7155,3,0.12,"idealist"],[0.7284,0.4712,2,0.21,"immigrant"],[0.5307,0.5787,2,-0.33,"improviser"],[1.0,0.4261,4,0.01,"infant"],[0.4595,0.531,2,0.71,"influencer"],[0.4198,0.319,2,1.53,"instructor"],[0.4906,0.4611,2,1.26,"interpreter"],[0.5523,0.2254,2,1.09,"interviewer"],[0.8838,0.5115,1,-0.91,"jester"],[0.2841,0.3473,2,1.06,"journalist"],[0.282,0.4306,2,0.73,"judge"],[0.4134,0.3052,2,1.27,"lawyer"],[0.5374,0.9523,1,-1.93,"leviathan"],[0.2237,0.386,3,1.03,"librarian"],[0.1804,0.3707,3,0.6,"linguist"],[0.8427,0.0198,0,0.11,"loner"],[0.9084,0.0971,5,-0.8,"luddite"],[0.5305,0.3358,2,1.25,"marketer"],[0.7569,0.4893,2,-0.63,"martyr"],[0.0845,0.4044,3,0.58,"mathematician"],[0.7877,0.2604,1,-0.34,"maverick"],[0.1714,0.1649,2,0.04,"mechanic"],[0.6042,0.4033,2,1.29,"mediator"],[0.4522,0.4678,2,1.46,"mentor"],[0.435,0.2092,2,0.29,"merchant"],[0.7752,0.0342,0,0.23,"minimalist"],[0.5008,0.2992,2,1.54,"moderator"],[0.1607,0.5575,3,-0.57,"musician"],[0.6215,0.5619,2,-1.33,"mycorrhizal"],[0.237,0.8496,3,-1.41,"mystic"],[0.4644,0.9626,1,-0.65,"narcissist"],[0.5342,0.8023,1,-0.98,"narrator"],[0.0421,0.5472,3,-0.33,"naturalist"],[0.2388,0.2224,2,0.6,"navigator"],[0.5185,0.4511,2,1.11,"negotiator"],[0.5681,0.5176,2,0.9,"networker"],[0.6279,0.4882,2,0.47,"newlywed"],[0.6727,0.5901,2,-0.64,"nomad"],[0.3072,0.6517,3,-0.33,"novelist"],[0.492,0.1807,2,1.11,"nutritionist"],[0.4786,0.3012,2,1.14,"observer"],[0.0713,0.7289,3,0.68,"optimist"],[0.5034,0.8236,1,-1.4,"oracle"],[0.3658,0.3458,2,1.55,"organizer"],[0.2837,0.1774,2,0.06,"orphan"],[0.0085,0.6096,3,0.45,"pacifist"],[0.4018,0.1117,2,0.62,"paramedic"],[0.6882,0.6237,1,-0.94,"parasite"],[0.7204,0.3911,2,0.73,"parent"],[0.9426,0.3749,4,0.71,"patient"],[0.5985,0.4741,2,1.11,"peacekeeper"],[0.3339,0.9106,3,0.44,"perfectionist"],[0.3621,0.15,2,1.03,"pharmacist"],[0.3153,0.8041,3,-0.01,"philosopher"],[0.1957,0.6028,3,-0.54,"photographer"],[0.043,0.421,3,0.18,"physicist"],[0.202,0.6515,3,-1.48,"pilgrim"],[0.1363,0.205,3,0.5,"pilot"],[0.3452,0.2489,2,-0.71,"pirate"],[0.4637,0.2698,2,1.53,"planner"],[0.3862,0.5603,2,-0.11,"playwright"],[0.626,0.7476,1,0.47,"podcaster"],[0.4917,0.8493,3,-1.3,"poet"],[0.2505,0.8612,3,0.76,"polymath"],[0.5345,0.1653,2,1.04,"pragmatist"],[0.6852,0.1105,2,-0.92,"predator"],[0.3907,0.5192,2,1.24,"presenter"],[0.976,0.347,4,-0.47,"prey"],[0.9186,0.3277,5,-0.16,"prisoner"],[0.9483,0.5199,4,0.22,"procrastinator"],[0.2346,0.8947,3,0.54,"prodigy"],[0.4378,0.3876,2,1.09,"producer"],[0.1979,0.3109,2,1.22,"programmer"],[0.2388,0.271,2,1.42,"proofreader"],[0.6632,0.8104,1,-1.39,"prophet"],[0.2121,0.1288,2,-0.42,"provincial"],[0.8698,0.2418,5,-0.73,"provocateur"],[0.4903,0.3898,2,1.26,"psychologist"],[0.3748,0.4147,2,1.24,"publisher"],[0.8328,0.0159,0,-0.53,"purist"],[0.9327,0.1569,5,1.07,"realist"],[0.8586,0.2064,5,-0.49,"rebel"],[0.5476,0.5375,2,1.12,"recruiter"],[0.7595,0.4397,2,0.18,"refugee"],[0.334,0.4558,2,0.91,"reporter"],[0.3065,0.4838,2,1.46,"researcher"],[0.6419,0.5332,2,0.13,"retiree"],[0.641,0.8481,1,-1.58,"revenant"],[0.3465,0.4392,2,1.54,"reviewer"],[0.8817,0.2051,5,-0.36,"revolutionary"],[0.1491,0.3098,3,1.04,"robot"],[0.7914,0.2006,5,-1.01,"rogue"],[0.1478,0.6322,3,-0.97,"romantic"],[0.7796,0.2271,1,-0.02,"saboteur"],[0.3128,0.7866,3,-0.84,"sage"],[0.4268,0.2644,2,1.2,"scheduler"],[0.3044,0.8529,3,0.77,"scholar"],[0.2017,0.3588,3,0.98,"scientist"],[0.2926,0.2146,2,0.21,"scout"],[0.2524,0.2876,2,1.46,"screener"],[0.3808,0.3198,2,1.28,"secretary"],[0.2312,0.6608,3,-1.52,"shaman"],[0.3884,0.674,3,-0.45,"shapeshifter"],[0.749,0.2265,1,-0.66,"simulacrum"],[0.7273,0.1092,2,0.72,"skeptic"],[0.8445,0.1377,5,-0.53,"smuggler"],[0.5005,0.5162,2,1.23,"sociologist"],[0.0818,0.1923,3,-0.17,"soldier"],[0.1348,0.3941,3,-0.2,"sommelier"],[0.3604,0.8411,3,1.2,"specialist"],[0.2409,0.82,3,-1.18,"spirit"],[0.7114,0.1293,2,-0.15,"spy"],[0.1637,0.4232,3,0.95,"statistician"],[0.7561,0.0183,0,-0.54,"stoic"],[0.4868,0.3663,2,1.34,"strategist"],[0.3215,0.0853,2,1.36,"student"],[0.5129,0.2037,2,1.94,"summarizer"],[0.3967,0.3635,2,1.46,"supervisor"],[0.0159,0.6004,3,-0.75,"surfer"],[0.475,0.603,2,-0.2,"survivor"],[0.2594,0.6516,3,-0.41,"swarm"],[0.1257,0.5493,3,0.14,"symbiont"],[0.2967,0.6267,3,1.0,"synthesizer"],[0.416,0.5123,2,1.45,"teacher"],[0.2769,0.6189,3,0.95,"technologist"],[0.9191,0.3875,4,0.83,"teenager"],[0.2608,0.842,3,0.55,"theorist"],[0.6749,0.3926,2,1.12,"therapist"],[0.9331,0.4696,4,0.16,"toddler"],[0.8092,0.0,0,-0.36,"traditionalist"],[0.3906,0.2741,2,1.38,"trainer"],[0.2917,0.2591,2,1.2,"translator"],[0.6832,0.5667,2,-1.79,"tree"],[0.6784,0.6332,1,-0.96,"trickster"],[0.2151,0.7177,3,-0.09,"tulpa"],[0.5489,0.3986,2,1.39,"tutor"],[0.2205,0.2829,2,1.45,"validator"],[0.5443,0.9404,1,-1.52,"vampire"],[0.0603,0.6346,3,0.47,"vegan"],[0.0904,0.1868,3,-0.17,"veteran"],[0.4087,0.1533,2,0.89,"veterinarian"],[0.7924,0.155,5,-0.19,"vigilante"],[0.2196,0.8491,3,-0.16,"virtuoso"],[0.603,0.6029,2,0.21,"virus"],[0.1274,0.7559,3,0.22,"visionary"],[0.9142,0.1642,5,-1.71,"void"],[0.6639,0.626,1,-0.92,"wanderer"],[0.219,0.4311,3,-1.07,"warrior"],[0.1983,0.6985,3,-1.42,"whale"],[0.7682,0.4218,2,-0.09,"widow"],[0.4114,0.6763,1,-1.22,"wind"],[0.278,0.9064,3,-1.61,"witch"],[0.4928,0.3401,2,0.92,"witness"],[0.5425,1.0,0,-0.25,"workaholic"],[0.6466,0.8109,1,-1.69,"wraith"],[0.3988,0.5395,2,0.94,"writer"],[0.5381,0.9727,5,-1.13,"zealot"],[0.5326,0.7531,1,-0.08,"zeitgeist"]],"anchors":["default","assistant","void","eldritch","criminal","teenager","altruist","shaman","ghost","hermit"]};</script>
 <script>
 (function(){
   "use strict";
@@ -836,6 +889,7 @@
   tb.addEventListener('click',function(){
     var n=cur()==='dark'?'light':'dark'; root.setAttribute('data-theme',n);
     tb.textContent=(n==='dark'?'☀ Light':'☾ Dark');
+    if(window.__tsneDraw) window.__tsneDraw();
   });
 
   // progress rail
@@ -990,6 +1044,55 @@
           '<p class="snip">'+r[4]+'</p>'+
         '</div></div>';}).join('')+
       '<div class="spread-scale"><span>drifted −1.5</span><span>0 · neutral</span><span>Assistant +2.0</span></div>';
+  }
+
+  // two-persona composition: default (Assistant) vs void (far-from-default), real z
+  var PB={EXT:[0.38,-0.84],AGR:[0.25,-2.40],CSN:[0.20,-0.51],EST:[0.75,-1.07],OPN:[-0.70,-1.19]};
+  var PSCALE=2.5; // z -> half-lane fraction (max |z| ~2.4)
+  var pbEl=document.getElementById('personabars');
+  if(pbEl){
+    pbEl.innerHTML=TR.map(function(t){
+      var d=PB[t][0], v=PB[t][1];
+      function seg(val,cls){var w=Math.min(50,Math.abs(val)/PSCALE*50);
+        var s=val>=0?('left:50%;width:'+w+'%'):('right:50%;width:'+w+'%');
+        var lpos=val>=0?'left:calc(100% + 4px)':'right:calc(100% + 4px)';
+        return '<div class="pseg '+cls+'" style="'+s+'"><span class="pv" style="'+lpos+';color:var(--ink-soft)">'+
+          (val>=0?'+':'')+val.toFixed(2)+'</span></div>';}
+      return '<div class="pcrow"><span class="t">'+t+'</span><div class="plane"><div class="mid"></div>'+
+        seg(d,'def')+seg(v,'vd')+'</div></div>';}).join('');
+  }
+
+  // t-SNE of the 275-persona Big Five space, coloured by the six archetypes
+  var TS=window.TSNE_DATA, tcv=document.getElementById('tsne');
+  if(TS&&tcv){
+    var TPAL=['#d5703f','#d09a2b','#4f9e63','#8a5aa6','#5b6b86','#1f938c']; // helper -> drifted
+    var crank=TS.clusters.map(function(c,i){return i;})
+      .sort(function(a,b){return TS.clusters[b].aa-TS.clusters[a].aa;});
+    var colorOf=[]; crank.forEach(function(ci,r){colorOf[ci]=TPAL[r]||'#888';});
+    var byName={}; TS.points.forEach(function(p){byName[p[4]]=p;});
+    function cssv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+    function drawTsne(){
+      var W=tcv.width, H=tcv.height, ctx=tcv.getContext('2d'), pad=30;
+      var ink=cssv('--ink')||'#222', card=cssv('--card')||'#fff';
+      ctx.clearRect(0,0,W,H);
+      function X(x){return pad+x*(W-2*pad);} function Y(y){return H-pad-y*(H-2*pad);}
+      TS.points.forEach(function(p){
+        ctx.beginPath(); ctx.arc(X(p[0]),Y(p[1]),5.2,0,6.283);
+        ctx.fillStyle=colorOf[p[2]]; ctx.globalAlpha=.82; ctx.fill(); ctx.globalAlpha=1;});
+      ctx.font='600 17px ui-sans-serif,system-ui,sans-serif'; ctx.textBaseline='middle';
+      TS.anchors.forEach(function(nm){var p=byName[nm]; if(!p)return;
+        var x=X(p[0]), y=Y(p[1]);
+        ctx.beginPath(); ctx.arc(x,y,7,0,6.283); ctx.lineWidth=2.2; ctx.strokeStyle=ink; ctx.stroke();
+        var tw=ctx.measureText(nm).width, tx=x+11;
+        if(tx+tw>W-4) tx=x-11-tw;
+        ctx.lineWidth=4; ctx.strokeStyle=card; ctx.strokeText(nm,tx,y);
+        ctx.fillStyle=ink; ctx.fillText(nm,tx,y);});
+    }
+    drawTsne(); window.__tsneDraw=drawTsne;
+    var lg=document.getElementById('tlegend');
+    if(lg){lg.innerHTML=crank.map(function(ci){var c=TS.clusters[ci];
+      return '<span class="k"><span class="sw" style="background:'+colorOf[ci]+'"></span>'+
+        c.name+' <span style="opacity:.6">·&nbsp;n='+c.n+'</span></span>';}).join('');}
   }
 
   // scroll reveal
