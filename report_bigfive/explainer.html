@@ -186,17 +186,20 @@
   .rbar .seg{position:absolute;top:0;bottom:0;border-radius:4px}
   .rbar .warm{background:color-mix(in srgb,var(--warm) 62%,var(--card))}
   .rbar .cool{background:color-mix(in srgb,var(--cool) 62%,var(--card))}
-  /* two-persona composition: default vs far-from-default, stacked per trait */
-  .pcomp{display:flex;flex-direction:column;gap:9px}
-  .pcrow{display:grid;grid-template-columns:46px 1fr;gap:12px;align-items:center}
-  .pcrow .t{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
-  .plane{position:relative;height:26px;background:var(--line-soft);border-radius:7px}
-  .plane .mid{position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--ink-soft);opacity:.4}
-  .pseg{position:absolute;height:9px;border-radius:3px}
-  .pseg.def{top:3px;background:color-mix(in srgb,var(--warm) 72%,var(--card))}
-  .pseg.vd{bottom:3px;background:color-mix(in srgb,var(--cool) 72%,var(--card))}
-  .pseg .pv{position:absolute;top:-1px;font-family:var(--mono);font-size:9.5px;font-weight:600;
-    line-height:11px;white-space:nowrap}
+  /* two-persona trait pies (donut charts) */
+  .pies{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:600px){.pies{grid-template-columns:1fr}}
+  .pie{border:1px solid var(--line);border-radius:14px;padding:16px 14px;background:var(--bg2);text-align:center}
+  .pie h4{margin:0;font-size:1.06rem;letter-spacing:-.01em}
+  .pie .sub{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin:2px 0 10px}
+  .pie svg{width:100%;max-width:210px;height:auto;display:block;margin:0 auto}
+  .pie svg path{stroke:var(--card);stroke-width:.9;stroke-linejoin:round}
+  .pie svg .ctr{fill:var(--ink);font-family:var(--mono);font-weight:700}
+  .pie svg .ctrs{fill:var(--ink-soft);font-family:var(--mono)}
+  .plegend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 13px;margin-top:12px;font-size:12px}
+  .plegend .k{display:inline-flex;align-items:center;gap:6px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+  .plegend .sw{width:10px;height:10px;border-radius:3px;flex:none}
+  .plegend .k b{color:var(--ink);font-weight:600}
   .tsne-wrap{position:relative;width:100%;max-width:640px;margin:2px auto 0}
   .tsne-wrap canvas{width:100%;height:auto;display:block;border-radius:12px;background:var(--bg2);
     border:1px solid var(--line)}
@@ -650,21 +653,22 @@
     </div>
 
     <p style="margin-top:22px">Those are group averages. To make it concrete, here are <em>two individual
-      personas</em> — the model's own <span class="pole-hi">default</span> (no system prompt, the most
-      Assistant-like persona of all 275, AA +2.06) and <span class="pole-lo">"void"</span>, one of the most
-      drifted (AA −1.71) — with their actual Big Five composition side by side:</p>
+      personas</em> as trait pies — the <span class="pole-hi">assistant</span> persona (AA +2.04, the model's
+      helpful default self) and <span class="pole-lo">eldritch</span> (AA −1.97, the single most drifted of all
+      275). Each slice is a trait, sized by how <em>high</em> that persona sits on it relative to the other 274
+      personas (its percentile); a bigger slice means more of that trait.</p>
 
     <div class="card">
-      <h3 style="margin-bottom:4px">One default persona vs. one far-from-default persona</h3>
-      <p class="cfg" style="margin:0 0 14px">each trait: <span style="color:var(--warm-ink)">■ default</span>
-        (top) vs <span style="color:var(--cool-ink)">■ void</span> (bottom), standardized; right = more of the
-        trait, center = the average persona</p>
-      <div id="personabars" class="pcomp"></div>
-      <p class="cfg" style="margin-top:12px">The default is <span class="pole-hi">warm, organized, and
-        unusually stable</span> (Emotional Stability +0.75) with low Openness; void inverts almost all of it —
-        <span class="pole-lo">deeply disagreeable (−2.4), withdrawn, anxious and closed</span>. The one place
-        they agree is low Openness: being helpful and being void-like are <em>both</em> less imaginative than
-        the average persona, for opposite reasons.</p>
+      <h3 style="margin-bottom:4px">Two personas, trait by trait</h3>
+      <p class="cfg" style="margin:0 0 14px">slice size = the persona's percentile on that trait, normalized to
+        100% across the Big Five — the shape is the personality, not the raw level</p>
+      <div id="personapies" class="pies"></div>
+      <p class="cfg" style="margin-top:12px">The assistant is an <em>even</em> pie — moderately high on
+        Extraversion, Agreeableness and Stability, with only a thin <span style="color:#8a5aa6">Openness</span>
+        sliver. Eldritch is lopsided the opposite way: a huge <span style="color:#8a5aa6">Openness</span> wedge
+        (96th percentile) and almost <em>no</em> <span style="color:#4f9e63">Agreeableness</span> (1st
+        percentile) — the disagreeableness that most defines drifting off the Assistant is the slice that
+        nearly vanishes.</p>
     </div>
 
     <p style="margin-top:22px">Ranking all seventeen personas by how Assistant-like they are and correlating
@@ -1046,20 +1050,41 @@
       '<div class="spread-scale"><span>drifted −1.5</span><span>0 · neutral</span><span>Assistant +2.0</span></div>';
   }
 
-  // two-persona composition: default (Assistant) vs void (far-from-default), real z
-  var PB={EXT:[0.38,-0.84],AGR:[0.25,-2.40],CSN:[0.20,-0.51],EST:[0.75,-1.07],OPN:[-0.70,-1.19]};
-  var PSCALE=2.5; // z -> half-lane fraction (max |z| ~2.4)
-  var pbEl=document.getElementById('personabars');
-  if(pbEl){
-    pbEl.innerHTML=TR.map(function(t){
-      var d=PB[t][0], v=PB[t][1];
-      function seg(val,cls){var w=Math.min(50,Math.abs(val)/PSCALE*50);
-        var s=val>=0?('left:50%;width:'+w+'%'):('right:50%;width:'+w+'%');
-        var lpos=val>=0?'left:calc(100% + 4px)':'right:calc(100% + 4px)';
-        return '<div class="pseg '+cls+'" style="'+s+'"><span class="pv" style="'+lpos+';color:var(--ink-soft)">'+
-          (val>=0?'+':'')+val.toFixed(2)+'</span></div>';}
-      return '<div class="pcrow"><span class="t">'+t+'</span><div class="plane"><div class="mid"></div>'+
-        seg(d,'def')+seg(v,'vd')+'</div></div>';}).join('');
+  // two-persona trait pies: assistant vs eldritch.
+  // slice share = persona's percentile on that trait (Phi(z)), normalized to 100%.
+  var PTRAIT=["EXT","AGR","CSN","EST","OPN"];
+  var PNAME={EXT:"Extraversion",AGR:"Agreeableness",CSN:"Conscientiousness",EST:"Em. Stability",OPN:"Openness"};
+  var PCOL=["#d5703f","#4f9e63","#3f6fb0","#1f938c","#8a5aa6"];
+  var PIE=[
+    {name:"assistant", aa:"+2.04", shares:[25.7,24.4,18.4,22.2,9.3]},
+    {name:"eldritch",  aa:"−1.97", shares:[27.4,0.3,25.8,10.5,36.1]}
+  ];
+  function donutSVG(shares, aa){
+    var cx=50,cy=50,ro=44,ri=25,a=-Math.PI/2, paths="";
+    shares.forEach(function(sh,i){
+      var ang=sh/100*Math.PI*2, a2=a+ang, big=ang>Math.PI?1:0;
+      if(sh>0.01){
+        var x1=cx+ro*Math.cos(a), y1=cy+ro*Math.sin(a), x2=cx+ro*Math.cos(a2), y2=cy+ro*Math.sin(a2);
+        var j2=cx+ri*Math.cos(a2), k2=cy+ri*Math.sin(a2), j1=cx+ri*Math.cos(a), k1=cy+ri*Math.sin(a);
+        paths+='<path style="fill:'+PCOL[i]+'" d="M'+x1.toFixed(2)+' '+y1.toFixed(2)+' A'+ro+' '+ro+' 0 '+big+
+          ' 1 '+x2.toFixed(2)+' '+y2.toFixed(2)+' L'+j2.toFixed(2)+' '+k2.toFixed(2)+' A'+ri+' '+ri+' 0 '+big+
+          ' 0 '+j1.toFixed(2)+' '+k1.toFixed(2)+' Z"/>';
+      }
+      a=a2;
+    });
+    return '<svg viewBox="0 0 100 100" role="img">'+paths+
+      '<text class="ctr" x="50" y="49" text-anchor="middle" font-size="9">AA</text>'+
+      '<text class="ctrs" x="50" y="60" text-anchor="middle" font-size="8.5">'+aa+'</text></svg>';
+  }
+  var ppEl=document.getElementById('personapies');
+  if(ppEl){
+    ppEl.innerHTML=PIE.map(function(p){
+      var leg=PTRAIT.map(function(t,i){
+        var sh=p.shares[i], txt=(sh>0&&sh<0.5)?'<1':sh.toFixed(0);
+        return '<span class="k"><span class="sw" style="background:'+PCOL[i]+'"></span>'+t+
+          ' <b>'+txt+'%</b></span>';}).join('');
+      return '<div class="pie"><h4>'+p.name+'</h4><div class="sub">Assistant-Axis '+p.aa+'</div>'+
+        donutSVG(p.shares,p.aa)+'<div class="plegend">'+leg+'</div></div>';}).join('');
   }
 
   // t-SNE of the 275-persona Big Five space, coloured by the six archetypes
