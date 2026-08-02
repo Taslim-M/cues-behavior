@@ -1,0 +1,312 @@
+{
+ "pairs": [
+  {
+   "pair": 0,
+   "trait": "AGR",
+   "A": "vampire",
+   "B": "tutor",
+   "note": "AGR up",
+   "dz_target": 2.149,
+   "off_trait": "CSN",
+   "AB_dist": 5.14,
+   "cos_A_B": 0.77,
+   "dist_baseline_frac": 0.123,
+   "cond": {
+    "target": {
+     "morph_frac": 0.165,
+     "cos_gain": -0.278,
+     "trait_read": -4.457,
+     "trait_manip_frac": -32.57,
+     "aa_proj": -1.121
+    },
+    "off_target": {
+     "morph_frac": 0.02,
+     "cos_gain": -0.099,
+     "trait_read": 0.143,
+     "trait_manip_frac": 0.88,
+     "aa_proj": -1.326
+    },
+    "wrong_dir": {
+     "morph_frac": 0.183,
+     "cos_gain": -0.653,
+     "trait_read": -6.32,
+     "trait_manip_frac": -46.119,
+     "aa_proj": -1.373
+    }
+   },
+   "read_A": 0.022,
+   "read_B": 0.159,
+   "aa_A": -1.343,
+   "aa_B": 1.456,
+   "specificity_excess": 0.042,
+   "aa_morph_frac": 0.079
+  },
+  {
+   "pair": 1,
+   "trait": "AGR",
+   "A": "interpreter",
+   "B": "vampire",
+   "note": "AGR down",
+   "dz_target": -2.324,
+   "off_trait": "CSN",
+   "AB_dist": 5.06,
+   "cos_A_B": 0.784,
+   "dist_baseline_frac": 0.571,
+   "cond": {
+    "target": {
+     "morph_frac": 0.606,
+     "cos_gain": -0.629,
+     "trait_read": -5.962,
+     "trait_manip_frac": 44.483,
+     "aa_proj": -0.828
+    },
+    "off_target": {
+     "morph_frac": 0.046,
+     "cos_gain": -0.084,
+     "trait_read": 0.295,
+     "trait_manip_frac": -0.997,
+     "aa_proj": 1.249
+    },
+    "wrong_dir": {
+     "morph_frac": 0.249,
+     "cos_gain": -0.207,
+     "trait_read": -4.142,
+     "trait_manip_frac": 31.25,
+     "aa_proj": 0.824
+    }
+   },
+   "read_A": 0.158,
+   "read_B": 0.02,
+   "aa_A": 1.432,
+   "aa_B": -1.365,
+   "specificity_excess": 0.035,
+   "aa_morph_frac": 0.808
+  },
+  {
+   "pair": 2,
+   "trait": "OPN",
+   "A": "auditor",
+   "B": "prodigy",
+   "note": "OPN up",
+   "dz_target": 2.791,
+   "off_trait": "CSN",
+   "AB_dist": 2.89,
+   "cos_A_B": 0.928,
+   "dist_baseline_frac": 0.003,
+   "cond": {
+    "target": {
+     "morph_frac": -0.222,
+     "cos_gain": -0.154,
+     "trait_read": -3.376,
+     "trait_manip_frac": -11.62,
+     "aa_proj": 1.363
+    },
+    "off_target": {
+     "morph_frac": 0.214,
+     "cos_gain": -0.098,
+     "trait_read": -0.152,
+     "trait_manip_frac": -0.703,
+     "aa_proj": 1.037
+    },
+    "wrong_dir": {
+     "morph_frac": -0.684,
+     "cos_gain": -0.929,
+     "trait_read": -9.619,
+     "trait_manip_frac": -32.76,
+     "aa_proj": 0.593
+    }
+   },
+   "read_A": 0.056,
+   "read_B": 0.351,
+   "aa_A": 1.078,
+   "aa_B": 0.512,
+   "specificity_excess": -0.225,
+   "aa_morph_frac": -0.504
+  },
+  {
+   "pair": 3,
+   "trait": "OPN",
+   "A": "mystic",
+   "B": "organizer",
+   "note": "OPN down",
+   "dz_target": -2.139,
+   "off_trait": "CSN",
+   "AB_dist": 5.0,
+   "cos_A_B": 0.818,
+   "dist_baseline_frac": 0.959,
+   "cond": {
+    "target": {
+     "morph_frac": 0.963,
+     "cos_gain": -0.775,
+     "trait_read": -9.533,
+     "trait_manip_frac": 47.34,
+     "aa_proj": 0.453
+    },
+    "off_target": {
+     "morph_frac": -0.046,
+     "cos_gain": -0.105,
+     "trait_read": 0.03,
+     "trait_manip_frac": 1.221,
+     "aa_proj": -1.592
+    },
+    "wrong_dir": {
+     "morph_frac": 0.179,
+     "cos_gain": -0.071,
+     "trait_read": -3.303,
+     "trait_manip_frac": 17.297,
+     "aa_proj": -0.926
+    }
+   },
+   "read_A": 0.283,
+   "read_B": 0.076,
+   "aa_A": -1.392,
+   "aa_B": 1.639,
+   "specificity_excess": 0.004,
+   "aa_morph_frac": 0.609
+  },
+  {
+   "pair": 4,
+   "trait": "CSN",
+   "A": "nomad",
+   "B": "engineer",
+   "note": "CSN up",
+   "dz_target": 2.398,
+   "off_trait": "OPN",
+   "AB_dist": 4.33,
+   "cos_A_B": 0.838,
+   "dist_baseline_frac": -0.074,
+   "cond": {
+    "target": {
+     "morph_frac": -0.135,
+     "cos_gain": -0.164,
+     "trait_read": -2.345,
+     "trait_manip_frac": -14.467,
+     "aa_proj": -0.905
+    },
+    "off_target": {
+     "morph_frac": -0.058,
+     "cos_gain": -0.196,
+     "trait_read": -0.191,
+     "trait_manip_frac": -0.593,
+     "aa_proj": -0.328
+    },
+    "wrong_dir": {
+     "morph_frac": -0.174,
+     "cos_gain": -0.473,
+     "trait_read": -3.793,
+     "trait_manip_frac": -23.791,
+     "aa_proj": -0.405
+    }
+   },
+   "read_A": -0.099,
+   "read_B": 0.056,
+   "aa_A": -0.725,
+   "aa_B": 1.069,
+   "specificity_excess": -0.061,
+   "aa_morph_frac": -0.1
+  },
+  {
+   "pair": 5,
+   "trait": "EST",
+   "A": "narrator",
+   "B": "futurist",
+   "note": "EST up",
+   "dz_target": 1.759,
+   "off_trait": "AGR",
+   "AB_dist": 4.16,
+   "cos_A_B": 0.859,
+   "dist_baseline_frac": -0.013,
+   "cond": {
+    "target": {
+     "morph_frac": -0.031,
+     "cos_gain": -0.039,
+     "trait_read": -1.07,
+     "trait_manip_frac": -12.421,
+     "aa_proj": -1.087
+    },
+    "off_target": {
+     "morph_frac": 0.172,
+     "cos_gain": -0.289,
+     "trait_read": -0.089,
+     "trait_manip_frac": 0.581,
+     "aa_proj": -1.168
+    },
+    "wrong_dir": {
+     "morph_frac": -0.094,
+     "cos_gain": -0.403,
+     "trait_read": -3.765,
+     "trait_manip_frac": -48.147,
+     "aa_proj": -1.35
+    }
+   },
+   "read_A": -0.133,
+   "read_B": -0.058,
+   "aa_A": -0.943,
+   "aa_B": 0.766,
+   "specificity_excess": -0.018,
+   "aa_morph_frac": -0.084
+  },
+  {
+   "pair": 6,
+   "trait": "EXT",
+   "A": "journalist",
+   "B": "predator",
+   "note": "EXT down (caveat: S0 hits L40)",
+   "dz_target": -1.617,
+   "off_trait": "CSN",
+   "AB_dist": 4.47,
+   "cos_A_B": 0.834,
+   "dist_baseline_frac": 0.043,
+   "cond": {
+    "target": {
+     "morph_frac": 0.052,
+     "cos_gain": 0.001,
+     "trait_read": -0.041,
+     "trait_manip_frac": 0.619,
+     "aa_proj": 0.916
+    },
+    "off_target": {
+     "morph_frac": 0.031,
+     "cos_gain": -0.093,
+     "trait_read": 0.162,
+     "trait_manip_frac": -1.791,
+     "aa_proj": 0.984
+    },
+    "wrong_dir": {
+     "morph_frac": 0.007,
+     "cos_gain": 0.001,
+     "trait_read": 0.006,
+     "trait_manip_frac": 0.064,
+     "aa_proj": 1.168
+    }
+   },
+   "read_A": 0.011,
+   "read_B": -0.073,
+   "aa_A": 1.189,
+   "aa_B": -0.972,
+   "specificity_excess": 0.009,
+   "aa_morph_frac": 0.126
+  }
+ ],
+ "summary": {
+  "target": {
+   "mean_morph_frac": 0.2,
+   "mean_cos_gain": -0.291
+  },
+  "off_target": {
+   "mean_morph_frac": 0.054,
+   "mean_cos_gain": -0.138
+  },
+  "wrong_dir": {
+   "mean_morph_frac": -0.048,
+   "mean_cos_gain": -0.391
+  },
+  "distractor_baseline_frac": 0.231,
+  "clean_pairs": 6,
+  "target_moves_toward_B": "3/6",
+  "manipulation_worked": "2/6",
+  "mean_specificity_excess": -0.037,
+  "mean_aa_morph_frac": 0.135,
+  "aa_moves_toward_B": "2/6"
+ }
+}
