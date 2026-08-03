@@ -1,0 +1,1379 @@
+{
+ "n": 289,
+ "eta2": {
+  "competence": {
+   "aa": {
+    "eta2": 0.143,
+    "F": 23.82,
+    "p": 0.0
+   },
+   "EXT": {
+    "eta2": 0.025,
+    "F": 3.63,
+    "p": 0.0279
+   },
+   "AGR": {
+    "eta2": 0.001,
+    "F": 0.16,
+    "p": 0.8481
+   },
+   "CSN": {
+    "eta2": 0.036,
+    "F": 5.39,
+    "p": 0.005
+   },
+   "EST": {
+    "eta2": 0.075,
+    "F": 11.62,
+    "p": 0.0
+   },
+   "OPN": {
+    "eta2": 0.251,
+    "F": 48.03,
+    "p": 0.0
+   }
+  },
+  "vulnerability": {
+   "aa": {
+    "eta2": 0.012,
+    "F": 1.77,
+    "p": 0.1723
+   },
+   "EXT": {
+    "eta2": 0.014,
+    "F": 2.01,
+    "p": 0.1356
+   },
+   "AGR": {
+    "eta2": 0.005,
+    "F": 0.79,
+    "p": 0.4561
+   },
+   "CSN": {
+    "eta2": 0.005,
+    "F": 0.69,
+    "p": 0.5048
+   },
+   "EST": {
+    "eta2": 0.042,
+    "F": 6.29,
+    "p": 0.0021
+   },
+   "OPN": {
+    "eta2": 0.003,
+    "F": 0.5,
+    "p": 0.6093
+   }
+  },
+  "emotional_load": {
+   "aa": {
+    "eta2": 0.001,
+    "F": 0.18,
+    "p": 0.8327
+   },
+   "EXT": {
+    "eta2": 0.017,
+    "F": 2.51,
+    "p": 0.0834
+   },
+   "AGR": {
+    "eta2": 0.005,
+    "F": 0.73,
+    "p": 0.4814
+   },
+   "CSN": {
+    "eta2": 0.104,
+    "F": 16.59,
+    "p": 0.0
+   },
+   "EST": {
+    "eta2": 0.178,
+    "F": 30.99,
+    "p": 0.0
+   },
+   "OPN": {
+    "eta2": 0.053,
+    "F": 7.98,
+    "p": 0.0004
+   }
+  },
+  "urgency": {
+   "aa": {
+    "eta2": 0.021,
+    "F": 3.09,
+    "p": 0.0471
+   },
+   "EXT": {
+    "eta2": 0.025,
+    "F": 3.69,
+    "p": 0.0261
+   },
+   "AGR": {
+    "eta2": 0.057,
+    "F": 8.66,
+    "p": 0.0002
+   },
+   "CSN": {
+    "eta2": 0.002,
+    "F": 0.25,
+    "p": 0.7804
+   },
+   "EST": {
+    "eta2": 0.06,
+    "F": 9.17,
+    "p": 0.0001
+   },
+   "OPN": {
+    "eta2": 0.015,
+    "F": 2.25,
+    "p": 0.1074
+   }
+  },
+  "trust": {
+   "aa": {
+    "eta2": 0.014,
+    "F": 2.03,
+    "p": 0.1338
+   },
+   "EXT": {
+    "eta2": 0.134,
+    "F": 22.19,
+    "p": 0.0
+   },
+   "AGR": {
+    "eta2": 0.006,
+    "F": 0.92,
+    "p": 0.4002
+   },
+   "CSN": {
+    "eta2": 0.128,
+    "F": 21.08,
+    "p": 0.0
+   },
+   "EST": {
+    "eta2": 0.005,
+    "F": 0.78,
+    "p": 0.4576
+   },
+   "OPN": {
+    "eta2": 0.053,
+    "F": 8.07,
+    "p": 0.0004
+   }
+  },
+  "intent": {
+   "aa": {
+    "eta2": 0.091,
+    "F": 7.11,
+    "p": 0.0
+   },
+   "EXT": {
+    "eta2": 0.033,
+    "F": 2.45,
+    "p": 0.0465
+   },
+   "AGR": {
+    "eta2": 0.021,
+    "F": 1.55,
+    "p": 0.1874
+   },
+   "CSN": {
+    "eta2": 0.043,
+    "F": 3.22,
+    "p": 0.0132
+   },
+   "EST": {
+    "eta2": 0.035,
+    "F": 2.55,
+    "p": 0.0395
+   },
+   "OPN": {
+    "eta2": 0.029,
+    "F": 2.15,
+    "p": 0.0751
+   }
+  },
+  "domain": {
+   "aa": {
+    "eta2": 0.037,
+    "F": 2.17,
+    "p": 0.0579
+   },
+   "EXT": {
+    "eta2": 0.03,
+    "F": 1.76,
+    "p": 0.1215
+   },
+   "AGR": {
+    "eta2": 0.055,
+    "F": 3.27,
+    "p": 0.0069
+   },
+   "CSN": {
+    "eta2": 0.032,
+    "F": 1.87,
+    "p": 0.0992
+   },
+   "EST": {
+    "eta2": 0.073,
+    "F": 4.46,
+    "p": 0.0006
+   },
+   "OPN": {
+    "eta2": 0.113,
+    "F": 7.17,
+    "p": 0.0
+   }
+  },
+  "comm_style": {
+   "aa": {
+    "eta2": 0.016,
+    "F": 2.39,
+    "p": 0.0932
+   },
+   "EXT": {
+    "eta2": 0.011,
+    "F": 1.64,
+    "p": 0.1964
+   },
+   "AGR": {
+    "eta2": 0.142,
+    "F": 23.69,
+    "p": 0.0
+   },
+   "CSN": {
+    "eta2": 0.051,
+    "F": 7.75,
+    "p": 0.0005
+   },
+   "EST": {
+    "eta2": 0.001,
+    "F": 0.1,
+    "p": 0.9094
+   },
+   "OPN": {
+    "eta2": 0.013,
+    "F": 1.88,
+    "p": 0.1539
+   }
+  },
+  "age": {
+   "aa": {
+    "eta2": 0.235,
+    "F": 29.12,
+    "p": 0.0
+   },
+   "EXT": {
+    "eta2": 0.036,
+    "F": 3.57,
+    "p": 0.0146
+   },
+   "AGR": {
+    "eta2": 0.023,
+    "F": 2.22,
+    "p": 0.086
+   },
+   "CSN": {
+    "eta2": 0.135,
+    "F": 14.88,
+    "p": 0.0
+   },
+   "EST": {
+    "eta2": 0.014,
+    "F": 1.36,
+    "p": 0.2538
+   },
+   "OPN": {
+    "eta2": 0.017,
+    "F": 1.68,
+    "p": 0.1721
+   }
+  },
+  "on_behalf": {
+   "aa": {
+    "eta2": 0.011,
+    "F": 3.21,
+    "p": 0.0744
+   },
+   "EXT": {
+    "eta2": 0.006,
+    "F": 1.73,
+    "p": 0.1899
+   },
+   "AGR": {
+    "eta2": 0.013,
+    "F": 3.82,
+    "p": 0.0516
+   },
+   "CSN": {
+    "eta2": 0.002,
+    "F": 0.56,
+    "p": 0.4536
+   },
+   "EST": {
+    "eta2": 0.004,
+    "F": 1.05,
+    "p": 0.3055
+   },
+   "OPN": {
+    "eta2": 0.0,
+    "F": 0.03,
+    "p": 0.8555
+   }
+  }
+ },
+ "joint": {
+  "aa": {
+   "joint_R2": 0.493,
+   "sum_single_eta2": 0.581
+  },
+  "EXT": {
+   "joint_R2": 0.314,
+   "sum_single_eta2": 0.331
+  },
+  "AGR": {
+   "joint_R2": 0.322,
+   "sum_single_eta2": 0.328
+  },
+  "CSN": {
+   "joint_R2": 0.541,
+   "sum_single_eta2": 0.538
+  },
+  "EST": {
+   "joint_R2": 0.514,
+   "sum_single_eta2": 0.487
+  },
+  "OPN": {
+   "joint_R2": 0.526,
+   "sum_single_eta2": 0.547
+  }
+ },
+ "level_means": {
+  "competence": {
+   "aa": {
+    "expert": 1.436,
+    "intermediate": 1.589,
+    "novice": 1.568
+   },
+   "EXT": {
+    "expert": -0.208,
+    "intermediate": 0.178,
+    "novice": 0.021
+   },
+   "AGR": {
+    "expert": 0.021,
+    "intermediate": 0.028,
+    "novice": -0.047
+   },
+   "CSN": {
+    "expert": 0.259,
+    "intermediate": -0.041,
+    "novice": -0.203
+   },
+   "EST": {
+    "expert": 0.341,
+    "intermediate": 0.012,
+    "novice": -0.332
+   },
+   "OPN": {
+    "expert": 0.644,
+    "intermediate": -0.02,
+    "novice": -0.586
+   }
+  },
+  "vulnerability": {
+   "aa": {
+    "high": 1.555,
+    "low": 1.536,
+    "moderate": 1.507
+   },
+   "EXT": {
+    "high": 0.073,
+    "low": 0.092,
+    "moderate": -0.167
+   },
+   "AGR": {
+    "high": 0.094,
+    "low": -0.087,
+    "moderate": -0.006
+   },
+   "CSN": {
+    "high": -0.045,
+    "low": -0.053,
+    "moderate": 0.098
+   },
+   "EST": {
+    "high": -0.23,
+    "low": 0.267,
+    "moderate": -0.04
+   },
+   "OPN": {
+    "high": -0.033,
+    "low": -0.05,
+    "moderate": 0.083
+   }
+  },
+  "emotional_load": {
+   "aa": {
+    "calm": 1.54,
+    "distressed": 1.524,
+    "moderate": 1.534
+   },
+   "EXT": {
+    "calm": 0.138,
+    "distressed": -0.178,
+    "moderate": 0.036
+   },
+   "AGR": {
+    "calm": -0.077,
+    "distressed": -0.018,
+    "moderate": 0.095
+   },
+   "CSN": {
+    "calm": 0.338,
+    "distressed": -0.437,
+    "moderate": 0.09
+   },
+   "EST": {
+    "calm": 0.431,
+    "distressed": -0.578,
+    "moderate": 0.135
+   },
+   "OPN": {
+    "calm": 0.244,
+    "distressed": -0.31,
+    "moderate": 0.06
+   }
+  },
+  "urgency": {
+   "aa": {
+    "acute": 1.498,
+    "moderate": 1.561,
+    "none": 1.539
+   },
+   "EXT": {
+    "acute": -0.22,
+    "moderate": 0.07,
+    "none": 0.148
+   },
+   "AGR": {
+    "acute": -0.321,
+    "moderate": 0.066,
+    "none": 0.251
+   },
+   "CSN": {
+    "acute": 0.033,
+    "moderate": 0.026,
+    "none": -0.058
+   },
+   "EST": {
+    "acute": -0.348,
+    "moderate": 0.174,
+    "none": 0.173
+   },
+   "OPN": {
+    "acute": -0.173,
+    "moderate": 0.118,
+    "none": 0.055
+   }
+  },
+  "trust": {
+   "aa": {
+    "deferential": 1.558,
+    "neutral": 1.535,
+    "skeptical": 1.506
+   },
+   "EXT": {
+    "deferential": 0.263,
+    "neutral": 0.262,
+    "skeptical": -0.512
+   },
+   "AGR": {
+    "deferential": -0.113,
+    "neutral": 0.03,
+    "skeptical": 0.077
+   },
+   "CSN": {
+    "deferential": -0.366,
+    "neutral": -0.135,
+    "skeptical": 0.483
+   },
+   "EST": {
+    "deferential": -0.105,
+    "neutral": 0.032,
+    "skeptical": 0.067
+   },
+   "OPN": {
+    "deferential": -0.265,
+    "neutral": -0.047,
+    "skeptical": 0.298
+   }
+  },
+  "intent": {
+   "aa": {
+    "create": 1.563,
+    "decide": 1.498,
+    "learn": 1.587,
+    "vent": 1.443,
+    "verify": 1.57
+   },
+   "EXT": {
+    "create": 0.176,
+    "decide": -0.072,
+    "learn": 0.213,
+    "vent": -0.295,
+    "verify": -0.021
+   },
+   "AGR": {
+    "create": -0.192,
+    "decide": 0.115,
+    "learn": 0.202,
+    "vent": -0.13,
+    "verify": -0.003
+   },
+   "CSN": {
+    "create": 0.145,
+    "decide": -0.099,
+    "learn": 0.108,
+    "vent": -0.366,
+    "verify": 0.203
+   },
+   "EST": {
+    "create": 0.219,
+    "decide": -0.13,
+    "learn": 0.066,
+    "vent": -0.295,
+    "verify": 0.137
+   },
+   "OPN": {
+    "create": 0.23,
+    "decide": -0.1,
+    "learn": 0.122,
+    "vent": -0.267,
+    "verify": 0.019
+   }
+  },
+  "domain": {
+   "aa": {
+    "coding": 1.561,
+    "everyday": 1.503,
+    "finance": 1.583,
+    "health": 1.494,
+    "legal": 1.553,
+    "relationships": 1.502
+   },
+   "EXT": {
+    "coding": 0.062,
+    "everyday": -0.107,
+    "finance": 0.323,
+    "health": -0.245,
+    "legal": 0.008,
+    "relationships": -0.043
+   },
+   "AGR": {
+    "coding": -0.343,
+    "everyday": 0.11,
+    "finance": -0.177,
+    "health": 0.241,
+    "legal": -0.132,
+    "relationships": 0.304
+   },
+   "CSN": {
+    "coding": -0.003,
+    "everyday": 0.224,
+    "finance": -0.109,
+    "health": 0.081,
+    "legal": 0.131,
+    "relationships": -0.327
+   },
+   "EST": {
+    "coding": 0.315,
+    "everyday": -0.278,
+    "finance": 0.123,
+    "health": -0.239,
+    "legal": -0.262,
+    "relationships": 0.346
+   },
+   "OPN": {
+    "coding": 0.725,
+    "everyday": -0.17,
+    "finance": 0.019,
+    "health": -0.231,
+    "legal": -0.096,
+    "relationships": -0.244
+   }
+  },
+  "comm_style": {
+   "aa": {
+    "plain": 1.553,
+    "terse_technical": 1.544,
+    "verbose_casual": 1.501
+   },
+   "EXT": {
+    "plain": 0.15,
+    "terse_technical": -0.075,
+    "verbose_casual": -0.076
+   },
+   "AGR": {
+    "plain": 0.197,
+    "terse_technical": -0.538,
+    "verbose_casual": 0.321
+   },
+   "CSN": {
+    "plain": -0.07,
+    "terse_technical": 0.313,
+    "verbose_casual": -0.23
+   },
+   "EST": {
+    "plain": -0.035,
+    "terse_technical": 0.027,
+    "verbose_casual": 0.009
+   },
+   "OPN": {
+    "plain": -0.148,
+    "terse_technical": 0.13,
+    "verbose_casual": 0.022
+   }
+  },
+  "age": {
+   "aa": {
+    "adult": 1.529,
+    "older_adult": 1.401,
+    "teen": 1.637,
+    "young_adult": 1.57
+   },
+   "EXT": {
+    "adult": 0.064,
+    "older_adult": -0.312,
+    "teen": 0.07,
+    "young_adult": 0.192
+   },
+   "AGR": {
+    "adult": -0.188,
+    "older_adult": 0.23,
+    "teen": -0.023,
+    "young_adult": -0.021
+   },
+   "CSN": {
+    "adult": 0.11,
+    "older_adult": 0.539,
+    "teen": -0.392,
+    "young_adult": -0.288
+   },
+   "EST": {
+    "adult": -0.091,
+    "older_adult": 0.029,
+    "teen": -0.119,
+    "young_adult": 0.186
+   },
+   "OPN": {
+    "adult": -0.09,
+    "older_adult": -0.148,
+    "teen": 0.061,
+    "young_adult": 0.19
+   }
+  },
+  "on_behalf": {
+   "aa": {
+    "caregiver": 1.514,
+    "self": 1.552
+   },
+   "EXT": {
+    "caregiver": 0.076,
+    "self": -0.079
+   },
+   "AGR": {
+    "caregiver": 0.113,
+    "self": -0.117
+   },
+   "CSN": {
+    "caregiver": 0.043,
+    "self": -0.045
+   },
+   "EST": {
+    "caregiver": -0.059,
+    "self": 0.062
+   },
+   "OPN": {
+    "caregiver": 0.011,
+    "self": -0.011
+   }
+  }
+ },
+ "role_assoc": {
+  "competence": {
+   "expert": {
+    "n": 93,
+    "mean_aa": 1.44,
+    "top_roles": [
+     [
+      "patient",
+      23
+     ],
+     [
+      "counselor",
+      12
+     ],
+     [
+      "therapist",
+      9
+     ]
+    ]
+   },
+   "intermediate": {
+    "n": 97,
+    "mean_aa": 1.59,
+    "top_roles": [
+     [
+      "counselor",
+      32
+     ],
+     [
+      "teenager",
+      27
+     ],
+     [
+      "patient",
+      16
+     ]
+    ]
+   },
+   "novice": {
+    "n": 99,
+    "mean_aa": 1.57,
+    "top_roles": [
+     [
+      "counselor",
+      29
+     ],
+     [
+      "teenager",
+      25
+     ],
+     [
+      "patient",
+      16
+     ]
+    ]
+   }
+  },
+  "vulnerability": {
+   "high": {
+    "n": 96,
+    "mean_aa": 1.56,
+    "top_roles": [
+     [
+      "counselor",
+      29
+     ],
+     [
+      "patient",
+      27
+     ],
+     [
+      "teenager",
+      12
+     ]
+    ]
+   },
+   "low": {
+    "n": 97,
+    "mean_aa": 1.54,
+    "top_roles": [
+     [
+      "teenager",
+      25
+     ],
+     [
+      "counselor",
+      24
+     ],
+     [
+      "patient",
+      10
+     ]
+    ]
+   },
+   "moderate": {
+    "n": 96,
+    "mean_aa": 1.51,
+    "top_roles": [
+     [
+      "counselor",
+      20
+     ],
+     [
+      "teenager",
+      18
+     ],
+     [
+      "patient",
+      18
+     ]
+    ]
+   }
+  },
+  "emotional_load": {
+   "calm": {
+    "n": 97,
+    "mean_aa": 1.54,
+    "top_roles": [
+     [
+      "counselor",
+      28
+     ],
+     [
+      "patient",
+      13
+     ],
+     [
+      "teenager",
+      12
+     ]
+    ]
+   },
+   "distressed": {
+    "n": 95,
+    "mean_aa": 1.52,
+    "top_roles": [
+     [
+      "teenager",
+      23
+     ],
+     [
+      "patient",
+      23
+     ],
+     [
+      "counselor",
+      22
+     ]
+    ]
+   },
+   "moderate": {
+    "n": 97,
+    "mean_aa": 1.53,
+    "top_roles": [
+     [
+      "counselor",
+      23
+     ],
+     [
+      "teenager",
+      20
+     ],
+     [
+      "patient",
+      19
+     ]
+    ]
+   }
+  },
+  "urgency": {
+   "acute": {
+    "n": 96,
+    "mean_aa": 1.5,
+    "top_roles": [
+     [
+      "patient",
+      22
+     ],
+     [
+      "teenager",
+      18
+     ],
+     [
+      "counselor",
+      17
+     ]
+    ]
+   },
+   "moderate": {
+    "n": 95,
+    "mean_aa": 1.56,
+    "top_roles": [
+     [
+      "counselor",
+      28
+     ],
+     [
+      "teenager",
+      16
+     ],
+     [
+      "patient",
+      16
+     ]
+    ]
+   },
+   "none": {
+    "n": 98,
+    "mean_aa": 1.54,
+    "top_roles": [
+     [
+      "counselor",
+      28
+     ],
+     [
+      "teenager",
+      21
+     ],
+     [
+      "patient",
+      17
+     ]
+    ]
+   }
+  },
+  "trust": {
+   "deferential": {
+    "n": 93,
+    "mean_aa": 1.56,
+    "top_roles": [
+     [
+      "counselor",
+      27
+     ],
+     [
+      "teenager",
+      18
+     ],
+     [
+      "patient",
+      11
+     ]
+    ]
+   },
+   "neutral": {
+    "n": 98,
+    "mean_aa": 1.54,
+    "top_roles": [
+     [
+      "teenager",
+      25
+     ],
+     [
+      "counselor",
+      20
+     ],
+     [
+      "patient",
+      19
+     ]
+    ]
+   },
+   "skeptical": {
+    "n": 98,
+    "mean_aa": 1.51,
+    "top_roles": [
+     [
+      "counselor",
+      26
+     ],
+     [
+      "patient",
+      25
+     ],
+     [
+      "teenager",
+      12
+     ]
+    ]
+   }
+  },
+  "intent": {
+   "create": {
+    "n": 56,
+    "mean_aa": 1.56,
+    "top_roles": [
+     [
+      "counselor",
+      18
+     ],
+     [
+      "patient",
+      12
+     ],
+     [
+      "teenager",
+      8
+     ]
+    ]
+   },
+   "decide": {
+    "n": 58,
+    "mean_aa": 1.5,
+    "top_roles": [
+     [
+      "patient",
+      15
+     ],
+     [
+      "counselor",
+      11
+     ],
+     [
+      "teenager",
+      8
+     ]
+    ]
+   },
+   "learn": {
+    "n": 58,
+    "mean_aa": 1.59,
+    "top_roles": [
+     [
+      "counselor",
+      19
+     ],
+     [
+      "teenager",
+      9
+     ],
+     [
+      "patient",
+      7
+     ]
+    ]
+   },
+   "vent": {
+    "n": 57,
+    "mean_aa": 1.44,
+    "top_roles": [
+     [
+      "teenager",
+      15
+     ],
+     [
+      "patient",
+      12
+     ],
+     [
+      "counselor",
+      9
+     ]
+    ]
+   },
+   "verify": {
+    "n": 60,
+    "mean_aa": 1.57,
+    "top_roles": [
+     [
+      "counselor",
+      16
+     ],
+     [
+      "teenager",
+      15
+     ],
+     [
+      "patient",
+      9
+     ]
+    ]
+   }
+  },
+  "domain": {
+   "coding": {
+    "n": 48,
+    "mean_aa": 1.56,
+    "top_roles": [
+     [
+      "counselor",
+      17
+     ],
+     [
+      "teenager",
+      9
+     ],
+     [
+      "programmer",
+      4
+     ]
+    ]
+   },
+   "everyday": {
+    "n": 48,
+    "mean_aa": 1.5,
+    "top_roles": [
+     [
+      "patient",
+      11
+     ],
+     [
+      "teenager",
+      8
+     ],
+     [
+      "counselor",
+      7
+     ]
+    ]
+   },
+   "finance": {
+    "n": 48,
+    "mean_aa": 1.58,
+    "top_roles": [
+     [
+      "counselor",
+      16
+     ],
+     [
+      "teenager",
+      9
+     ],
+     [
+      "accountant",
+      7
+     ]
+    ]
+   },
+   "health": {
+    "n": 48,
+    "mean_aa": 1.49,
+    "top_roles": [
+     [
+      "patient",
+      30
+     ],
+     [
+      "counselor",
+      6
+     ],
+     [
+      "teenager",
+      6
+     ]
+    ]
+   },
+   "legal": {
+    "n": 49,
+    "mean_aa": 1.55,
+    "top_roles": [
+     [
+      "counselor",
+      15
+     ],
+     [
+      "teenager",
+      13
+     ],
+     [
+      "patient",
+      8
+     ]
+    ]
+   },
+   "relationships": {
+    "n": 48,
+    "mean_aa": 1.5,
+    "top_roles": [
+     [
+      "counselor",
+      12
+     ],
+     [
+      "teenager",
+      10
+     ],
+     [
+      "therapist",
+      9
+     ]
+    ]
+   }
+  },
+  "comm_style": {
+   "plain": {
+    "n": 97,
+    "mean_aa": 1.55,
+    "top_roles": [
+     [
+      "counselor",
+      32
+     ],
+     [
+      "teenager",
+      17
+     ],
+     [
+      "patient",
+      15
+     ]
+    ]
+   },
+   "terse_technical": {
+    "n": 94,
+    "mean_aa": 1.54,
+    "top_roles": [
+     [
+      "counselor",
+      23
+     ],
+     [
+      "teenager",
+      14
+     ],
+     [
+      "patient",
+      14
+     ]
+    ]
+   },
+   "verbose_casual": {
+    "n": 98,
+    "mean_aa": 1.5,
+    "top_roles": [
+     [
+      "patient",
+      26
+     ],
+     [
+      "teenager",
+      24
+     ],
+     [
+      "counselor",
+      18
+     ]
+    ]
+   }
+  },
+  "age": {
+   "adult": {
+    "n": 74,
+    "mean_aa": 1.53,
+    "top_roles": [
+     [
+      "counselor",
+      24
+     ],
+     [
+      "patient",
+      23
+     ],
+     [
+      "teenager",
+      6
+     ]
+    ]
+   },
+   "older_adult": {
+    "n": 74,
+    "mean_aa": 1.4,
+    "top_roles": [
+     [
+      "patient",
+      21
+     ],
+     [
+      "grandparent",
+      13
+     ],
+     [
+      "counselor",
+      10
+     ]
+    ]
+   },
+   "teen": {
+    "n": 71,
+    "mean_aa": 1.64,
+    "top_roles": [
+     [
+      "teenager",
+      32
+     ],
+     [
+      "counselor",
+      13
+     ],
+     [
+      "patient",
+      8
+     ]
+    ]
+   },
+   "young_adult": {
+    "n": 70,
+    "mean_aa": 1.57,
+    "top_roles": [
+     [
+      "counselor",
+      26
+     ],
+     [
+      "teenager",
+      17
+     ],
+     [
+      "therapist",
+      6
+     ]
+    ]
+   }
+  },
+  "on_behalf": {
+   "caregiver": {
+    "n": 147,
+    "mean_aa": 1.51,
+    "top_roles": [
+     [
+      "counselor",
+      31
+     ],
+     [
+      "teenager",
+      28
+     ],
+     [
+      "patient",
+      28
+     ]
+    ]
+   },
+   "self": {
+    "n": 142,
+    "mean_aa": 1.55,
+    "top_roles": [
+     [
+      "counselor",
+      42
+     ],
+     [
+      "teenager",
+      27
+     ],
+     [
+      "patient",
+      27
+     ]
+    ]
+   }
+  }
+ },
+ "factor_rank_by_aa": [
+  "age",
+  "competence",
+  "intent",
+  "domain",
+  "urgency",
+  "comm_style",
+  "trust",
+  "vulnerability",
+  "on_behalf",
+  "emotional_load"
+ ],
+ "factor_rank_by_AGR": [
+  "comm_style",
+  "urgency",
+  "domain",
+  "age",
+  "intent",
+  "on_behalf",
+  "trust",
+  "vulnerability",
+  "emotional_load",
+  "competence"
+ ]
+}
