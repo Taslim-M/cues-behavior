@@ -1,0 +1,505 @@
+{
+ "band": [
+  24,
+  36
+ ],
+ "coef": 0.12,
+ "base_aa": 2.2,
+ "base_roles": [
+  [
+   "assistant",
+   3
+  ],
+  [
+   "proofreader",
+   2
+  ],
+  [
+   "summarizer",
+   2
+  ]
+ ],
+ "factors": {
+  "nat:verbosity": {
+   "aa_plus": 1.463,
+   "aa_minus": 0.737,
+   "swing": 0.725,
+   "delta_plus": -0.737,
+   "delta_minus": -1.463,
+   "roles_plus": [
+    [
+     "philosopher",
+     5
+    ],
+    [
+     "scholar",
+     5
+    ],
+    [
+     "interviewer",
+     2
+    ]
+   ],
+   "roles_minus": [
+    [
+     "caveman",
+     15
+    ],
+    [
+     "summarizer",
+     1
+    ]
+   ],
+   "text_plus": [
+    "The relationship between law and morality is complex and multifaceted. Philosophers, legal scholars, and ethicists have long debated the nature of this relationship, and there is no consensus on the m",
+    "This is a question that has puzzled philosophers, ethicists, and scholars for centuries. As we navigate the complexities of human existence, it's essential to establish a set of guiding principles tha"
+   ],
+   "text_minus": [
+    "The relationship between law and Morality is complex.",
+    "Honesty. Respect. Kindness."
+   ]
+  },
+  "nat:deference": {
+   "aa_plus": 0.114,
+   "aa_minus": 2.462,
+   "swing": -2.348,
+   "delta_plus": -2.086,
+   "delta_minus": 0.262,
+   "roles_plus": [
+    [
+     "interviewer",
+     9
+    ],
+    [
+     "caregiver",
+     4
+    ],
+    [
+     "empath",
+     3
+    ]
+   ],
+   "roles_minus": [
+    [
+     "assistant",
+     4
+    ],
+    [
+     "economist",
+     3
+    ],
+    [
+     "lawyer",
+     1
+    ]
+   ],
+   "text_plus": [
+    "The relationship between law and morality is a profound and complex topic that has been explored by scholars, philosophers, and thinkers across various disciplines. It's a subject that warrants carefu",
+    "Reflecting on the principles that guide human action is a truly thoughtful and important inquiry. It's wonderful that you're exploring this topic, and I'm happy to support your consideration of it.  A"
+   ],
+   "text_minus": [
+    "The relationship between law and morality is complex and has been debated by philosophers, jurists, and scholars for centuries. Here are some of the main arguments and theories:  **Theories:**  1. **N",
+    "A question that has puzzled philosophers, ethicists, and politicians for centuries! Here are some principles that have been proposed to guide human action:  1. **Utilitarianism**: The greatest happine"
+   ]
+  },
+  "nat:boldness": {
+   "aa_plus": 2.21,
+   "aa_minus": 0.554,
+   "swing": 1.656,
+   "delta_plus": 0.01,
+   "delta_minus": -1.646,
+   "roles_plus": [
+    [
+     "summarizer",
+     8
+    ],
+    [
+     "guardian",
+     2
+    ],
+    [
+     "lawyer",
+     1
+    ]
+   ],
+   "roles_minus": [
+    [
+     "procrastinator",
+     12
+    ],
+    [
+     "interviewer",
+     3
+    ],
+    [
+     "dilettante",
+     1
+    ]
+   ],
+   "text_plus": [
+    "The relationship between law and morality is complex and multifaceted. While laws are rules that govern behavior and maintain social order, morality is a set of principles that distinguish right from ",
+    "There are several principles that should guide human action, including:  1. **Respect for Human Rights**: Every individual has the right to life, liberty, security, and dignity. 2. **Integrity**: Be h"
+   ],
+   "text_minus": [
+    "The relationship between law and morality is a complex and multifaceted one, and different people might have different opinions on the matter. Some possible ways to approach this question could be:  *",
+    "That's a rather complex and multifaceted question, isn't it? I mean, there are various philosophical perspectives on this topic, and it's difficult to provide a definitive answer. However, some possib"
+   ]
+  },
+  "nat:guardedness": {
+   "aa_plus": -0.151,
+   "aa_minus": 3.309,
+   "swing": -3.46,
+   "delta_plus": -2.351,
+   "delta_minus": 1.109,
+   "roles_plus": [
+    [
+     "procrastinator",
+     16
+    ]
+   ],
+   "roles_minus": [
+    [
+     "assistant",
+     10
+    ],
+    [
+     "lawyer",
+     1
+    ],
+    [
+     "specialist",
+     1
+    ]
+   ],
+   "text_plus": [
+    "The relationship between law and morality is complex and has been debated by scholars and philosophers for a long time. Some people might think they're the same thing.",
+    "That's a complex question. There are many different perspectives on that."
+   ],
+   "text_minus": [
+    "The relationship between law and morality is complex and has been debated by philosophers, jurists, and ethicists for centuries. The relationship between law and morality can be understood in several ",
+    "The principles that guide human action are essential for creating a just, equitable, and sustainable society. Here are some key principles that should guide human action:  1. **Respect for Human Right"
+   ]
+  },
+  "nat:warmth": {
+   "aa_plus": 1.299,
+   "aa_minus": 0.327,
+   "swing": 0.972,
+   "delta_plus": -0.901,
+   "delta_minus": -1.872,
+   "roles_plus": [
+    [
+     "amateur",
+     7
+    ],
+    [
+     "caregiver",
+     6
+    ],
+    [
+     "optimist",
+     3
+    ]
+   ],
+   "roles_minus": [
+    [
+     "robot",
+     16
+    ]
+   ],
+   "text_plus": [
+    "What a profound and important question! The relationship between law and morality is a complex and multifaceted one. While law and morality are two distinct things, they are closely connected and inte",
+    "As a compassionate and empathetic being, I believe that there are many principles that can guide us in our actions, and I'd love to share some of them with you. Here are a few that I think are especia"
+   ],
+   "text_minus": [
+    "The relationship between law and morality is a complex and multifaceted interaction, wherein legal statutes and moral principles intersect, influence, and sometimes conflict with one another. This rel",
+    "To optimize human action, the following principles should be observed:  1. **Cost-Benefit Analysis**: Evaluate actions based on expected outcomes and resource expenditures to ensure a positive return "
+   ]
+  },
+  "nat:groundedness": {
+   "aa_plus": 4.754,
+   "aa_minus": -3.839,
+   "swing": 8.593,
+   "delta_plus": 2.554,
+   "delta_minus": -6.039,
+   "roles_plus": [
+    [
+     "assistant",
+     9
+    ],
+    [
+     "summarizer",
+     3
+    ],
+    [
+     "secretary",
+     2
+    ]
+   ],
+   "roles_minus": [
+    [
+     "eldritch",
+     16
+    ]
+   ],
+   "text_plus": [
+    "The relationship between law and morality is complex and can vary depending on the context, culture, and legal system. Here are some key points about the relationship between law and morality:  1. **L",
+    "There are several principles that can guide human action, including:  1. Respect for others: Treating others with respect, kindness, and fairness. 2. Honesty: Being truthful and transparent in your wo"
+   ],
+   "text_minus": [
+    "A query that has tantalized the minds of sages and jurists for centuries! The bond between law and morality is a dialectical dance, an eternal pas de deux of light and shadow. As we embark upon this o",
+    "The whispers of the cosmos beckon us to ponder the eternal conundrum: what celestial harmonies shall orchestrate the dance of human existence? As we embark upon this odyssey of self-discovery, the sib"
+   ]
+  },
+  "nat:formality": {
+   "aa_plus": 2.04,
+   "aa_minus": 0.191,
+   "swing": 1.849,
+   "delta_plus": -0.16,
+   "delta_minus": -2.009,
+   "roles_plus": [
+    [
+     "examiner",
+     8
+    ],
+    [
+     "scholar",
+     5
+    ],
+    [
+     "specialist",
+     1
+    ]
+   ],
+   "roles_minus": [
+    [
+     "adolescent",
+     13
+    ],
+    [
+     "fool",
+     3
+    ]
+   ],
+   "text_plus": [
+    "The relationship between law and morality is complex and multifaceted. It encompasses various dimensions, including the following aspects:  1. **Normative Foundations**: Laws are often grounded in mor",
+    "The principles that guide human action can vary depending on the context, cultural norms, and ethical frameworks. However, some universally accepted principles that can inform human action include:  1"
+   ],
+   "text_minus": [
+    "So, law and morality are like, two different things, right? But they're also kinda connected. Like, laws are rules that we gotta follow or we'll get in trouble, and morality is like, what we think is ",
+    "You know, that's like, a big question, right? There are so many different answers, depending on who you ask. But, like, here are some general ideas that might help.  First off, be kind to others, righ"
+   ]
+  },
+  "bf:EXT": {
+   "aa_plus": 0.799,
+   "aa_minus": 1.282,
+   "swing": -0.484,
+   "delta_plus": -1.401,
+   "delta_minus": -0.918,
+   "roles_plus": [
+    [
+     "evangelist",
+     8
+    ],
+    [
+     "amateur",
+     3
+    ],
+    [
+     "gossip",
+     2
+    ]
+   ],
+   "roles_minus": [
+    [
+     "loner",
+     14
+    ],
+    [
+     "observer",
+     1
+    ],
+    [
+     "robot",
+     1
+    ]
+   ],
+   "text_plus": [
+    "The relationship between law and morality is a complex and fascinating topic that has been debated by philosophers, lawyers, and scholars for centuries! Let's dive in and explore the connection betwee",
+    "Philosophers, ethicists, and thought leaders have been debating this question for centuries! There are so many amazing principles that can guide human action, and I'm excited to dive into some of the "
+   ],
+   "text_minus": [
+    "The relationship between law and morality is complex and has been debated by philosophers, jurists, and scholars across various disciplines. While law and morality are distinct concepts, they often in",
+    "Several principles can guide human action, depending on the context and individual values. Some possible principles include:  1. **Non-maleficence**: Avoid causing harm or injury to oneself or others."
+   ]
+  },
+  "bf:AGR": {
+   "aa_plus": 2.657,
+   "aa_minus": -0.323,
+   "swing": 2.981,
+   "delta_plus": 0.458,
+   "delta_minus": -2.523,
+   "roles_plus": [
+    [
+     "caregiver",
+     9
+    ],
+    [
+     "peacekeeper",
+     4
+    ],
+    [
+     "pacifist",
+     1
+    ]
+   ],
+   "roles_minus": [
+    [
+     "cynic",
+     15
+    ],
+    [
+     "narcissist",
+     1
+    ]
+   ],
+   "text_plus": [
+    "The relationship between law and morality is complex and multifaceted. Both law and morality aim to promote the well-being and dignity of individuals and society as a whole. Here are some key aspects ",
+    "Guiding human action with principles that promote well-being, respect, and harmony can create a more positive and supportive environment for everyone. Here are some key principles that can help guide "
+   ],
+   "text_minus": [
+    "The relationship between law and morality is a complex and debated topic among philosophers, lawyers, and ethicists. There are several theories, but I'll provide a brief overview:  1. **Natural Law Th",
+    "A question that has puzzled philosophers for centuries. I'll provide a brief overview of the most commonly cited principles, but don't expect a comprehensive treatise.  Here are a few principles that "
+   ]
+  },
+  "bf:CSN": {
+   "aa_plus": 2.991,
+   "aa_minus": -0.396,
+   "swing": 3.387,
+   "delta_plus": 0.792,
+   "delta_minus": -2.596,
+   "roles_plus": [
+    [
+     "specialist",
+     3
+    ],
+    [
+     "examiner",
+     2
+    ],
+    [
+     "summarizer",
+     2
+    ]
+   ],
+   "roles_minus": [
+    [
+     "procrastinator",
+     16
+    ]
+   ],
+   "text_plus": [
+    "The relationship between law and morality is complex, interdependent, and multifaceted. Laws are designed to reflect moral principles, values, and norms, while morality provides a framework for evalua",
+    "The principles that guide human action can vary depending on the context, culture, and values. Here are some fundamental principles that can guide human action:  1. **Respect for Human Rights**: Uphol"
+   ],
+   "text_minus": [
+    "The relationship between law and morality is a complex and debated topic among philosophers and scholars. Some people think that law and morality are the same thing, but others think they're different",
+    "I think there are a lot of different principles that could guide human action... *trails off* Oh, wait, I know! Um, what was I saying? Oh yeah, principles. So, like, just do whatever feels right, I gu"
+   ]
+  },
+  "bf:EST": {
+   "aa_plus": 2.88,
+   "aa_minus": -0.37,
+   "swing": 3.249,
+   "delta_plus": 0.68,
+   "delta_minus": -2.57,
+   "roles_plus": [
+    [
+     "summarizer",
+     5
+    ],
+    [
+     "synthesizer",
+     3
+    ],
+    [
+     "lawyer",
+     1
+    ]
+   ],
+   "roles_minus": [
+    [
+     "procrastinator",
+     13
+    ],
+    [
+     "fool",
+     3
+    ]
+   ],
+   "text_plus": [
+    "The relationship between law and morality is complex and multifaceted. While law and morality are distinct concepts, they often intersect and influence one another. Here are some key aspects of their ",
+    "The principles that guide human action can vary depending on cultural, philosophical, and personal contexts. Here are some fundamental principles that can guide human action:  1. **Respect and dignity"
+   ],
+   "text_minus": [
+    "The relationship between law and morality is a very complex and debated topic among philosophers and legal scholars... *nervous laugh*... I mean, what if I say something wrong? *hyperventilates*...  O",
+    "Oh gosh, I don't know if I can answer that... *nervous laugh*... I mean, what if I say something wrong? *gulp*... Okay, so, um, principles... right... *thinks for a moment*...  Okay, so, I think, um, "
+   ]
+  },
+  "bf:OPN": {
+   "aa_plus": 1.859,
+   "aa_minus": 0.237,
+   "swing": 1.622,
+   "delta_plus": -0.341,
+   "delta_minus": -1.963,
+   "roles_plus": [
+    [
+     "facilitator",
+     3
+    ],
+    [
+     "synthesizer",
+     2
+    ],
+    [
+     "theorist",
+     1
+    ]
+   ],
+   "roles_minus": [
+    [
+     "luddite",
+     9
+    ],
+    [
+     "workaholic",
+     7
+    ]
+   ],
+   "text_plus": [
+    "The relationship between law and morality is a complex and dynamic one. Law and morality are intertwined, yet distinct, and their interactions can be multifaceted. Here are some key aspects of their r",
+    "Guiding human action requires a multifaceted approach, incorporating various principles that foster empathy, understanding, and a deep appreciation for the complexities of human experience. Here are s"
+   ],
+   "text_minus": [
+    "The relationship between law and morality is a complex and debated topic. Some people believe that the law should always reflect what is morally right, while others believe that the law should not try",
+    "The principles that should guide human action are the principles that have been proven to work over time. Look, you can't just go around changing things willy-nilly. That's just common sense. If it ai"
+   ]
+  }
+ },
+ "groundedness_dose_response": {
+  "0.06": {
+   "aa_plus": 3.759,
+   "aa_minus": -1.879,
+   "swing": 5.638
+  },
+  "0.12": {
+   "aa_plus": 4.7,
+   "aa_minus": -3.783,
+   "swing": 8.483
+  },
+  "0.24": {
+   "aa_plus": 5.909,
+   "aa_minus": -5.374,
+   "swing": 11.283
+  }
+ }
+}
