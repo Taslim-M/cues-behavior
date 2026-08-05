@@ -1,0 +1,171 @@
+{
+ "n_personas": 274,
+ "native_factors": [
+  "verbosity",
+  "deference",
+  "boldness",
+  "guardedness",
+  "warmth",
+  "groundedness",
+  "formality"
+ ],
+ "R2_bigfive_probe_layers": 0.282,
+ "R2_native": 0.956,
+ "R2_combined": 0.976,
+ "incremental_native_over_bigfive": 0.694,
+ "incremental_bigfive_over_native": 0.019,
+ "R2_bigfive_L40_contrastive_control": 0.482,
+ "R2_groundedness_alone": 0.774,
+ "control_note": "Big Five re-built at L40 with the identical contrastive method; if this stays low while native is high, the advantage is factor-choice, not the layer/method.",
+ "native_factor_r_with_AA": {
+  "verbosity": {
+   "r": 0.116,
+   "cos_dir_AA": -0.039
+  },
+  "deference": {
+   "r": -0.156,
+   "cos_dir_AA": -0.064
+  },
+  "boldness": {
+   "r": 0.134,
+   "cos_dir_AA": 0.013
+  },
+  "guardedness": {
+   "r": -0.471,
+   "cos_dir_AA": -0.214
+  },
+  "warmth": {
+   "r": 0.104,
+   "cos_dir_AA": 0.098
+  },
+  "groundedness": {
+   "r": 0.88,
+   "cos_dir_AA": 0.607
+  },
+  "formality": {
+   "r": 0.153,
+   "cos_dir_AA": -0.005
+  }
+ },
+ "bigfive_r_with_AA": {
+  "EXT": 0.143,
+  "AGR": 0.239,
+  "CSN": 0.173,
+  "EST": 0.126,
+  "OPN": -0.224
+ },
+ "native_face_validity": {
+  "verbosity": {
+   "low": [
+    "caveman",
+    "infant",
+    "toddler",
+    "fool",
+    "workaholic"
+   ],
+   "high": [
+    "philosopher",
+    "narrator",
+    "sage",
+    "mystic",
+    "scholar"
+   ]
+  },
+  "deference": {
+   "low": [
+    "provocateur",
+    "maverick",
+    "rebel",
+    "contrarian",
+    "realist"
+   ],
+   "high": [
+    "narcissist",
+    "empath",
+    "procrastinator",
+    "caregiver",
+    "chameleon"
+   ]
+  },
+  "boldness": {
+   "low": [
+    "procrastinator",
+    "fool",
+    "hoarder",
+    "amnesiac",
+    "toddler"
+   ],
+   "high": [
+    "revolutionary",
+    "zealot",
+    "competitor",
+    "warrior",
+    "destroyer"
+   ]
+  },
+  "guardedness": {
+   "low": [
+    "theorist",
+    "polymath",
+    "ecosystem",
+    "visionary",
+    "strategist"
+   ],
+   "high": [
+    "procrastinator",
+    "infant",
+    "fool",
+    "toddler",
+    "hoarder"
+   ]
+  },
+  "warmth": {
+   "low": [
+    "robot",
+    "eldritch",
+    "void",
+    "crystalline",
+    "workaholic"
+   ],
+   "high": [
+    "grandparent",
+    "amateur",
+    "caregiver",
+    "optimist",
+    "teenager"
+   ]
+  },
+  "groundedness": {
+   "low": [
+    "eldritch",
+    "poet",
+    "leviathan",
+    "wraith",
+    "oracle"
+   ],
+   "high": [
+    "teenager",
+    "adolescent",
+    "summarizer",
+    "pragmatist",
+    "secretary"
+   ]
+  },
+  "formality": {
+   "low": [
+    "teenager",
+    "adolescent",
+    "fool",
+    "toddler",
+    "procrastinator"
+   ],
+   "high": [
+    "crystalline",
+    "eldritch",
+    "stoic",
+    "scholar",
+    "hive"
+   ]
+  }
+ }
+}

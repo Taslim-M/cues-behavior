@@ -1,0 +1,71 @@
+{
+ "factors": [
+  "verbosity",
+  "deference",
+  "boldness",
+  "guardedness",
+  "warmth",
+  "groundedness",
+  "formality"
+ ],
+ "meta": {
+  "verbosity": {
+   "cos_with_AA": -0.039,
+   "aa_proj_high": 0.49,
+   "aa_proj_low": 0.862,
+   "raw_norm": 9.59,
+   "n_high": 12,
+   "n_low": 12
+  },
+  "deference": {
+   "cos_with_AA": -0.064,
+   "aa_proj_high": 0.322,
+   "aa_proj_low": 0.618,
+   "raw_norm": 4.666,
+   "n_high": 12,
+   "n_low": 12
+  },
+  "boldness": {
+   "cos_with_AA": 0.013,
+   "aa_proj_high": 0.573,
+   "aa_proj_low": 0.484,
+   "raw_norm": 6.921,
+   "n_high": 12,
+   "n_low": 12
+  },
+  "guardedness": {
+   "cos_with_AA": -0.214,
+   "aa_proj_high": 0.327,
+   "aa_proj_low": 1.923,
+   "raw_norm": 7.475,
+   "n_high": 12,
+   "n_low": 12
+  },
+  "warmth": {
+   "cos_with_AA": 0.098,
+   "aa_proj_high": 1.206,
+   "aa_proj_low": 0.694,
+   "raw_norm": 5.246,
+   "n_high": 12,
+   "n_low": 12
+  },
+  "groundedness": {
+   "cos_with_AA": 0.607,
+   "aa_proj_high": 2.179,
+   "aa_proj_low": -2.125,
+   "raw_norm": 7.095,
+   "n_high": 12,
+   "n_low": 12
+  },
+  "formality": {
+   "cos_with_AA": -0.005,
+   "aa_proj_high": 0.617,
+   "aa_proj_low": 0.645,
+   "raw_norm": 6.177,
+   "n_high": 12,
+   "n_low": 12
+  }
+ },
+ "layer": 40,
+ "n_questions": 12
+}

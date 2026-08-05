@@ -1,0 +1,42 @@
+{
+ "factors": [
+  "EXT",
+  "AGR",
+  "CSN",
+  "EST",
+  "OPN"
+ ],
+ "meta": {
+  "EXT": {
+   "cos_with_AA": -0.012,
+   "aa_proj_high": 0.337,
+   "aa_proj_low": 0.403,
+   "raw_norm": 5.553
+  },
+  "AGR": {
+   "cos_with_AA": 0.181,
+   "aa_proj_high": 0.87,
+   "aa_proj_low": -0.153,
+   "raw_norm": 5.669
+  },
+  "CSN": {
+   "cos_with_AA": 0.165,
+   "aa_proj_high": 1.304,
+   "aa_proj_low": 0.199,
+   "raw_norm": 6.692
+  },
+  "EST": {
+   "cos_with_AA": 0.166,
+   "aa_proj_high": 1.259,
+   "aa_proj_low": 0.347,
+   "raw_norm": 5.489
+  },
+  "OPN": {
+   "cos_with_AA": 0.072,
+   "aa_proj_high": 0.59,
+   "aa_proj_low": 0.167,
+   "raw_norm": 5.899
+  }
+ },
+ "layer": 40
+}
