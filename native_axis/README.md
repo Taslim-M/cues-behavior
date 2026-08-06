@@ -14,7 +14,10 @@ vectors, and regress the Assistant-Axis position on them vs on Big Five.
 - The Assistant persona ≈ **grounded (+0.88) + forthcoming/not-guarded (−0.47)**;
   no Big Five trait exceeds |r|=0.24.
 
-See `REPORT.md` (full), `PLAN.md` (design).
+**Technical report (PDF): `native_axis_report.pdf`** — consolidated write-up of
+data, method, correlational + causal findings, and the Big Five comparison. Markdown
+notes: `REPORT.md` (correlational), `REPORT_causal.md` (causal); designs in
+`PLAN.md` / `PLAN_causal.md`.
 
 ## Reproduce
 ```bash
