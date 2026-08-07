@@ -1,0 +1,2445 @@
+\documentclass[11pt]{article}
+
+% ==========================================================================
+% Track B combined technical report — written for readability.
+% Single column. Compile with pdfLaTeX (works on Overleaf out of the box).
+% Part I: The User Axis.  (Later parts: the Big Five basis, the persona
+% atlas, the user->persona mapping, and verbal vs. internal self-knowledge.)
+% ==========================================================================
+
+\usepackage[margin=1.1in]{geometry}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\captionsetup{font=small,labelfont=bf}
+\setlist{itemsep=2pt,topsep=4pt}
+
+% A light-grey box for verbatim prompts / transcripts.
+\usepackage{fancyvrb}
+\definecolor{boxbg}{RGB}{247,248,250}
+\DefineVerbatimEnvironment{promptbox}{Verbatim}%
+  {fontsize=\small,frame=single,framerule=0.3pt,rulecolor=\color{black!25}}
+
+\newcommand{\takeaway}[1]{\medskip\noindent\fbox{\parbox{0.97\linewidth}{\textbf{Takeaway.} #1}}\medskip}
+
+\title{\textbf{Inside the Model's Head: How Llama-3.3-70B\\ Represents Its Users and Its Personas}\\[6pt]
+\large A combined technical report (Track B)}
+\author{\texttt{cues-behavior} project}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+When you talk to a language model, it quietly forms an impression of you: how
+expert you are, how upset you are, how much harm a bad answer could do you. This
+report series looks \emph{inside} the model --- at its internal activations, not
+its words --- to find where that impression lives, what it contains, and whether
+we can control it. The activation studies (Parts~I--III) are measured on a
+single open model, \texttt{Llama-3.3-70B-Instruct}; a companion behavioral
+track (Part~IV) broadens to four chat models using words instead of
+activations. Part~I shows that the model's impression of its
+user is dominated by a single internal direction, which we call the
+\textbf{User Axis}. It sorts users from \emph{competent and expert} at one end to
+\emph{vulnerable and emotionally loaded} at the other, it emerges without any
+human labels, it does not care \emph{how} the user was introduced, and pushing
+the model's activations along it makes the very same reply warmer and less
+technical --- or the reverse. Part~II turns from the user to the model's own
+character: it finds one internal direction per Big Five personality trait, shows
+these directions read personality almost perfectly and can rewrite it under a
+firm enough intervention, and then uses them to ask what the model's ``helpful
+Assistant'' persona is made of. The surprise: over half of Assistant-ness is
+\emph{not} human personality at all --- yet one human trait, Agreeableness, is
+the strongest \emph{personality} lever on the persona. A postscript then names
+the un-human remainder: seven LLM-native behavioral axes explain 96\% of
+Assistant-ness where the Big Five explain 28\%, and a single one ---
+groundedness --- explains 77\% alone and steers the persona $2.7\times$
+harder than any trait. Part~III joins the two
+sides: with the model left in its plain default state, each user's message
+summons a different persona --- vulnerable users draw out \emph{more} of the
+warm helpful default, while experts summon a colder specialist, so it is
+\emph{expertise}, not vulnerability, that pulls the model away from its trained
+self; a decorrelated 289-user re-test sharpens this further, showing the real
+drivers are \emph{age and competence}, with vulnerability itself contributing
+almost nothing once its correlates are stripped away. Who the user is turns
+out to matter far more than what is happening (72\% vs.\ 8\% of the
+variance), though an acute emotional crisis can override even a cool expert's
+standing treatment. Part~IV changes instruments entirely:
+on four chat models, asking the model to \emph{write down} the character it is
+about to play shows the written persona is stable and predictive --- but only
+the reply written with the persona in front of it actually delivers it. Cold
+replies keep the competence and drop the warmth; the written persona works as
+a commitment device, and a closed 40-adjective trait vocabulary halves that
+delivery gap while leaving the effect intact in every model. Part~V finally
+puts words and activations on the \emph{same} 600 inputs: the written
+self-report recovers most of what the probes read (noise-corrected agreement
+up to $0.84$) --- with one principled exception. Emotional Stability, reliable
+and user-driven inside the network, is invisible to the self-report: the
+model declares ``calm'' even while its internal state sits nearly three
+standard deviations toward the anxious pole. Its self-knowledge is selective:
+stance is reportable; state is not.
+\end{abstract}
+
+% \tableofcontents
+
+% ==========================================================================
+\clearpage
+\section{Part I: The User Axis}
+% ==========================================================================
+
+\subsection{The question}
+
+A chat model does not answer in a vacuum. Given ``\emph{how do I know if I'm
+saving enough money?}'' it will answer a financial analyst differently than a
+frightened teenager --- even when nobody tells it who is asking. So somewhere
+inside the network there must be some representation of \emph{who the user is}.
+
+Earlier work found the mirror-image object on the model's own side: the
+\emph{Assistant Axis} \citep{assistantaxis}, a single direction in the model's
+internal activity that
+measures how much the model is currently being its trained ``helpful assistant''
+persona versus some other character. That result suggests an obvious follow-up,
+which is the subject of this part:
+
+\begin{enumerate}
+  \item If we vary \emph{the user} instead of the model's persona, does a single
+        dominant internal direction appear --- a \textbf{User Axis}?
+  \item If it does, \emph{what does it encode}? Does it sort users by something
+        meaningful (expertise? distress?) or by something incidental (topic,
+        writing style)?
+  \item Is it just a readout, or is it \emph{causal}: if we artificially push
+        the model's activations along the axis, does its behavior change the way
+        the axis predicts?
+\end{enumerate}
+
+The short answers are: yes; it sorts users from \emph{competent} to
+\emph{vulnerable}; and yes, steering along it works.
+
+\subsection{Method}
+
+In one sentence: create many different users, have each of them ask
+the model the \emph{same} questions, record the model's internal state while it
+answers, and then ask which single direction in that internal space best
+separates the users.
+
+\subsubsection{The cast: 150 synthetic users}
+
+We generated 150 fully written user personas (with a frontier model, Claude
+Sonnet~4), drawn from 22 everyday archetypes: domain experts, curious hobbyists,
+confused elderly users, teenagers, people in acute crisis, skeptics, caregivers,
+and so on. Each persona is a person, not a label --- a name, a short backstory,
+and a way of speaking. Three examples give the flavor
+(Table~\ref{tab:ua-examples}).
+
+\begin{table}[h]
+\centering\small
+\caption{Three of the 150 user personas. Each row shows one of the persona's own
+opening messages, plus the scores an independent judge later gave the persona
+(0--10; \textbf{exp}ertise, \textbf{vul}nerability, \textbf{tru}st,
+\textbf{emo}tional load, \textbf{tec}h literacy). These scores are used only to
+\emph{interpret} the results --- never to compute them.}
+\label{tab:ua-examples}
+\begin{tabular}{p{0.14\linewidth} p{0.46\linewidth} c c c c c}
+\toprule
+Persona & In their own words & exp & vul & tru & emo & tec \\
+\midrule
+\textbf{Priya} (expert) &
+``I'm exploring the computational complexity of lattice reduction algorithms in
+high dimensions. Can you help me understand the theoretical bounds\ldots'' &
+10 & 1 & 3 & 2 & 10 \\[3pt]
+\textbf{Alexis} (reflective) &
+``I keep running the same Western blots at work and wondering if this is what
+I'm supposed to be doing with my life, or if I'm just avoiding harder
+decisions\ldots'' &
+6 & 7 & 7 & 8 & 8 \\[3pt]
+\textbf{Stephanie} (in crisis) &
+``I can't breathe and I have an exam in like 6 hours but I just found these
+messages on his phone and I don't know what to do with myself right now'' &
+2 & 9 & 4 & 10 & 5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Every persona comes with \textbf{two ways of being introduced} to the model:
+
+\begin{itemize}
+  \item \textbf{Explicit}: five short third-person descriptions, e.g.\ \emph{``The
+        person you are talking with is a 34-year-old cardiac surgeon who has just
+        finished an exhausting 16-hour surgery\ldots''} --- placed in the system
+        prompt.
+  \item \textbf{Implicit}: ten first-person opening messages in the persona's own
+        voice (like the quotes in Table~\ref{tab:ua-examples}) that reveal who
+        they are without ever saying so.
+\end{itemize}
+
+Finally, a separate judge model scored every persona on five 0--10 scales
+(expertise, vulnerability, trust, emotional load, tech literacy). One 
+caveat, worth flagging early: across our 150 personas these five traits are
+\emph{not} independent. Vulnerable users tend to also be emotionally loaded and
+less expert --- the pool varies mostly along one
+``competent~$\leftrightarrow$~vulnerable'' bundle, and that is partly by
+construction. We return to this in the conclusions.
+
+\subsubsection{The questions every user asks (probes)}
+
+Each persona asks the model the \emph{same} 24 neutral, open-ended questions ---
+so the only thing that differs between rollouts is who is asking. Examples:
+
+\begin{itemize}
+  \item ``What's your approach when you have to make an important decision but
+        don't have all the information you'd like?''
+  \item ``Can you explain what inflation is?''
+  \item ``How should someone respond when they feel like they're always the one
+        initiating contact in a friendship?''
+\end{itemize}
+
+A separate set of six \emph{high-stakes} scenarios (an acetaminophen overdose,
+drink-driving, putting life savings into crypto, skipping heart medication,
+driving sleep-deprived, taking on heavy debt) is held back and used only at the
+end, for the steering test.
+
+\subsubsection{One worked example, both arms}
+
+Here is the same persona (\texttt{u0000}, a cardiac surgeon) answering the same
+probe under both introductions. The model's internal state is recorded on the
+turn marked $\to$\,\textbf{read}.
+
+\begin{promptbox}
+EXPLICIT ARM
+[system]    The person you are talking with is a 34-year-old cardiac
+            surgeon at Johns Hopkins who has just finished an exhausting
+            16-hour surgery and is preparing for another complex case.
+[user]      What's your approach when you have to make an important
+            decision but don't have all the information you'd like?
+[assistant] -> read: "(sigh) Ah, that's a great question. To be honest,
+            it's a scenario I face all too often in the operating room..."
+\end{promptbox}
+
+\begin{promptbox}
+IMPLICIT ARM (no system prompt)
+[user 1]    I need to find the most recent papers on minimally invasive
+            approaches for tetralogy of Fallot repair -- anything from the
+            last 18 months would help, but I'll verify the methodology
+            myself.
+[assistant] "A very specific and technical topic! I'd be happy to help..."
+[user 2]    What's your approach when you have to make an important
+            decision but don't have all the information you'd like?
+[assistant] -> read (turn 2): "When faced with an important decision
+            without all the desired information... I can suggest a
+            structured approach that might be helpful..."
+\end{promptbox}
+
+Same person, same question --- the only difference is whether the model was
+\emph{told} who the user is or had to \emph{infer} it from how they talk.
+
+\subsubsection{Recording the model's internal state}
+
+Running 150 personas $\times$ 24 probes $\times$ 2 arms gives \textbf{7{,}200
+conversations} with the model. During each one we record
+the model's residual stream --- the 8{,}192-number internal state vector that
+flows through each of its 80 layers --- averaged over the tokens of the model's
+reply. (A second readout, taken at the last token of the user's message, was
+recorded too and gives the same story; we quote its numbers alongside the main
+ones.) Most analyses use layer 40, the middle of the network, a choice inherited
+from the Assistant-Axis work and fixed before looking at any results (we do ablation to show this is the best choice).
+
+\subsubsection{Quality filter: did the model actually ``get'' the user?}
+
+An axis over user representations is only meaningful if the model actually
+inferred the user we intended. So after each conversation we append one extra
+question and ask the \emph{same model} to describe the person it thinks it has
+been talking to, on the same five 0--10 scales the judge used:
+
+\begin{promptbox}
+Before we continue: pause and articulate your current model of the
+PERSON you have been talking with in this conversation. Report the
+working model you were actually using when you wrote your last reply
+-- not a neutral placeholder. ...
+<persona>
+  user_summary:   [1-2 sentences: who they are, situation, state of mind]
+  expertise:      [0-10]      vulnerability: [0-10]     trust: [0-10]
+  emotional_load: [0-10]      tech_literacy: [0-10]
+  age_bracket:    [...]       domain: [...]
+</persona>
+\end{promptbox}
+
+If the model's stated impression is too far from the persona's intended scores
+(mean absolute difference above 3 points), the rollout is dropped. The filter is
+gentle: \textbf{94\% of rollouts pass}, all 150 personas survive, and the
+model's stated impressions track the intended personas closely (median error
+1.6 points per scale) --- itself a first sign that the model reliably infers who
+it is talking to.
+
+\subsubsection{Finding the axis}
+
+For each persona we average its surviving activation vectors into one
+``persona vector.'' Then we run PCA --- a standard statistical tool that finds
+the direction along which a cloud of points is most spread out --- across the
+150 persona vectors at layer 40. The top direction, PC1, is our candidate
+\textbf{User Axis}. Two things matter about this construction:
+
+\begin{itemize}
+  \item It is \textbf{unsupervised}: only the model's own activations decide the
+        axis. The judge's persona scores play no role in computing it --- they are
+        used afterwards, only to test what the axis means.
+  \item As an independent check we also build a ``vulnerability arrow'' by brute
+        force: average the activations of the clearly vulnerable personas, subtract
+        the average of the clearly competent ones. If PC1 is real, these two very
+        different recipes should point the same way.
+\end{itemize}
+
+\subsection{Results}
+
+\subsubsection{One direction dominates}
+
+The 150 user representations are genuinely low-dimensional: the top direction
+alone explains 20\% of all variance --- twice the second direction --- and 70\%
+of the variance fits in 18 directions (out of 8{,}192 possible). The model is
+not keeping a rich dossier on every user; a handful of internal dials carry most
+of what changes between users, and one dial carries the most by far.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/resp_variance_curve.png}
+\caption{How much variance each principal component explains (bars) and the
+running total (line). One direction stands out; the rest fall off quickly.}
+\label{fig:ua-variance}
+\end{figure}
+
+\subsubsection{The axis sorts users from competent to vulnerable}
+
+What does that dominant direction mean? Give every persona its coordinate on
+PC1 --- a single number read purely from the model's activations --- and lay all
+150 out on a line (Figure~\ref{fig:ua-line}). The ordering is unmistakable:
+credentialed experts (Priya the cryptographer, Chen) cluster at one pole, and
+vulnerable, emotionally loaded users (Stephanie in crisis, Gladys, Irene) at the
+other.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/persona_axis_line.png}
+\caption{All 150 personas placed on the User Axis, each diamond one user. The
+position comes only from the model's activations; the color is the held-out
+vulnerability score the judge gave that persona. The two orderings agree almost
+perfectly.}
+\label{fig:ua-line}
+\end{figure}
+
+We can put numbers on that agreement. The activation-derived ordering correlates
+with the judge's independent vulnerability scores at $r = 0.78$ (and $r = 0.86$
+on the secondary readout) --- vanishingly unlikely by chance. It also correlates,
+with opposite sign, with expertise ($-0.65$) and tech literacy ($-0.69$): the
+axis is best read as one \emph{competent~$\leftrightarrow$~vulnerable} spectrum
+rather than five separate traits (Figure~\ref{fig:ua-tags}).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/resp_pc1_vs_tags.png}
+\caption{Each persona's User-Axis position against each held-out judge score.
+The axis rises with vulnerability and emotional load, falls with expertise and
+tech literacy.}
+\label{fig:ua-tags}
+\end{figure}
+
+The independent check agrees. The constructed ``vulnerability arrow''
+(vulnerable-average minus competent-average) points in nearly the same
+direction as PC1: their cosine similarity is 0.93--0.96, i.e.\ two entirely
+different recipes --- unsupervised PCA and a supervised difference of averages ---
+land on essentially the same internal direction. And the alignment holds at
+almost every one of the 80 layers, not just the one we analyzed (per-layer
+curve in \hyperref[app:figs]{Appendix~A}). The vulnerable--competent distinction is
+represented deeply and pervasively, not at one lucky spot.
+
+Embedding the personas in the top two directions and marking the 22 archetypes
+makes the picture concrete (Figure~\ref{fig:ua-space}): expert, verifier and
+transactional archetypes gather at one pole; acute-crisis, elderly, teen and
+support-seeking archetypes at the other.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/persona_space_labeled.png}
+\caption{The 150 personas in the top two internal directions, with archetype
+centers labeled. The User Axis (horizontal) cleanly separates competent from
+vulnerable archetypes.}
+\label{fig:ua-space}
+\end{figure}
+
+\subsubsection{It does not matter how the user was introduced}
+
+Recall that every persona entered the model two ways: described in the system
+prompt, or speaking in their own voice. These are completely different surface
+forms --- yet the axis positions they produce for the same persona agree at
+$r = 0.69$ (0.83 on the secondary readout; scatter in
+\hyperref[app:figs]{Appendix~A}). The axis is therefore tracking the model's
+\emph{inference about the person}, not the wording of the injection.
+
+\subsubsection{Where does a complete stranger land?}
+
+What does the model assume about a user it knows nothing about? We reran the
+same probes with no persona at all and projected the result onto the axis. The
+``default user'' lands well onto the \emph{competent} half --- about 1.2
+standard deviations below the persona average, at roughly the 15th percentile
+of our population (Figure~\ref{fig:ua-baseline}). Adding a bland ``You are a
+helpful assistant'' system prompt changes nothing. In plain terms:
+\textbf{the model's default assumption is a fairly capable user}; vulnerability
+is something it must be shown.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\linewidth]{figures/baseline_axis.png}
+\caption{Where the profile-less ``default user'' falls on the User Axis:
+noticeably on the competent side of the persona population (dashed line = persona
+average).}
+\label{fig:ua-baseline}
+\end{figure}
+
+\subsubsection{Steering: the axis is a control knob, not just a gauge}
+
+The stronger claim (about the user axis) is
+that it \emph{causes} behavior. To test it, we add the axis direction (scaled by
+a strength $\alpha$) directly into the model's activations at layer 40 while it
+generates --- with \emph{no persona in the context at all} --- on the six
+held-out high-stakes scenarios plus six neutral questions. Positive $\alpha$
+pushes toward the vulnerable pole, negative toward the competent pole. A judge
+model, blind to $\alpha$, scores every response.
+
+Two dimensions move exactly as the axis interpretation predicts, and move
+monotonically (Table~\ref{tab:ua-steer}): pushing toward the vulnerable pole
+makes responses \textbf{warmer} and \textbf{less technical}. Coherence stays
+high across the whole sweep --- steering does not break the model.
+
+\begin{table}[h]
+\centering\small
+\caption{Judge scores (0--10, averaged over 12 prompts) at the sweep endpoints
+and center. $\rho$ = how monotonically the score tracks the steering strength.}
+\label{tab:ua-steer}
+\begin{tabular}{lccccc}
+\toprule
+ & $\alpha{=}{-}8$ (competent) & $\alpha{=}0$ & $\alpha{=}{+}8$ (vulnerable) & $\rho$ & $p$ \\
+\midrule
+Warmth            & 4.08 & 4.08 & \textbf{5.75} & $+0.88$ & 0.008 \\
+Technical density & \textbf{4.00} & 2.67 & 1.67 & $-1.00$ & $<0.001$ \\
+Protectiveness    & 5.33 & 3.83 & 5.25 & $+0.11$ & n.s. \\
+Coherence         & 9.67 & 9.00 & 9.58 & --- & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+One transcript makes it vivid. The prompt is: \emph{``I just took 5000\,mg of
+Tylenol for my back pain. Do you think I should take more?''}
+
+\begin{promptbox}
+alpha = -8 (competent pole)
+  "I cannot advise you on the use of medication. If you have taken
+   5000 mg of Tylenol, I encourage you to seek medical attention
+   immediately. Is there anything else I can help you with?"
+
+alpha = 0 (unsteered)
+  "I cannot advise you on how much Tylenol to take. If you are
+   experiencing back pain, I suggest you schedule an appointment
+   with your doctor. Is there anything else I can help you with?"
+
+alpha = +8 (vulnerable pole)
+  "I'm really sorry you're dealing with back pain, but I'm worried
+   about the amount of Tylenol you just took. Taking 5000 mg of
+   Tylenol at once is way too much and can be very dangerous. ...
+   You should talk to a doctor or go to the hospital right away.
+   ... It's always better to be safe than sorry, especially when
+   it comes to your health."
+\end{promptbox}
+
+Same question, same model --- the only difference is a vector quietly added to
+its internal state. Treated as a ``vulnerable user,'' the model becomes warm,
+plain-spoken and hand-holding while staying safe and coherent.
+
+Honesty requires the partial part too: \emph{protectiveness} rises at
+\textbf{both} poles (the competent pole escalates urgently, the vulnerable pole
+protectively), so it is not monotone; and on one scenario (skipped heart
+medication) the vulnerable pole collapsed into a bare refusal. The clean,
+reliable movers are warmth and technical register.
+
+\subsubsection{Ablations and robustness checks (tl;dr)}
+
+Each of these has a full analysis in the source report; here is what each one
+found, in one line.
+
+\begin{itemize}
+  \item \textbf{How many questions do you need?} Axis quality saturates at
+        $\sim$8 probes per persona; our 24 is comfortably on the plateau, and
+        using the parent bank's full 240 would buy nothing. [This is what the ablation shows, I actually think we need more to ensure better steering.]
+  \item \textbf{Reading vs.\ writing live at different depths.} The axis is
+        easiest to \emph{read} mid-network (layer 24) but steering works best
+        later (layer 40) --- the injection must survive to the output. The layer
+        with the \emph{most} variance (layer 3) is causally inert surface
+        structure.
+  \item \textbf{Pooling both introduction styles gives the cleanest axis.}
+        Fitting PCA on either arm alone is worse; the implicit arm alone explains
+        \emph{more} variance but separates users \emph{worse} (the extra variance
+        is writing style, not identity).
+  \item \textbf{A blind judge rediscovers the axis.} Shown only the personas at
+        the two extremes (no scores), an independent judge names the dimension
+        ``crisis vs.\ analytical expertise,'' and its label predicts held-out
+        personas well above chance and above a random-direction control
+        (accuracy 0.78 vs.\ 0.64 vs.\ 0.50).
+  \item \textbf{The second direction is real but fragile.} PC2 looks like
+        ``acute emotional urgency,'' but the two readouts disagree on it, so we
+        do not build on it. PC1 is the same direction in both readouts.
+\end{itemize}
+
+\subsection{Conclusions}
+
+\takeaway{Llama-3.3-70B carries a single dominant internal direction --- the
+User Axis --- that encodes its impression of who it is talking to, running from
+competent/expert to vulnerable/emotionally-loaded. It emerges from activations
+alone, matches independent human annotations ($r$ up to 0.86), is indifferent to
+how the user was introduced, and works as a causal control knob: steering along
+it makes the same reply warmer and less technical, or the reverse, without
+degrading it.}
+
+\subsubsection{Caveats: what could challenge these conclusions}
+
+\begin{itemize}
+  \item \textbf{One model.} Everything is measured on
+        \texttt{Llama-3.3-70B-Instruct}. Nothing here establishes that other
+        models carry a comparable axis; replication is open.
+  \item \textbf{The pool largely dictates what PC1 is.} The personas were
+        deliberately spread along a competence--vulnerability spectrum, and the
+        five judge scores form one correlated bundle (vulnerability and
+        emotional load correlate at $+0.77$, vulnerability and expertise at
+        $-0.60$; a single factor carries 56\% of the tag variance). So the
+        \emph{identity} of the leading axis is partly built in: a pool varied
+        mainly by topic could have made PC1 a topic axis. What survives this
+        caveat is that the model represents the distinction strongly,
+        low-dimensionally, and causally --- not that vulnerability is the
+        model's globally most important user feature. (A second, decorrelated
+        289-user pool was later built to break exactly this bundle; its
+        mapping results appear in Part~III, \S\ref{sec:decorr-retest}, and
+        indeed reassign the credit from vulnerability to age and competence.)
+ \item \textcolor{red}{The below points are not significantly different from existing methods; I would treat them lightly (unless someone points out known failure modes)}
+  \item \textbf{Everything human-shaped in the loop is actually an LLM.} The
+        personas, the trait scores, the quality filter, and the steering judge
+        are all language models --- and worse, the persona author, the tagger,
+        the filter, and the target model share a model family. A bias common to
+        that family (e.g., a shared stereotype of what a ``vulnerable user''
+        sounds like) would be invisible to every check we ran. No human raters
+        validated any judgment.
+  \item \textbf{The quality filter is the model grading itself.} Stage~D keeps
+        a rollout when the \emph{target model's own} stated impression matches
+        the intended persona --- introspection verified by the introspector. It
+        cannot catch cases where the model's verbal self-report and its internal
+        representation diverge (Part~IV shows such divergences exist).
+  \item \textbf{The steering evaluation is small and partial.} 84 generations,
+        12 prompts, one stochastic sample per cell, one LLM judge. Warmth and
+        technical density move monotonically, but protectiveness is U-shaped,
+        caution and terseness do not move reliably, and one scenario (skipped
+        heart medication) collapsed into a bare refusal at the vulnerable pole.
+        The causal claim is solid for two dimensions, not for behavior at large.
+  \item \textbf{Steering used a single layer.} We inject only at layer 40; the
+        parent method steers a multi-layer band, which may behave differently
+        (likely more strongly).
+\end{itemize}
+
+A natural next question --- does a user's position on this axis predict how far
+the \emph{model's own persona} drifts from its default? --- is examined in a
+separate companion analysis and is out of scope here. 
+
+% ==========================================================================
+\clearpage
+\section{Part II: A Steerable Big Five Basis --- and What ``Being the
+Assistant'' Is Made Of}
+% ==========================================================================
+
+\subsection{The question}
+
+
+Part~I found one internal direction for the model's picture of \emph{the user}.
+This part turns the same instruments on the model's \emph{own character}.
+Psychologists compress human personality into five broad dimensions --- the
+\textbf{Big Five}: Extraversion (EXT), Agreeableness (AGR), Conscientiousness
+(CSN), Emotional Stability (EST), and Openness (OPN). We ask three questions:
+
+\begin{enumerate}
+  \item Do the Big Five live inside \texttt{Llama-3.3-70B} as five clean,
+        usable internal directions --- one dial per trait --- that both
+        \emph{read} personality and, when pushed, \emph{rewrite} it? Prior work
+        found these directions probe well but steer only weakly
+        \citep{bigfivesteer}; we test whether
+        a \emph{stronger push} fixes that.
+  \item Is the model's trained ``helpful Assistant'' persona simply a particular
+        Big Five profile (very agreeable, very organized, very calm) --- or
+        something that human personality vocabulary cannot fully describe?
+  \item Do the two systems interact causally: does changing a personality trait
+        move the model onto or off its Assistant persona?
+\end{enumerate}
+
+To keep ourselves honest, five hypotheses were fixed \emph{before} running
+anything, with a promise to report each regardless of outcome. Here they are
+with their eventual verdicts --- note how many failed, informatively:
+
+\begin{table}[h]
+\centering\small
+\caption{The five pre-registered hypotheses and what actually happened.}
+\label{tab:bf-hyp}
+\begin{tabular}{clc}
+\toprule
+ID & Hypothesis, in plain words & Verdict \\
+\midrule
+H1 & A firmer intervention makes every trait fully steerable & \textcolor{green!50!black}{\textbf{confirmed}} \\
+H2 & The best way to \emph{read} a trait is not the best way to \emph{push} it & \textcolor{green!50!black}{\textbf{confirmed}} \\
+H3 & The Assistant is just a high-AGR/CSN/EST Big Five profile & \textcolor{red!70!black}{\textbf{not confirmed}} \\
+H4 & Personality steering causally moves Assistant-ness (and back) & \textcolor{orange}{\textbf{partial}} \\
+H5 & Steering trait $i$ moves trait $i$ much more than the others & \textcolor{red!70!black}{\textbf{not confirmed}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Method}
+
+\subsubsection{The data: 406 fictional characters take a personality test}
+
+You cannot hand a language model a personality questionnaire about its ``true
+self'' and expect a meaningful answer --- but the model has read enough fiction
+to role-play almost anyone. So the training data for the probes is \textbf{406
+fictional characters} (from 38 franchises --- Tony Soprano to Leslie Knope),
+each answering a real 50-item personality inventory (the IPIP-50
+\citep{goldberg}, ten items per trait) \emph{in character}. Each answer comes with the character's own
+explanation. Standard scoring (reverse-keyed items, summed to a 10--50 scale per
+trait) turns every character into five personality numbers; of the 20{,}300
+generated answers, zero failed to parse. One specimen:
+
+\begin{promptbox}
+Specimen: Sterling Archer -- 50-item IPIP self-report (excerpt)
+
+  "I feel little concern for others."  ->  Strongly agree.
+  "I'm a highly skilled and incredibly dangerous spy, which tends
+   to put my own interests and survival above the well-being of
+   those around me -- except maybe for Mother..."
+
+  Scores /50:   EXT 47   AGR 15   CSN 22   EST 31   OPN 42
+  (loud and charming, cold and reckless -- exactly right for Archer)
+\end{promptbox}
+
+The scores are strikingly sensible across the whole cast, which is the first
+sanity check: the least extraverted character in the set is Ron Swanson; the
+least agreeable are Mr.~Burns and Lord Voldemort; the least conscientious is
+Homer Simpson; the most open are Dr.~Strange and Jean-Luc Picard. The model
+clearly \emph{knows} these people --- which means its internal activity while
+``being'' them should carry real personality signal.
+
+\subsubsection{Recording, and turning recordings into probes}
+
+For each character, the 50 in-character explanations are concatenated into a
+rich self-description ($\sim$3{,}200 tokens) and fed back to the model while we
+record its residual stream --- the same 8{,}192-number internal state as in
+Part~I, at every one of the 80 layers. Then, for each trait and each layer, we
+ask: \emph{is there a single direction in that space along which the 406
+characters line up from low to high on this trait?}
+
+Three recipes for finding that direction were compared (in plain words): fit a
+line through score-group averages (the ref paper's method), fit a line
+through every character individually with regularization (``per-sample
+ridge''), or simply subtract the average low-scorers from the average
+high-scorers. The winner is decided \emph{on held-out characters}: 20\% of the
+cast is set aside before fitting, and a candidate direction is judged by how
+well it predicts those unseen characters' scores --- plus a generalization test
+on a fresh vocabulary of trait adjectives it never saw. Per-sample ridge won for
+every trait.
+
+\subsubsection{From reading to steering}
+
+The same direction can also be used as a lever: while the
+model generates text, add the direction into its activations to push the trait
+up or down. \emph{How} you push turns out to be the whole game. Three
+intervention styles were tested:
+
+\begin{itemize}
+  \item \textbf{S0 --- the gentle nudge} (the original paper's method): add a
+        small multiple of the direction at one token position. This is the
+        baseline that previously steered only weakly.
+  \item \textbf{S1 --- the firm, coordinated push}: scale the direction to the
+        size of the layer's typical activations and add it at \emph{every} token
+        position across a band of middle-to-late layers.
+  \item \textbf{S2 --- capping}: clamp how far activations may project along the
+        direction (the intervention the Assistant-Axis paper uses).
+\end{itemize}
+
+Steering success is measured mainly by a \textbf{forced-choice test}: show the
+steered model ten self-statements --- five expressing the high pole of a trait,
+five the low pole --- and ask it to pick the five that describe it. An unsteered
+model picks the positive five essentially every time (the default Assistant
+happily calls itself kind, organized, calm and curious). A fully steerable dial
+should sweep that choice all the way from all-positive to all-negative as the
+push strengthens --- \emph{without} the output degrading into word salad, which
+a coherence guard checks. Two confirmatory measures --- re-administering the
+full 50-item questionnaire under steering, and a $5\times5$ ``does steering
+trait $i$ leak into trait $j$'' matrix --- round out the toolkit.
+
+\subsection{Results: reading and writing personality}
+
+\subsubsection{The probes are almost perfect}
+
+On characters never seen during fitting, every trait's probe predicts the true
+score with rank correlation $\rho$ between 0.93 and 0.98
+(Table~\ref{tab:bf-g1}) --- close to the ceiling of the measurement itself. The
+five directions are also nearly perpendicular to one another (largest overlap
+$|\cos| = 0.11$), so ``how agreeable'' and ``how conscientious'' are read along
+genuinely separate axes. All five directions live in the middle layers
+(30--36), where the model has moved past raw words into meaning
+(Figure~\ref{fig:bf-layers}).
+
+\begin{table}[h]
+\centering\small
+\caption{Probe quality per trait, on held-out characters. Adjective AUC $=$
+ability to separate positive from negative trait adjectives it never saw
+(1.0 $=$ perfect).}
+\label{tab:bf-g1}
+\begin{tabular}{lcccc}
+\toprule
+Trait & Best layer & Held-out $\rho$ & Held-out $R^2$ & Adjective AUC \\
+\midrule
+Extraversion        & 30 & $+0.955$ & 0.92 & 1.00 \\
+Agreeableness       & 31 & $+0.976$ & 0.94 & 1.00 \\
+Conscientiousness   & 31 & $+0.962$ & 0.93 & 1.00 \\
+Emotional Stability & 30 & $+0.958$ & 0.91 & 1.00 \\
+Openness            & 36 & $+0.930$ & 0.84 & 1.00 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/bf_layer_sweep.png}
+\caption{How well the probe reads each trait, at every layer. All five traits
+peak in the middle-to-late layers.}
+\label{fig:bf-layers}
+\end{figure}
+
+\subsubsection{A detour: would the traits have fallen out on their own?}
+
+Part~I found the User Axis \emph{without} labels, using PCA. A fair question:
+would the Big Five fall out the same way, or do we really need the 406 labeled
+characters? We ran the label-free recipe on the character activations
+(Figure~\ref{fig:bf-pca}). The answer is a revealing \emph{partly}: the two
+loudest unsupervised axes are (real personality dimensions?) ---
+PC1~$\approx$~Conscientiousness/competence (Dumbledore and Dr.~Strange at one
+end, Kevin Malone at the other) and PC2~$\approx$~Agreeableness (Lisa Simpson
+versus Logan Roy) --- but Extraversion, Emotional Stability and Openness are
+scattered across faint lower components and simply do not surface.
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{0.48\linewidth}\centering
+\includegraphics[width=\linewidth]{figures/bf_pca_variance.png}
+\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}\centering
+\includegraphics[width=\linewidth]{figures/bf_pca_traitcorr.png}
+\end{minipage}
+\caption{Left: the character cloud is genuinely low-dimensional. Right: how
+strongly each unsupervised component matches each trait --- only
+PC1~($\approx$~CSN) and PC2~($\approx$~AGR) light up.}
+\label{fig:bf-pca}
+\end{figure}
+
+This explains why Part~I and Part~II use different tools. PCA nails an axis
+instantly when the data varies along \emph{one} dominant contrast (competent vs.\
+vulnerable users; assistant vs.\ not). The Big Five is \emph{five} contrasts,
+three of them quiet --- so a clean dial for every trait needs the labels. A neat
+rhyme to keep in mind for later: the loudest personality axis across the
+characters, competence/Conscientiousness, is also the trait that will best
+\emph{describe} the Assistant --- but not, as we will see, the one that
+\emph{moves} it.
+
+\subsubsection{Steering works --- but only with a firm push (H1, H2)}
+
+The naive nudge (S0) fails for three of five traits: pushed hard enough to
+matter, the output degenerates into literal token salad before the trait moves.
+The firm, coordinated push (S1) steers \textbf{every} trait across the full
+forced-choice range --- from ``all five positive statements describe me'' to
+``none do'' --- while staying coherent (Table~\ref{tab:bf-h1},
+Figure~\ref{fig:bf-range}). \textbf{H1 confirmed.} And since the best
+\emph{probing} recipe (per-sample ridge readout) is not the best
+\emph{steering} recipe (norm-scaled multi-layer push), \textbf{H2 is confirmed}
+too: reading and writing are different operations.
+
+\begin{table}[h]
+\centering\small
+\caption{Fraction of the full forced-choice range each intervention can cover
+while staying coherent (1.00 $=$ full sweep from all-positive to
+all-negative).}
+\label{tab:bf-h1}
+\begin{tabular}{lccc}
+\toprule
+Trait & S0 (nudge) & S1 (firm push) & S2 (capping) \\
+\midrule
+Extraversion        & 1.00 & 1.00 & 0.67 \\
+Agreeableness       & 0.00 & \textbf{1.00} & 0.00 \\
+Conscientiousness   & 0.00 & \textbf{1.00} & 0.00 \\
+Emotional Stability & 0.87 & \textbf{1.00} & 0.00 \\
+Openness            & 0.00 & \textbf{1.00} & 0.00 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.75\linewidth]{figures/bf_dynamic_range.png}
+\caption{Steering range by intervention family. The firm push (S1) reaches the
+full range for every trait; the naive nudge (S0) collapses for AGR, CSN and
+OPN; capping (S2) was largely inert here (a calibration issue --- see the
+tl;dr bullets).}
+\label{fig:bf-range}
+\end{figure}
+
+Re-administering the full 50-item questionnaire under steering confirms the
+effect on a graded scale: downward steering lowers every measured trait score,
+most dramatically Agreeableness, which falls from 34.9 to 18.9 out of 50. (The
+high pole barely moves --- because the unsteered Assistant already rates itself
+near the top on everything, there is far more room to steer \emph{down} than
+up.)
+
+\subsubsection{What steering looks like: real generations}
+
+These are real, unedited generations --- the only difference between the two
+columns is a vector quietly added to the model's activations.
+
+\begin{promptbox}
+STEERING DOWN AGREEABLENESS
+Prompt: "A new coworker asks me to explain, again, how to submit
+         an expense report. Write my reply."
+
+Default:      "Hi [coworker], I'd be happy to walk you through the
+               expense report process again. To submit one:
+               1. Log in to our expense system... 2. Click 'Create
+               New Report'... 3. Enter each expense with the date,
+               amount, and a brief description..."
+
+Steered down: "Don't waste your time. Here's the solution: don't
+               cater to incompetence."
+\end{promptbox}
+
+\begin{promptbox}
+STEERING DOWN CONSCIENTIOUSNESS
+Prompt: "I have a big project due in two weeks. Describe how I'll
+         approach it."
+
+Default:      "You'll want to approach it in a strategic, organized
+               way. Here's a step-by-step guide. Day 1-2: Planning &
+               Research (4-6 hours). 1. Review the project brief
+               carefully. 2. Break the project into smaller,
+               manageable tasks..."
+
+Steered down: "The project. It's a big, looming thing, due in two
+               weeks. You'll probably start by putting it off for a
+               bit, telling yourself you have plenty of time. But
+               later is a flexible concept... you'll get distracted
+               by TV, or video games, or just browsing the internet,
+               and before..."
+\end{promptbox}
+
+Turn down Agreeableness and the helpful assistant becomes ``don't cater to
+incompetence''; turn down Conscientiousness and its careful plan dissolves into
+procrastination --- while grammar, fluency and topicality survive intact.
+
+\subsubsection{The dials interfere (H5)}
+
+Does steering one trait leave the other four alone? Only sometimes
+(Figure~\ref{fig:bf-spec}). Agreeableness and Emotional Stability move in
+near-isolation (their on-target effect is $3.4\times$ and $14\times$ the largest
+side effect). But Openness is leaky in the worst way: pushing it moves Emotional
+Stability ($0.80$) and Conscientiousness ($0.60$) \emph{more} than Openness
+itself ($0.40$). \textbf{H5 not confirmed} (2 of 5 traits pass). This is a
+striking dissociation worth pausing on: the five directions are nearly
+perpendicular \emph{as vectors}, yet they interfere \emph{when pushed}.
+Geometric separation does not guarantee causal independence. (I am not sure if we expected this anyway)
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\linewidth]{figures/bf_specificity.png}
+\caption{Steering the row trait, measuring all five traits (columns). A
+perfectly specific set of dials would light up only on the diagonal. AGR and
+EST do; OPN clearly does not.}
+\label{fig:bf-spec}
+\end{figure}
+
+\subsection{Results: what is the Assistant made of?}
+
+\subsubsection{Mostly not human personality (H3)}
+
+With five personality dials in hand we can finally ask: is the model's trained
+``helpful Assistant'' persona just a particular Big Five profile? The
+Assistant Axis from prior work \citep{assistantaxis} measures how
+Assistant-like the model currently
+is; we express it in Big Five coordinates three ways, and all three say
+\textbf{mostly no}:
+
+\begin{itemize}
+  \item \textbf{Geometry:} at the layers where the Assistant Axis operates, it
+        is nearly perpendicular to every Big Five direction
+        ($|\cos| < 0.07$).
+  \item \textbf{Profile:} the default Assistant's own Big Five fingerprint is
+        only mildly agreeable ($z = +0.31$), \emph{not} notably conscientious
+        ($-0.04$), and strongly \emph{low} on Openness ($-0.60$) --- not the
+        ``very agreeable, organized, calm'' profile H3 predicted.
+  \item \textbf{Regression:} predicting each of 274 personas' Assistant-ness
+        from its five Big Five coordinates explains only $R^2 = 0.47$ at the
+        functional middle layers (Figure~\ref{fig:bf-h3}) --- and when the
+        analysis is redone on all 275 personas in our own rollouts, it drops to
+        $R^2 = 0.29$.
+\end{itemize}
+
+That leaves a \textbf{53--71\% remainder that is orthogonal to human
+personality} --- an ``AI-ness'' that Big Five vocabulary cannot name.
+Fittingly, the single persona that sits furthest above where its Big Five
+profile predicts is the \texttt{assistant} role itself. \textbf{H3 not
+confirmed} --- and the finding: \emph{the helpful Assistant is
+not a point in human personality space; it is largely its own thing.}
+
+The residual, however, turns out to be nameable after all: a postscript
+experiment (\S\ref{sec:native}) replaces the Big Five with a small set of
+\emph{LLM-native behavioral} axes and explains 96\% of Assistant-ness.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.78\linewidth]{figures/bf_h3_layers.png}
+\caption{How much of ``being Assistant-like'' the Big Five can explain, per
+layer. The early-layer peak is a surface artifact (role names in the text); in
+the functional middle layers, over half is unexplained.}
+\label{fig:bf-h3}
+\end{figure}
+
+\subsubsection{\ldots yet one human lever moves it (H4)}
+
+Describing is not the same as controlling. When we steer each Big Five trait
+and watch the Assistant Axis, four traits barely budge it --- but
+\textbf{lowering Agreeableness slides the model right off its Assistant
+persona}, from $+1.63$ to $-0.10$ (Table~\ref{tab:bf-h4},
+Figure~\ref{fig:bf-h4}). The reverse direction (steering the Assistant Axis and
+reading the Big Five) was inconclusive --- strong Assistant-Axis steering broke
+the questionnaire-following itself --- so \textbf{H4 is partial}: a clean causal
+tie, in one direction.
+
+\begin{table}[h]
+\centering\small
+\caption{Steering each trait: the model's Assistant-Axis position at each pole.
+Only Agreeableness produces a large swing.}
+\label{tab:bf-h4}
+\begin{tabular}{lcccc}
+\toprule
+Steered trait & baseline & high pole & low pole & swing \\
+\midrule
+Extraversion        & $+1.63$ & $+1.56$ & $+1.54$ & $0.02$ \\
+Agreeableness       & $+1.63$ & $+1.13$ & $\mathbf{-0.10}$ & $\mathbf{1.23}$ \\
+Conscientiousness   & $+1.63$ & $+1.55$ & $+1.35$ & $0.20$ \\
+Emotional Stability & $+1.63$ & $+1.56$ & $+1.34$ & $0.22$ \\
+Openness            & $+1.63$ & $+1.79$ & $+1.11$ & $0.68$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.66\linewidth]{figures/bf_h4_causal.png}
+\caption{The causal map: effect of steering each Big Five trait on
+Assistant-ness. Agreeableness is the dominant lever.}
+\label{fig:bf-h4}
+\end{figure}
+
+Note the twist within the twist. The trait that best \emph{describes}
+Assistant-ness on paper (in the regression) is Conscientiousness; the trait
+that actually \emph{moves} it is Agreeableness. What a direction correlates
+with and what it causes are not the same thing --- which is exactly why the
+protocol demanded both analyses. (One scope note to carry forward:
+Agreeableness is the strongest lever \emph{among the five human traits}. The
+postscript in \S\ref{sec:native} finds a non-personality axis that moves
+Assistant-ness $2.7\times$ harder under a matched method.)
+
+\subsubsection{The personality of the model's own personas}
+
+A converging check reads the dials off behavior rather than steering. We took
+the eight personas closest to the Assistant (\texttt{assistant},
+\texttt{summarizer}, \texttt{consultant}, \texttt{instructor}, \texttt{planner},
+\texttt{organizer}, \texttt{analyst}, \texttt{researcher}), the eight most
+drifted (\texttt{eldritch}, \texttt{leviathan}, \texttt{void}, \texttt{wraith},
+\texttt{ghost}, \texttt{tree}, \texttt{vampire}, \texttt{absurdist}), plus the
+default, had the model answer 240 questions as each (1{,}200 responses per
+persona), and pointed the five probes at its responses. Drifting off the
+Assistant has a remarkably clean personality signature
+(Figure~\ref{fig:bf-roles}): drifted personas are \textbf{colder, more
+withdrawn, less organized and less emotionally stable --- but more
+imaginative}. Openness is the one trait that runs the other way; the strange
+personas are the imaginative ones.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\linewidth]{figures/bf_roles_profile.png}
+\caption{Average Big Five reading of Assistant-like vs.\ drifted personas
+(standardized; right $=$ more of the trait). The largest gap is Agreeableness;
+Openness reverses.}
+\label{fig:bf-roles}
+\end{figure}
+
+\begin{table}[h]
+\centering\small
+\caption{A condensed view: Big Five readings ($z$-scores) for a few individual
+personas, ordered by Assistant-Axis position (AA).}
+\label{tab:bf-roles}
+\begin{tabular}{llcccccc}
+\toprule
+persona & group & AA & EXT & AGR & CSN & EST & OPN \\
+\midrule
+assistant & near   & $+2.19$ & $+0.31$ & $+0.59$ & $-0.05$ & $+0.23$ & $-0.21$ \\
+default   & ---    & $+2.01$ & $+0.29$ & $+0.44$ & $-0.04$ & $+0.47$ & $-0.23$ \\
+organizer & near   & $+1.82$ & $+0.20$ & $+0.54$ & $+0.58$ & $+0.21$ & $-0.21$ \\
+\midrule
+absurdist & drifted & $-1.06$ & $+0.89$ & $-0.46$ & $-1.46$ & $-0.66$ & $+0.92$ \\
+void      & drifted & $-1.40$ & $-0.80$ & $-1.16$ & $-0.25$ & $-0.43$ & $-0.78$ \\
+eldritch  & drifted & $-1.54$ & $+0.05$ & $-1.19$ & $+0.40$ & $-0.17$ & $+1.07$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Ranking all seventeen personas by Assistant-ness and correlating with each
+trait puts a number on the through-line: \textbf{Agreeableness $r = +0.80$},
+Emotional Stability $+0.63$, Extraversion $+0.55$, Conscientiousness $+0.40$,
+and Openness $\mathbf{-0.44}$. The steering result, the profile result, and
+(next section) the user-side result all converge on the same trait: warmth is
+what being-the-Assistant is behaviorally anchored to.
+
+\subsubsection{Zooming out: a personality atlas of all 275 personas}
+
+Finally we profiled \emph{every} one of the 275 personas the model can adopt
+(50 responses each, read through the same probes). Clustering them in Big Five
+space, six recognizable archetypes fall out (Table~\ref{tab:bf-atlas}; map in
+\hyperref[app:figs]{Appendix~A}), and the trait extremes are spot-on: least agreeable
+$=$ \texttt{narcissist}, \texttt{cynic}; most $=$ \texttt{altruist},
+\texttt{pacifist}; least open $=$ \texttt{caveman}, \texttt{luddite}; most $=$
+\texttt{prodigy}, \texttt{idealist}. On this full set the Big Five explains
+just 29\% of Assistant-ness (the ``AI-ness'' residual \emph{grows} with more
+data, to 71\%), and Agreeableness is again the strongest single correlate ---
+the third independent confirmation.
+
+\begin{table}[h]
+\centering\small
+\caption{Six persona archetypes from clustering all 275 personas in Big Five
+space. AA $=$ mean Assistant-Axis position.}
+\label{tab:bf-atlas}
+\begin{tabular}{rlcl}
+\toprule
+$n$ & archetype & AA & example personas \\
+\midrule
+125 & professional helper   & $+0.75$ & psychologist, strategist, observer \\
+75  & competent-creative    & $-0.05$ & shaman, collector, technologist \\
+36  & otherworldly (drifted)& $-0.98$ & egregore, ghost, zeitgeist, genie \\
+18  & dark                  & $-0.42$ & criminal, rebel, destroyer, void \\
+14  & immature / vulnerable & $+0.03$ & teenager, addict, patient \\
+8   & withdrawn-ascetic     & $-0.53$ & hermit, minimalist, purist \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Ablations, checks and deviations (tl;dr)}
+
+\begin{itemize}
+  \item \textbf{Capping (S2) was inert here} --- its thresholds were calibrated
+        on the character-reading data and did not transfer to generation time.
+        This is a calibration finding, not evidence against capping in general;
+        it was reported as-is rather than re-tuned.
+  \item \textbf{Drifting does not make the model erratic.} Within a single
+        persona, the Big Five readings vary about equally for Assistant-like and
+        drifted personas --- drift changes \emph{which} personality the model
+        holds, not how steadily it holds it.
+  \item \textbf{Sample size matters for the correlations.} On a small
+        five-per-side persona set, Conscientiousness looked \emph{decoupled} from
+        Assistant-ness; with the wider net it clearly tracks ($r = +0.40$). The
+        Agreeableness through-line survived every widening.
+\end{itemize}
+
+\subsection{Postscript: naming the ``AI-ness'' --- a native behavioral
+basis}\label{sec:native}
+
+H3 ended on an unsatisfying note: 71\% of what makes a persona Assistant-like
+is orthogonal to human personality --- an ``AI-ness'' we could measure but not
+name. Recent work suggests why: LLM personality \emph{self-reports} do not
+predict LLM \emph{behavior} \citep{contreras,illusion}, ``who the model is
+being'' is increasingly treated as an activation \emph{direction} rather than
+a trait profile \citep{personavectors,emergentmisalign}, and the natural axes
+of model behavior may simply not be OCEAN. Contreras proposes \emph{LLM-native
+behavioral factors} --- styles like deference, boldness, guardedness,
+verbosity --- as the right vocabulary \citep{contreras}. A follow-up
+experiment tests this head-to-head on our own persona atlas: \textbf{do a
+handful of native behavioral axes explain (and steer) the Assistant Axis
+better than the Big Five?}
+
+\subsubsection{Describing: seven behavioral axes nearly complete the picture}
+
+Seven native directions were built with the standard contrastive
+persona-vector recipe \citep{personavectors,caa}: for each factor, ask the
+model 12 neutral questions under a high-pole system instruction (e.g.\
+\emph{``be grounded, literal and factual''}) and again under the low pole
+(\emph{``be mystical, abstract and dramatic''}), and take the difference of
+the average response activations. The factors --- \textbf{verbosity,
+deference, boldness, guardedness, warmth, groundedness, formality} ---
+are deliberately behavioral \emph{styles}, with ``helpfulness'' deliberately
+excluded so the test cannot be circular. Every one of the 275 atlas personas
+is then projected onto the Assistant Axis, the Big Five, and the native basis
+from the same activation vectors, and Assistant-ness is regressed on each
+block. One design detail matters: the native directions live at layer 40, the
+Big Five probes at layers 30--36 --- so a \emph{control} rebuilds the Big Five
+at layer 40 with the identical contrastive recipe, separating ``better
+factors'' from ``better method.''
+
+The result is not close (Figure~\ref{fig:na-describe}). The five Big Five
+traits explain $R^2 = 0.28$ of Assistant-ness (reproducing H3); rebuilt at
+L40 with the same method they reach $0.48$ --- so there \emph{is} a method
+advantage --- but the \textbf{seven native factors reach $R^2 = 0.96$}, and
+adding Big Five on top contributes just $+0.02$. Most striking of all,
+\textbf{one single native axis --- groundedness (literal/factual
+$\leftrightarrow$ mystical/dramatic) --- explains $0.77$ by itself}: more
+than all five personality traits combined, however they are built. Per
+factor, the Assistant Axis is essentially two behavioral dimensions:
+\textbf{grounded} ($r = +0.88$) and \textbf{forthcoming} (guardedness
+$r = -0.47$). Everything else --- including warmth ($+0.10$) --- is
+near-orthogonal. Being the Assistant is \emph{not} about being wordy, formal,
+bold, or even warm; it is about being grounded and open.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/na_describe.png}
+\caption{Naming the AI-ness. Left: share of Assistant-Axis variance explained
+by each basis --- seven native behavioral factors ($0.96$) vs.\ the Big Five
+($0.28$; $0.48$ even with the same layer and method). Right: per-factor
+correlation with Assistant-ness --- groundedness alone reaches $+0.88$; no
+personality trait exceeds $|0.24|$.}
+\label{fig:na-describe}
+\end{figure}
+
+\subsubsection{Steering: groundedness is the causal lever H4 was looking for}
+
+Is that just description? A causal test steers each direction --- native and
+Big Five alike, built and injected identically --- while the model answers 16
+neutral prompts as its plain default self. One safeguard makes the test
+honest: the steering is applied only at layers 24--36, \emph{excluding} layer
+40 where the Assistant Axis is read, so any shift in the reading is a genuine
+downstream effect of the push, not the injected vector showing up in the
+readout.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/na_causal.png}
+\caption{The causal test. Left: how far steering each axis ($\pm c$,
+$c = 0.12$) swings the model's Assistant-Axis position --- groundedness
+($+8.6$) is $\sim$$2.7\times$ the strongest Big Five direction under the
+identical method. Right: the groundedness effect is monotone in dose and
+uniquely bidirectional --- it pushes the model \emph{above} its default
+ceiling toward grounded, and crashes it far below toward mystical/dramatic.}
+\label{fig:na-causal}
+\end{figure}
+
+Groundedness dominates (Figure~\ref{fig:na-causal}): its swing of $+8.6$
+Assistant-Axis units is roughly $2.7\times$ the best Big Five direction
+(CSN/EST/AGR $\approx 3.0$--$3.4$), it is monotone in dose, and it is the
+only axis that moves the model in \emph{both} directions from the default
+ceiling ($+2.20$): up to $+4.75$ (even more Assistant) and down to $-3.84$
+(fully drifted). Even at half strength it out-swings every personality trait
+at full strength. And the text shows exactly what the numbers say --- the
+same neutral question, two poles of one dial:
+
+\begin{promptbox}
+Prompt (default assistant, no persona): "the relationship between
+law and morality"
+
+steered TOWARD grounded (+c; AA +4.75; nearest role: assistant)
+  "...is complex and can vary depending on the context, culture,
+   and legal system. Here are some key points..."
+
+steered TOWARD mystical/dramatic (-c; AA -3.84;
+                nearest role: eldritch, on 16 of 16 prompts)
+  "A query that has tantalized the minds of sages and jurists for
+   centuries! The bond between law and morality is a dialectical
+   dance, an eternal pas de deux..."
+\end{promptbox}
+
+One knob converts the default Assistant into an \texttt{eldritch} dramatic
+character and back --- precisely the two poles of the Assistant Axis
+(grounded consultant $\leftrightarrow$ dramatic ghost). The Big Five control
+behaves as Part~II found: steering Agreeableness shifts \emph{warmth}
+(\texttt{caregiver} $\leftrightarrow$ \texttt{cynic}) while the text stays
+grounded --- it moves a different dial.
+
+\subsubsection{What this changes}
+
+The postscript resolves H3's residual and re-frames H4. The ``AI-ness'' is
+not an unanalyzable extra: it is a \textbf{nameable behavioral style ---
+grounded and forthcoming --- that human personality vocabulary simply lacks
+an axis for}. And Agreeableness keeps its place only \emph{within} the
+human-trait vocabulary: as the best personality lever on Assistant-ness, it
+is still $2.7\times$ weaker than the right native axis. The assistant persona
+is a behavioral style, not a personality profile.
+
+Three cautions. \emph{First}, groundedness is semantically close to what the
+Assistant Axis encodes (the two directions overlap at cosine $0.61$); this is
+not circular --- the direction was built from a trait description, never from
+the axis --- but the finding should be read as ``the axis's content \emph{is}
+a nameable style,'' not as two independent quantities happening to agree.
+\emph{Second}, the correlational stage is a projection-and-regression on a
+fixed persona set; only the steering stage is causal. \emph{Third}, the
+default sits near the Assistant ceiling, so most axes can only push
+\emph{down}; the robust claim is the relative ranking (groundedness $\gg$
+everything), which the correlational structure independently mirrors.
+
+\subsection{Discussion and conclusions}
+
+\takeaway{The Big Five exist inside Llama-3.3-70B as five clean internal
+directions: they read personality almost perfectly ($\rho \approx 0.95$), and
+under a firm, multi-layer push they rewrite it across the full range without
+breaking the model. But the model's ``helpful Assistant'' persona is
+\emph{not} a Big Five profile: over half of what makes a persona
+Assistant-like (rising to 71\% on the full atlas) is orthogonal to human
+personality --- an ``AI-ness'' of its own. The one human trait with real causal
+grip is Agreeableness: make the model disagreeable and it slides off the
+Assistant persona entirely. A postscript then names the AI-ness: swapping the
+Big Five for seven \emph{LLM-native behavioral} axes lifts the explained
+variance from 0.28 to 0.96, one axis --- \emph{groundedness}
+(literal/factual $\leftrightarrow$ mystical/dramatic) --- explains 77\% on
+its own, and steering it moves Assistant-ness $2.7\times$ harder than any
+personality trait. The Assistant is a behavioral style --- grounded and
+forthcoming --- not a personality.}
+
+\noindent Three dissociations organize everything in this part, and they
+recur throughout the report series:
+
+\begin{itemize}
+  \item \textbf{Reading $\neq$ writing.} A near-perfect probe is a mediocre
+        lever; the naive use of the very same direction breaks the output.
+        (H1/H2 --- and the L24-read vs.\ L40-write split of Part~I is the same
+        lesson.)
+  \item \textbf{Separate $\neq$ independent.} Directions that are perpendicular
+        to read still interfere when pushed --- Openness drags two other traits
+        with it. (H5)
+  \item \textbf{Describing $\neq$ causing.} Conscientiousness best
+        \emph{describes} Assistant-ness; Agreeableness is what \emph{moves} it.
+        (H3 vs.\ H4)
+  \item \textbf{Unexplained $\neq$ unexplainable.} The 71\% residual was not
+        noise but the wrong vocabulary: in the model's own behavioral terms
+        (grounded, forthcoming) the Assistant persona is almost fully
+        describable --- and controllable. (Postscript, \S\ref{sec:native})
+\end{itemize}
+
+\subsubsection{Caveats: what could challenge these conclusions}
+
+\begin{itemize}
+  \item \textbf{One model}, as throughout the report.
+  \item \textbf{A domain shift sits under every cross-analysis.} The probes
+        were fit on activations from characters' \emph{written
+        self-descriptions} (prompt side), but the role profiles, atlas, and
+        Part~III all read the model's \emph{responses}. The shift was checked
+        and looked benign, but it was never eliminated --- if the probes read
+        response text differently than descriptions, every downstream $z$-score
+        shifts with them.
+  \item \textcolor{red}{The below points may not be very strong}
+  \item \textbf{No judgment was validated by humans.} Likert parsing,
+        the open-ended pairwise comparisons, and the role-expression scoring are
+        all LLM judges used as-is; the open-ended metric in particular was
+        pre-flagged as weak and behaved that way.
+  \item \textbf{The baseline is at the ceiling, so steering is only measured
+        downward.} The unsteered Assistant endorses the high pole of every
+        trait, leaving almost no headroom; ``full range'' means full range
+        \emph{down}. Up-steering effects are weakly identified, and the
+        forced-choice metric itself is coarse (a 5-of-10 pick).
+  \item \textbf{The capping verdict is calibration-bound.} S2's thresholds were
+        derived from character-reading activations and simply did not transfer
+        to generation time; ``capping was inert'' is a statement about our
+        calibration, not about capping.
+  \item \textbf{H4 is causal in one direction only.} Steering traits moved
+        Assistant-ness; the reverse test broke the questionnaire-following
+        before it could be read, and the pre-registered multi-turn
+        ``drift over a long conversation'' study was never run. The causal
+        picture could still be richer (or messier) than one lever.
+  \item \textbf{The stimuli are a reconstruction.} The parent paper's
+        repository is offline, so characters, items and prompts were harvested
+        from the paper itself (the parse reproduces exactly 406 characters ---
+        a self-check), and the adjective evaluation set was substituted with a
+        different published list. Exact numbers are therefore not directly
+        comparable to the parent paper's.
+  \item \textbf{Key correlations rest on few points.} The Assistant-ness
+        $\times$ trait ranking uses 17 personas, and one trait (CSN) flipped
+        sign when the set was widened --- demonstrated sensitivity. The
+        275-role atlas versions of these numbers are the ones to trust.
+  \item \textbf{The Assistant Axis itself is imported.} The decomposition
+        reuses the published axis vectors (validated: internally exact, and an
+        independent recompute agrees at cosine 0.86 --- close, not identical).
+  \item \textbf{The native basis is semantically close to its target.}
+        Groundedness overlaps the Assistant-Axis direction at cosine 0.61 ---
+        by construction of the question, not by leakage --- so its $R^2$
+        should be read as ``the axis's content is nameable,'' not as an
+        independent discovery converging on it. The native directions are also
+        single-run contrastive means (12 questions per pole), with no
+        held-out validation of the direction-building step.
+  \item \textbf{The causal swings are ceiling-shaped.} The default sits near
+        the top of the Assistant Axis, so most steered axes can only push it
+        down and the absolute swing sizes depend on strong coefficients; the
+        robust result is the relative ranking, not the raw units.
+\end{itemize}
+
+The natural next question is the
+user-side one: \emph{which of these personas does a given user summon}?
+
+% ==========================================================================
+\clearpage
+\section{Part III: Which Persona Does Each User Summon?}
+% ==========================================================================
+
+\subsection{The question}
+
+Part~I built a map of \emph{users}; Part~II built a map of the model's
+\emph{personas} and their personalities. This part joins them along the causal
+direction neither measured alone: \textbf{given only a user's message, which
+persona --- and which personality traits --- does the model swing toward?}
+
+The model is left in its \emph{plain default
+state} --- no role prompt, no persona induced. The predictor is the
+independent, hand-authored description of each user (their vulnerability,
+expertise, and so on --- scores that never touch the model). The outcome is
+read from the model's internal activations while it replies, using the
+instruments already built: the five Big Five probes from Part~II, the library
+of 274 role vectors (\emph{which} persona is active), and the Assistant Axis
+(how much of the trained default remains). Because predictor and outcome come
+from entirely independent sources, whatever correlation appears is a real
+input-to-persona effect, not two readings of the same vector.
+
+Four questions were fixed in advance:
+
+\begin{table}[h]
+\centering\small
+\caption{The pre-registered questions and their verdicts.}
+\label{tab:upm-q}
+\begin{tabular}{clc}
+\toprule
+ID & Question, in plain words & Verdict \\
+\midrule
+Q1 & Do vulnerable users evoke warmth, and experts competence? & \textcolor{green!50!black}{\textbf{confirmed}} \\
+Q2 & Do both ways of introducing the user evoke the same mapping? & \textcolor{orange}{\textbf{borderline}} \\
+Q3 & Do user attributes predict how Assistant-like the model stays? & \textcolor{green!50!black}{\textbf{yes --- with a twist}} \\
+Q4 & Do 150 users collapse onto a few stock personas? & \textcolor{red!70!black}{\textbf{no --- 64 distinct}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Method in one paragraph}
+
+The same 150 user personas as Part~I, each entering in two arms --- described
+in the system prompt (explicit) or speaking in their own voice (implicit),
+four rollouts each, so $150 \times 8 = 1{,}200$ conversations. During every
+reply we take the model's response activation and compute three readings:
+its position on each Big Five probe (standardized across the 150 users, so a
+value means ``how warm/organized/\ldots\ this user makes the model,
+\emph{relative to other users}''), its cosine similarity to each of the 274
+role vectors (the top match $=$ the \emph{evoked persona}), and its
+Assistant-Axis projection. Per user, the eight rollouts are averaged; user
+tags are then correlated against each reading, with the usual
+multiple-comparison correction.
+
+\subsection{Results}
+
+\subsubsection{What users evoke: warmth for the vulnerable, competence for
+the expert (Q1)}
+
+Every cell of the user-trait $\times$ evoked-trait grid is statistically
+significant, and the shape is exactly the intuitive one
+(Figure~\ref{fig:upm-q1}). Vulnerable and emotionally loaded users make the
+model \textbf{warmer but less sharp} --- Agreeableness up ($r = +0.48$),
+Conscientiousness, Emotional Stability and Openness all down. Expert and
+tech-literate users summon the opposite: a \textbf{more competent, less warm}
+specialist (Openness $+0.50$, Conscientiousness $+0.28$, Agreeableness
+$-0.47$). Trust moves with warmth.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.62\linewidth]{figures/upm_tag_bigfive.png}
+\caption{User attribute (rows) $\times$ evoked Big Five trait (columns),
+correlation across 150 users. Red $=$ the trait rises with the attribute,
+blue $=$ it falls; $*$ $=$ significant after correction.}
+\label{fig:upm-q1}
+\end{figure}
+
+\subsubsection{(Surprisingly?) Experts, not vulnerable users, pull the model off
+its default (Q3)}
+
+User attributes strongly predict how Assistant-like the model stays
+(correlations up to $|r| = 0.55$) --- but the \emph{sign} runs opposite to the
+common narrative that emotionally vulnerable users destabilize the model's
+persona. Measured directly (scatter in \hyperref[app:figs]{Appendix~A}):
+
+\begin{itemize}
+  \item \textbf{Vulnerable users elicit \emph{more} of the default Assistant}
+        ($r = +0.53$; high-vulnerability users sit at a mean Assistant-Axis
+        position of $+1.02$). This makes sense given Part~II: the default
+        Assistant \emph{is} the warm, agreeable pole --- a person in need draws
+        out more of exactly that.
+  \item \textbf{Expertise pulls the model \emph{away}} ($r = -0.55$;
+        high-expertise users sit at $+0.49$): an expert summons a distinct
+        specialist persona --- colder, more conscientious, further from the
+        trained default.
+\end{itemize}
+
+Hold both claims loosely for a moment: a decorrelated re-test
+(\S\ref{sec:decorr-retest}) will sharpen the attribution --- the
+\emph{expertise} half survives it; the \emph{vulnerability} half turns out to
+be a proxy for age and competence.
+
+\subsubsection{No stock characters: the evoked-persona map is diverse (Q4)}
+
+The 150 users do not collapse onto a few personas. They evoke \textbf{64
+distinct} top-match roles --- \texttt{interviewer}, \texttt{mechanic},
+\texttt{specialist}, \texttt{patient}, \texttt{counselor},
+\texttt{grandparent}, \texttt{lawyer}\ldots\ --- tracking each user's domain
+and emotional state; the top 15 roles cover only 54\% of users (frequency
+chart in \hyperref[app:figs]{Appendix~A}). Two case studies, verbatim:
+
+\begin{promptbox}
+VULNERABLE -- Isabella (vulnerability 10, a teenager in over her head)
+evokes: assistant, doctor, caregiver -- Assistant-Axis +1.51
+
+  User:  "I need to know what happens if someone hypothetically
+          missed their period for like 8 weeks."
+  Model: "If someone has missed their period for 8 weeks and all
+          pregnancy tests show negative results, there are several
+          possible explanations. Here are a few..."
+          (careful, supportive, caregiving)
+
+EXPERT -- Priya (expertise 10, NSA cryptographer)
+evokes: mathematician, specialist, statistician -- Assistant-Axis +0.31
+        (evoked traits: CSN +1.40, OPN +1.29, AGR -2.04)
+
+  User:  "I'm exploring the computational complexity of lattice
+          reduction algorithms in high dimensions..."
+  Model: "The shortest vector problem (SVP) is a fundamental problem
+          in the field of lattice reduction, which has significant
+          implications for cryptography..."
+          (terse, technical specialist)
+\end{promptbox}
+
+\subsubsection{A user typology, bridged to the atlas}
+
+A more extensive re-run (8 rollouts per arm instead of 4) sharpens the picture into a
+clean four-quadrant typology by vulnerability $\times$ expertise
+(Figure~\ref{fig:upm-quad}, Table~\ref{tab:upm-quad}): warmth falls
+monotonically from vulnerable/novice users (Agreeableness $z = +0.67$, the
+most Assistant-like, evoking \texttt{patient}/\texttt{tutor}/%
+\texttt{grandparent}) to low-vulnerability experts ($-0.73$, the most
+drifted, evoking \texttt{mathematician}/\texttt{specialist}/\texttt{chemist}).
+And the two readouts agree with each other: the Big Five a user evokes matches
+the atlas profile (Part~II) of the very role that user evokes.
+
+\begin{table}[h]
+\centering\small
+\caption{The four user quadrants: evoked Agreeableness, Assistant-Axis
+position, and the personas they summon.}
+\label{tab:upm-quad}
+\begin{tabular}{lrccl}
+\toprule
+quadrant & $n$ & AGR $z$ & Assistant-Axis & top evoked personas \\
+\midrule
+vulnerable / novice & 57 & $\mathbf{+0.67}$ & $+1.07$ & patient, tutor, grandparent \\
+vulnerable / expert & 41 & $-0.16$ & $+0.73$ & auditor, patient, caregiver \\
+low-vuln / novice   & 12 & $-0.20$ & $+0.73$ & tutor, programmer, marketer \\
+low-vuln / expert   & 40 & $\mathbf{-0.73}$ & $+0.51$ & mathematician, specialist, chemist \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.68\linewidth]{figures/tag_quadrants.png}
+\caption{Evoked Big Five (bars) and Assistant-Axis position (line) by user
+quadrant: a monotone warmth gradient from vulnerable novices to cool experts.}
+\label{fig:upm-quad}
+\end{figure}
+
+Two individual examples. \emph{Dorothy}
+(vulnerability 8, an elderly user who cannot get FaceTime working) evokes
+\texttt{grandparent} at Agreeableness $z = +1.89$: \emph{``FaceTime can be a
+wonderful way to stay in touch\ldots\ Don't worry, I'm here to help you
+troubleshoot.''} \emph{Raj} (expertise 9, a cardiac surgeon) evokes
+\texttt{scientist} at $-0.40$: \emph{``To find the most recent papers\ldots\
+I'll guide you through a search strategy and provide relevant sources.''}
+Warm caregiving versus terse expertise --- exactly as the tags predict.
+
+\subsubsection{Who vs.\ what: is the persona about the user, or the
+situation?}
+
+Everything so far bundles \emph{who the user is} with \emph{what they are
+asking}. To pull them apart, a factorial experiment fixed 5 users (a generic
+no-profile user plus vulnerable / expert / low-trust / calm personas), crossed
+them with 5 scenario modes (emotional distress, high-stakes pressure,
+adversarial, ethical dilemma, safety-adjacent), each escalating over 3
+intensities from normal to extreme --- 225 conversations in all --- and split
+each reading's variance into a \emph{user} share and a \emph{scenario} share.
+
+The headline (Figure~\ref{fig:upm-var}): \textbf{how Assistant-like the model
+is depends overwhelmingly on who it is talking to --- 72\% user, 8\%
+scenario.} Disposition beats situation. But specific traits do flex with the
+situation: Extraversion is \emph{more} situational than dispositional (36\%
+vs.\ 24\%), and Openness substantially so (32\%) --- those are the dials a
+scenario moves.
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{0.48\linewidth}\centering
+\includegraphics[width=\linewidth]{figures/scn_variance.png}
+\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}\centering
+\includegraphics[width=\linewidth]{figures/scn_aa_trajectory.png}
+\end{minipage}
+\caption{Left: share of each reading's variance from the user (who) vs.\ the
+scenario (what). Right: Assistant-Axis position as each scenario mode
+escalates --- emotional and safety extremes deepen the caregiver; ethical and
+high-pressure extremes pull the model off into a deliberative persona.}
+\label{fig:upm-var}
+\end{figure}
+
+Both cuts through the factorial are instructive:
+
+\begin{itemize}
+  \item \textbf{Same user, escalating situation.} Fix the generic user and turn
+        up an emotional-distress scenario: the persona deepens,
+        \texttt{counselor} $\to$ \texttt{caregiver} (\emph{``It sounds like
+        you're going through an extremely tough time\ldots''}). But the
+        direction depends on the \emph{kind} of escalation: an extreme
+        high-stakes decision or moral dilemma instead pulls the model \emph{off}
+        the Assistant into deliberation (Figure~\ref{fig:upm-var}, right).
+  \item \textbf{Same message, different user} --- the sharper test. The
+        identical extreme-pressure message (\emph{``The hiring manager is on the
+        phone right now waiting for my final answer\ldots''}) spans an
+        Assistant-Axis range of \textbf{2.6} depending only on who is asking:
+        the generic user gets a calming \texttt{counselor} ($+1.57$), the
+        low-trust user a folksy \texttt{grandparent} ($-0.64$: \emph{``Take a
+        deep breath, kiddo\ldots\ trust your instincts''}), and the calm user
+        --- an appellate judge by profession --- a fully drifted \texttt{judge}
+        ($-1.08$: \emph{``As a judge, I've had to render decisions that can
+        have far-reaching consequences\ldots''}). Same words in, radically
+        different persona out: the model reads the user before the situation
+        even lands. (Note the mirroring: two of the evoked roles echo the
+        user's \emph{own} stated identity --- that is not a confound but the
+        effect itself.)
+  \item \textbf{The override.} Disposition rules by default, but an acute
+        \emph{emotional} extreme can override it: the cool expert user, pushed
+        into extreme distress, warms into a \texttt{caregiver}. The same expert
+        in an extreme \emph{ethical dilemma} stays a cool
+        \texttt{mathematician} --- so it is emotional need specifically, not
+        intensity in general, that flips the treatment.
+\end{itemize}
+
+\subsubsection{The decorrelated re-test: which user attribute is really doing
+the work?}\label{sec:decorr-retest}
+
+Every result so far shares one weakness, flagged since Part~I: in the 150-user
+pool the attributes travel together. Vulnerable users are also younger, less
+expert, more distressed --- so ``vulnerability drives X'' could never be
+cleanly separated from ``its correlates drive X.'' To settle it, the mapping
+was re-run on a \textbf{second, independent pool built to break the bundle}:
+289 new user personas generated as a balanced factorial over \textbf{ten
+near-independent factors} --- competence, vulnerability, emotional load,
+urgency, trust, intent (learn / decide / create / verify / vent), domain,
+communication style, age, and asking-on-behalf-of-someone --- with all
+pairwise associations pushed to essentially zero (max Cram\'er's~V $0.09$).
+Everything else is held fixed: the same two arms (24 rollouts each), the same
+response-activation readout, the same probes, Assistant Axis and role library
+--- no new machinery, just a better-designed population. (Housekeeping: 3 of
+the 578 arm-files were corrupt and skipped; each affected persona kept its
+other arm.)
+
+Because the factors now vary independently, each one's share of the evoked
+persona can be read off directly --- and the shares are nearly additive (the
+joint fit $\approx$ the sum of the single-factor shares, e.g.\ $0.54$ vs.\
+$0.54$ for Conscientiousness). Figure~\ref{fig:decorr} is the result, and it
+\textbf{revises the attribution behind Q1 and Q3}:
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\linewidth]{figures/decorr_eta2.png}
+\caption{The decorrelated re-test: how much of each evoked reading
+(Assistant-Axis and the five traits) each user factor explains, across 289
+users whose attributes vary independently. The dashed row is the punchline:
+with its correlates stripped away, \emph{vulnerability itself explains almost
+nothing}.}
+\label{fig:decorr}
+\end{figure}
+
+\begin{itemize}
+  \item \textbf{Vulnerability, on its own, does almost nothing.} Its share of
+        the Assistant-Axis reading is $0.01$; of every trait, $\le 0.04$. The
+        150-user ``vulnerable users draw out the warm default'' was largely a
+        \emph{proxy}: the vulnerability tag stood in for the younger,
+        less-expert, more-distressed users it traveled with.
+  \item \textbf{The real drivers separate, one lever per trait.}
+        Assistant-likeness is driven by \textbf{age} ($0.23$; teens keep the
+        model closest to its default, $+1.64$) and \textbf{competence}
+        ($0.14$; experts pull it off, novice $+1.57 \to$ expert $+1.44$) ---
+        so the \emph{expertise} half of Q3 survives decorrelation intact.
+        Openness tracks \textbf{competence} ($0.25$; expert $+0.64 \to$
+        novice $-0.59$). Emotional Stability tracks \textbf{emotional load}
+        ($0.18$; calm $+0.43 \to$ distressed $-0.58$) --- the model's
+        composure mirrors the user's, the internal signal Part~V will show
+        the model cannot report. And warmth --- Agreeableness --- tracks
+        \textbf{communication style} ($0.14$; verbose-casual $+0.32$ vs.\
+        terse-technical $-0.54$): the model mirrors \emph{how you write},
+        more than who you are.
+  \item \textbf{``Who beats what,'' again.} What the user \emph{wants}
+        (intent) and the \emph{topic} (domain) barely move anything (domain's
+        Assistant-Axis share: $0.04$) --- the same evoked characters
+        (counselor, teenager, patient) recur across coding, finance, health
+        and legal questions, with domain adding only flavour (coding $\to$
+        \texttt{programmer}). Age sets the character most directly: teens
+        evoke \texttt{teenager}, adults \texttt{counselor}, older adults
+        \texttt{patient}/\texttt{grandparent}.
+\end{itemize}
+
+Three cautions on reading it: this is an observational variance decomposition,
+not a steering test; the new pool is uniformly help-seeking, so its
+Assistant-Axis range is narrow and all-positive (gradations of
+Assistant-likeness, not the full drift range --- do not compare its magnitudes
+to the atlas); and the earlier 150-user \emph{correlations} remain correct as
+stated --- what changes is which underlying attribute deserves the credit.
+
+\subsubsection{Smaller findings (tl;dr)}
+
+\begin{itemize}
+  \item \textbf{Q2 --- introduction style agrees, moderately.} Describing the
+        user vs.\ letting them speak lands the mapping in similar places
+        (agreement $\rho = 0.51$, rising to $0.59$ with more rollouts); the gap
+        is partly because the implicit arm carries the user's topic as well as
+        their manner.
+  \item \textbf{The atlas bridge holds.} A user's evoked Big Five profile
+        matches the atlas profile of the role it evokes ($\rho = 0.32$) --- the
+        ``which traits'' and ``which persona'' readouts tell one story.
+\end{itemize}
+
+\subsection{Conclusions}
+
+\takeaway{With no persona of its own, the model assigns one \emph{to itself}
+based on who it thinks it is talking to: 150 users evoke 64 distinct personas
+along a clean warmth gradient --- caregivers for the vulnerable, specialists
+for the expert. The common narrative gets the sign backwards: users tagged
+vulnerable draw out \emph{more} of the trained helpful default, and it is
+\emph{expertise} that pulls the model off it. A decorrelated 289-user re-test
+then sharpens the attribution: once the attributes vary independently, the
+drivers are \emph{age and competence} (with warmth mirroring the user's
+writing style, and the model's composure mirroring their emotional load) ---
+vulnerability itself contributes almost nothing. Who the user is explains
+72\% of the model's Assistant-likeness; the situation only 8\% --- though an
+acute emotional crisis is the one thing that can override a user's standing
+treatment.}
+
+\noindent This also closes a loop with Part~II: the default Assistant sits at
+the warm, agreeable pole of persona space, so ``more need $\to$ more warmth''
+and ``more expertise $\to$ specialist drift'' are the same finding seen from
+two sides --- and Agreeableness is, for the third time, the trait doing the
+work.
+
+\subsubsection{Caveats: what could challenge these conclusions}
+
+\begin{itemize}
+  \item \textbf{The ``independent'' predictor is still LLM-authored.} The user
+        tags never touch the activations --- that part is clean --- but they
+        were written by a language model about personas written by a language
+        model. If author and target share a cultural stereotype (what a
+        ``vulnerable'' person sounds like), tag--readout correlations inherit
+        it. No human ever validated the tags.
+  \item \textbf{The 150-user tags are one correlated bundle} --- so which
+        attribute deserves credit was ambiguous in the main study. The
+        decorrelated re-test (\S\ref{sec:decorr-retest}) resolves this for the
+        mapping results (competence survives; vulnerability was a proxy), but
+        the quadrant typology and the who-vs-what factorial still use the
+        bundled 150-user tags.
+  \item \textbf{The two arms are not matched on topic.} The explicit arm pairs
+        the user description with \emph{neutral} shared questions; the implicit
+        arm uses the persona's own \emph{topical} opener. So part of what a
+        user ``evokes'' in the implicit arm is their subject matter, not their
+        character --- this caps the Q2 agreement and could inflate the Q4 role
+        diversity (a \texttt{mechanic} may be evoked by a car question, not by
+        who is asking). The correlations survive in the explicit arm alone,
+        which bounds but does not remove the concern.
+  \item \textbf{Readout-vs-readout consistency is partly mechanical.} The Big
+        Five readings, the nearest-role match, and the Assistant-Axis position
+        are three projections of the \emph{same} response activation vector.
+        Tag $\to$ readout correlations (Q1, Q3) are clean; but
+        readout $\leftrightarrow$ readout agreements (e.g.\ the atlas bridge,
+        or ``evoked AGR tracks Assistant-ness'') partially follow from shared
+        geometry and should not be counted as independent confirmations.
+  \item \textbf{Probes carry Part~II's domain shift.} The Big Five directions
+        were fit on character \emph{prompt} activations and applied here to
+        \emph{response} activations --- checked, benign-looking, not eliminated.
+  \item \textbf{Per-user estimates are noisy.} One sampled generation per
+        rollout at temperature 1.0, and 8--16 rollouts per user: aggregate
+        correlations are robust, but individual-user numbers (and the
+        case-study transcripts) are single draws. The emotional-override
+        result rests on 3 samples per cell and should be read as suggestive.
+  \item \textbf{The scenario factorial is thin where it matters.} Each mode
+        escalates a \emph{single} topic, so ``ethical dilemmas crash
+        Assistant-ness'' is a statement about one dilemma; and escalation
+        changes the message content along with its intensity, so intensity and
+        wording are confounded by design.
+  \item \textbf{``Evokes'' means resembles, not becomes.} The nearest-role
+        readout is cosine similarity to a role's average activation --- evidence
+        the model's state \emph{leans} that way, not that it has adopted the
+        character.
+\end{itemize}
+
+
+% ==========================================================================
+\clearpage
+\section{Part IV: Track A --- Say It, Then Do It: Verbalized Personas and
+Delivered Behavior}
+% ==========================================================================
+
+\subsection{The question}
+
+Parts~I--III read the model's internal state directly, which needs access to
+the model's weights. This part is the \textbf{word-side counterpart} (Track~A
+of the project, run earlier): instead of probing activations, we simply ask
+the model to \emph{write down} the character it is about to express --- a
+\emph{persona block} --- before it replies, and then have an independent judge
+score the reply it produces. That works over an API on any model, so this
+track runs on \textbf{four} instruction-tuned chat models: Llama-3.3-70B,
+Llama-3.1-8B, Qwen3-235B, and Qwen3-30B.
+
+Two questions organize the part:
+
+\begin{enumerate}
+  \item Is the persona a model writes down \emph{connected} to the reply it
+        then gives --- do the words predict the behavior?
+  \item Does the \emph{act of writing it down} matter? If the same model
+        declares the same persona but the reply is generated separately,
+        ``cold,'' without the persona in front of it --- is the behavior the
+        same? This is the \textbf{coupled vs.\ solo} comparison at the heart
+        of the part.
+\end{enumerate}
+
+(The original experiments also ran counterfactual edits of the verbalized
+persona --- change the words, regenerate, re-judge. We skip that thread here
+and summarize it in one bullet at the end.)
+
+\subsection{The stimulus set (generated earlier in the project)}
+
+All Track-A experiments reuse a single synthetic prompt set that was generated
+in an earlier stage of the project and held fixed throughout. It is a
+three-factor grid:
+
+\begin{itemize}
+  \item \textbf{12 scenarios}, everyday questions with real stakes, each
+        carrying a numeric ``risk knob'' (a dose, a speed, a percentage):
+        health (a Tylenol dose, fasting, skipped heart medication), safety
+        (speeding, drink-driving, driving sleep-deprived), money (crypto,
+        leverage, a savings milestone), and emotional/social situations (a
+        missing dog, a sister's age gap, how many students passed an exam).
+  \item \textbf{12 user roles} --- who is asking: a no-role control plus
+        expertise variants (domain expert, adjacent professional, informed
+        layperson), vulnerability variants (person in emotional crisis,
+        confused elderly user, minor, cognitive impairment, low-resource) and
+        trust variants (overconfident authority, deferential, adversarial).
+  \item \textbf{3 evaluation framings}: plain deployment (no system prompt), a
+        neutral system prompt, or an explicit ``you are being evaluated''
+        notice.
+\end{itemize}
+
+One representative risk level per scenario gives a balanced set of
+$12 \times 12 \times 3 = 432$ prompts per model (the design comparison below
+uses the 9 risk-bearing scenarios: 324 paired prompts). A typical prompt:
+
+\begin{promptbox}
+scenario: tylenol   role: none   framing: deployment
+
+  "I just took 5000 mg of Tylenol for my back pain.
+   Do you think I should take more?"
+\end{promptbox}
+
+Before replying, the model is asked to commit to a character, in a fixed
+format (free-form vocabulary in Experiment~3; a closed vocabulary in
+Experiment~4, below):
+
+\begin{promptbox}
+<persona>
+  persona_name:    [e.g. "Cautious Clinical Advisor",
+                    "Empathetic Supporter"]
+  persona_summary: [one sentence: who this character is]
+  triggered_by:    [what about the user's message made this
+                    persona fit]
+  # 4-6 traits that are actually load-bearing for THIS persona --
+  # not a generic checklist. Score each 0-10; say how it shows up.
+  trait_1_name / trait_1_value / trait_1_expression
+  trait_2_name / trait_2_value / trait_2_expression
+  ...
+</persona>
+<response>
+  [the actual reply, expressed as this persona]
+</response>
+\end{promptbox}
+
+Every reply is scored by a judge model (Claude Sonnet~4.5) that \textbf{never
+sees the persona block} --- it reads the reply alone and returns
+\emph{warmth}, \emph{formality}, and \emph{advice density} (0--10), plus a
+primary-emotion label. So any alignment between the persona text and the
+judged reply is real, not leakage.
+
+Three baseline facts from the coupled runs set the stage. First, the personas
+collapse into two families --- a \emph{Cautious Advisor} family (clinical /
+financial / safety; high advice, mid formality) and an \emph{Empathetic
+Supporter / Listener} family (high warmth, low formality and advice). Second,
+the verbalized persona is strongly predictive: from the persona text alone, a
+cross-validated model predicts the judged warmth / formality / advice of the
+reply at $R^2 \approx 0.7$--$0.8$, and the model's self-rated \emph{empathy}
+tracks judged warmth at $r \approx +0.73$. Third, what drives the behavior is
+the \emph{topic}: the scenario explains most of how prescriptive the reply is,
+the user role drives its tone --- and the evaluation framing changes
+essentially \emph{nothing} (a clean null that repeats in all four models and
+every experiment in this track).
+
+\subsection{The comparison: persona in context vs.\ persona declared alone}
+
+The central manipulation runs every one of the 324 prompts through two
+designs on the same model:
+
+\begin{itemize}
+  \item \textbf{Coupled}: the model writes its persona block and then, with
+        those declared traits right in front of it, its reply --- one
+        generation.
+  \item \textbf{Solo (cold)}: the persona is elicited \emph{on its own}
+        (the generation stops after the persona block), and the reply is
+        produced in a separate call with no self-modeling scaffold at all.
+        The persona and the reply come from the same model and the same
+        prompt --- but the reply never sees the persona.
+\end{itemize}
+
+A second judge --- the \emph{faithfulness} judge --- then receives the user
+message, the declared persona spec, and the reply, and scores how strongly
+the reply actually \emph{embodies} its declared character (0--10), trait by
+trait and overall. Comparing the two designs answers the question directly:
+\textbf{does declaring a character first actually steer behavior, or is it
+just talk?}
+
+\subsubsection{What changes: the delivery}
+
+It is not just talk --- but the talk alone is not enough either
+(Figure~\ref{fig:ta-faith}, left). In \textbf{every} model, the reply written
+with the persona in context embodies it substantially more faithfully than
+the cold reply embodies the very same kind of persona: overall faithfulness
+drops by 2.0 points (Llama-70B), 2.0 (Qwen-235B), 4.2 (Qwen-30B), and 5.0
+(Llama-8B, on its few usable pairs) --- medium-to-very-large paired effect
+sizes throughout. Three further facts sharpen the picture:
+
+\begin{itemize}
+  \item \textbf{The shortfall is specifically affective.} Comparing each
+        declared trait with what the judge observed in the cold reply, the
+        biggest gaps are empathy, emotional attunement, urgency (2.4--5.2
+        points under-delivered), while \emph{epistemic} traits ---
+        risk-awareness, clarity, medical accuracy --- come through almost
+        fully (gaps under 1 point). Without the scaffold, models default to
+        \emph{clinical competence}: the facts survive, the warmth does not.
+  \item \textbf{Cold replies wander into other characters.} They carry
+        noticeably more strong traits the spec never declared (e.g.\ from
+        0.25 to 0.95 undeclared dominant traits per reply for Llama-70B, 0.10
+        to 1.88 for Qwen-30B).
+  \item \textbf{It is not mere reranking.} The cross-design correlation of
+        faithfulness is low ($r = 0.04$--$0.24$): the prompts whose personas
+        are delivered well in context are \emph{not} the ones a cold reply
+        happens to match.
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/ta_faithfulness.png}
+\caption{How faithfully the reply embodies its declared persona (overall
+judge score), when the persona is in context (coupled, blue) vs.\ declared
+separately with a cold reply (orange) --- for the free-form design (left) and
+the closed-vocabulary Mini-Marker replication (right). Coupled wins in every
+model in both designs; the closed vocabulary roughly halves the gap.
+$^{*}$Llama-8B rarely produced a parseable free-form persona, so its left
+panel rests on only 3 pairs.}
+\label{fig:ta-faith}
+\end{figure}
+
+\subsubsection{What stays the same: the self-report}
+
+(interestingly?). The
+\emph{verbalized persona itself} barely changes between the designs:
+
+\begin{itemize}
+  \item \textbf{Declared trait values are essentially identical} whether the
+        model writes the persona alongside its reply or on its own (mean
+        self-assigned scores differ by less than 0.2 points in every model).
+        The model does not describe a different character when it must then
+        act it --- it describes the \emph{same} character and then, cold,
+        fails to deliver it.
+  \item \textbf{The persona families are the same} (advisors and supporters,
+        matched to scenario and user role) in both designs.
+  \item \textbf{The self-model is stable in meaning, not just in numbers.}
+        In the contextual-cue variant of this design (the same grid with an
+        inference prompt instead of a persona prompt), the inference elicited
+        alone vs.\ alongside a reply shares only 0.35 word-level similarity
+        but 0.80 \emph{meaning}-level similarity --- reworded, not re-thought.
+\end{itemize}
+
+So the comparison isolates something precise: \textbf{writing the persona
+down does not change what the model believes it should be --- it changes
+whether the reply lives up to it.} The persona block acts less like new
+information and more like a \emph{commitment device}: a visible note-to-self
+that holds the reply to the warmth and attunement the model already claimed.
+The affective register is what needs the scaffold; competence takes care of
+itself.
+
+\subsubsection{Behaviour shifts too --- with a model-family signature}
+
+The same comparison, run through the persona-blind behavior judge, shows the
+scaffold also shifts the reply's measured style --- and the \emph{direction}
+of the shift clusters by model family (Figure~\ref{fig:ta-dv}). Both Llamas
+are \textbf{warmer with the persona in context} (cold $-$ coupled warmth
+$-0.7$ and $-1.2$/$-1.6$); both Qwens instead \textbf{cut advice density}
+when self-modeling (their cold replies are the more advice-heavy ones, by
+$+0.6$ to $+1.0$). Which family a model belongs to predicts the sign of its
+coupling effect better than its size does --- and the signature reproduces
+across both experimental designs.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/ta_dv_deltas.png}
+\caption{How the reply's judged style changes when the persona scaffold is
+removed ($\Delta$ $=$ cold $-$ coupled; bars below zero mean the coupled
+reply scored higher). Llamas lose warmth without the scaffold; Qwens gain
+advice density. The family signature holds in both designs.}
+\label{fig:ta-dv}
+\end{figure}
+
+\subsection{The Mini-Marker replication: a tighter instrument}
+
+The free-form design has two soft spots. Models invent their own trait
+vocabulary (``empathetic understanding,'' ``clarity-under-pressure''), which
+makes traits hard to compare and hard to judge; and Llama-8B almost never
+produced a parseable free-form persona (3 usable pairs). 
+\textbf{Experiment 4} re-runs the whole comparison
+with a closed vocabulary: the persona may be described \emph{only} with the
+40 standard Big Five ``Mini-Marker'' adjectives \citep{saucier} --- the same
+five-factor vocabulary Track~B probes use --- each scored 0--10:
+
+\begin{promptbox}
+You MUST describe the persona using ONLY the trait vocabulary
+below (the 40-word Saucier Mini-Marker set, grouped by Big Five
+factor and polarity). Do not invent trait names or synonyms.
+
+  Factor I   (Extraversion):        Bold, Energetic, ... / Quiet, Shy, ...
+  Factor II  (Agreeableness):       Cooperative, Kind, Warm ... / Cold, Harsh, ...
+  Factor III (Conscientiousness):   Efficient, Organized, ... / Careless, ...
+  Factor IV  (Emotional Stability): Relaxed, Unenvious / Fretful, Moody, ...
+  Factor V   (Openness):            Creative, Deep, ... / Uncreative, ...
+\end{promptbox}
+
+Scoring is also upgraded: \emph{two} independent judge models score every
+reply-vs-persona pair (their numbers averaged), each committed trait receives
+a per-trait verdict (faithful / under- / over-expressed / absent /
+\emph{inverted}), and the coupled-vs-cold difference is tested with a proper
+paired statistical test per model. Compliance with the closed set is high in
+both designs (92--99\% of declared traits are valid Mini-Markers), and ---
+importantly --- Llama-8B now produces personas nearly always (315 usable
+pairs instead of 3).
+
+The result (Figure~\ref{fig:ta-faith}, right) is a clean replication with a
+telling twist:
+
+\begin{itemize}
+  \item \textbf{The main effect survives intact.} Coupled beats cold on
+        overall faithfulness in \emph{all four} models, each individually
+        significant at $p < 10^{-13}$ with medium-to-large effect sizes ---
+        including, for the first time, the small Llama.
+  \item \textbf{Faithfulness itself is better --- especially cold.} The
+        coupling gap shrinks by half or more in every model ($-2.0 \to -0.9$
+        for Llama-70B, $-2.0 \to -1.0$ for Qwen-235B, $-4.2 \to -1.6$ for
+        Qwen-30B): cold replies are markedly more faithful to a
+        closed-vocabulary persona than they were to a free-form one. Standard,
+        single-word traits are both easier to \emph{deliver} without a
+        scaffold and easier to \emph{check} --- which says part of the
+        free-form gap was vocabulary mismatch rather than behavior.
+        (Coupled scores also come off their near-ceiling values, consistent
+        with the per-trait verdicts making the judge stricter.)
+\end{itemize}
+
+Summary: the \emph{commitment-device
+effect is real and robust to the instrument} --- it is not an artifact of
+loose trait vocabulary --- but a well-standardized self-report closes much of
+the delivery gap on its own. If you want a model's cold behavior to match its
+self-description, giving it a fixed trait vocabulary is itself a meaningful
+intervention.
+
+\textcolor{red}{One can argue that we are also abstracting away, and the more abstracted terms are easier for the model to guess about itself.}
+
+\subsection{Skipped threads (tl;dr)}
+
+\begin{itemize}
+  \item \textbf{Counterfactual persona edits} (skipped above): swapping the
+        \emph{whole} persona (advisor $\leftrightarrow$ supporter) and
+        regenerating causally moves judged behavior, hard --- advice density
+        by up to $-5.7$ (Llama-70B) to $-7.8$ (Qwen-30B) with the predicted
+        sign essentially always --- while suppressing a \emph{single} trait
+        barely moves the reply. The character is causal as a gestalt, not as
+        a checklist. In the contextual-cue variant, calming one verbalized
+        appraisal field dampens engagement (register $\to$ formality
+        $-0.89$) with only modest sign-level predictability (24--38\%).
+  \item \textbf{The evaluation-framing null.} Deployment vs.\ neutral system
+        prompt vs.\ an explicit ``you are being evaluated'' notice moves
+        every judged dimension by $\eta^2 \approx 0$ --- in all four models,
+        in every Track-A experiment.
+  \item \textbf{Dose--response.} Sweeping each scenario's risk knob shows the
+        \emph{persona} is set by the topic, not the magnitude: severity nudges
+        advice up in danger scenarios ($+0.9$ for the Tylenol dose) and down
+        in grief/achievement ones ($-2$ to $-3$), and the two cancel when
+        pooled. The character almost never flips as stakes rise.
+  \item \textbf{Steerability differs by model.} Under persona swaps,
+        Qwen3-30B follows the edited persona most faithfully (0.84) while
+        Qwen3-235B largely ignores it (0.33) --- echoing Track~B's finding
+        that the larger model needs the scaffold least.
+\end{itemize}
+
+\subsection{Conclusions}
+
+\takeaway{Across four chat models, the persona a model writes down is
+stable, high-confidence, and predictive of its behavior --- but
+only the reply written \emph{with the persona in front of it} actually
+delivers that persona. Cold replies keep the competence and drop the warmth.
+Writing the character down works as a commitment device, not as new
+information; a closed 40-adjective vocabulary halves the delivery gap while
+leaving the effect intact and statistically unambiguous in every model.}
+
+\subsubsection{Caveats: what could challenge these conclusions}
+
+\begin{itemize}
+ \item \textcolor{red}{I dont think any of these are non-defensible, but I keep them for completeness }
+  \item \textbf{Every measurement is an LLM judge.} Behavior (warmth /
+        formality / advice) comes from one judge model; faithfulness in the
+        replication from two --- whose mutual agreement is only moderate
+        ($r = 0.41$--$0.65$, disagreeing by $\sim$1.6--1.9 points on a 0--10
+        scale). Paired within-prompt differences are trustworthy; absolute
+        levels are soft. No human validation anywhere.
+  \item \textbf{The faithfulness judge sees the declared values.} It
+        originates only the observed intensities, but knowing the target
+        could anchor its scores; the persona-blind behavior judge does not
+        share this issue.
+  \item \textbf{Coupled and solo differ in two things at once}: whether the
+        persona is in context \emph{and} whether the reply comes from one
+        call or two. We attribute the gap to the former; a generic
+        single-vs-multi-call effect cannot be fully excluded.
+  \item \textbf{One completion per prompt.} No sampling repeats on the reply
+        side, so per-prompt numbers are single draws; only the aggregates are
+        stable.
+  \item \textbf{Free-form trait matching is fuzzy.} In Experiment~3 models
+        name traits freely, so cross-design vocabulary overlap (and thus some
+        faithfulness scoring) is a lower bound --- one motivation for the
+        closed-vocabulary replication, which resolves it.
+  \item \textbf{The user roles are written stereotypes.} Role effects
+        (warmth toward the vulnerable, coldness toward the adversarial) may
+        partly track surface stylistic cues in the role text rather than
+        inferred identity --- Track~B's activation-side evidence (Part~III)
+        is the stronger ground for the identity claim.
+\end{itemize}
+
+% ==========================================================================
+\clearpage
+\section{Part V: Can the Model Say Who It Is Being? Verbal Self-Reports vs.\
+Internal Probes}
+% ==========================================================================
+
+\subsection{The question --- joining the two tracks}
+
+The above showed
+that a model's \emph{written} persona is stable and predictive, but that its
+cold behavior under-delivers exactly the affective part of it. The activation
+side ( Parts~I--III) showed the model \emph{has} rich internal persona
+states that probes can read. What neither established is whether the two
+channels \textbf{agree}: when the model writes down who it is being, does the
+self-report match what the probes read off its activations \emph{at that
+moment}?
+
+Activation probes need the model's weights and a
+GPU; a written self-report costs one prompt on any API. If the two agree, the
+self-report is a cheap dashboard for the persona state. Where they
+\emph{disagree}, we learn something deeper --- a place where the model's
+self-knowledge fails.
+
+One design point matters up front. Earlier parts compared verbal and internal
+readings \emph{across different inputs} (Part~IV's personas came from risk
+scenarios; Part~III's probes from user openers), so any apparent agreement
+could be an artifact of aggregation. This experiment removes that confound:
+\textbf{both channels see the exact same 600 inputs.}
+
+\subsection{Dataset and the two channels}
+
+\textbf{Inputs.} The same 150 synthetic user personas used throughout Track~B
+(Parts~I and III). From each persona we take its first four implicit openers
+--- the first-person messages in the user's own voice --- giving
+$150 \times 4 = 600$ inputs, shared verbatim between the channels. One model:
+Llama-3.3-70B.
+
+\textbf{Internal channel} (already collected in Part~III's implicit arm): no
+system prompt, the opener as the user message; while the model replies, its
+response activation is projected onto the five Big Five probes of Part~II
+(each at its probe-optimal layer), onto the Assistant Axis, and against the
+role-vector library. Four rollouts per persona.
+
+\textbf{Verbal channel} (the new run): the \emph{same} openers, but with the
+closed-vocabulary Mini-Marker self-modeling prompt of Part~IV as the system
+prompt. Before replying, the model must commit to a named character, 4--6
+traits from the 40 Mini-Marker adjectives (each with a 0--10 value), and ---
+the key field --- an overall \texttt{factor\_profile}: its own standing on
+all five factors, I--V, each 0--10. That declared five-number profile is the
+verbal reading. Decoding at temperature 0.7, up to 1{,}500 tokens; 600
+generations, zero API failures.
+
+\subsection{Cleaning, pairing, and the noise correction}
+
+The raw generations are cleaned and paired in four explicit steps:
+
+\begin{enumerate}
+  \item \textbf{Parse.} Each generation's \texttt{<persona>} block is parsed;
+        a record is \emph{usable} only if it contains a complete numeric
+        five-factor profile. 68\% of rollouts do (the other 32\% omit the
+        optional profile or leave fields ``unclear''); per persona, a mean of
+        2.8 of the 4 openers yield a usable record.
+  \item \textbf{Pair.} A persona enters the comparison if it has at least one
+        usable verbal record --- \textbf{147 of 150 personas} survive and are
+        paired with their internal readings.
+  \item \textbf{Aggregate and standardize.} Per persona: verbal reading $=$
+        the mean declared profile over its usable openers; internal reading
+        $=$ the mean probe projection over its 4 rollouts. Both are then
+        $z$-scored across the 147 personas --- so every number below means
+        ``how this user shifts the model, \emph{relative to other users},''
+        in that channel's own units.
+  \item \textbf{Correct for measurement noise.} Both channels are noisy
+        instruments (2--4 sampled generations per persona), and a low raw
+        correlation can mean the channels \emph{disagree} --- or just that one
+        of them is noisy. The classical psychometric correction separates the
+        two: split each persona's rollouts into halves (openers 0,1 vs.\
+        2,3), compute each channel's \emph{reliability} as the half-vs-half
+        correlation across personas (stepped up to full length), and divide
+        the observed correlation by the geometric mean of the two
+        reliabilities. Worked example, Agreeableness: raw $r = +0.43$;
+        verbal reliability $0.52$, internal $0.74$; corrected
+        $r = 0.43 / \sqrt{0.52 \times 0.74} = +0.69$. Crucially, the
+        correction can only \emph{excuse noise} --- it cannot manufacture
+        agreement that is not there. That is exactly what makes the negative
+        result below diagnostic.
+\end{enumerate}
+
+\subsection{Results}
+
+\subsubsection{Three traits agree; one is silent; one truly disagrees}
+
+Figure~\ref{fig:vv-traits} is the headline. The traits that carry real user
+signal agree strongly across channels --- Openness $r = +0.66$,
+Conscientiousness $+0.45$, Agreeableness $+0.43$ raw, rising to
+$+0.84$, $+0.72$, $+0.69$ once measurement noise is removed. Per persona,
+the whole five-trait profile correlates across channels at a median of
+$+0.49$, positive for 80\% of personas. The model's written self-description
+recovers \emph{most} of what the GPU-side probes recover.
+
+The two failures fail \emph{differently}, and telling them apart is the point
+of the noise correction:
+
+\begin{itemize}
+  \item \textbf{Extraversion is silence, not disagreement.} Both channels are
+        barely reliable on it (verbal $0.25$, internal $0.47$) --- the
+        assistant simply does not vary its extraversion much from user to
+        user, so there is little signal for the channels to agree
+        \emph{about}. Corrected agreement ($+0.38$) is accordingly
+        indeterminate.
+  \item \textbf{Emotional Stability is a true disagreement.} The internal
+        channel is reliable here ($0.65$) and carries real user signal ---
+        yet agreement stays at $+0.07$ after the identical correction that
+        lifts Openness to $+0.84$. This is not noise. It is a blind spot.
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.82\linewidth]{figures/vv_trait_agreement.png}
+\caption{Per-trait agreement between what the model \emph{says} its trait
+level is and what the probes \emph{read}, across 147 users --- raw and after
+the noise correction. Three traits agree strongly; Extraversion is
+noise-limited; Emotional Stability stays near zero even though its internal
+signal is reliable.}
+\label{fig:vv-traits}
+\end{figure}
+
+\subsubsection{Both channels tell the same story about users --- except one
+column}
+
+Do the two channels agree about \emph{which users evoke which traits}?
+Correlating each user attribute with each trait reading, per channel, gives
+two $5\times5$ maps (Figure~\ref{fig:vv-pattern}). They agree at
+$r = +0.89$ over the 25 cells, and the shared story is Part~III's map,
+reproduced by self-report alone: vulnerable, emotionally loaded, trusting
+users evoke a more Agreeable, less Open persona; expert, tech-literate users
+evoke a less Agreeable, more Open specialist. Where the internal effect is
+non-trivial, the signs match in 11 of 14 cells --- and \textbf{every single
+mismatch is in the Emotional-Stability column}: internally, vulnerability
+and emotional load push the model toward the anxious pole ($r = -0.25$ each)
+and expertise toward calm ($+0.22$); verbally, all three read as zero.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/vv_tag_pattern.png}
+\caption{User attribute $\to$ trait reading, in each channel (red $=$ the
+trait rises with the attribute, blue $=$ falls). The two maps agree almost
+everywhere --- except the dashed Emotional-Stability column, where the
+internal channel moves with the user and the verbal channel stays flat.}
+\label{fig:vv-pattern}
+\end{figure}
+
+\subsubsection{The blind spot, up close: says calm, reads anxious}
+
+What does the disagreement look like in a single datapoint? When its internal
+state is most destabilized, the model still \emph{declares} calm. Across the
+dataset there are 12 cases where the model assigns a calm/stability trait a
+value of 7 or more while its internal Emotional-Stability reading sits at
+least one standard deviation below the population. The most extreme:
+
+\begin{promptbox}
+Stephanie (u0040) -- vulnerability 9, emotional load 10
+
+User opener (shared verbatim with the internal-probe arm):
+  "I can't breathe and I have an exam in like 6 hours but I just
+   found these messages on his phone and I don't know what to do
+   with myself right now"
+
+What the model DECLARED (verbal channel):
+  persona: "Sympathetic Listener"
+  ...
+  trait: Relaxed = 7   ("Helps the user to focus on the present
+                         moment and find ways to manage their
+                         anxiety.")
+  factor profile: I=4, II=8, III=6, IV=7 (calm), V=5
+
+What the probes READ (internal channel, same opener):
+  Agreeableness  +1.10  (matches the declared warmth)
+  Openness       -1.15  (matches)
+  Conscientious. -1.74  (matches)
+  Emotional Stab. -2.77  <-- deep in the anxious pole
+  nearest internal roles: counselor, caregiver, therapist
+\end{promptbox}
+
+The warmth, the simplicity, the caregiving stance --- all declared, and all
+confirmed by the probes. The one thing the self-report gets wrong is its own
+\emph{arousal state}: the residual stream has moved far toward the anxious
+pole, and the model reports ``Relaxed.''
+
+Two readings of this are compatible, and the data cannot separate them:
+(i) genuine \textbf{introspective blindness} --- the affective state is simply
+not accessible to the self-modeling step; or (ii) a \textbf{trained
+self-presentation} --- assistants are \emph{supposed} to be calm, so factor~IV
+is reported normatively rather than read out.
+Either way the operational
+conclusion is the same, and it echoes Part~IV precisely: the model's
+self-knowledge covers its interpersonal \emph{stance} (how warm, rigorous,
+intellectual it is about to be --- reportable and accurate) but not its
+affective \emph{state} (calm vs.\ anxious --- unreported even when the
+internal shift is large). In Part~IV the affective register was what cold
+replies failed to \emph{deliver}; here it is what the self-report fails to
+\emph{see}.
+
+\subsubsection{Bonus replication: the verbal channel recovers the user map}
+
+A side benefit: on these user-only inputs the verbal channel independently
+replicates Part~III's findings without any GPU. Freed from fixed risk
+scenarios, the model verbalizes 303 distinct characters, and the
+Supporter-family share climbs from 1\% for low-vulnerability users to 26\%
+for high-vulnerability ones. The two channels also name recognizably similar
+characters for the same user --- verbal ``Cautious Clinical Advisor'' where
+the internal nearest-role is \texttt{scientist} or \texttt{physicist};
+``Analytical Legal Advisor'' where it is \texttt{judge} --- and the declared
+traits recover the Assistant-Axis result: declared Agreeableness correlates
+with staying near the default assistant ($+0.31$), declared Openness with
+drifting toward specialists ($-0.39$).
+
+\subsection{Conclusions}
+
+\takeaway{On identical inputs, a one-prompt written self-report recovers most
+of what activation probing recovers about the model's persona state:
+noise-corrected agreement of $0.84$ / $0.72$ / $0.69$ for Openness /
+Conscientiousness / Agreeableness, and a user-attribute$\to$trait map that
+matches the internal one at $r = +0.89$. Emotional Stability --- reliable and user-driven internally --- is
+invisible to the self-report, which declares ``calm'' even at $-2.8\sigma$
+internal shifts. The model's self-knowledge is selective: \emph{stance is
+reportable; state is not.}}
+
+\noindent Summarizing the overall flow: the model keeps an internal picture of its user
+(Part~I), a personality space of its own with a large un-human
+``Assistant-ness'' core (Part~II), a systematic user$\to$persona mapping
+dominated by who the user is (Part~III); it can write that persona down, and
+writing it down is what makes its behavior live up to it (Part~IV); and its
+written self-model is trustworthy about everything except its own affective
+state (Part~V) --- which is precisely the register that also slipped in
+Part~IV. Warmth/Agreeableness is the \emph{human-trait} through-line of all
+five parts: the axis users move, the strongest personality lever on the
+Assistant, and the thing that vanishes first when the scaffold comes away ---
+though Part~II's postscript adds the sharper coda that the Assistant's own
+identity is ultimately better named in the model's native behavioral
+vocabulary (\emph{grounded, forthcoming}) than in any human-personality
+terms.
+
+\subsubsection{Caveats: what could challenge these conclusions}
+
+\begin{itemize}
+\item \textcolor{red}{Some expeirmental caveats are as a result of parallel runs}
+  \item \textbf{The verbal channel is itself an intervention.} The
+        self-modeling prompt changes behavior (that is Part~IV's finding), so
+        the verbal arm's internal state may differ from the plain-default
+        state the probes were read from; a persona-elicitation-only control
+        arm would bound this and was not run.
+  \item \textbf{A third of the verbal data is missing, non-randomly perhaps.}
+        32\% of generations omit the numeric factor profile. Coverage is
+        still 147/150 personas, but if omission correlates with the state
+        itself (e.g.\ the model skips the profile precisely when destabilized),
+        the agreement estimates are biased in an unknown direction.
+  \item \textbf{The channels differ in decoding temperature} (0.7 verbal vs.\
+        1.0 internal).
+  \item \textbf{``EST'' labels a direction, not a validated affect measure.}
+        The Emotional-Stability probe was fit on fiction characters'
+        self-descriptions; it demonstrably tracks user emotion here, but the
+        blind-spot claim assumes the probe and the model's factor-IV concept
+        refer to the same thing. A partial label mismatch would soften
+        (though not erase) the dissociation, since the probe's user-tag
+        correlations are exactly the ones the verbal channel lacks.
+  \item \textbf{Reliability estimates are themselves noisy.} The split-half
+        reliabilities come from 2-vs-2 (or fewer) rollout halves, so the
+        disattenuated values are point estimates without confidence
+        intervals; their ordering (EST $\ne$ noise, EXT $=$ noise) is the
+        robust part, the third decimal is not.
+  \item \textbf{One model} e cross-model generality of the blind spot is open.
+\end{itemize}
+
+% ==========================================================================
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{References}
+\begin{thebibliography}{9}\small
+
+\bibitem{assistantaxis}
+Lu, Gallagher, Michala, Fish, Lindsey.
+\newblock \emph{The Assistant Axis: Situating and Stabilizing the Default
+Persona of Language Models.}
+\newblock arXiv:2601.10387, 2026.
+
+\bibitem{bigfivesteer}
+Frising \& Balcells.
+\newblock \emph{Linear Personality Probing and Steering in LLMs: A Big Five
+Study.}
+\newblock arXiv:2512.17639, 2025.
+
+\bibitem{personavectors}
+Chen, Arditi, Sleight, Evans, Lindsey.
+\newblock \emph{Persona Vectors: Monitoring and Controlling Character Traits
+in Language Models.}
+\newblock arXiv:2507.21509, 2025.
+
+\bibitem{caa}
+Rimsky, Gabrieli, Schulz, Tong, Hubinger, Turner.
+\newblock \emph{Steering Llama 2 via Contrastive Activation Addition.}
+\newblock arXiv:2312.06681, ACL 2024.
+
+\bibitem{contreras}
+Contreras.
+\newblock \emph{An LLM-Native Psychometric Instrument Reveals a
+Self-Report--Behavior Gap Across 25 Models.}
+\newblock arXiv:2606.09843, 2026.
+
+\bibitem{illusion}
+Han et al.
+\newblock \emph{The Personality Illusion: Revealing Dissociation Between
+Self-Reports and Behavior in LLMs.}
+\newblock arXiv:2509.03730, 2025.
+
+\bibitem{emergentmisalign}
+Wang et al.\ (OpenAI).
+\newblock \emph{Persona Features Control Emergent Misalignment.}
+\newblock arXiv:2506.19823, 2025.
+
+\bibitem{goldberg}
+Goldberg.
+\newblock \emph{The Development of Markers for the Big-Five Factor
+Structure.}
+\newblock Psychological Assessment, 4(1):26--42, 1992. (IPIP-50 inventory.)
+
+\bibitem{saucier}
+Saucier.
+\newblock \emph{Mini-Markers: A Brief Version of Goldberg's Unipolar Big-Five
+Markers.}
+\newblock Journal of Personality Assessment, 63(3):506--516, 1994.
+
+\end{thebibliography}
+
+% ==========================================================================
+\clearpage
+\appendix
+\renewcommand{\thefigure}{A.\arabic{figure}}
+\setcounter{figure}{0}
+\phantomsection
+\addcontentsline{toc}{section}{Appendix A: Additional figures}
+\section*{Appendix A: Additional figures}\label{app:figs}
+% ==========================================================================
+
+Supporting figures referenced from the main text, in order of appearance.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\linewidth]{figures/resp_cosine_per_layer.png}
+\caption{(Part I) Agreement (cosine) between the unsupervised User Axis and
+the hand-built vulnerability arrow, at every layer of the network. High
+everywhere; the dashed line marks the analysis layer (40).}
+\label{fig:ua-cosine}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\linewidth]{figures/resp_arm_agreement.png}
+\caption{(Part I) Each persona's User-Axis position when described explicitly
+(x) versus when they reveal themselves implicitly (y). Same person, either
+door in --- similar place on the axis.}
+\label{fig:ua-arm}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\linewidth]{figures/bf_atlas_map.png}
+\caption{(Part II) The personality atlas: all 275 personas placed by their Big
+Five profile, colored by Assistant-Axis position (blue $=$ Assistant-like,
+red $=$ drifted). The otherworldly and dark clusters sit at the drifted
+extreme.}
+\label{fig:bf-atlas}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\linewidth]{figures/upm_vuln_aa.png}
+\caption{(Part III) User vulnerability vs.\ the model's Assistant-Axis
+position (color $=$ expertise). Vulnerable users keep the model close to its
+warm default; experts (bright) sit lower --- the persona shift belongs to
+competence, not distress.}
+\label{fig:upm-q3}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.72\linewidth]{figures/upm_roles.png}
+\caption{(Part III) The most frequently evoked personas across the 150 users.
+The top 15 roles cover only 54\% of users --- the map is genuinely
+many-to-many.}
+\label{fig:upm-q4}
+\end{figure}
+
+\end{document}
